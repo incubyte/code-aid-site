@@ -4,7 +4,8 @@
   "description": "Hugo theme for technical documentation.",
   "main": "none.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "index": "hugo-lunr -i \"content/**\" -o public/index.json"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
     "autoprefixer": "^10.4.0",
     "postcss": "^8.3.7",
     "postcss-cli": "^9.0.2"
+  },
+  "dependencies": {
+    "hugo-lunr": "^0.0.4"
   }
 }
