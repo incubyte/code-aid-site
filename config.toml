@@ -1,5 +1,5 @@
 baseURL = "/"
-title = "Code AID"
+title = "CodeAID"
 
 # Language settings
 contentDir = "content/en"
@@ -60,7 +60,7 @@ id = "UA-00000000-0"
 
 [languages]
 [languages.en]
-title = "Code AID"
+title = "CodeAID"
 description = "A Documentation Generator."
 languageName ="English"
 # Weight used for sorting.
