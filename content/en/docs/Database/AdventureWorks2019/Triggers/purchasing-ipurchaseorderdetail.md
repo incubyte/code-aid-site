@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   |       No of Lines      |  Tables Involved |
+|----------|:-------------:|------:|
+| Trigger |  43 | PurchaseOrderDetail, PurchaseOrderHeader, TransactionHistory |
+
 ## 1. Overview
 
 This trigger, `Purchasing.iPurchaseOrderDetail`, is designed to execute after an INSERT statement on the `Purchasing.PurchaseOrderDetail` table. It updates the `Production.TransactionHistory`, as well as the `SubTotal` in the `Purchasing.PurchaseOrderHeader`.

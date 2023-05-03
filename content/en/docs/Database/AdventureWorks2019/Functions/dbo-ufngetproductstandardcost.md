@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   | No of Lines | Tables Involved |
+|----------|:-------------:|------:|
+| Function | 14 | Production.Product, Production.ProductCostHistory |
+
 ## Overview
 This user-defined function, `ufnGetProductStandardCost`, takes a `ProductID` and an `OrderDate` as input parameters and returns the standard cost of the product on the given date.
 

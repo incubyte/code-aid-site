@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   | No of Lines | Tables Involved |
+|---------------|:-----------:|----------------:|
+| Function      | 12          | N/A             |
+
 ## Overview
 A user-defined scalar function, `ufnGetPurchaseOrderStatusText`, is being created in the `dbo` schema. It takes an input parameter of type `tinyint` and returns the corresponding status text as a string `nvarchar(15)`.
 

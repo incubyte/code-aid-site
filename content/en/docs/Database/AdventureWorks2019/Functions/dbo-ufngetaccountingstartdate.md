@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   |       No of Lines      |  Tables Involed |
+|----------|:-------------:|------:|
+| Function |  5 | None |
+
 ## 1. Overview
 
 The `ufnGetAccountingStartDate` is a user-defined scalar function in the `dbo` schema. It returns the accounting start date as a `datetime`. 

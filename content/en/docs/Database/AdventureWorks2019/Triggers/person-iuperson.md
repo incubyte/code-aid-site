@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   |       No of Lines      |  Tables Involved |
+|----------|:-------------:|------:|
+| Trigger |  25 | Person.Person |
+
 ## Overview
 This trigger, named `iuPerson`, is defined on the `Person.Person` table for `AFTER INSERT, UPDATE` events not related to replication. It is responsible for updating the `Demographics` column of the `Person.Person` table when certain conditions are met.
 

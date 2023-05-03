@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   |       No of Lines      |  Tables Involed |
+|----------|:-------------:|------:|
+| Function |  18 | None |
+
 
 ## Overview
 The `ufnGetSalesOrderStatusText` function accepts a `tinyint` input as the sales order status code and returns the corresponding status as a text representation. The function is designed to help retrieve human-readable sales order status descriptions for respective numeric codes in the database.

@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   |       No of Lines      |  Tables Involved |
+|----------|:-------------:|------:|
+| Function |  19 | Production.Product, Production.ProductListPriceHistory |
+
 ## 1. Overview
 
 This documentation provides information about the User-defined Function (UDF) `[dbo].[ufnGetProductDealerPrice]` which is created in SQL Server. The function returns the dealer price for a specific product on a specific date, calculated based on a dealer discount.

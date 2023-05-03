@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   |       No of Lines      |  Tables Involed |
+|----------|:-------------:|------:|
+| Trigger |  22 | Purchasing.PurchaseOrderHeader |
+
 ## Overview
 This documentation covers the `Purchasing.uPurchaseOrderHeader` trigger in the `Purchasing.PurchaseOrderHeader` table. The trigger is invoked after an `UPDATE` operation on the table.
 

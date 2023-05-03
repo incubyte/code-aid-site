@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   |       No of Lines      |  Tables Involved |
+|----------|:-------------:|------:|
+| Function |  12 | Production.ProductInventory |
+
 ## Overview
 This is a T-SQL function named "ufnGetStock" that accepts a ProductID as a parameter and returns the stock level for the specified product. The function is intended for internal use only and calculates the stock level based on inventory in the "misc storage" location.
 

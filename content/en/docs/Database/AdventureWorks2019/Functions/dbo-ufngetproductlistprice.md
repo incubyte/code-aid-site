@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   |       No of Lines      |  Tables Involved |
+|----------|:-------------:|------:|
+| Function |  12 | Production.Product,Production.ProductListPriceHistory |
+
 ## Overview
 - This database object is a user-defined function named `[dbo].[ufnGetProductListPrice]`.
 - The function accepts two parameters:

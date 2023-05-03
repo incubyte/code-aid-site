@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   |       No of Lines      |  Tables Involed |
+|----------|:-------------:|------:|
+| Trigger |  22 | Purchasing.PurchaseOrderHeader |
+
 ## Overview
 
 This trigger, `Purchasing.uPurchaseOrderDetail`, is designed to be executed on the `Purchasing.PurchaseOrderDetail` table after any UPDATE operation. It performs several actions including inserting records into the `Production.TransactionHistory`, updating the `SubTotal` in the `Purchasing.PurchaseOrderHeader` record, and updating `ModifiedDate` in the `Purchasing.PurchaseOrderDetail` record.

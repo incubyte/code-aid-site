@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   |       No of Lines      |  Tables Involed |
+|----------|:-------------:|------:|
+| Function |  5 | None |
+
 ## Overview
 
 The `ufnGetDocumentStatusText` is a user-defined scalar function in the database that takes a tinyint status value and returns a corresponding nvarchar(16) status text representation.

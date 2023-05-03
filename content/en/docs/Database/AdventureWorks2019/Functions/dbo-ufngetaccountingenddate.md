@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Object Type   |       No of Lines      |  Tables Involed |
+|----------|:-------------:|------:|
+| Function |  5 | N/A |
+
 ## Overview
 
 This documentation provides an analysis of the `ufnGetAccountingEndDate` function created in the database. The function returns the accounting end date, which is calculated by subtracting 2 milliseconds from the provided date.

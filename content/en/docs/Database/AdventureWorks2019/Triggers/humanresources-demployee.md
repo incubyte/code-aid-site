@@ -7,9 +7,9 @@ categories:
   - Programming
 ---
 
-| Object Type   |       No of Lines      |  Tables Involed |
-|----------|:-------------:|------:|
-| Trigger |  700 | Employees, HR |
+| Object Type   | No of Lines | Tables Involed   |
+|---------------|-------------|------------------|
+| Trigger       | 22          | HumanResources.Employee |
     
 
 ## Overview
