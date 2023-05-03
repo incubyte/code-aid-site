@@ -4,4 +4,4 @@ linkTitle: "AdventureWorks2019"
 weight: -1
 ---
 
-This data base has 10 tables
+This database has 10 tables
