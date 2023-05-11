@@ -7,6 +7,10 @@ categories:
   - Programming
 ---
 
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
+|---|---|---|---|---|---|---|
+| sstmssqlreturn |  |  |  |  |  |  |
+
 ## Overview
 
 This markdown documentation is for the user-defined function `ufnGetAccountingEndDate` in the `dbo` schema of the database. The function returns a `datetime` value representing the accounting end date.

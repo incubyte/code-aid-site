@@ -7,6 +7,14 @@ categories:
   - Programming
 ---
 
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
+|---|---|---|---|---|---|---|
+| sstmssqldeclare |  |  |  |  |  |  |
+| sstselect | @ret = SUM(p.[Quantity]) | NA | NA |  | , [ProductID], [LocationID] | [Production].[ProductInventory] |
+| sstmssqlif |  |  |  |  |  |  |
+| sstmssqlset |  |  |  |  |  |  |
+| sstmssqlreturn |  |  |  |  |  |  |
+
 ## Overview
 
 The `ufnGetStock` function is a user-defined function that returns the stock level for a specific product. This function is intended for internal use only.

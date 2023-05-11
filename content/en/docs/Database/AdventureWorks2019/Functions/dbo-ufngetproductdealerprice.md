@@ -7,6 +7,14 @@ categories:
   - Programming
 ---
 
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
+|---|---|---|---|---|---|---|
+| sstmssqldeclare |  |  |  |  |  |  |
+| sstmssqldeclare |  |  |  |  |  |  |
+| sstmssqlset |  |  |  |  |  |  |
+| sstselect | @DealerPrice = plph.[ListPrice] * @DealerDiscount | NA | NA | , [ProductID], [StartDate], [EndDate] |  | [Production].[Product], [Production].[ProductListPriceHistory] |
+| sstmssqlreturn |  |  |  |  |  |  |
+
 ## 1. Overview
 
 This markdown documentation describes the `[dbo].[ufnGetProductDealerPrice]` function, which calculates the dealer price for a specific product & order date by applying a discount.

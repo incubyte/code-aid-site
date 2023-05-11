@@ -7,6 +7,12 @@ categories:
   - Programming
 ---
 
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
+|---|---|---|---|---|---|---|
+| sstmssqldeclare |  |  |  |  |  |  |
+| sstselect | @ListPrice = plph.[ListPrice] | NA | NA | , [ProductID], [StartDate], [EndDate] |  | [Production].[Product], [Production].[ProductListPriceHistory] |
+| sstmssqlreturn |  |  |  |  |  |  |
+
 ## Overview
 The `ufnGetProductListPrice` function is a user-defined scalar function in the `dbo` schema that returns the list price of a product based on the given product ID and order date.
 

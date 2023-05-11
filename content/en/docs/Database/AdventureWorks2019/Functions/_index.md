@@ -1,5 +1,5 @@
 ---
-title: "Function"
-linkTitle: "Function"
+title: "Functions"
+linkTitle: "Functions"
 description: "Database FUNCTION."
 ---

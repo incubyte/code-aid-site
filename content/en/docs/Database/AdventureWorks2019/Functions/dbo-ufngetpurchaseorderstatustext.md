@@ -7,6 +7,13 @@ categories:
   - Programming
 ---
 
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
+|---|---|---|---|---|---|---|
+| sstmssqldeclare |  |  |  |  |  |  |
+| sstmssqlset |  |  |  |  |  |  |
+| sstmssqlreturn |  |  |  |  |  |  |
+
 ## Overview
 This documentation provides information about the `[dbo].[ufnGetPurchaseOrderStatusText]` function in the database, which returns the status text for a given purchase order status value.
 

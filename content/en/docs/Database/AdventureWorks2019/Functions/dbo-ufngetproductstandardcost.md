@@ -7,6 +7,12 @@ categories:
   - Programming
 ---
 
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
+|---|---|---|---|---|---|---|
+| sstmssqldeclare |  |  |  |  |  |  |
+| sstselect | @StandardCost = pch.[StandardCost] | NA | NA | , [ProductID], [StartDate], [EndDate] |  | [Production].[Product], [Production].[ProductCostHistory] |
+| sstmssqlreturn |  |  |  |  |  |  |
+
 ## 1. Overview
 This markdown documentation describes the database function `[dbo].[ufnGetProductStandardCost]`, which returns the standard cost of a product on a specific date.
 

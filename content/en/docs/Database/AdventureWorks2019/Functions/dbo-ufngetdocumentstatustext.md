@@ -7,6 +7,12 @@ categories:
   - Programming
 ---
 
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
+|---|---|---|---|---|---|---|
+| sstmssqldeclare |  |  |  |  |  |  |
+| sstmssqlset |  |  |  |  |  |  |
+| sstmssqlreturn |  |  |  |  |  |  |
+
 ## Overview
 This markdown documentation provides information about the `[dbo].[ufnGetDocumentStatusText]` function. This user-defined function takes a `tinyint` parameter representing a sales order status value and returns an `nvarchar(16)` containing the text representation of that sales order status.
 

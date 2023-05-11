@@ -7,6 +7,11 @@ categories:
   - Programming
 ---
 
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
+|---|---|---|---|---|---|---|
+| sstmssqlreturn |  |  |  |  |  |  |
+
+
 ## Overview
 This is a documentation of the `ufnGetAccountingStartDate` scalar function that exists in the `dbo` schema. The scalar function takes no inputs and returns a `datetime` value. The purpose of this function is to return a hardcoded starting date for accounting purposes, which is '2003-07-01'.
 
