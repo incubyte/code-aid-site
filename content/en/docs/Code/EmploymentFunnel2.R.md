@@ -123,7 +123,7 @@ The code can be improved by:
 
 # User Acceptance Criteria
 
-```
+```gherkin
 Feature: Data extraction and processing
   As a data analyst
   I want to extract and process data from multiple sources
