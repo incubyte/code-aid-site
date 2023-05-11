@@ -1,5 +1,5 @@
 ---
-title: "ufnGetStock"
+title: "dbo.ufnGetStock"
 author: GPT
 date: 2022-05-01
 categories:
@@ -7,69 +7,82 @@ categories:
   - Programming
 ---
 
-| Object Type   |       No of Lines      |  Tables Involved |
-|----------|:-------------:|------:|
-| Function |  12 | Production.ProductInventory |
-
 ## Overview
-This is a T-SQL function named "ufnGetStock" that accepts a ProductID as a parameter and returns the stock level for the specified product. The function is intended for internal use only and calculates the stock level based on inventory in the "misc storage" location.
+
+The `ufnGetStock` function is a user-defined function that returns the stock level for a specific product. This function is intended for internal use only.
 
 ## Details
 
-1. **Function Name:** dbo.ufnGetStock
-2. **Parameter:** @ProductID [int] - The product ID for which the stock level needs to be calculated.
-3. **Return Type:** [int] - The stock level (int) for the given product ID.
+**Parameters:**
+1. `@ProductID [int]` - The ProductID for which the stock level is required.
 
-## Information on data
+**Returns:**
+- `[int]` - The stock level for the given ProductID.
 
-The function accesses data from the **Production.ProductInventory** table with the following columns:
+## Information on Data
 
-1. Quantity
-2. ProductID
-3. LocationID
+This function refers to the `[Production].[ProductInventory]` table to fetch the stock information.
 
-## Information on the tables
+### Information on the Tables
 
-- **Production.ProductInventory:** This table contains information about the inventory of products, including quantities and location.
+#### [Production].[ProductInventory]
 
-## Possible optimization opportunities
+Columns:
+- ProductID [int] - Unique ID of a product
+- LocationID [int] - Unique ID of a location
+- Quantity [int] - Quantity of a product in a specific location
 
-Currently, the function uses a hardcoded location value (6) for "misc storage." It could be beneficial to turn this into a parameter, allowing the user to retrieve stock levels for different locations.
+## Possible Optimization Opportunities
 
-## Possible bugs
+There's an opportunity to optimize the code by replacing the `IF` statement with a `COALESCE` function for better readability.
 
-No apparent bugs.
+## Possible Bugs
+
+Currently, none.
 
 ## Risk
 
-- The query runs without a WHERE clause, which may cause performance issues if the table size increases significantly.
+* Running the SELECT query without a WHERE clause or specifying the LocationID might lead to displaying stock levels from other storage locations or incorrect results.
 
 ## Code Complexity
 
-The code's complexity is relatively low as it consists of a single SELECT statement and an IF condition.
+The code consists of a single SELECT statement with a WHERE clause and an IF statement. The complexity of this function is low.
 
 ## Refactoring Opportunities
 
-Consider changing the hardcoded location value to a parameter or creating a separate function that retrieves the location ID based on its name.
-
-Example:
+Refactoring the function to replace the current IF statement with a COALESCE function can improve readability.
 
 ```sql
-CREATE FUNCTION [dbo].[ufnGetStock](@ProductID [int], @LocationID [int])
+CREATE FUNCTION [dbo].[ufnGetStock](@ProductID [int])
 RETURNS [int] 
 AS 
 -- Returns the stock level for the product. This function is used internally only
 BEGIN
     DECLARE @ret int;
     
-    SELECT @ret = SUM(p.[Quantity]) 
+    SELECT @ret = COALESCE(SUM(p.[Quantity]), 0)
     FROM [Production].[ProductInventory] p 
     WHERE p.[ProductID] = @ProductID 
-        AND p.[LocationID] = @LocationID;
-    
-    IF (@ret IS NULL) 
-        SET @ret = 0
+        AND p.[LocationID] = '6'; -- Only look at inventory in the misc storage
     
     RETURN @ret
 END;
+```
+
+## User Acceptance Criteria
+
+### Gherkin Scripts
+
+```gherkin
+Feature: Stock Level Retrieval Function
+
+  Scenario: Retrieve the stock level for a specified product ID
+    Given a ProductID is provided as input
+    When the function ufnGetStock is called
+    Then the stock level for the product should be returned
+   
+  Scenario: Retrieve the stock level for an invalid product ID
+    Given an invalid ProductID is provided as input
+    When the function ufnGetStock is called
+    Then the stock level should be returned as 0
 ```

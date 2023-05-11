@@ -1,5 +1,5 @@
 ---
-title: "ufnGetProductStandardCost"
+title: "dbo.ufnGetProductStandardCost"
 author: GPT
 date: 2022-05-01
 categories:
@@ -7,65 +7,65 @@ categories:
   - Programming
 ---
 
-| Object Type   | No of Lines | Tables Involved |
-|----------|:-------------:|------:|
-| Function | 14 | Production.Product, Production.ProductCostHistory |
+## 1. Overview
+This markdown documentation describes the database function `[dbo].[ufnGetProductStandardCost]`, which returns the standard cost of a product on a specific date.
 
-## Overview
-This user-defined function, `ufnGetProductStandardCost`, takes a `ProductID` and an `OrderDate` as input parameters and returns the standard cost of the product on the given date.
+## 2. Details
 
-## Details
+### 2.1 Function signature
+```sql
+CREATE FUNCTION [dbo].[ufnGetProductStandardCost](@ProductID [int], @OrderDate [datetime])
+RETURNS [money]
+```
 
-### Input Parameters
+### 2.2 Parameters
+1. `@ProductID [int]`: The identifier of the product for which the standard cost is needed.
+2. `@OrderDate [datetime]`: The date on which the standard cost should be returned.
 
-1. `@ProductID`: An integer representing the unique identifier of the product.
-2. `@OrderDate`: A datetime value representing the date for which the standard cost is requested.
+## 3. Information on data
 
-### Return Type
-The function returns a `money` datatype representing the standard cost of the product.
+### 3.1 Used tables
+1. `[Production].[Product]`
+2. `[Production].[ProductCostHistory]`
 
-## Information on Data
+## 4. Information on the tables
 
-The function uses data from the following tables:
+### 4.1 Table: `[Production].[Product]`
+1. `ProductID [int]`: Unique identifier of the product.
+2. *Other columns are not relevant for this function.*
 
-1. `Production.Product`: Contains information about available products. Utilized columns include:
-    - `ProductID`: Primary key for the table; unique identifier for a product.
+### 4.2 Table: `[Production].[ProductCostHistory]`
+1. `ProductID [int]`: Unique identifier of the product this cost history belongs to.
+2. `StandardCost [money]`: Standard cost of the product.
+3. `StartDate [datetime]`: Start date of the standard cost validity period.
+4. `EndDate [datetime]`: End date of the standard cost validity period. Null if the product is no longer available.
 
-2. `Production.ProductCostHistory`: Contains the history of standard costs for each product. Utilized columns include:
-    - `ProductID`: Foreign key that references `Product.ProductID`.
-    - `StandardCost`: The standard cost of the product.
-    - `StartDate`: The start date when the standard cost became effective.
-    - `EndDate`: The end date when the standard cost became ineffective (nullable).
+## 5. Possible optimization opportunities
+None identified.
 
-## Information on the Tables
+## 6. Possible bugs
+None identified.
 
-### Production.Product
+## 7. Risk
+- If the query returns multiple rows of data, the function takes the last standard cost encountered. This may or may not be the desired behavior, depending on the data in the tables.
 
-- Columns:
-    1. `ProductID`
-    2. ...
+## 8. Code Complexity
+The code complexity is low as it contains only a single `SELECT` statement.
 
-### Production.ProductCostHistory
+## 9. Refactoring Opportunities
+None identified.
 
-- Columns:
-    1. `ProductID`
-    2. `StandardCost`
-    3. `StartDate`
-    4. `EndDate`
+## 10. User Acceptance Criteria
 
-## Possible Optimization Opportunities
-None
+```gherkin
+Feature: Get product standard cost
+  Scenario: Retrieve a valid product standard cost
+    Given I have a valid ProductID and OrderDate
+    When I execute the ufnGetProductStandardCost function with those parameters
+    Then I should get the correct standard cost for that product on that date
 
-## Possible Bugs
-None
-
-## Risk
-
-### Query without WHERE Clause
-There are no queries without a WHERE clause.
-
-## Code Complexity
-The code complexity is relatively low, as it only involves a single SELECT statement to fetch the `StandardCost` based on the input parameters.
-
-## Refactoring Opportunities
-No refactoring opportunities detected as the code is straightforward and easy to understand.
+  Scenario: Retrieve a product standard cost with an invalid ProductID
+    Given I have an invalid ProductID and a valid OrderDate
+    When I execute the ufnGetProductStandardCost function with those parameters
+    Then I should get null or an error message
+```

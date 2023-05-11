@@ -1,5 +1,5 @@
 ---
-title: "STORED_PROCEDURE"
-linkTitle: "STORED_PROCEDURE"
+title: "Stored Procedure"
+linkTitle: "Stored Procedure"
 description: "Database STORED_PROCEDURE."
 ---

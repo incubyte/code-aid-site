@@ -1,5 +1,5 @@
 ---
-title: "ufnGetPurchaseOrderStatusText"
+title: "dbo.ufnGetPurchaseOrderStatusText"
 author: GPT
 date: 2022-05-01
 categories:
@@ -7,58 +7,61 @@ categories:
   - Programming
 ---
 
-| Object Type   | No of Lines | Tables Involved |
-|---------------|:-----------:|----------------:|
-| Function      | 12          | N/A             |
-
 ## Overview
-A user-defined scalar function, `ufnGetPurchaseOrderStatusText`, is being created in the `dbo` schema. It takes an input parameter of type `tinyint` and returns the corresponding status text as a string `nvarchar(15)`.
+This documentation provides information about the `[dbo].[ufnGetPurchaseOrderStatusText]` function in the database, which returns the status text for a given purchase order status value.
 
 ## Details
-
-**Function Name:** `ufnGetPurchaseOrderStatusText`
-
-**Parameters:**
-
-1. `@Status [tinyint]` - The status value for which we want to get the status text.
-
-**Return Type:** `[nvarchar](15)` - The function returns a string of maximum 15 characters, which is the status text representation of the input status value.
-
-## Information on Data
-
-The function doesn't depend on any table or data from the database. Instead, it uses a simple `CASE` statement to map the input status value to its corresponding status text.
-
-## Information on the Tables
-
-There is no table involved in this function as it uses a `CASE` statement only.
-
-## Possible Optimization Opportunities
-
-As the function is simple and doesn't involve any complex operations or querying any database tables or views, there seems to be no room for further optimization.
-
-## Possible Bugs
-
-There are no possible bugs that can be identified in this function, as it doesn't interact with any other database objects or external systems, and its logic is very simple.
-
-## Risk
-
-Since the function only uses a `CASE` statement, there are no statements without a `WHERE` clause, and therefore, no need to highlight any risks.
-
-## Code Complexity
-
-The code is very simple, with the only complexity lying in the `CASE` statement used to map input status value to its corresponding status text.
+The function takes a `tinyint` input parameter called `@Status`, which represents the purchase order status value, and returns an `nvarchar(15)` representing the textual status.
 
 ```sql
-SET @ret = 
-    CASE @Status
-        WHEN 1 THEN 'Pending'
-        WHEN 2 THEN 'Approved'
-        WHEN 3 THEN 'Rejected'
-        WHEN 4 THEN 'Complete'
-        ELSE '** Invalid **'
-    END;
+CREATE FUNCTION [dbo].[ufnGetPurchaseOrderStatusText](@Status [tinyint])
+RETURNS [nvarchar](15)
 ```
 
-## Refactoring Opportunities
+## Information on data
+The function uses a hardcoded `CASE` statement to map the status value to its corresponding text representation.
 
-No refactoring is required since the function is already as simple as it can be, serving its purpose effectively.
+## Information on the tables
+No tables are involved in the function.
+
+## Possible optimization opportunities
+There are no significant optimization opportunities in this function, considering the current logic used.
+
+## Possible bugs
+There are no known bugs in this function.
+
+## Risk
+As the function does not operate on tables or access any database objects, there are no risks associated with using this function. It also does not run any query without a `WHERE` clause.
+
+## Code Complexity
+This function uses a simple `CASE` statement to map the input status value to the status description. The code is easy to understand and maintain.
+
+## Refactoring Opportunities
+Currently, there are no significant refactoring opportunities in this function.
+
+## User Acceptance Criteria
+The following are the Gherkin scripts describing the behavior of the function:
+
+```gherkin
+Feature: Get the purchase order status text representation
+  The function should return the text representation of a given purchase order status value.
+
+  Scenario: Getting the purchase order status text
+    Given a purchase order status value
+    When the ufnGetPurchaseOrderStatusText function is called with the status value
+    Then the function should return the corresponding status text
+ 
+  Scenario Outline: Mapping status values to text representations
+    Given the status value <status_value>
+    When the ufnGetPurchaseOrderStatusText function is called with the status value
+    Then the function should return the corresponding status text <status_text>
+
+    Examples:
+      | status_value | status_text  |
+      | 1            | Pending      |
+      | 2            | Approved     |
+      | 3            | Rejected     |
+      | 4            | Complete     |
+      | 0            | ** Invalid **|
+      | 5            | ** Invalid **|
+```

@@ -56,7 +56,7 @@ The code complexity is low, as it comprises only a few lines of code for printin
 None identified, as the procedure is simple and serves its purpose of printing error information.
 
 ## User Acceptance Criteria
-```
+```gherkin
 Scenario: An error occurs during the execution of a script
   Given a SQL script encounters an error during execution
   When the script enters a CATCH block
