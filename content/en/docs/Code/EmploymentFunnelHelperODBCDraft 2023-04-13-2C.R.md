@@ -75,4 +75,86 @@ There might be possible bugs due to missing data, duplicate records, or incorrec
 
 3. Use better naming conventions for variables and functions to improve code readability.
 
-4. Add proper code documentation and comments to make it easier for other developers to understand and maintain the code.
+4. Add proper code documentation and comments to make it easier for other developers to understand and maintain the code.+++
+categories = ["Documentation"]
+title = "EmploymentFunnelHelperODBCDraft 2023-04-13-2C.R"
++++
+
+
+# EmploymentFunnelHelperODBCDraft 2023-04-13-2C.R
+# Overview
+
+This script performs various operations on data and aims to manipulate and analyze the data to generate actionable insights. The code mainly revolves around data processing functions that help to clean, transform, and extract insights from the input data.
+
+# Functions
+
+In this section, we will discuss the different functions defined throughout the script and what they do.
+
+## 1. fnFunnelClean
+
+This function takes three input parameters, `DTmx`, `lsM1`, and `DT_msg`. Its primary purpose is to clean the data and join relevant information to attain the desired dataset. It then returns the combined dataset `DTem5` after performing a series of data cleaning operations, joining and transforming steps.
+
+## 2. fnGetMxStatus
+
+This function takes `DTem`, `invec`, `outvec`, and `fld_nm` as input parameters, and it is responsible for performing some sorting, grouping and transformation operations on the input dataset `DTem`. It returns a cleaned dataset `lk_level1` with the relevant transformations applied.
+
+## 3. fnAddFunnel2
+
+This function takes `DTem` and `DTmx` as input parameters and processes step-specific information by performing a series of joins and grouping operations. It creates a dataset `mgDT` that contains the processed data and returns this dataset.
+
+## 4. fnAddClickTime
+
+This function takes `mgDT`, `DTmx2`, `DT_delv2`, and `DT_clik` as input parameters and applies a series of joins, transformations, and data cleaning operations to calculate the click time. It then returns the updated dataset `mgDT0`.
+
+## 5. fnPlaidGrab
+
+This function takes `DT` and `event` as input parameters and returns a dataset `DTup` after performing a series of filtering and manipulation operations on the input dataset `DT`.
+
+## 6. fnPlaidLast
+
+This function takes `DT` and `event` as input parameters and returns a dataset `DTpl` after performing a variety of transformations, cleaning operations, and grouping while handling the provided event names.
+
+## 7. fnDataPlaid
+
+This function takes `DTmx2` and `lsM1` as input parameters and is responsible for performing joins and transformations to create a final dataset `DTpl_out` based on Plaid data.
+
+## 8. fnAddPlaid
+
+This function takes `mgDT` as input and updates some columns of the dataset based on a specific condition, `datasource_id`. It returns the updated dataset `mgDT`.
+
+## 9. fnUpdateMonthly
+
+This function takes `dtBase`, `dtIn`, `PrevMeasure`, and `MeasureName` as input parameters and updates the monthly dataset with the respective measures. It then returns the updated dataset.
+
+## 10. fnGetMonthly
+
+This function takes `mgOut2` as input and generates a `dtMonthly` dataset containing aggregations based on measures related to customer interactions, host portal activities, and datasource classifications. It returns the aggregated `dtMonthly` dataset.
+
+# Risks
+
+## Security Issues
+
+There are no apparent security issues in the script.
+
+## Bugs
+
+There are no apparent bugs in the script.
+
+# Refactoring Opportunities
+
+1. Create smaller helper functions that perform specific tasks to break down large functions like `fnFunnelClean`. This will improve code readability and maintainability.
+
+2. Properly comment the code explaining each step or transformation to make the code easy to understand for others.
+
+3. Remove hardcoded values (e.g., dates) and replace them with variables or constants.
+
+4. Use consistent and meaningful variable and function names throughout the script.
+
+# User Acceptance Criteria
+
+```gherkin
+1. Feature: Data cleaning and processing
+
+    Scenario: Input datasets are processed and cleaned
+    Given input datasets DTmx, lsM1, and DT_msg
+```

@@ -78,4 +78,44 @@ This function connects to a PostgreSQL database, extracts specific data related 
 1. The connection logic used in `fnGetPostgresData` and `fnGetPostgresData2` is repetitive and could be placed inside a separate function to avoid redundancy and improve code reusability.
 2. Date-time transformations are used quite frequently in various functions. It is advisable to create a separate helper function for date-time transformations that can be invoked when required.
 3. There are functions with similar or overlapping functionality (`nm_response0`, `nm_response1`, and `fnDeliver`). These functions could be combined or refactored to utilize a more modular approach.
-4. The script uses a mix of different libraries such as `odbc`, `dbConnect` — which can be standardized to make the codebase consistent and easier to maintain.
+4. The script uses a mix of different libraries such as `odbc`, `dbConnect` — which can be standardized to make the codebase consistent and easier to maintain.+++
+categories = ["Documentation"]
+title = "EmploymentFunnelHelperODBCDraft 2023-04-13-A.R"
++++
+
+
+# EmploymentFunnelHelperODBCDraft 2023-04-13-A.R
+# Overview
+
+This script includes a set of functions that deal with extracting and transforming data from different sources such as JSON data and PostgreSQL databases. The main functions to be explored in this script are:
+
+1. nm_response0
+2. nm_response1
+3. fnDeliver
+4. fnGetPostgresData
+5. fnGetPostgresData2
+6. fnGetCustomerTokensSQL
+7. fnGetInvitationDataSQL
+8. fnGetAllSKUs
+9. fnFunnelReport
+10. fnGetMUD
+11. fnGetM1Plaid
+12. fnUrlStr
+
+# Function Explanations
+
+## 1. nm_response0
+
+This function extracts column names from a JSON object and returns a nested data.table object.
+
+### Input:
+
+- json_act_data: JSON object
+
+### Output:
+
+- ls: data.table object
+
+## 2. nm_response1
+
+This function

@@ -56,4 +56,75 @@ None found.
 # Refactoring Opportunities
 
 1. The SQL query in `fnGetUnidays` could be structured better, with proper indentation and comments that would improve the readability.
-2. The use of meaningful variable names for intermediate processing steps would also help in code understanding.
+2. The use of meaningful variable names for intermediate processing steps would also help in code understanding.+++
+categories = ["Documentation"]
+title = "EmploymentFunnelHelperODBCDraft 2023-04-13-3.R"
++++
+
+
+# EmploymentFunnelHelperODBCDraft 2023-04-13-3.R
+# Overview
+
+The presented R script consists of two main functions `fnGetPostgresData2` and `fnGetUnidays` that extracts specific data from a PostgreSQL database and returns the required information as a data.table. The script essentially connects to the database, fetches customer tokens, and retrieves additional information by executing a SQL query.
+
+## Function: fnGetPostgresData2
+
+This function is responsible for:
+
+1. Setting default values for function parameters.
+2. Checking for the existence of the database driver.
+3. Establishing a connection with a PostgreSQL database using the given username, password, and provided connection strings.
+4. Fetching and processing customer tokens by invoking the `fnGetUnidays` function.
+5. Closing the connection to the PostgreSQL database.
+
+### Parameters:
+
+- `start_date`: The starting date for the data fetching process. If not provided, a default value of '2020-06-01' will be used.
+- `username`: Database username; fetched from the environment variable 'userid' if not provided.
+- `pwd`: Database password; fetched from the environment variable 'pstgPwd' if not provided.
+- `echo`: If TRUE, the function will print out progress messages, by default set to FALSE.
+
+## Function: fnGetUnidays
+
+This function is responsible for fetching data from the PostgreSQL database using an SQL query and preprocessing the result into a data.table.
+
+### Parameters:
+
+- `odbc_channel`: The ODBC connection object created during the database connection.
+
+# Risks
+
+## Security Issues
+
+- No major security issues identified within provided code.
+
+## Bugs
+
+- The code does not handle any potential errors or exceptions during the database connection and querying process. For example, there are no try-catch mechanisms or error handling for unsuccessful database connections, SQL errors, or NULL data returns.
+
+# Refactoring Opportunities
+
+- Improve error handling: Add robust error handling mechanisms to address potential issues while connecting to the database, executing SQL queries, and processing the results.
+- Modularize SQL Query: Separate the SQL query into a smaller, more manageable, and reusable module or function.
+- Use Parameterized Queries: Replace the hardcoded values in the SQL queries with parameterized queries to make the function more flexible and secure.
+
+# User Acceptance Criteria
+
+## Feature: Data extraction from PostgreSQL
+
+### Scenario: Extract and process customer tokens
+
+```gherkin
+  Given a PostgreSQL database connection
+  When the `fnGetPostgresData2` function is invoked
+  Then the customer tokens should be fetched and processed by the `fnGetUnidays` function
+  And returned as a data.table
+```
+
+### Scenario: Return an empty data.table if no data is fetched
+
+```gherkin
+  Given a PostgreSQL database connection
+  When the `fnGetUnidays` function queries an empty result set
+  Then the function should return an empty data.table
+```

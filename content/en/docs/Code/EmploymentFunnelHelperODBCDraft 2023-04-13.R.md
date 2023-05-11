@@ -71,4 +71,85 @@ There are no known bugs at this time.
 
 4. Follow a consistent naming convention for variables and functions.
 
-5. DRY (Don't Repeat Yourself) principle can be followed more strictly by eliminating repeated functionality and reusing functions. This will help in reducing the code size and making the script more modular.
+5. DRY (Don't Repeat Yourself) principle can be followed more strictly by eliminating repeated functionality and reusing functions. This will help in reducing the code size and making the script more modular.+++
+categories = ["Documentation"]
+title = "EmploymentFunnelHelperODBCDraft 2023-04-13.R"
++++
+
+
+# EmploymentFunnelHelperODBCDraft 2023-04-13.R
+# Overview
+
+This code contains a series of functions that perform various operations on data. The functions are classified as generic and Mixpanel-specific. Generic functions are used for operations like data manipulation and data extraction, while Mixpanel-specific functions focus on extracting and processing data from [Mixpanel](https://mixpanel.com/), a platform that helps businesses to analyze their users' behavior.
+
+The code can be divided into two sections:
+
+1. **Generic Functions**: These include functions like `fnRecursivelyJoin`, `fnDailyVolumes`, `fnSamCol`, `getNwordVec`, and others that help manipulate data, join tables, and perform specific actions on the given data.
+2. **Mixpanel Specific Elements**: This section has `fld_nam` array defining names of fields, and function `fn_mixpanel_raw_export` which is responsible for accessing the Mixpanel API and fetching data in a specific format.
+
+Let's take a closer look at each of the generic functions and then the Mixpanel-specific elements.
+
+## Generic Functions
+
+### 1. fnRecursivelyJoin
+
+The `fnRecursivelyJoin` function takes a base dataset `dtBase` and a list of datasets `ls` as inputs. It recursively performs inner joins between `dtBase` and each of the datasets in the list `ls`. This function returns a single dataset that is the result of all the joins.
+
+### 2. fnDailyVolumes
+
+This function calculates daily volumes for a given dataset `dtSkus` and an interval `ntrv`. It filters rows based on specific date ranges and service codes, then aggregates the data by 'act_id'. Finally, the function returns a new dataset with the calculated daily volumes along with other related statistics.
+
+### 3. fnSamCol
+
+The `fnSamCol` function takes two data frames as inputs and returns a vector of column names that are common to both data frames.
+
+### 4. getNwordVec
+
+This function returns a vector of N concatenated words, given a word list `wordList`, a number of words `nWords`, and an optional seed value `seed_val`.
+
+### 5. fnMergeList
+
+The `fnMergeList` function takes a list of data tables (`LSDT`) and a vector of key column names (`keyvec`). It merges all the tables in the list using the specified key column names and returns the resulting data table.
+
+## Mixpanel Specific Elements
+
+### fld_nam
+
+The `fld_nam` variable is the names of the columns needed from the Mixpanel data.
+
+### fn_mixpanel_raw_export
+
+The `fn_mixpanel_raw_export` function fetches raw event data from Mixpanel's API for a specific date range (`from_date`, `to_date`) and an API `keyBearer`. The timeout limit `timeout_limit` can be set. It returns the fetched data as a JSON format.
+
+## Risks
+
+### Security Issues
+
+There are no security issues identified in the given code.
+
+### Bugs
+
+There are no bugs identified in the given code.
+
+## Refactoring Opportunities
+
+1. The code can be refactored to use libraries like [dplyr](https://dplyr.tidyverse.org/) and [tidyverse](https://www.tidyverse.org/) to make the data manipulation and extraction operations more readable and efficient.
+2. Some functions have similar functionalities, such as `fnJoin` and `fnMergeList`. These can be combined into a single function with additional parameters to reduce redundancy.
+3. Some portions of the code have commented out variables that are not used. These can be removed to make the code cleaner.
+
+## User Acceptance Criteria
+
+```gherkin
+Feature: Daily Volumes Calculation
+  Scenario: Calculate daily volumes for a given dataset and interval
+    Given a dataset 'dtSkus' and an interval 'ntrv'
+    When I call the 'fnDailyVolumes' function
+    Then I should get a new dataset with correctly calculated daily volumes and related statistics for each 'act_id'
+
+Feature: Data Extraction from Mixpanel
+  Scenario: Extract raw events data from Mixpanel's API
+    Given a date range 'from_date' and 'to_date'
+    And an API key 'keyBearer'
+    When I call the 'fn_mixpanel_raw_export' function
+    Then I should get the fetched data in JSON format
+```

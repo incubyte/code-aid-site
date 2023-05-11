@@ -123,7 +123,7 @@ The code can be improved by:
 
 # User Acceptance Criteria
 
-```gherkin
+```
 Feature: Data extraction and processing
   As a data analyst
   I want to extract and process data from multiple sources
@@ -156,4 +156,116 @@ Feature: Data extraction and processing
     Given I have processed the data
     When the script writes the data to files
     Then the output files should be created with the correct data
+```+++
+categories = ["Documentation"]
+title = "EmploymentFunnel2.R"
++++
+
+
+# EmploymentFunnel2.R
+## Overview
+
+The given script primarily consists of data extraction, transformation, and loading operations, along with some data filtering and joining operations. This script uses several R packages like httr, data.table, base64, bit64, jsonlite, RODBC, googlesheets4, lubridate, zoo, and feather.
+
+## Section 1: Extraction
+
+1. The script begins with reading the file `mx_all.csv` using the fread() function from the data.table package.
+```
+filnm <- 'mx_all.csv'
+baseDt <- fread(filnm)
+```
+
+2. The script then calls the fn_mixpanel_raw_export() function to get the data in the JSON format.
+```
+json <- fn_mixpanel_raw_export(
+    lubridate::as_date('2021-12-16')
+  , lubridate::as_date('2021-12-17')
+  , mx_keyBearer
+)
+```
+
+## Section 2: Transformation
+
+1. The script then converts the JSON data into a datatable format and performs some transformation operations using the mxDTfromJson() function.
+```
+dt1 <- mxDTfromJson(json,echo=T)
+```
+
+2. The script further cleans and formats the extracted JSON data.
+```
+json_splt <- strsplit(json,'\n')[[1]]
+json_splt <- json_splt[!grepl('17ce4c5da5289b-0392f8a441f3d8-1c306851-13c680-17ce4c5da531045',json_splt)]
+clean_format <- paste0 ('[',paste(json_splt, collapse=','),']')
+dfMx0 <- fromJSON(clean_format)
+```
+
+3. Some additional transformations like formatting and date operations are also performed on the extracted data.
+```
+baseDt$mp_processing_time_ms <- as.double(baseDt$mp_processing_time_ms)
+baseDt$plaid_timestamp0 <- format(baseDt$plaid_timestamp0,'%Y-%m-%dT%H:%M:%S')
+baseDt <- baseDt[event_time<lubridate::as_date('2021-11-30')]
+```
+
+## Section 3: Data Filtering and Joining
+
+Several datatable operations like filter and join are performed on the extracted and transformed data, such as joining `DTem5` and `DTmx3` data.tables, or filtering events with specific event names, such as "Clicked on YES, knows payroll processor" and "Clicked on 'NO', does not know payroll processor".
+
+1. The script filters the events based on specific event names.
+
+```R
+DTtmp <- DTcmb[ event_name %in% c( "Clicked on YES, knows payroll processor"
+                                   ,"Clicked on 'NO', does not know payroll processor")
+               , c('pseudo_id','event_name','event_time')]
+```
+
+2. The script uses the user-defined function `fnJoin()` to join two data.tables, such as `DTem5` and `DTmx3`, based on a key column.
+
+```R
+DTcmb <- fnJoin(DTem5,DTmx3,key_vec = c('pseudo_id'))
+```
+
+## Risks
+
+### Security Issues
+
+1. Sensitive information like API keys is hardcoded in the script, which may lead to potential exposure and unauthorized access by unauthorized entities.
+
+```R
+# mx_keyBearer <- 'fa657cdd38ae7966977094e3556ef744:' OLD KEY
+mx_keyBearer <- '27b46442ab4299479c3dce41998e1b68'
+```
+
+### Bugs
+
+No specific bugs/errors were found in this script.
+
+## Refactoring Opportunities
+
+1. The script contains some hard codes, like filenames and API keys, which could be moved to a separate configuration file for better modularity, maintainability, and security.
+
+2. The script can be broken down into smaller functions to avoid lengthy sections and make it more modular and easier to understand.
+
+3. It is recommended to add some error handling and exception handling mechanisms to handle unexpected situations and error messages.
+
+## User Acceptance Criteria
+
+```
+Feature: Data Extraction, Transformation, and Loading
+  Scenario: Success
+    Given a user provides a valid API key
+    And a user provides correct source data
+    When the user runs the script
+    Then the script should extract data from 'mx_all.csv' file
+    And convert JSON data to datatable format
+    And perform necessary data transformations
+    And filter and join required data.tables
+    And output the transformed data without errors
+```
+
+```
+Feature: Data Extraction, Transformation, and Loading
+  Scenario: Failed API Key or Incorrect Source Data
+    Given a user provides an invalid API key or incorrect source data
+    When the user runs the script
+    Then the script should display appropriate error messages
 ```

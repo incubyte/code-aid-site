@@ -3,6 +3,8 @@ categories = ["Documentation"]
 title = "EmploymentFunnelHelperODBCDraft 2023-04-13-1A.R"
 +++
 
+
+# EmploymentFunnelHelperODBCDraft 2023-04-13-1A.R
 # Overview
 
 This script provides functions to:
@@ -153,4 +155,92 @@ The function fetches data from the Customer.io API recursively based on input pa
 This function takes the following inputs:
 
 - `keyBearer`: the API key (authorization key) to access Customer.io data
-- `start` (optional
+- `start` (optional+++
+categories = ["Documentation"]
+title = "EmploymentFunnelHelperODBCDraft 2023-04-13-1A.R"
++++
+
+
+# EmploymentFunnelHelperODBCDraft 2023-04-13-1A.R
+# Overview
+
+The provided code consists of multiple functions and operations primarily related to data extraction, transformation, and loading. The flow of the code can be broadly divided into the following sections:
+
+1. Functions for extracting data from JSON files
+2. Functions for reading and writing data from CSV files
+3. Functions for processing and transforming data
+4. External API calls for customer events and messages
+
+In the following sections, we will discuss each function in detail.
+
+## Functions
+
+### mxDTfromJson
+
+This function takes a dataframe (dfMx0), a timestamp, and a boolean flag (echo) as input. It extracts several data subsets from `dfMx0` and then performs operations such as coalescing columns and formatting datetime values. 
+
+### getStoredDataMx
+
+This function reads data from a specified CSV file (if it exists) and performs type conversions on certain columns.
+
+### getDataMx
+
+This function takes a keyBearer, a baseDt (data.table), now_date value, and a timeout value (in seconds) as input. It calls the `fn_mixpanel_raw_export` function to get raw data and returns the response.
+
+### updateDataMx
+
+This function is responsible for updating the data from Mixpanel with the latest input data. It takes several input parameters like DTbas, keyBearer, echo, timeout, and now_date. It calls the `getDataMx` and `mxDTfromJson` functions to get the latest data and then combines the latest data with the existing data using `rbindlist`.
+
+### fnJoinCIO
+
+**Purpose:** This function joins the input data table `dtIn` with the provided data table `dtCIO` on the specified columns. It also has an option to perform the join based on a timestamp column.
+
+### fn_customer_raw_export0 & fn_customer_raw_export_rec
+
+These functions are used to fetch raw data by calling the customer.io API recursively to retrieve all the data.
+
+### updateDataCio & updateDataCioMsg
+
+These functions are responsible for updating data related to customer.io API calls. They store the response data into the appropriate CSV files and return the updated data as output.
+
+## Risks
+
+### Security Issues
+
+- API keys are being passed as function parameters, which could lead to unintentional leakage of sensitive information. It is recommended to use environment variables or a configuration file to securely store and access API keys.
+
+### Bugs
+
+- No specific bugs have been identified in the code.
+
+## Refactoring Opportunities
+
+- There are several instances of repeated code, particularly during data extraction and transformation. These can be refactored into utility functions to follow the DRY (Don't Repeat Yourself) principle.
+- The use of global variables (such as keyBearer) might lead to issues with code maintenance and potential bugs.
+
+## User Acceptance Criteria
+
+```gherkin
+Feature: Data Extraction and Transformation
+  As a code reviewer and technical writer, I want to ensure that the provided code is correct and efficient.
+  
+  Scenario: Successfully extract data from JSON
+    Given I have an input JSON file with required format
+    When I run the mxDTfromJson function
+    Then I should get a data.table with specified columns and transformed data
+
+  Scenario: Successfully read data from a CSV file
+    Given I have an existing CSV file with data
+    When I run the getStoredDataMx function
+    Then I should get a data.table with the data from the CSV file
+
+  Scenario: Successfully update data with Mixpanel data
+    Given I have a base data.table and a valid keyBearer
+    When I run the updateDataMx function
+    Then I should get a data.table with updated data, combined from existing data and the latest data
+
+  Scenario: Successfully update data with data from customer.io API
+    Given I have a valid keyBearer and a start value
+    When I run the updateDataCio or updateDataCioMsg function
+    Then I should get a data.table with updated data based on the customer.io API responses
+```

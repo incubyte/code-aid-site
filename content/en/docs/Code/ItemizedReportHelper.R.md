@@ -82,4 +82,136 @@ No bugs found.
 1. Move common operations and settings into sub-functions that can be reused. This would make it easier to maintain and modify the code.
 2. Use `lapply()` and vapply with a more informative name rather than the general `ls`.
 3. Consolidate `paste0()` with a single call to `paste()` using `sep=""`, which would make the string manipulation more readable.
-4. Replace the for loop in `fnMakeFiles` with a `lapply()` function for better readability and performance.
+4. Replace the for loop in `fnMakeFiles` with a `lapply()` function for better readability and performance.+++
+categories = ["Documentation"]
+title = "ItemizedReportHelper.R"
++++
+
+
+# ItemizedReportHelper.R
+# Overview
+
+This code consists of multiple functions that work together to create and save an Excel file report which shows the MeasureOne Itemized Transactions. The whole script contains data extraction, transformation, and loading processes.
+
+Here is an overview of these functions:
+
+1. `fnGetbyid()` - Retrieves the data for a given individual ID using an API call.
+2. `fnCk()` - Replaces empty cells with an empty string.
+3. `fnGetByIdS()` - Applies `fnGetbyid()` function to each ID in an input vector.
+4. `fnCreateItemizedReport()` - Creates an Excel report containing the data from DT1 data frame.
+5. `fnGetSkuLastMonth()` - Creates a data.table with selected rows based on conditions given.
+6. `fnPrepIR()` - Prepares the final data for the itemized report creation.
+7. `fnMakeFile()` - Generates the final Excel file using the itemized report function.
+8. `fnMakeFiles()` - Wrapper function that helps generate multiple Excel files.
+
+## Function Explanations
+
+### fnGetbyid()
+
+This function retrieves the data for an individual ID using an API call to `https://agents.measureone.com/internal/individuals/get_by_id`. The extracted data includes first_name, last_name, external_id, email_id, and the response status code.
+
+#### Key operations:
+
+1. Construct the API URL with the provided `ind_id`.
+2. Make a POST request to the API.
+3. Check the response status code.
+4. Extract the desired information from the JSON response and transform it into a data.table format.
+
+### fnCk()
+
+This is a simple helper function that replaces empty cells with an empty string.
+
+### fnGetByIdS()
+
+This function applies the `fnGetbyid()` function to each ID in an input vector and returns the result as a data table.
+
+#### Key operation:
+
+1. Use `lapply()` to apply the `fnGetbyid()` function for each ID in the input vector.
+
+### fnCreateItemizedReport()
+
+This function generates an itemized report Excel file consisting of transaction details. The report uses the data from the DT1 data frame provided as the function's input.
+
+#### Key operations:
+
+1. Set up formatting and styles for the Excel workbook.
+2. Add data frame to the worksheet.
+3. Adjust column widths and total line.
+4. Add a logo to the worksheet.
+5. Save the workbook to a file with the given filename.
+
+### fnGetSkuLastMonth()
+
+This function creates a data table from a specified list of elements `lsM1`, based on several conditions, and orders it by the `sku_date`. 
+
+#### Key operations:
+
+1. Gather data from the last month.
+2. Filter the data based on the given conditions.
+3. Retrieve the individual ID information using the `fnGetByIdS()` function.
+
+### fnPrepIR()
+
+This function prepares the final data table for creating the itemized report by performing the following operations:
+
+1. Keep only relevant columns in the data table.
+2. Sort the data by service_code and sku_date.
+3. Format the sku_date column.
+4. Rename column names for readability.
+
+### fnMakeFile()
+
+This function generates the final Excel file using the `fnCreateItemizedReport()` function with the given input parameters. Returns the created file name.
+
+### fnMakeFiles()
+
+This is a wrapper function that uses the data frame, DTcusf, and data table, DTsku, to generate multiple Excel files. For each row in the DTcusf data frame, the function extracts the necessary information, generates an Excel file, and creates a zip archive with a password. Finally, it removes the original Excel file from the system after zipping it.
+
+#### Key operations:
+
+1. Loop over all rows of the DTcusf data frame.
+2. Extract necessary information from the row.
+3. Call `fnMakeFile()` to generate the Excel file.
+4. Zip the Excel file with a password.
+5. Remove the original Excel file from the system.
+
+## Risks
+
+### Security Issues
+
+- Sensitive information like passwords and private API URLs are hardcoded in the script, which can lead to possible leaking of such information to unauthorized users.
+
+### Bugs
+
+- No apparent bugs in the provided code.
+
+## Refactoring Opportunities
+
+- Make use of configuration files or environment variables to store sensitive information like private API URLs and passwords.
+- Create classes, objects, or separate functions to handle HTTP requests and responses more efficiently.
+- Divide the `fnCreateItemizedReport()` function into smaller sub-functions for better readability and maintainability.
+
+## User Acceptance Criteria
+
+```gherkin
+Scenario 1: Retrieve data for a given individual ID using the fnGetbyid() function
+Given an individual id
+When the fnGetbyid() function is called with the id
+Then the function should return a data table with the individual's information (first_name, last_name, external_id, and email_id)
+
+Scenario 2: Generate Excel report using the fnCreateItemizedReport() function
+Given a data table (DT1) with transaction details
+When the fnCreateItemizedReport() function is called with DT1 as input
+Then the function should generate an Excel report with transaction details
+
+Scenario 3: Retrieve the last month's data using the fnGetSkuLastMonth() function
+Given a list of elements (lsM1)
+When the fnGetSkuLastMonth() function is called with lsM1 as input
+Then the function should return a data table with data from the last month based on the given conditions
+
+Scenario 4: Create multiple Excel files using the fnMakeFiles() function
+Given a data frame (DTcusf) with different accounts and a data table (DTsku) with SKU details
+When the fnMakeFiles() function is called with DTcusf and DTsku as inputs
+Then the function should generate multiple Excel files, each representing an account and its respective SKU details
+```
