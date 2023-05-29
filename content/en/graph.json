@@ -1,0 +1,564 @@
+{
+  "data": {
+    "nodes": [
+      {
+        "id": "sql-node-graph-collection/inserted",
+        "name": "inserted",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_._Person_",
+        "name": "[Person].[Person]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Production_._TransactionHistory_",
+        "name": "[Production].[TransactionHistory]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Purchasing_._PurchaseOrderHeader_",
+        "name": "[Purchasing].[PurchaseOrderHeader]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Purchasing_._PurchaseOrderDetail_",
+        "name": "[Purchasing].[PurchaseOrderDetail]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Sales_._SalesOrderHeader_",
+        "name": "[Sales].[SalesOrderHeader]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Sales_._Customer_",
+        "name": "[Sales].[Customer]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Sales_._SalesOrderDetail_",
+        "name": "[Sales].[SalesOrderDetail]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/deleted",
+        "name": "deleted",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Sales_._SalesPerson_",
+        "name": "[Sales].[SalesPerson]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Sales_._SalesTerritory_",
+        "name": "[Sales].[SalesTerritory]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_AdditionalContactInfo_.nodes(_'declare_namespace_ci=_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_ContactInfo_;_ci:AdditionalContactInfo')",
+        "name": "[AdditionalContactInfo].nodes(\r\n    'declare namespace ci=\"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ContactInfo\"; \r\n    /ci:AdditionalContactInfo')",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_HumanResources_._Employee_",
+        "name": "[HumanResources].[Employee]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_._CountryRegion_",
+        "name": "[Person].[CountryRegion]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_._BusinessEntityAddress_",
+        "name": "[Person].[BusinessEntityAddress]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_._Address_",
+        "name": "[Person].[Address]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_._StateProvince_",
+        "name": "[Person].[StateProvince]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_._EmailAddress_",
+        "name": "[Person].[EmailAddress]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_._PhoneNumberType_",
+        "name": "[Person].[PhoneNumberType]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_._PersonPhone_",
+        "name": "[Person].[PersonPhone]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_HumanResources_._Department_",
+        "name": "[HumanResources].[Department]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_HumanResources_._EmployeeDepartmentHistory_",
+        "name": "[HumanResources].[EmployeeDepartmentHistory]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_HumanResources_._Shift_",
+        "name": "[HumanResources].[Shift]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_._AddressType_",
+        "name": "[Person].[AddressType]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/p._Demographics_.nodes(N'declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_IndividualSurvey_;_IndividualSurvey')",
+        "name": "p.[Demographics].nodes(N'declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/IndividualSurvey\"; \r\n    /IndividualSurvey')",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_HumanResources_._JobCandidate_",
+        "name": "[HumanResources].[JobCandidate]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/jc._Resume_.nodes(N'declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_Resume_;_Resume')",
+        "name": "jc.[Resume].nodes(N'declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume\"; \r\n    /Resume')",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/jc._Resume_.nodes(N'declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_Resume_;_Resume_Employment')",
+        "name": "jc.[Resume].nodes(N'declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume\"; \r\n    /Resume/Employment')",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/jc._Resume_.nodes(N'declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_Resume_;_Resume_Education')",
+        "name": "jc.[Resume].nodes(N'declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume\"; \r\n    /Resume/Education')",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Production_._ProductModelProductDescriptionCulture_",
+        "name": "[Production].[ProductModelProductDescriptionCulture]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Production_._ProductDescription_",
+        "name": "[Production].[ProductDescription]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Production_._ProductModel_",
+        "name": "[Production].[ProductModel]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Production_._Product_",
+        "name": "[Production].[Product]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_MfgInstructions_.ref.nodes('declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_ProductModelManuInstructions_;_step')",
+        "name": "[MfgInstructions].ref.nodes('declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelManuInstructions\"; \r\n    step')",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Instructions_.nodes(N'declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_ProductModelManuInstructions_;_root_Location')",
+        "name": "[Instructions].nodes(N'declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelManuInstructions\"; \r\n    /root/Location')",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/(SELECT_soh._SalesPersonID_,p._FirstName_+_'_'_+_COALESCE(p._MiddleName_,_'')_+_'_'_+_p._LastName_AS_FullName_,e._JobTitle_,st._Name_AS_SalesTerritory_,soh._SubTotal_,YEAR(DATEADD(m,_6,_soh._OrderDate_))_AS_FiscalYear_FROM_Sales_._SalesPerson_sp_INNER_JO",
+        "name": "(SELECT \r\n        soh.[SalesPersonID]\r\n        ,p.[FirstName] + ' ' + COALESCE(p.[MiddleName], '') + ' ' + p.[LastName] AS [FullName]\r\n        ,e.[JobTitle]\r\n        ,st.[Name] AS [SalesTerritory]\r\n        ,soh.[SubTotal]\r\n        ,YEAR(DATEADD(m, 6, soh.[OrderDate])) AS [FiscalYear] \r\n    FROM [Sales].[SalesPerson] sp \r\n        INNER JOIN [Sales].[SalesOrderHeader] soh \r\n        ON sp.[BusinessEntityID] = soh.[SalesPersonID]\r\n        INNER JOIN [Sales].[SalesTerritory] st \r\n        ON sp.[TerritoryID] = st.[TerritoryID] \r\n        INNER JOIN [HumanResources].[Employee] e \r\n        ON soh.[SalesPersonID] = e.[BusinessEntityID] \r\n\t\tINNER JOIN [Person].[Person] p\r\n\t\tON p.[BusinessEntityID] = sp.[BusinessEntityID]\r\n\t )",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/pvt",
+        "name": "pvt",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Sales_._Store_",
+        "name": "[Sales].[Store]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_._ContactType_",
+        "name": "[Person].[ContactType]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_._BusinessEntityContact_",
+        "name": "[Person].[BusinessEntityContact]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Person_.ContactType",
+        "name": "[Person].ContactType",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Purchasing_._Vendor_",
+        "name": "[Purchasing].[Vendor]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ufnGetAccountingStartDate_",
+        "name": "[dbo].[ufnGetAccountingStartDate]",
+        "group": "sstmssqlcreatefunction"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ufnGetAccountingEndDate_",
+        "name": "[dbo].[ufnGetAccountingEndDate]",
+        "group": "sstmssqlcreatefunction"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
+        "name": "[dbo].[ufnGetContactInformation]",
+        "group": "sstmssqlcreatefunction"
+      },
+      {
+        "id": "sql-node-graph-collection/@retContactInformation",
+        "name": "@retContactInformation",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ufnGetProductDealerPrice_",
+        "name": "[dbo].[ufnGetProductDealerPrice]",
+        "group": "sstmssqlcreatefunction"
+      },
+      {
+        "id": "sql-node-graph-collection/_Production_._ProductListPriceHistory_",
+        "name": "[Production].[ProductListPriceHistory]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ufnGetProductListPrice_",
+        "name": "[dbo].[ufnGetProductListPrice]",
+        "group": "sstmssqlcreatefunction"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ufnGetProductStandardCost_",
+        "name": "[dbo].[ufnGetProductStandardCost]",
+        "group": "sstmssqlcreatefunction"
+      },
+      {
+        "id": "sql-node-graph-collection/_Production_._ProductCostHistory_",
+        "name": "[Production].[ProductCostHistory]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ufnGetStock_",
+        "name": "[dbo].[ufnGetStock]",
+        "group": "sstmssqlcreatefunction"
+      },
+      {
+        "id": "sql-node-graph-collection/_Production_._ProductInventory_",
+        "name": "[Production].[ProductInventory]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ufnGetDocumentStatusText_",
+        "name": "[dbo].[ufnGetDocumentStatusText]",
+        "group": "sstmssqlcreatefunction"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ufnGetPurchaseOrderStatusText_",
+        "name": "[dbo].[ufnGetPurchaseOrderStatusText]",
+        "group": "sstmssqlcreatefunction"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ufnGetSalesOrderStatusText_",
+        "name": "[dbo].[ufnGetSalesOrderStatusText]",
+        "group": "sstmssqlcreatefunction"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._uspGetBillOfMaterials_",
+        "name": "[dbo].[uspGetBillOfMaterials]",
+        "group": "sstmssqlcreateprocedure"
+      },
+      {
+        "id": "sql-node-graph-collection/_BOM_cte_",
+        "name": "[BOM_cte]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_Production_._BillOfMaterials_",
+        "name": "[Production].[BillOfMaterials]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._uspGetEmployeeManagers_",
+        "name": "[dbo].[uspGetEmployeeManagers]",
+        "group": "sstmssqlcreateprocedure"
+      },
+      {
+        "id": "sql-node-graph-collection/_EMP_cte_",
+        "name": "[EMP_cte]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._uspGetManagerEmployees_",
+        "name": "[dbo].[uspGetManagerEmployees]",
+        "group": "sstmssqlcreateprocedure"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._uspGetWhereUsedProductID_",
+        "name": "[dbo].[uspGetWhereUsedProductID]",
+        "group": "sstmssqlcreateprocedure"
+      },
+      {
+        "id": "sql-node-graph-collection/_HumanResources_._uspUpdateEmployeeHireInfo_",
+        "name": "[HumanResources].[uspUpdateEmployeeHireInfo]",
+        "group": "sstmssqlcreateprocedure"
+      },
+      {
+        "id": "sql-node-graph-collection/_HumanResources_._EmployeePayHistory_",
+        "name": "[HumanResources].[EmployeePayHistory]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_HumanResources_._uspUpdateEmployeeLogin_",
+        "name": "[HumanResources].[uspUpdateEmployeeLogin]",
+        "group": "sstmssqlcreateprocedure"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._uspPrintError_",
+        "name": "[dbo].[uspPrintError]",
+        "group": "sstmssqlcreateprocedure"
+      },
+      {
+        "id": "sql-node-graph-collection/_HumanResources_._uspUpdateEmployeePersonalInfo_",
+        "name": "[HumanResources].[uspUpdateEmployeePersonalInfo]",
+        "group": "sstmssqlcreateprocedure"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._uspLogError_",
+        "name": "[dbo].[uspLogError]",
+        "group": "sstmssqlcreateprocedure"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ErrorLog_",
+        "name": "[dbo].[ErrorLog]",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._uspSearchCandidateResumes_",
+        "name": "[dbo].[uspSearchCandidateResumes]",
+        "group": "sstmssqlcreateprocedure"
+      },
+      {
+        "id": "sql-node-graph-collection/FREETEXTTABLE(_HumanResources_._JobCandidate_,*,_@searchString,LANGUAGE_@language)",
+        "name": "FREETEXTTABLE([HumanResources].[JobCandidate],*, @searchString,LANGUAGE @language)",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/CONTAINSTABLE(_HumanResources_._JobCandidate_,*,_@string,LANGUAGE_@language)",
+        "name": "CONTAINSTABLE([HumanResources].[JobCandidate],*, @string,LANGUAGE @language)",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/CONTAINSTABLE(_HumanResources_._JobCandidate_,*,@string,LANGUAGE_@language)",
+        "name": "CONTAINSTABLE([HumanResources].[JobCandidate],*,@string,LANGUAGE @language)",
+        "group": "table"
+      },
+      {
+        "id": "sql-node-graph-collection/_dbo_._ufnLeadingZeros_",
+        "name": "[dbo].[ufnLeadingZeros]",
+        "group": "sstmssqlcreatefunction"
+      }
+    ],
+    "links": [
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
+        "target": "sql-node-graph-collection/_HumanResources_._Employee_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
+        "target": "sql-node-graph-collection/_Person_._Person_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
+        "target": "sql-node-graph-collection/@retContactInformation",
+        "type": "sstinsert"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
+        "target": "sql-node-graph-collection/_Person_._BusinessEntityContact_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
+        "target": "sql-node-graph-collection/_Purchasing_._Vendor_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
+        "target": "sql-node-graph-collection/_Person_.ContactType",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
+        "target": "sql-node-graph-collection/_Sales_._Store_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
+        "target": "sql-node-graph-collection/_Sales_._Customer_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetProductDealerPrice_",
+        "target": "sql-node-graph-collection/_Production_._ProductListPriceHistory_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetProductDealerPrice_",
+        "target": "sql-node-graph-collection/_Production_._Product_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetProductListPrice_",
+        "target": "sql-node-graph-collection/_Production_._ProductListPriceHistory_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetProductListPrice_",
+        "target": "sql-node-graph-collection/_Production_._Product_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetProductStandardCost_",
+        "target": "sql-node-graph-collection/_Production_._Product_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetProductStandardCost_",
+        "target": "sql-node-graph-collection/_Production_._ProductCostHistory_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._ufnGetStock_",
+        "target": "sql-node-graph-collection/_Production_._ProductInventory_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetBillOfMaterials_",
+        "target": "sql-node-graph-collection/_Production_._BillOfMaterials_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetBillOfMaterials_",
+        "target": "sql-node-graph-collection/_Production_._Product_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetBillOfMaterials_",
+        "target": "sql-node-graph-collection/_BOM_cte_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetEmployeeManagers_",
+        "target": "sql-node-graph-collection/_HumanResources_._Employee_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetEmployeeManagers_",
+        "target": "sql-node-graph-collection/_Person_._Person_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetEmployeeManagers_",
+        "target": "sql-node-graph-collection/_EMP_cte_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetManagerEmployees_",
+        "target": "sql-node-graph-collection/_HumanResources_._Employee_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetManagerEmployees_",
+        "target": "sql-node-graph-collection/_Person_._Person_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetManagerEmployees_",
+        "target": "sql-node-graph-collection/_EMP_cte_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetWhereUsedProductID_",
+        "target": "sql-node-graph-collection/_Production_._BillOfMaterials_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetWhereUsedProductID_",
+        "target": "sql-node-graph-collection/_Production_._Product_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspGetWhereUsedProductID_",
+        "target": "sql-node-graph-collection/_BOM_cte_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_HumanResources_._uspUpdateEmployeeHireInfo_",
+        "target": "sql-node-graph-collection/_HumanResources_._Employee_",
+        "type": "sstupdate"
+      },
+      {
+        "source": "sql-node-graph-collection/_HumanResources_._uspUpdateEmployeeHireInfo_",
+        "target": "sql-node-graph-collection/_HumanResources_._EmployeePayHistory_",
+        "type": "sstinsert"
+      },
+      {
+        "source": "sql-node-graph-collection/_HumanResources_._uspUpdateEmployeeLogin_",
+        "target": "sql-node-graph-collection/_HumanResources_._Employee_",
+        "type": "sstupdate"
+      },
+      {
+        "source": "sql-node-graph-collection/_HumanResources_._uspUpdateEmployeePersonalInfo_",
+        "target": "sql-node-graph-collection/_HumanResources_._Employee_",
+        "type": "sstupdate"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspLogError_",
+        "target": "sql-node-graph-collection/_dbo_._ErrorLog_",
+        "type": "sstinsert"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspSearchCandidateResumes_",
+        "target": "sql-node-graph-collection/_HumanResources_._JobCandidate_",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspSearchCandidateResumes_",
+        "target": "sql-node-graph-collection/FREETEXTTABLE(_HumanResources_._JobCandidate_,*,_@searchString,LANGUAGE_@language)",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspSearchCandidateResumes_",
+        "target": "sql-node-graph-collection/CONTAINSTABLE(_HumanResources_._JobCandidate_,*,_@string,LANGUAGE_@language)",
+        "type": "sstselect"
+      },
+      {
+        "source": "sql-node-graph-collection/_dbo_._uspSearchCandidateResumes_",
+        "target": "sql-node-graph-collection/CONTAINSTABLE(_HumanResources_._JobCandidate_,*,@string,LANGUAGE_@language)",
+        "type": "sstselect"
+      }
+    ]
+  },
+  "databaseName": "AdventureWorks2019"
+}

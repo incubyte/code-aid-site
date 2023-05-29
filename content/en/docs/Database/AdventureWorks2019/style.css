@@ -1,0 +1,24 @@
+svg {
+  cursor: grab;
+  user-select: none;
+}
+
+svg:active {
+  cursor: grabbing;
+}
+
+circle {
+  cursor: pointer;
+}
+
+.link-label {
+  font-size: 10px;
+  fill: #3b3b3b;
+  pointer-events: none;
+}
+
+.node-label {
+  font-size: 10px;
+  fill: #3b3b3b;
+  transform: translate(5px, -8px);
+}
