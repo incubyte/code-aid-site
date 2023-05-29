@@ -127,13 +127,27 @@ function ForceGraph(
     .attr("text-anchor", "middle")
     .attr("alignment-baseline", "middle");
 
-  function handleNodeClick(event) {
-    window.open("https://google.com/", "_blank");
+  function handleNodeClick(event, d) {
+    if (
+      ["TRIGGERED_VALUED_FUNCTION", "FUNCTION", "STORED_PROCEDURE"].indexOf(
+        d.objectType
+      ) >= 0
+    ) {
+      window.location.href =
+        window.location.href +
+        convertToLowerCaseSeparatedWords(d.objectType) +
+        "/" +
+        d.name
+          .toLowerCase()
+          .replace(".", "-")
+          .replaceAll("[", "")
+          .replaceAll("]", "");
+    }
   }
 
   node
     .append("a")
-    .attr("xlink:href", "https://www.google.com")
+    .attr("xlink:href", (d) => `${d.name}`)
     .append("circle")
     .attr("r", nodeRadius);
 
@@ -196,11 +210,12 @@ function ForceGraph(
 fetch("/graph.json")
   .then((response) => response.json())
   .then((data) => {
-    const nodes = data.data.nodes.map((node) => {
+    console.log(window.location.href);
+    const nodes = data.nodes.map((node) => {
       return { ...node, label: node.name };
     });
 
-    const links = data.data.links.map((link) => {
+    const links = data.links.map((link) => {
       return { ...link, label: link.type };
     });
 
@@ -241,6 +256,19 @@ function extractSecondPart(str) {
   }
 
   return str;
+}
+
+function convertToLowerCaseSeparatedWords(str) {
+  // Replace underscores with spaces
+  const stringWithSpaces = str.replace(/_/g, " ");
+
+  // Convert to lower case and split into words
+  const words = stringWithSpaces.toLowerCase().split(" ");
+
+  // Join words with hyphens
+  const convertedString = words.join("-");
+
+  return convertedString;
 }
 
 function makeSvgScrollable() {
