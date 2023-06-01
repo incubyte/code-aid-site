@@ -1,8 +1,8 @@
 ---
 categories: ["Examples", "Placeholders"]
 tags: ["test","docs"] 
-title: "Sub Dir"
-linkTitle: "Sub Dir"
+title: "Python"
+linkTitle: "Python"
 weight: -2
 description: >
   What does your user need to know to try your project?

@@ -6,15 +6,16 @@ categories:
   - Technology
   - Programming
 ---
+### Summary
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |
-| sstselect | [ProductAssemblyID], [ComponentID], [ComponentDesc], SUM([PerAssemblyQty]), [StandardCost], [ListPrice], [BOMLevel], [RecursionLevel] | NA | NA |  |  | [BOM_cte] |
-| sstselect | [ProductAssemblyID], [ComponentID], [Name], [PerAssemblyQty], [StandardCost], [ListPrice], [BOMLevel], [RecursionLevel] + 1 | NA | NA |  |  |  |
-| sstselect | [ProductAssemblyID], [ComponentID], [Name], [PerAssemblyQty], [StandardCost], [ListPrice], [BOMLevel], 0 | NA | NA | [ProductID], [ComponentID] | [ProductAssemblyID], , [StartDate], [EndDate] | [Production].[BillOfMaterials], [Production].[Product] |
-| sstselect | [ProductAssemblyID], [ComponentID], [Name], [PerAssemblyQty], [StandardCost], [ListPrice], [BOMLevel], [RecursionLevel] + 1 | NA | NA | [ProductAssemblyID], [ProductID], [ComponentID] | , [StartDate], [EndDate] | [BOM_cte], [Production].[BillOfMaterials], [Production].[Product] |
+- **Number of Tables Accessed:** 2
+- **Lines of Code in Definition:** 37
+- **Complexity of SQL Code:** 4
+### Missing Indexes
 
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
+| [PRODUCTION].[BILLOFMATERIALS]| [EndDate] | sstselect | WHERE |
 ## Overview
 
 This stored procedure, `uspGetBillOfMaterials`, is designed to retrieve a multi-level Bill of Materials (BOM) for a specific product assembly, based on a given `@StartProductID` and `@CheckDate`. The output includes information on components, quantity, costs, and BOM level.
@@ -99,3 +100,13 @@ Feature: Retrieve Multi-Level BOM
     When the uspGetBillOfMaterials stored procedure is executed
     Then an empty result set should be returned
 ```
+
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqlset |  |  |  |  |  |  |  |  |  |
+| sstselect |  | NA | NA |  |  |  |  |  |  |
+| sstselect | [PRODUCTION].[BILLOFMATERIALS].[ComponentID], [PRODUCTION].[BILLOFMATERIALS].[BOMLevel], [PRODUCTION].[PRODUCT].[Name], [PRODUCTION].[BILLOFMATERIALS].[ProductAssemblyID], [PRODUCTION].[PRODUCT].[StandardCost], [PRODUCTION].[PRODUCT].[ListPrice], [PRODUCTION].[BILLOFMATERIALS].[PerAssemblyQty] | NA | NA |  |  |  |  |  |  |
+| sstselect | [PRODUCTION].[BILLOFMATERIALS].[ComponentID], [PRODUCTION].[BILLOFMATERIALS].[BOMLevel], [PRODUCTION].[PRODUCT].[Name], [PRODUCTION].[BILLOFMATERIALS].[ProductAssemblyID], [PRODUCTION].[PRODUCT].[StandardCost], [PRODUCTION].[PRODUCT].[ListPrice], [PRODUCTION].[BILLOFMATERIALS].[PerAssemblyQty] | NA | NA | [PRODUCTION].[BILLOFMATERIALS].[ComponentID], [PRODUCTION].[PRODUCT].[ProductID] | [PRODUCTION].[BILLOFMATERIALS].[StartDate], [PRODUCTION].[BILLOFMATERIALS].[ProductAssemblyID], [PRODUCTION].[BILLOFMATERIALS].[EndDate] |  |  |  | [Production].[BillOfMaterials], [Production].[Product] |
+| sstselect | [PRODUCTION].[BILLOFMATERIALS].[ComponentID], [PRODUCTION].[BILLOFMATERIALS].[BOMLevel], [PRODUCTION].[PRODUCT].[Name], [PRODUCTION].[BILLOFMATERIALS].[ProductAssemblyID], [PRODUCTION].[PRODUCT].[StandardCost], [PRODUCTION].[PRODUCT].[ListPrice], [PRODUCTION].[BILLOFMATERIALS].[PerAssemblyQty] | NA | NA | [PRODUCTION].[BILLOFMATERIALS].[ComponentID], [PRODUCTION].[PRODUCT].[ProductID], [PRODUCTION].[BILLOFMATERIALS].[ProductAssemblyID] | [PRODUCTION].[BILLOFMATERIALS].[StartDate], [PRODUCTION].[BILLOFMATERIALS].[EndDate] |  |  |  | [Production].[BillOfMaterials], [Production].[Product] |

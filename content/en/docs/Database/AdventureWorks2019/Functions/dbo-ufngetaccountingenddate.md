@@ -7,9 +7,17 @@ categories:
   - Programming
 ---
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqlreturn |  |  |  |  |  |  |
+### Summary
+
+
+- **Number of Tables Accessed:** 0
+- **Lines of Code in Definition:** 7
+- **Complexity of SQL Code:** 2
+
+### Missing Indexes
+
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
 
 ## Overview
 
@@ -87,3 +95,9 @@ When I review the function's implementation
 Then I should ensure there are no dependencies based on the hardcoded date value
 And if there are any, mitigate the risks associated with a changed hardcoded date
 ```
+
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
