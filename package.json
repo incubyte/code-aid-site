@@ -20,7 +20,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.0",
     "postcss": "^8.3.7",
-    "postcss-cli": "^9.0.2"
+    "postcss-cli": "^10.1.0"
   },
   "dependencies": {
     "hugo-lunr": "^0.0.4"
