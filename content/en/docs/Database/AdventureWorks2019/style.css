@@ -1,9 +1,10 @@
-svg {
+.graph-svg {
   cursor: grab;
   user-select: none;
+  z-index: 1;
 }
 
-svg:active {
+.graph-svg:active {
   cursor: grabbing;
 }
 
@@ -21,4 +22,17 @@ circle {
   font-size: 10px;
   fill: #3b3b3b;
   transform: translate(5px, -8px);
+}
+
+#graph-container {
+  position: relative;
+  display: inline-block;
+}
+
+.legend-svg {
+  top: 1%;
+  right: 0.5%;
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
 }

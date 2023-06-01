@@ -67,12 +67,6 @@
       "objectType": "table"
     },
     {
-      "id": "sql-node-graph-collection/_AdditionalContactInfo_.nodes(_'declare_namespace_ci=_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_ContactInfo_;_ci:AdditionalContactInfo')",
-      "name": "[AdditionalContactInfo].nodes(\r\n    'declare namespace ci=\"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ContactInfo\"; \r\n    /ci:AdditionalContactInfo')",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
       "id": "sql-node-graph-collection/_HumanResources_._Employee_",
       "name": "[HumanResources].[Employee]",
       "group": "table",
@@ -145,32 +139,8 @@
       "objectType": "table"
     },
     {
-      "id": "sql-node-graph-collection/p._Demographics_.nodes(N'declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_IndividualSurvey_;_IndividualSurvey')",
-      "name": "p.[Demographics].nodes(N'declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/IndividualSurvey\"; \r\n    /IndividualSurvey')",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
       "id": "sql-node-graph-collection/_HumanResources_._JobCandidate_",
       "name": "[HumanResources].[JobCandidate]",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
-      "id": "sql-node-graph-collection/jc._Resume_.nodes(N'declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_Resume_;_Resume')",
-      "name": "jc.[Resume].nodes(N'declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume\"; \r\n    /Resume')",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
-      "id": "sql-node-graph-collection/jc._Resume_.nodes(N'declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_Resume_;_Resume_Employment')",
-      "name": "jc.[Resume].nodes(N'declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume\"; \r\n    /Resume/Employment')",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
-      "id": "sql-node-graph-collection/jc._Resume_.nodes(N'declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_Resume_;_Resume_Education')",
-      "name": "jc.[Resume].nodes(N'declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume\"; \r\n    /Resume/Education')",
       "group": "table",
       "objectType": "table"
     },
@@ -195,30 +165,6 @@
     {
       "id": "sql-node-graph-collection/_Production_._Product_",
       "name": "[Production].[Product]",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
-      "id": "sql-node-graph-collection/_MfgInstructions_.ref.nodes('declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_ProductModelManuInstructions_;_step')",
-      "name": "[MfgInstructions].ref.nodes('declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelManuInstructions\"; \r\n    step')",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
-      "id": "sql-node-graph-collection/_Instructions_.nodes(N'declare_default_element_namespace_http:_schemas.microsoft.com_sqlserver_2004_07_adventure-works_ProductModelManuInstructions_;_root_Location')",
-      "name": "[Instructions].nodes(N'declare default element namespace \"http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelManuInstructions\"; \r\n    /root/Location')",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
-      "id": "sql-node-graph-collection/(SELECT_soh._SalesPersonID_,p._FirstName_+_'_'_+_COALESCE(p._MiddleName_,_'')_+_'_'_+_p._LastName_AS_FullName_,e._JobTitle_,st._Name_AS_SalesTerritory_,soh._SubTotal_,YEAR(DATEADD(m,_6,_soh._OrderDate_))_AS_FiscalYear_FROM_Sales_._SalesPerson_sp_INNER_JO",
-      "name": "(SELECT \r\n        soh.[SalesPersonID]\r\n        ,p.[FirstName] + ' ' + COALESCE(p.[MiddleName], '') + ' ' + p.[LastName] AS [FullName]\r\n        ,e.[JobTitle]\r\n        ,st.[Name] AS [SalesTerritory]\r\n        ,soh.[SubTotal]\r\n        ,YEAR(DATEADD(m, 6, soh.[OrderDate])) AS [FiscalYear] \r\n    FROM [Sales].[SalesPerson] sp \r\n        INNER JOIN [Sales].[SalesOrderHeader] soh \r\n        ON sp.[BusinessEntityID] = soh.[SalesPersonID]\r\n        INNER JOIN [Sales].[SalesTerritory] st \r\n        ON sp.[TerritoryID] = st.[TerritoryID] \r\n        INNER JOIN [HumanResources].[Employee] e \r\n        ON soh.[SalesPersonID] = e.[BusinessEntityID] \r\n\t\tINNER JOIN [Person].[Person] p\r\n\t\tON p.[BusinessEntityID] = sp.[BusinessEntityID]\r\n\t )",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
-      "id": "sql-node-graph-collection/pvt",
-      "name": "pvt",
       "group": "table",
       "objectType": "table"
     },
@@ -269,12 +215,6 @@
       "name": "[dbo].[ufnGetContactInformation]",
       "group": "sstmssqlcreatefunction",
       "objectType": "TRIGGERED_VALUED_FUNCTION"
-    },
-    {
-      "id": "sql-node-graph-collection/@retContactInformation",
-      "name": "@retContactInformation",
-      "group": "table",
-      "objectType": "table"
     },
     {
       "id": "sql-node-graph-collection/_dbo_._ufnGetProductDealerPrice_",
@@ -343,12 +283,6 @@
       "objectType": "STORED_PROCEDURE"
     },
     {
-      "id": "sql-node-graph-collection/_BOM_cte_",
-      "name": "[BOM_cte]",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
       "id": "sql-node-graph-collection/_Production_._BillOfMaterials_",
       "name": "[Production].[BillOfMaterials]",
       "group": "table",
@@ -359,12 +293,6 @@
       "name": "[dbo].[uspGetEmployeeManagers]",
       "group": "sstmssqlcreateprocedure",
       "objectType": "STORED_PROCEDURE"
-    },
-    {
-      "id": "sql-node-graph-collection/_EMP_cte_",
-      "name": "[EMP_cte]",
-      "group": "table",
-      "objectType": "table"
     },
     {
       "id": "sql-node-graph-collection/_dbo_._uspGetManagerEmployees_",
@@ -427,24 +355,6 @@
       "objectType": "STORED_PROCEDURE"
     },
     {
-      "id": "sql-node-graph-collection/FREETEXTTABLE(_HumanResources_._JobCandidate_,*,_@searchString,LANGUAGE_@language)",
-      "name": "FREETEXTTABLE([HumanResources].[JobCandidate],*, @searchString,LANGUAGE @language)",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
-      "id": "sql-node-graph-collection/CONTAINSTABLE(_HumanResources_._JobCandidate_,*,_@string,LANGUAGE_@language)",
-      "name": "CONTAINSTABLE([HumanResources].[JobCandidate],*, @string,LANGUAGE @language)",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
-      "id": "sql-node-graph-collection/CONTAINSTABLE(_HumanResources_._JobCandidate_,*,@string,LANGUAGE_@language)",
-      "name": "CONTAINSTABLE([HumanResources].[JobCandidate],*,@string,LANGUAGE @language)",
-      "group": "table",
-      "objectType": "table"
-    },
-    {
       "id": "sql-node-graph-collection/_dbo_._ufnLeadingZeros_",
       "name": "[dbo].[ufnLeadingZeros]",
       "group": "sstmssqlcreatefunction",
@@ -461,11 +371,6 @@
       "source": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
       "target": "sql-node-graph-collection/_Person_._Person_",
       "type": "sstselect"
-    },
-    {
-      "source": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
-      "target": "sql-node-graph-collection/@retContactInformation",
-      "type": "sstinsert"
     },
     {
       "source": "sql-node-graph-collection/_dbo_._ufnGetContactInformation_",
@@ -538,11 +443,6 @@
       "type": "sstselect"
     },
     {
-      "source": "sql-node-graph-collection/_dbo_._uspGetBillOfMaterials_",
-      "target": "sql-node-graph-collection/_BOM_cte_",
-      "type": "sstselect"
-    },
-    {
       "source": "sql-node-graph-collection/_dbo_._uspGetEmployeeManagers_",
       "target": "sql-node-graph-collection/_HumanResources_._Employee_",
       "type": "sstselect"
@@ -553,11 +453,6 @@
       "type": "sstselect"
     },
     {
-      "source": "sql-node-graph-collection/_dbo_._uspGetEmployeeManagers_",
-      "target": "sql-node-graph-collection/_EMP_cte_",
-      "type": "sstselect"
-    },
-    {
       "source": "sql-node-graph-collection/_dbo_._uspGetManagerEmployees_",
       "target": "sql-node-graph-collection/_HumanResources_._Employee_",
       "type": "sstselect"
@@ -565,11 +460,6 @@
     {
       "source": "sql-node-graph-collection/_dbo_._uspGetManagerEmployees_",
       "target": "sql-node-graph-collection/_Person_._Person_",
-      "type": "sstselect"
-    },
-    {
-      "source": "sql-node-graph-collection/_dbo_._uspGetManagerEmployees_",
-      "target": "sql-node-graph-collection/_EMP_cte_",
       "type": "sstselect"
     },
     {
@@ -580,11 +470,6 @@
     {
       "source": "sql-node-graph-collection/_dbo_._uspGetWhereUsedProductID_",
       "target": "sql-node-graph-collection/_Production_._Product_",
-      "type": "sstselect"
-    },
-    {
-      "source": "sql-node-graph-collection/_dbo_._uspGetWhereUsedProductID_",
-      "target": "sql-node-graph-collection/_BOM_cte_",
       "type": "sstselect"
     },
     {
@@ -615,21 +500,6 @@
     {
       "source": "sql-node-graph-collection/_dbo_._uspSearchCandidateResumes_",
       "target": "sql-node-graph-collection/_HumanResources_._JobCandidate_",
-      "type": "sstselect"
-    },
-    {
-      "source": "sql-node-graph-collection/_dbo_._uspSearchCandidateResumes_",
-      "target": "sql-node-graph-collection/FREETEXTTABLE(_HumanResources_._JobCandidate_,*,_@searchString,LANGUAGE_@language)",
-      "type": "sstselect"
-    },
-    {
-      "source": "sql-node-graph-collection/_dbo_._uspSearchCandidateResumes_",
-      "target": "sql-node-graph-collection/CONTAINSTABLE(_HumanResources_._JobCandidate_,*,_@string,LANGUAGE_@language)",
-      "type": "sstselect"
-    },
-    {
-      "source": "sql-node-graph-collection/_dbo_._uspSearchCandidateResumes_",
-      "target": "sql-node-graph-collection/CONTAINSTABLE(_HumanResources_._JobCandidate_,*,@string,LANGUAGE_@language)",
       "type": "sstselect"
     }
   ]
