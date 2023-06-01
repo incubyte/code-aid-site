@@ -207,7 +207,7 @@ function ForceGraph(
   return Object.assign(svg.node(), { scales: { color } });
 }
 
-fetch("/graph.json")
+fetch("./graph.json")
   .then((response) => response.json())
   .then((data) => {
     console.log(window.location.href);
