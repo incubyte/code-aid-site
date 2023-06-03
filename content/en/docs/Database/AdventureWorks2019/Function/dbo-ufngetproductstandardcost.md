@@ -1,77 +1,132 @@
 ---
 title: "dbo.ufnGetProductStandardCost"
-author: GPT
-date: 2022-05-01
-categories:
-  - Technology
-  - Programming
+linkTitle: "dbo.ufnGetProductStandardCost"
+description: "dbo.ufnGetProductStandardCost"
 ---
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |
-| sstselect | @StandardCost = pch.[StandardCost] | NA | NA | , [ProductID], [StartDate], [EndDate] |  | [Production].[Product], [Production].[ProductCostHistory] |
-| sstmssqlreturn |  |  |  |  |  |  |
+# Functions
 
-## 1. Overview
-This markdown documentation describes the database function `[dbo].[ufnGetProductStandardCost]`, which returns the standard cost of a product on a specific date.
+## [dbo].[ufnGetProductStandardCost]
+### Summary
 
-## 2. Details
 
-### 2.1 Function signature
+- **Number of Tables Accessed:** 2
+- **Lines of Code:** 17
+- **Code Complexity:** 2
+### Missing Indexes
+
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
+| [PRODUCTION].[PRODUCTCOSTHISTORY]| [EndDate] | sstselect | JOIN |
+
+
+### Parameters
+
+| Parameter Name | Data Type | Direction |
+|---|---|---|
+| @ProductID | INT | IN |
+| @OrderDate | DATETIME | IN |
+| RETURN | MONEY | OUT |
+
+{{< details "Sql Code" >}}
+```sql
+
+CREATE FUNCTION [dbo].[ufnGetProductStandardCost](@ProductID [int], @OrderDate [datetime])
+RETURNS [money] 
+AS 
+-- Returns the standard cost for the product on a specific date.
+BEGIN
+    DECLARE @StandardCost money;
+
+    SELECT @StandardCost = pch.[StandardCost] 
+    FROM [Production].[Product] p 
+        INNER JOIN [Production].[ProductCostHistory] pch 
+        ON p.[ProductID] = pch.[ProductID] 
+            AND p.[ProductID] = @ProductID 
+            AND @OrderDate BETWEEN pch.[StartDate] AND COALESCE(pch.[EndDate], CONVERT(datetime, '99991231', 112)); -- Make sure we get all the prices!
+
+    RETURN @StandardCost;
+END;
+
+```
+{{< /details >}}
+## Overview
+
+This document describes the `dbo.ufnGetProductStandardCost` function in the provided database. The function determines the standard cost of a product based on its `ProductID` and a specified `OrderDate`.
+
+## Details
+
+### Function Signature
+
 ```sql
 CREATE FUNCTION [dbo].[ufnGetProductStandardCost](@ProductID [int], @OrderDate [datetime])
 RETURNS [money]
 ```
 
-### 2.2 Parameters
-1. `@ProductID [int]`: The identifier of the product for which the standard cost is needed.
-2. `@OrderDate [datetime]`: The date on which the standard cost should be returned.
+### Parameters
 
-## 3. Information on data
+1. `@ProductID` - An integer representing a product's unique identifier.
+2. `@OrderDate` - The date when the order is placed for the product.
 
-### 3.1 Used tables
+### Information on data
+
+The function uses the following tables:
+
 1. `[Production].[Product]`
 2. `[Production].[ProductCostHistory]`
 
-## 4. Information on the tables
+#### Information on the tables
 
-### 4.1 Table: `[Production].[Product]`
-1. `ProductID [int]`: Unique identifier of the product.
-2. *Other columns are not relevant for this function.*
+- `[Production].[Product]` table:
 
-### 4.2 Table: `[Production].[ProductCostHistory]`
-1. `ProductID [int]`: Unique identifier of the product this cost history belongs to.
-2. `StandardCost [money]`: Standard cost of the product.
-3. `StartDate [datetime]`: Start date of the standard cost validity period.
-4. `EndDate [datetime]`: End date of the standard cost validity period. Null if the product is no longer available.
+  - Stores product related information, such as `ProductID` and `Name`.
 
-## 5. Possible optimization opportunities
+- `[Production].[ProductCostHistory]` table:
+
+  - Stores historical cost data for each product, such as `StartDate`, `EndDate`, and `StandardCost`.
+
+### Possible optimization opportunities
+
+1. Add proper indexing to the tables to speed up the lookup process.
+
+### Possible bugs
+
 None identified.
 
-## 6. Possible bugs
-None identified.
+### Risk
 
-## 7. Risk
-- If the query returns multiple rows of data, the function takes the last standard cost encountered. This may or may not be the desired behavior, depending on the data in the tables.
+1. If the function is called without a valid `ProductID` or `OrderDate`, the query might not return any data.
+2. Performance issues might occur if the function is used extensively for large datasets.
 
-## 8. Code Complexity
-The code complexity is low as it contains only a single `SELECT` statement.
+### Code Complexity
 
-## 9. Refactoring Opportunities
-None identified.
+The code complexity for this function is low. It contains a single SELECT statement to fetch the standard cost for the product.
 
-## 10. User Acceptance Criteria
+### Refactoring Opportunities
+
+1. Add proper error handling and messaging to handle cases when the function is called with invalid parameters.
+
+## User Acceptance Criteria
+
+### Gherkin Scripts
 
 ```gherkin
-Feature: Get product standard cost
-  Scenario: Retrieve a valid product standard cost
-    Given I have a valid ProductID and OrderDate
-    When I execute the ufnGetProductStandardCost function with those parameters
-    Then I should get the correct standard cost for that product on that date
+Feature: Standard cost calculation for a product by order date
+  Scenario: A user provides a valid ProductID and OrderDate
+    Given a ProductID and an OrderDate
+    When dbo.ufnGetProductStandardCost is called with these parameters
+    Then it should return the appropriate standard cost for that product and date
 
-  Scenario: Retrieve a product standard cost with an invalid ProductID
-    Given I have an invalid ProductID and a valid OrderDate
-    When I execute the ufnGetProductStandardCost function with those parameters
-    Then I should get null or an error message
+  Scenario: A user provides an invalid ProductID or OrderDate
+    Given an invalid ProductID or OrderDate
+    When dbo.ufnGetProductStandardCost is called with these parameters
+    Then it should return an appropriate error message or handle the situation gracefully
 ```
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
+| sstselect | [PRODUCTION].[PRODUCTCOSTHISTORY].[StandardCost] | NA | NA | [PRODUCTION].[PRODUCT].[ProductID], [PRODUCTION].[PRODUCTCOSTHISTORY].[ProductID], [PRODUCTION].[PRODUCTCOSTHISTORY].[StartDate], [PRODUCTION].[PRODUCTCOSTHISTORY].[EndDate] |  |  |  |  | [Production].[Product], [Production].[ProductCostHistory] |
+| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
+

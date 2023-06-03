@@ -1,89 +1,169 @@
 ---
 title: "dbo.uspGetManagerEmployees"
-author: GPT
-date: 2022-05-01
-categories:
-  - Technology
-  - Programming
+linkTitle: "dbo.uspGetManagerEmployees"
+description: "dbo.uspGetManagerEmployees"
 ---
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |
-| sstselect | [RecursionLevel], [EMP_cte].[OrganizationNode].ToString(), [FirstName], [LastName], [BusinessEntityID], [FirstName], [LastName] | NA | NA | [OrganizationNode], [BusinessEntityID] |  | [EMP_cte], [HumanResources].[Employee], [Person].[Person] |
-| sstselect | [BusinessEntityID], [OrganizationNode], [FirstName], [LastName], [RecursionLevel] + 1 | NA | NA |  |  |  |
-| sstselect | [BusinessEntityID], [OrganizationNode], [FirstName], [LastName], 0 | NA | NA | [BusinessEntityID] | [BusinessEntityID],  | [HumanResources].[Employee], [Person].[Person] |
-| sstselect | [BusinessEntityID], [OrganizationNode], [FirstName], [LastName], [RecursionLevel] + 1 | NA | NA | [OrganizationNode], [BusinessEntityID] |  | [HumanResources].[Employee], [EMP_cte], [Person].[Person] |
+# Stored Procedures
 
+## [dbo].[uspGetManagerEmployees]
+### Summary
+
+
+- **Number of Tables Accessed:** 2
+- **Lines of Code:** 34
+- **Code Complexity:** 4
+### Missing Indexes
+
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
+
+
+### Parameters
+
+| Parameter Name | Data Type | Direction |
+|---|---|---|
+| @BusinessEntityID | INT | IN |
+
+{{< details "Sql Code" >}}
+```sql
+
+CREATE PROCEDURE [dbo].[uspGetManagerEmployees]
+    @BusinessEntityID [int]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Use recursive query to list out all Employees required for a particular Manager
+    WITH [EMP_cte]([BusinessEntityID], [OrganizationNode], [FirstName], [LastName], [RecursionLevel]) -- CTE name and columns
+    AS (
+        SELECT e.[BusinessEntityID], e.[OrganizationNode], p.[FirstName], p.[LastName], 0 -- Get the initial list of Employees for Manager n
+        FROM [HumanResources].[Employee] e 
+			INNER JOIN [Person].[Person] p 
+			ON p.[BusinessEntityID] = e.[BusinessEntityID]
+        WHERE e.[BusinessEntityID] = @BusinessEntityID
+        UNION ALL
+        SELECT e.[BusinessEntityID], e.[OrganizationNode], p.[FirstName], p.[LastName], [RecursionLevel] + 1 -- Join recursive member to anchor
+        FROM [HumanResources].[Employee] e 
+            INNER JOIN [EMP_cte]
+            ON e.[OrganizationNode].GetAncestor(1) = [EMP_cte].[OrganizationNode]
+			INNER JOIN [Person].[Person] p 
+			ON p.[BusinessEntityID] = e.[BusinessEntityID]
+        )
+    -- Join back to Employee to return the manager name 
+    SELECT [EMP_cte].[RecursionLevel], [EMP_cte].[OrganizationNode].ToString() as [OrganizationNode], p.[FirstName] AS 'ManagerFirstName', p.[LastName] AS 'ManagerLastName',
+        [EMP_cte].[BusinessEntityID], [EMP_cte].[FirstName], [EMP_cte].[LastName] -- Outer select from the CTE
+    FROM [EMP_cte] 
+        INNER JOIN [HumanResources].[Employee] e 
+        ON [EMP_cte].[OrganizationNode].GetAncestor(1) = e.[OrganizationNode]
+			INNER JOIN [Person].[Person] p 
+			ON p.[BusinessEntityID] = e.[BusinessEntityID]
+    ORDER BY [RecursionLevel], [EMP_cte].[OrganizationNode].ToString()
+    OPTION (MAXRECURSION 25) 
+END;
+
+```
+{{< /details >}}
 ## Overview
-
-This is the documentation for the `[dbo].[uspGetManagerEmployees]` stored procedure. The purpose of this stored procedure is to retrieve a given manager's employees and their respective information using a recursive query.
+The stored procedure `[uspGetManagerEmployees]` returns a list of employees reporting to a particular manager.
 
 ## Details
 
-The stored procedure takes one input parameter:
+### Input Parameters
+1. `@BusinessEntityID` (int) - The ID of the manager whose employees need to be retrieved.
 
-1. `@BusinessEntityID int`: The Business Entity ID of the manager for whom employees are fetched
+### Tables Involved
+1. `[HumanResources].[Employee]`
+2. `[Person].[Person]`
 
-The result set of this stored procedure includes the following columns:
+### Stored Procedure
+```sql
+CREATE PROCEDURE [dbo].[uspGetManagerEmployees]
+    @BusinessEntityID [int]
+AS
+BEGIN
+    SET NOCOUNT ON;
 
-1. `RecursionLevel`: The level of management of each employee
-2. `OrganizationNode`: The hierarchical node of the employee in the organization
-3. `ManagerFirstName`: First Name of the manager of the employee
-4. `ManagerLastName`: Last Name of the manager of the employee
-5. `BusinessEntityID`: Business Entity ID of the employee
-6. `FirstName`: First Name of the employee
-7. `LastName`: Last Name of the employee
+    -- Use recursive query to list out all Employees required for a particular Manager
+    WITH [EMP_cte]([BusinessEntityID], [OrganizationNode], [FirstName], [LastName], [RecursionLevel]) -- CTE name and columns
+    AS (
+        SELECT e.[BusinessEntityID], e.[OrganizationNode], p.[FirstName], p.[LastName], 0 -- Get the initial list of Employees for Manager n
+        FROM [HumanResources].[Employee] e 
+            INNER JOIN [Person].[Person] p 
+            ON p.[BusinessEntityID] = e.[BusinessEntityID]
+        WHERE e.[BusinessEntityID] = @BusinessEntityID
+        UNION ALL
+        SELECT e.[BusinessEntityID], e.[OrganizationNode], p.[FirstName], p.[LastName], [RecursionLevel] + 1 -- Join recursive member to anchor
+        FROM [HumanResources].[Employee] e 
+            INNER JOIN [EMP_cte]
+            ON e.[OrganizationNode].GetAncestor(1) = [EMP_cte].[OrganizationNode]
+            INNER JOIN [Person].[Person] p 
+            ON p.[BusinessEntityID] = e.[BusinessEntityID]
+        )
+    -- Join back to Employee to return the manager name 
+    SELECT [EMP_cte].[RecursionLevel], [EMP_cte].[OrganizationNode].ToString() as [OrganizationNode], p.[FirstName] AS 'ManagerFirstName', p.[LastName] AS 'ManagerLastName',
+        [EMP_cte].[BusinessEntityID], [EMP_cte].[FirstName], [EMP_cte].[LastName] -- Outer select from the CTE
+    FROM [EMP_cte] 
+        INNER JOIN [HumanResources].[Employee] e 
+        ON [EMP_cte].[OrganizationNode].GetAncestor(1) = e.[OrganizationNode]
+        INNER JOIN [Person].[Person] p 
+        ON p.[BusinessEntityID] = e.[BusinessEntityID]
+    ORDER BY [RecursionLevel], [EMP_cte].[OrganizationNode].ToString()
+    OPTION (MAXRECURSION 25) 
+END;
+```
 
 ## Information on data
+### HumanResources.Employee
+Columns used:
+- `BusinessEntityID`
+- `OrganizationNode`
 
-The stored procedure uses data from two tables:
-
-1. `[Person].[Person]`: Contains information about each person in the company
-2. `[HumanResources].[Employee]`: Contains information about each employee in the company
+### Person.Person
+Columns used:
+- `BusinessEntityID`
+- `FirstName`
+- `LastName`
 
 ## Information on the tables
-
-### [Person].[Person]
-
-This table contains personal information about each person in the company, such as their name or Business Entity ID.
-
-### [HumanResources].[Employee]
-
-This table contains information about employees in the company, such as their management hierarchy and organization structure.
+1. `[HumanResources].[Employee]` - Contains the employee records where each row represents an employee with the `BusinessEntityID` and a hierarchy of organization nodes (`OrganizationNode`).
+2. `[Person].[Person]` - Contains the person records where each row represents a person with their `BusinessEntityID`, `FirstName`, and `LastName`.
 
 ## Possible optimization opportunities
-
-The current code utilizes a recursive CTE, which can sometimes be inefficient. Future revisions of the code may explore using alternative methods for retrieving the employee hierarchy to improve performance.
+There are no apparent optimization opportunities at this time.
 
 ## Possible bugs
-
-There are no known bugs in the stored procedure.
+There are no apparent bugs at this time.
 
 ## Risk
-
-1. Running without a WHERE clause: Since this is a stored procedure, there is no risk of running it without a WHERE clause in any specific query.
+There are no risks associated with running this stored procedure without a `WHERE` clause as it requires an input parameter, `@BusinessEntityID`, to filter the results.
 
 ## Code Complexity
-
-The code complexity of this stored procedure is relatively low, as it primarily consists of a single recursive CTE and an outer SELECT statement to retrieve the final result set.
+The code complexity is relatively low as it utilizes a recursive CTE to retrieve the employees and their managers.
 
 ## Refactoring Opportunities
-
-The current code is concise and efficient, but the performance can be improved by employing more efficient methods than a recursive query.
+There are no apparent refactoring opportunities at this time.
 
 ## User Acceptance Criteria
-
 ```gherkin
-Feature: Employees under Manager retrieval
-    Scenario: Get all employees under a manager
-        Given the Business Entity ID of a manager
-        When the [dbo].[uspGetManagerEmployees] stored procedure is executed
-        Then it should return a list of employees under the manager with their information
+Feature: Retrieve Manager Employees
+    Scenario: Successfully retrieve employees under a manager
+        Given a Manager with BusinessEntityID = 2
+        When the stored procedure uspGetManagerEmployees is executed with the given BusinessEntityID
+        Then the result should list all employees reporting to the given manager
 
-    Scenario: Invalid manager ID provided
-        Given an invalid Business Entity ID
-        When the [dbo].[uspGetManagerEmployees] stored procedure is executed
-        Then it should return an empty result set
+    Scenario: Return empty result when the given BusinessEntityID has no employees under them
+        Given a Manager with BusinessEntityID = 45 who has no employees under them
+        When the stored procedure uspGetManagerEmployees is executed with the given BusinessEntityID
+        Then the result should be empty
 ```
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqlset |  |  |  |  |  |  |  |  |  |
+| sstselect | [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA | [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [PERSON].[PERSON].[BusinessEntityID] |  |  |  |  | [HumanResources].[Employee], [Person].[Person] |
+| sstselect | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA |  |  |  |  |  |  |
+| sstselect | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [PERSON].[PERSON].[BusinessEntityID] | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee], [Person].[Person] |
+| sstselect | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [PERSON].[PERSON].[BusinessEntityID] |  |  |  |  | [HumanResources].[Employee], [Person].[Person] |
 

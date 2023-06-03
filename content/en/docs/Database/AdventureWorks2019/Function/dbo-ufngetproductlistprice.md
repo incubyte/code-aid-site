@@ -1,32 +1,36 @@
 ---
 title: "dbo.ufnGetProductListPrice"
-author: GPT
-date: 2022-05-01
-categories:
-  - Technology
-  - Programming
+linkTitle: "dbo.ufnGetProductListPrice"
+description: "dbo.ufnGetProductListPrice"
 ---
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |
-| sstselect | @ListPrice = plph.[ListPrice] | NA | NA | , [ProductID], [StartDate], [EndDate] |  | [Production].[Product], [Production].[ProductListPriceHistory] |
-| sstmssqlreturn |  |  |  |  |  |  |
+# Functions
 
-## Overview
-The `ufnGetProductListPrice` function is a user-defined scalar function in the `dbo` schema that returns the list price of a product based on the given product ID and order date.
+## [dbo].[ufnGetProductListPrice]
+### Summary
 
-## Details
 
-### Input
-1. @ProductID (int): The Product ID to retrieve the list price for.
-2. @OrderDate (datetime): The date for which the price should be displayed.
+- **Number of Tables Accessed:** 2
+- **Lines of Code:** 16
+- **Code Complexity:** 2
+### Missing Indexes
 
-### Output
-Returns a single value of datatype 'money' indicating the list price of the given Product ID and Order Date.
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
+| [PRODUCTION].[PRODUCTLISTPRICEHISTORY]| [EndDate] | sstselect | JOIN |
 
-### Code
+
+### Parameters
+
+| Parameter Name | Data Type | Direction |
+|---|---|---|
+| @ProductID | INT | IN |
+| @OrderDate | DATETIME | IN |
+| RETURN | MONEY | OUT |
+
+{{< details "Sql Code" >}}
 ```sql
+
 CREATE FUNCTION [dbo].[ufnGetProductListPrice](@ProductID [int], @OrderDate [datetime])
 RETURNS [money] 
 AS 
@@ -42,50 +46,97 @@ BEGIN
 
     RETURN @ListPrice;
 END;
+
+```
+{{< /details >}}
+## 1. Overview
+
+This documentation provides an in-depth look into the `ufnGetProductListPrice` function within the database. The function retrieves the list price of a product based on the product ID and order date. It returns the list price as a `money` data type.
+
+## 2. Details
+
+The following SQL code defines the `ufnGetProductListPrice` function:
+
+```sql
+CREATE FUNCTION [dbo].[ufnGetProductListPrice](@ProductID [int], @OrderDate [datetime])
+RETURNS [money] 
+AS 
+BEGIN
+    DECLARE @ListPrice money;
+
+    SELECT @ListPrice = plph.[ListPrice] 
+    FROM [Production].[Product] p 
+        INNER JOIN [Production].[ProductListPriceHistory] plph 
+        ON p.[ProductID] = plph.[ProductID] 
+            AND p.[ProductID] = @ProductID 
+            AND @OrderDate BETWEEN plph.[StartDate] AND COALESCE(plph.[EndDate], CONVERT(datetime, '99991231', 112));
+
+    RETURN @ListPrice;
+END;
 ```
 
-## Information on data
-The function retrieves data from the following tables:
-1. Production.Product
-2. Production.ProductListPriceHistory
+## 3. Information on Data
 
-## Information on the tables
-1. Production.Product: This table contains all the product information. Contains columns like ProductID, Name, ProductNumber, etc.
-2. Production.ProductListPriceHistory: This table contains the history of list prices for each product. Contains columns like ProductID, StartDate, EndDate, and ListPrice.
+The function uses the following input parameters:
 
-## Possible optimization opportunities
-The current function fetches list price using an inner join and conditional statement. It may be possible to speed up performance by optimizing this join or by using more efficient date-handling techniques.
+1. @ProductID [int]: The product identifier
+2. @OrderDate [datetime]: The order date for the product
 
-## Possible bugs
-None detected.
+The function returns a single value: the list price as a `money` data type.
 
-## Risk
-1. If the function is called without passing a value to `@OrderDate`, it may not return accurate results.
-2. It is essential to make sure the correct date format is used when passing the order date, or the function may not give accurate results.
+## 4. Information on the Tables
 
-## Code Complexity
-The code is relatively simple and easy to understand.
+The function relies on two tables:
 
-## Refactoring Opportunities
-1. If dates are used more often, consider creating a helper function to handle date formatting.
-2. The handling of the end date can be improved to avoid hardcoding a future date. Instead, rely on default date range values or null checks.
+1. [Production].[Product]: Stores information about the products
+2. [Production].[ProductListPriceHistory]: Stores the history of list prices and their effective date range for each product
 
-## User Acceptance Criteria
+## 5. Possible Optimization Opportunities
+
+Currently, there are no apparent optimization opportunities; however, it's critical to monitor this function's performance over time. Review the query plan and execution times to determine if new indexes or other optimizations are needed.
+
+## 6. Possible Bugs
+
+There are no known bugs in this function.
+
+## 7. Risk
+
+Given that this function does not contain a WHERE clause, it doesn't present any risks in terms of high RAM usage or slow performance. Always ensure that the input parameters are valid and correctly formatted to avoid errors.
+
+## 8. Code Complexity
+
+The code complexity of this function is relatively low, with one JOIN operation and a simple SELECT statement. The function's purpose is clear, and its logic is easy to understand.
+
+## 9. Refactoring Opportunities
+
+There are no immediate refactoring opportunities for this function. The function is adequately concise and efficient, and its purpose is well-defined.
+
+## 10. User Acceptance Criteria
+
+Create Gherkin scripts to define the acceptance criteria for the `ufnGetProductListPrice` function:
+
 ```gherkin
-Scenario: Get the list price for a given Product ID and Order Date
-Given I have a valid Product ID and Order Date
-When I execute the ufnGetProductListPrice function
-Then I should get the list price for that Product ID and Order Date
-
-Scenario: Get the list price when the end date is not specified
-Given I have a valid Product ID and Order Date
-And the end date is not specified in the ProductListPriceHistory table
-When I execute the ufnGetProductListPrice function
-Then I should get the list price for that Product ID and Order Date
-
-Scenario: Get the list price when the Order Date is not within the price history date range
-Given I have a valid Product ID and Order Date
-And the Order Date is not within the date range specified in the ProductListPriceHistory table
-When I execute the ufnGetProductListPrice function
-Then I should get no result or an error depending on the implementation
+Feature: Get Product List Price
+  Scenario: Fetch a valid product list price
+    Given a valid product ID and order date
+    When the function ufnGetProductListPrice is called
+    Then a list price should be returned as a money data type
+  
+  Scenario: Fetch a product list price for an unknown product ID
+    Given an unknown product ID
+    When the function ufnGetProductListPrice is called
+    Then a NULL value should be returned
+  
+  Scenario: Fetch a product list price for an invalid order date
+    Given a valid product ID and an invalid order date
+    When the function ufnGetProductListPrice is called
+    Then an error should be returned
 ```
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
+| sstselect | [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[ListPrice] | NA | NA | [PRODUCTION].[PRODUCT].[ProductID], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[EndDate], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[ProductID], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[StartDate] |  |  |  |  | [Production].[ProductListPriceHistory], [Production].[Product] |
+| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
+

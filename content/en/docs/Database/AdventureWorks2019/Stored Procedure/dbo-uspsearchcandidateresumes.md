@@ -1,104 +1,169 @@
 ---
 title: "dbo.uspSearchCandidateResumes"
-author: GPT
-date: 2022-05-01
-categories:
-  - Technology
-  - Programming
+linkTitle: "dbo.uspSearchCandidateResumes"
+description: "dbo.uspSearchCandidateResumes"
 ---
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |
-| sstmssqldeclare |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |
-| sstselect | @language =CONVERT(int, serverproperty('lcid')) | NA | NA |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |
-| sstselect | [JobCandidateID], [RANK] | NA | NA | [JobCandidateID], [KEY] |  | [HumanResources].[JobCandidate], FREETEXTTABLE([HumanResources].[JobCandidate],*, @searchString,LANGUAGE @language) |
-| sstmssqlif |  |  |  |  |  |  |
-| sstselect | @string ='FORMSOF(THESAURUS,"'+@searchString +'"'+')' | NA | NA |  |  |  |
-| sstselect | [JobCandidateID], [RANK] | NA | NA | [JobCandidateID], [KEY] |  | [HumanResources].[JobCandidate], CONTAINSTABLE([HumanResources].[JobCandidate],*, @string,LANGUAGE @language) |
-| sstmssqlif |  |  |  |  |  |  |
-| sstselect | @string ='FORMSOF(INFLECTIONAL,"'+@searchString +'"'+')' | NA | NA |  |  |  |
-| sstselect | [JobCandidateID], [RANK] | NA | NA | [JobCandidateID], [KEY] |  | [HumanResources].[JobCandidate], CONTAINSTABLE([HumanResources].[JobCandidate],*, @string,LANGUAGE @language) |
-| sstselect | @string='"'+@searchString +'"' | NA | NA |  |  |  |
-| sstselect | [JobCandidateID], [RANK] | NA | NA | [JobCandidateID], [KEY] |  | [HumanResources].[JobCandidate], CONTAINSTABLE([HumanResources].[JobCandidate],*,@string,LANGUAGE @language) |
+# Stored Procedures
 
+## [dbo].[uspSearchCandidateResumes]
+### Summary
+
+
+- **Number of Tables Accessed:** 1
+- **Lines of Code:** 56
+- **Code Complexity:** 5
+### Missing Indexes
+
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
+
+
+### Parameters
+
+| Parameter Name | Data Type | Direction |
+|---|---|---|
+| @searchString | NVARCHAR | IN |
+| @useInflectional | BIT | IN |
+| @useThesaurus | BIT | IN |
+| @language | INT | IN |
+
+{{< details "Sql Code" >}}
+```sql
+
+--A stored procedure which demonstrates integrated full text search
+
+CREATE PROCEDURE [dbo].[uspSearchCandidateResumes]
+    @searchString [nvarchar](1000),   
+    @useInflectional [bit]=0,
+    @useThesaurus [bit]=0,
+    @language[int]=0
+
+
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+      DECLARE @string nvarchar(1050)
+      --setting the lcid to the default instance LCID if needed
+      IF @language = NULL OR @language = 0 
+      BEGIN 
+            SELECT @language =CONVERT(int, serverproperty('lcid'))  
+      END
+      
+
+            --FREETEXTTABLE case as inflectional and Thesaurus were required
+      IF @useThesaurus = 1 AND @useInflectional = 1  
+        BEGIN
+                  SELECT FT_TBL.[JobCandidateID], KEY_TBL.[RANK] FROM [HumanResources].[JobCandidate] AS FT_TBL 
+                        INNER JOIN FREETEXTTABLE([HumanResources].[JobCandidate],*, @searchString,LANGUAGE @language) AS KEY_TBL
+                   ON  FT_TBL.[JobCandidateID] =KEY_TBL.[KEY]
+            END
+
+      ELSE IF @useThesaurus = 1
+            BEGIN
+                  SELECT @string ='FORMSOF(THESAURUS,"'+@searchString +'"'+')'      
+                  SELECT FT_TBL.[JobCandidateID], KEY_TBL.[RANK] FROM [HumanResources].[JobCandidate] AS FT_TBL 
+                        INNER JOIN CONTAINSTABLE([HumanResources].[JobCandidate],*, @string,LANGUAGE @language) AS KEY_TBL
+                   ON  FT_TBL.[JobCandidateID] =KEY_TBL.[KEY]
+        END
+
+      ELSE IF @useInflectional = 1
+            BEGIN
+                  SELECT @string ='FORMSOF(INFLECTIONAL,"'+@searchString +'"'+')'
+                  SELECT FT_TBL.[JobCandidateID], KEY_TBL.[RANK] FROM [HumanResources].[JobCandidate] AS FT_TBL 
+                        INNER JOIN CONTAINSTABLE([HumanResources].[JobCandidate],*, @string,LANGUAGE @language) AS KEY_TBL
+                   ON  FT_TBL.[JobCandidateID] =KEY_TBL.[KEY]
+        END
+  
+      ELSE --base case, plain CONTAINSTABLE
+            BEGIN
+                  SELECT @string='"'+@searchString +'"'
+                  SELECT FT_TBL.[JobCandidateID],KEY_TBL.[RANK] FROM [HumanResources].[JobCandidate] AS FT_TBL 
+                        INNER JOIN CONTAINSTABLE([HumanResources].[JobCandidate],*,@string,LANGUAGE @language) AS KEY_TBL
+                   ON  FT_TBL.[JobCandidateID] =KEY_TBL.[KEY]
+            END
+
+END;
+
+```
+{{< /details >}}
 ## Overview
-
-This stored procedure, `uspSearchCandidateResumes`, demonstrates an integrated full-text search feature for searching candidate resumes in the database.
+This stored procedure allows the user to search candidate resumes using an integrated full-text search. The user can input a search string and toggle the use of inflectional or thesaurus searches using input parameters.
 
 ## Details
-
-The procedure accepts the following parameters:
-
-1. `@searchString`: a search query typed by the user.
-2. `@useInflectional`: a boolean flag for whether to use inflectional forms of words.
-3. `@useThesaurus`: a boolean flag for whether to use a thesaurus for finding synonyms.
-4. `@language`: the language to be used in the search; default is 0.
-
-Based on the parameter values, the procedure dynamically constructs a search query using `FREETEXTTABLE` or `CONTAINSTABLE` functions and executes the SQL statement accordingly.
+- Name: `[dbo].[uspSearchCandidateResumes]`
+- Input Parameters:
+  - `@searchString`: The search string (nvarchar 1000)
+  - `@useInflectional`: To enable or disable the use of inflectional search (bit, default to 0)
+  - `@useThesaurus`: To enable or disable the use of thesaurus search (bit, default to 0)
+  - `@language`: The language code for the search (int, defaults to server language)
 
 ## Information on data
+The stored procedure queries the `HumanResources.JobCandidate` table.
 
-The stored procedure operates on the `[HumanResources].[JobCandidate]` table.
-
-## Information on the tables
-
-The `[HumanResources].[JobCandidate]` table has the following columns:
-
-1. `JobCandidateID`: an identifier for a job candidate.
-2. `Resume`: the resume text of a job candidate (where the full-text search is performed).
+### Information on the tables
+#### `HumanResources.JobCandidate`
+- `JobCandidateID`: Unique identifier for a job candidate
+- `Resume`: Resume text of the job candidate
 
 ## Possible optimization opportunities
-
-1. Analyze the performance of the full-text search and fine-tune the index settings for a more optimized search experience.
-2. Implement caching if the search query remains the same, to serve results faster.
+1. Add indexes to the columns used in the search to speed up the query execution
+2. Consider caching frequently used search results to decrease database load
 
 ## Possible bugs
-
-1. If the stored procedure doesn't return any results or returns unexpected results, it might be related to the full-text search settings.
+None identified.
 
 ## Risk
-
-1. If the stored procedure contains a heavy amount of data or huge resumes, the performance might be impacted.
-2. The stored procedure is read-only and has no risks of changing data.
+The stored procedure runs without a WHERE clause. This may lead to potential performance issues due to the full scan of the table.
 
 ## Code Complexity
-
-The code complexity is low-to-medium. This procedure involves basic SQL statements and conditional statements.
+The code uses conditional logic based on user input for `useInflectional` and `useThesaurus` parameters. The logic is easy to understand but can be refactored to avoid repetitive code blocks.
 
 ## Refactoring Opportunities
-
-1. Implement helper or utility functions to handle different cases of full-text search.
-2. Consider using Temporary Tables or CTE (Common Table Expressions) for more complex queries.
+1. Create a reusable function for search logic based on the given parameters to simplify the stored procedure (maintainability improvement)
 
 ## User Acceptance Criteria
-
-```Gherkin
-Feature: JobCandidate Resume Search
-  Scenario: User searches for a keyword with inflectional and thesaurus options
-    Given the user specifies a searchString keyword
-    And the user enables the useInflectional option
-    And the user enables the useThesaurus option
-    When the user executes the uspSearchCandidateResumes stored procedure
-    Then the stored procedure should return the relevant JobCandidateID and RANK
-
-  Scenario: User searches for a keyword with only thesaurus option
-    Given the user specifies searchString keyword
-    And the user enables the useThesaurus option
-    When the user executes the uspSearchCandidateResumes stored procedure
-    Then the stored procedure should return the relevant JobCandidateID and RANK
-
-  Scenario: User searches for a keyword with only inflectional option
-    Given the user specifies searchString keyword
-    And the user enables the useInflectional option
-    When the user executes the uspSearchCandidateResumes stored procedure
-    Then the stored procedure should return the relevant JobCandidateID and RANK
-
-  Scenario: User searches for a keyword without any additional options
-    Given the user specifies searchString keyword
-    When the user executes the uspSearchCandidateResumes stored procedure
-    Then the stored procedure should return the relevant JobCandidateID and RANK
 ```
+Feature: Search candidate resumes using various search parameters
+
+  Scenario: Search resumes without inflectional or thesaurus options
+    Given the stored procedure [dbo].[uspSearchCandidateResumes] is called with searchString 'developer', useInflectional 0, and useThesaurus 0
+    When the query executes
+    Then the results should contain resumes with exact matches for 'developer'
+
+  Scenario: Search resumes with inflectional option enabled
+    Given the stored procedure [dbo].[uspSearchCandidateResumes] is called with searchString 'developer', useInflectional 1, and useThesaurus 0
+    When the query executes
+    Then the results should contain resumes with inflectional variations of 'developer'
+
+  Scenario: Search resumes with thesaurus option enabled
+    Given the stored procedure [dbo].[uspSearchCandidateResumes] is called with searchString 'developer', useInflectional 0, and useThesaurus 1
+    When the query executes
+    Then the results should contain resumes with synonyms of 'developer'
+
+  Scenario: Search resumes with both inflectional and thesaurus options enabled
+    Given the stored procedure [dbo].[uspSearchCandidateResumes] is called with searchString 'developer', useInflectional 1, and useThesaurus 1
+    When the query executes
+    Then the results should contain resumes with inflectional variations and synonyms of 'developer'
+```
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqlset |  |  |  |  |  |  |  |  |  |
+| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
+| sstmssqlif |  |  |  |  |  |  |  |  |  |
+| sstselect |  | NA | NA |  |  |  |  |  |  |
+| sstmssqlif |  |  |  |  |  |  |  |  |  |
+| sstselect | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] | NA | NA | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] |  |  |  |  | [HumanResources].[JobCandidate] |
+| sstmssqlif |  |  |  |  |  |  |  |  |  |
+| sstselect |  | NA | NA |  |  |  |  |  |  |
+| sstselect | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] | NA | NA | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] |  |  |  |  | [HumanResources].[JobCandidate] |
+| sstmssqlif |  |  |  |  |  |  |  |  |  |
+| sstselect |  | NA | NA |  |  |  |  |  |  |
+| sstselect | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] | NA | NA | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] |  |  |  |  | [HumanResources].[JobCandidate] |
+| sstselect |  | NA | NA |  |  |  |  |  |  |
+| sstselect | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] | NA | NA | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] |  |  |  |  | [HumanResources].[JobCandidate] |
 

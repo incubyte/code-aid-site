@@ -1,90 +1,132 @@
 ---
 title: "dbo.ufnGetProductDealerPrice"
-author: GPT
-date: 2022-05-01
-categories:
-  - Technology
-  - Programming
+linkTitle: "dbo.ufnGetProductDealerPrice"
+description: "dbo.ufnGetProductDealerPrice"
 ---
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |
-| sstmssqldeclare |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |
-| sstselect | @DealerPrice = plph.[ListPrice] * @DealerDiscount | NA | NA | , [ProductID], [StartDate], [EndDate] |  | [Production].[Product], [Production].[ProductListPriceHistory] |
-| sstmssqlreturn |  |  |  |  |  |  |
+# Functions
 
-## 1. Overview
+## [dbo].[ufnGetProductDealerPrice]
+### Summary
 
-This markdown documentation describes the `[dbo].[ufnGetProductDealerPrice]` function, which calculates the dealer price for a specific product & order date by applying a discount.
 
-## 2. Details
+- **Number of Tables Accessed:** 2
+- **Lines of Code:** 22
+- **Code Complexity:** 2
+### Missing Indexes
 
-**Function Name**: `[dbo].[ufnGetProductDealerPrice]`
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
+| [PRODUCTION].[PRODUCTLISTPRICEHISTORY]| [EndDate] | sstselect | JOIN |
 
-**Parameters**:
-- `@ProductID [int]`: ID of the product for which the dealer price should be calculated.
-- `@OrderDate [datetime]`: Date on which the order has been placed.
 
-**Return Type**: `[money]`: Returns the dealer price for the product on the specified order date.
+### Parameters
 
-## 3. Information on data
+| Parameter Name | Data Type | Direction |
+|---|---|---|
+| @ProductID | INT | IN |
+| @OrderDate | DATETIME | IN |
+| RETURN | MONEY | OUT |
 
-The function uses the following tables and columns:
+{{< details "Sql Code" >}}
+```sql
 
-**Table**: `[Production].[Product]`
-- `ProductID`
 
-**Table**: `[Production].[ProductListPriceHistory]`
-- `ListPrice`
-- `StartDate`
-- `EndDate`
 
-## 4. Information on the tables
+CREATE FUNCTION [dbo].[ufnGetProductDealerPrice](@ProductID [int], @OrderDate [datetime])
+RETURNS [money] 
+AS 
+-- Returns the dealer price for the product on a specific date.
+BEGIN
+    DECLARE @DealerPrice money;
+    DECLARE @DealerDiscount money;
 
-1. **[Production].[Product]**: Contains information about each product.
-2. **[Production].[ProductListPriceHistory]**: Contains the history of price changes for each product.
+    SET @DealerDiscount = 0.60  -- 60% of list price
 
-## 5. Possible optimization opportunities
+    SELECT @DealerPrice = plph.[ListPrice] * @DealerDiscount 
+    FROM [Production].[Product] p 
+        INNER JOIN [Production].[ProductListPriceHistory] plph 
+        ON p.[ProductID] = plph.[ProductID] 
+            AND p.[ProductID] = @ProductID 
+            AND @OrderDate BETWEEN plph.[StartDate] AND COALESCE(plph.[EndDate], CONVERT(datetime, '99991231', 112)); -- Make sure we get all the prices!
 
-- Using a parameter for the dealer discount instead of a fixed value would provide more flexibility.
-- Caching frequently requested dealer prices may improve performance.
+    RETURN @DealerPrice;
+END;
 
-## 6. Possible bugs
-
-- If the `@OrderDate` is null, behavior is undefined.
-
-## 7. Risk
-
-- The function runs without a `WHERE` clause, risking performance issues on large tables.
-- The discount calculation only considers the `ListPrice` value, not other potential factors (e.g., promotions or rebates).
-
-## 8. Code Complexity
-
-The code complexity is relatively low, as it consists of a single `SELECT` statement, joining the `Product` and `ProductListPriceHistory` tables and calculating the discounted price.
-
-## 9. Refactoring Opportunities
-
-- Encapsulate the discount calculation within another function, allowing easier modifications of this business rule in the future.
-
-## 10. User Acceptance Criteria
-
-**Gherkin Scripts:**
-
-```Gherkin
-Feature: Calculate Dealer Price
-  As a user, I want to calculate the dealer price for a product on a specific order date
-
-  Scenario: Calculate dealer price for a valid product and order date
-    Given I have a valid Product ID
-    And I have a valid order date
-    When I call the ufnGetProductDealerPrice function
-    Then I should receive the dealer price for that product on that order date
-
-  Scenario: Handle NULL order date
-    Given I have a valid Product ID
-    And I have a NULL order date
-    When I call the ufnGetProductDealerPrice function
-    Then I should receive an error or default value
 ```
+{{< /details >}}
+## Overview
+This document provides markdown documentation for the `ufnGetProductDealerPrice` function in the database. The `ufnGetProductDealerPrice` function returns the dealer price for a specified product on a specific date.
+
+## Details
+
+1. Language: SQL
+2. Type: User Defined Function (Scalar Function)
+
+## Information on data
+
+1. Input parameters:
+   - @ProductID [int]: The ID of the specified product.
+   - @OrderDate [datetime]: The date on which the dealer price should be determined.
+
+2. Output data type: money
+
+## Information on the tables
+
+1. Production.Product:
+   - An inner join is performed on the `ProductID` column.
+2. Production.ProductListPriceHistory:
+   - An inner join is performed on the `ProductID` column.
+
+## Possible optimization opportunities
+
+1. Consider creating an index on the `ProductID` and `StartDate` columns in the `ProductListPriceHistory` table to speed up the join between the two tables.
+
+## Possible bugs
+
+1. The current code assumes a fixed dealer discount percentage of 60% (0.60) for all products and order dates, therefore it does not account for any changes in the discount rates over time.
+
+## Risk
+
+1. The function runs without a WHERE clause. JOIN conditions are used for filtering instead of WHERE clause. The current implementation might lead to performance issues if the tables grow significantly in size.
+
+## Code Complexity
+
+1. The function contains two variable declarations and a single SELECT statement. The complexity level can be considered relatively low.
+
+## Refactoring Opportunities
+
+1. One potential refactoring opportunity is to allow the dealer discount rate to be passed as an input parameter instead of hardcoding the value in the function. This would make the function more flexible and adaptable to changes in business rules.
+
+## User Acceptance Criteria
+
+1. #### Getting product dealer price
+  ```
+  Given a valid ProductID and OrderDate as input
+  When the function ufnGetProductDealerPrice is executed
+  Then the function should return the dealer price for the specified product on the specified date
+  ```
+
+2. #### Invalid or missing ProductID
+  ```
+  Given an invalid or missing ProductID as input
+  When the function ufnGetProductDealerPrice is executed
+  Then the function should return NULL
+  ```
+
+3. #### Invalid or missing OrderDate
+  ```
+  Given an invalid or missing OrderDate as input
+  When the function ufnGetProductDealerPrice is executed
+  Then the function should return NULL
+  ```
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
+| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
+| sstmssqlset |  |  |  |  |  |  |  |  |  |
+| sstselect | [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[ListPrice] | NA | NA | [PRODUCTION].[PRODUCT].[ProductID], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[EndDate], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[ProductID], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[StartDate] |  |  |  |  | [Production].[ProductListPriceHistory], [Production].[Product] |
+| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
+

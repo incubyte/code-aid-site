@@ -20,6 +20,8 @@ const VALID_OBJECTS = [
     "TRIGGERED_VALUED_FUNCTION",
     "FUNCTION",
     "STORED_PROCEDURE",
+    "VIEW",
+    "TRIGGER"
 ];
 function isValidObject(d) {
     const validObjectTitleCase = VALID_OBJECTS.map((o) => (0,_utils__WEBPACK_IMPORTED_MODULE_1__.convertToTitleCase)(o));
