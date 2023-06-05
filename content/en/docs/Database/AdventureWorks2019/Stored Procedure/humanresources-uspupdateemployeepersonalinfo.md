@@ -1,71 +1,127 @@
 ---
 title: "HumanResources.uspUpdateEmployeePersonalInfo"
-author: GPT
-date: 2022-05-01
-categories:
-  - Technology
-  - Programming
+linkTitle: "HumanResources.uspUpdateEmployeePersonalInfo"
+description: "HumanResources.uspUpdateEmployeePersonalInfo"
 ---
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |
-| sstmssqlblock |  |  |  |  |  |  |
-| sstupdate | NA | [NationalIDNumber], [BirthDate], [MaritalStatus], [Gender] | NA |  | [BusinessEntityID],  | [HumanResources].[Employee] |
-| sstmssqlexec |  |  |  |  |  |  |
+# Stored Procedures
 
-## 1. Overview
+## [HumanResources].[uspUpdateEmployeePersonalInfo]
+### Summary
 
-The `[HumanResources].[uspUpdateEmployeePersonalInfo]` stored procedure is used to update an employee's personal information in the `[HumanResources].[Employee]` table.
 
-## 2. Details
+- **Number of Tables Accessed:** 1
+- **Lines of Code:** 24
+- **Code Complexity:** 2
+### Missing Indexes
 
-**Stored Procedure:** `[HumanResources].[uspUpdateEmployeePersonalInfo]`
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
 
-**Parameters:**
 
-* `@BusinessEntityID [int]`: The unique identifier of the employee.
-* `@NationalIDNumber [nvarchar](15)`: The employee's national identification number.
-* `@BirthDate [datetime]`: The employee's date of birth.
-* `@MaritalStatus [nchar](1)`: The employee's marital status.
-* `@Gender [nchar](1)`: The employee's gender.
+### Parameters
 
-## 3. Information on data
+| Parameter Name | Data Type | Direction |
+|---|---|---|
+| @BusinessEntityID | INT | IN |
+| @NationalIDNumber | NVARCHAR | IN |
+| @BirthDate | DATETIME | IN |
+| @MaritalStatus | NCHAR | IN |
+| @Gender | NCHAR | IN |
 
-This stored procedure updates an employee's personal information using input parameters. The data is stored in the `[HumanResources].[Employee]` table.
+{{< details "Sql Code" >}}
+```sql
 
-## 4. Information on the tables
+CREATE PROCEDURE [HumanResources].[uspUpdateEmployeePersonalInfo]
+    @BusinessEntityID [int], 
+    @NationalIDNumber [nvarchar](15), 
+    @BirthDate [datetime], 
+    @MaritalStatus [nchar](1), 
+    @Gender [nchar](1)
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+    SET NOCOUNT ON;
 
-* `[HumanResources].[Employee]`: This table holds employee records.
+    BEGIN TRY
+        UPDATE [HumanResources].[Employee] 
+        SET [NationalIDNumber] = @NationalIDNumber 
+            ,[BirthDate] = @BirthDate 
+            ,[MaritalStatus] = @MaritalStatus 
+            ,[Gender] = @Gender 
+        WHERE [BusinessEntityID] = @BusinessEntityID;
+    END TRY
+    BEGIN CATCH
+        EXECUTE [dbo].[uspLogError];
+    END CATCH;
+END;
 
-## 5. Possible optimization opportunities
-
-* None
-
-## 6. Possible bugs
-
-* Data type mismatch with input parameters
-
-## 7. Risk
-
-* Running the stored procedure without all required input parameters
-
-## 8. Code Complexity
-
-The code is not complex; it is easy to understand as a single `UPDATE` statement.
-
-## 9. Refactoring Opportunities
-
-* None
-
-## 10. User Acceptance Criteria
-
-**Gherkin Scripts:**
-
-```Gherkin
-Feature: Update Employee's Personal Information
-  Scenario: Update an employee's personal information
-    Given an employee with BusinessEntityID 1
-    When I update the employee's personal information with new values
-    Then the employee's information should be updated in the Employee table
 ```
+{{< /details >}}
+## Overview
+This documentation explains the stored procedure `[HumanResources].[uspUpdateEmployeePersonalInfo]`, which updates the personal information of an employee in the `HumanResources.Employee` table.
+
+## Details
+The stored procedure takes the following input parameters:
+1. `@BusinessEntityID [int]`: The ID of the employee to update.
+2. `@NationalIDNumber [nvarchar](15)`: The updated National ID Number of the employee.
+3. `@BirthDate [datetime]`: The updated birth date of the employee.
+4. `@MaritalStatus [nchar](1)`: The updated marital status of the employee.
+5. `@Gender [nchar](1)`: The updated gender of the employee.
+
+The stored procedure updates the relevant records in the `HumanResources.Employee` table with the provided information.
+
+## Information on Data
+The stored procedure deals with the following data elements:
+
+- `HumanResources.Employee`
+  - `BusinessEntityID`
+  - `NationalIDNumber`
+  - `BirthDate`
+  - `MaritalStatus`
+  - `Gender`
+
+## Information on the Tables
+The stored procedure interacts with the following table:
+
+- `HumanResources.Employee`: Contains information about the employees, including their personal data.
+
+## Possible Optimization Opportunities
+None.
+
+## Possible Bugs
+None.
+
+## Risk
+- No risks identified.
+
+## Code Complexity
+The code has low complexity as it is just a single `UPDATE` statement enclosed in a `TRY...CATCH` block.
+
+### Refactoring Opportunities
+None.
+
+## User Acceptance Criteria
+
+### Gherkin scripts
+
+```
+Scenario: Update an employee's personal information
+  Given an employee exists with BusinessEntityID "1"
+  When I execute uspUpdateEmployeePersonalInfo with the following parameters:
+    | Parameter          | Value          |
+    | BusinessEntityID   | 1              |
+    | NationalIDNumber   | "000-00-0000"  |
+    | BirthDate          | "1990-01-01"   |
+    | MaritalStatus      | "M"            |
+    | Gender             | "F"            |
+  Then the employee with BusinessEntityID "1" should have their personal information updated.
+```
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqlset |  |  |  |  |  |  |  |  |  |
+| sstupdate | NA | [NationalIDNumber], [BirthDate], [MaritalStatus], [Gender] | NA |  | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee] |
+| sstmssqlexec |  |  |  |  |  |  |  |  |  |
+

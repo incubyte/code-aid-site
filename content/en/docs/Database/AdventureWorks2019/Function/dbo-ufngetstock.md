@@ -1,66 +1,34 @@
 ---
 title: "dbo.ufnGetStock"
-author: GPT
-date: 2022-05-01
-categories:
-  - Technology
-  - Programming
+linkTitle: "dbo.ufnGetStock"
+description: "dbo.ufnGetStock"
 ---
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |
-| sstselect | @ret = SUM(p.[Quantity]) | NA | NA |  | , [ProductID], [LocationID] | [Production].[ProductInventory] |
-| sstmssqlif |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |
+# Functions
 
-## Overview
+## [dbo].[ufnGetStock]
+### Summary
 
-The `ufnGetStock` function is a user-defined function that returns the stock level for a specific product. This function is intended for internal use only.
 
-## Details
+- **Number of Tables Accessed:** 1
+- **Lines of Code:** 18
+- **Code Complexity:** 3
+### Missing Indexes
 
-**Parameters:**
-1. `@ProductID [int]` - The ProductID for which the stock level is required.
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
 
-**Returns:**
-- `[int]` - The stock level for the given ProductID.
 
-## Information on Data
+### Parameters
 
-This function refers to the `[Production].[ProductInventory]` table to fetch the stock information.
+| Parameter Name | Data Type | Direction |
+|---|---|---|
+| @ProductID | INT | IN |
+| RETURN | INT | OUT |
 
-### Information on the Tables
-
-#### [Production].[ProductInventory]
-
-Columns:
-- ProductID [int] - Unique ID of a product
-- LocationID [int] - Unique ID of a location
-- Quantity [int] - Quantity of a product in a specific location
-
-## Possible Optimization Opportunities
-
-There's an opportunity to optimize the code by replacing the `IF` statement with a `COALESCE` function for better readability.
-
-## Possible Bugs
-
-Currently, none.
-
-## Risk
-
-* Running the SELECT query without a WHERE clause or specifying the LocationID might lead to displaying stock levels from other storage locations or incorrect results.
-
-## Code Complexity
-
-The code consists of a single SELECT statement with a WHERE clause and an IF statement. The complexity of this function is low.
-
-## Refactoring Opportunities
-
-Refactoring the function to replace the current IF statement with a COALESCE function can improve readability.
-
+{{< details "Sql Code" >}}
 ```sql
+
 CREATE FUNCTION [dbo].[ufnGetStock](@ProductID [int])
 RETURNS [int] 
 AS 
@@ -68,29 +36,77 @@ AS
 BEGIN
     DECLARE @ret int;
     
-    SELECT @ret = COALESCE(SUM(p.[Quantity]), 0)
+    SELECT @ret = SUM(p.[Quantity]) 
     FROM [Production].[ProductInventory] p 
     WHERE p.[ProductID] = @ProductID 
         AND p.[LocationID] = '6'; -- Only look at inventory in the misc storage
     
+    IF (@ret IS NULL) 
+        SET @ret = 0
+    
     RETURN @ret
 END;
+
 ```
+{{< /details >}}
+## Overview
+This document provides markdown documentation for the `dbo.ufnGetStock` function in the database. The function takes a ProductID (`int`) as input and returns the stock level (`int`) for the product.
+
+## Details
+The `dbo.ufnGetStock` function is an internally used function that queries the `Production.ProductInventory` table to calculate the stock level of a product based on the `ProductID`.
+
+**Function Signature:**
+```sql
+CREATE FUNCTION [dbo].[ufnGetStock](@ProductID [int])
+RETURNS [int]
+```
+
+## Information on Data
+The data used in the calculation of stock level involves the `Quantity` field of the `Production.ProductInventory` table.
+
+## Information on the Tables
+1. `Production.ProductInventory`: This table contains information about the product inventory with fields such as `ProductID`, `LocationID`, and `Quantity`. The function fetches data from this table to calculate the stock level.
+
+## Possible Optimization Opportunities
+No optimization opportunities have been identified for this function.
+
+## Possible Bugs
+No possible bugs have been identified for this function.
+
+## Risk
+The function does not utilize a WHERE clause as it calculates the stock using the `ProductID` and `LocationID` in the query. Therefore, there is no risk of exposing sensitive data or incorrect results.
+
+## Code Complexity
+The code complexity of the function is relatively low as it only consists of a single SELECT statement.
+
+## Refactoring Opportunities
+No refactoring opportunities have been identified for this function.
 
 ## User Acceptance Criteria
-
-### Gherkin Scripts
-
-```gherkin
-Feature: Stock Level Retrieval Function
-
-  Scenario: Retrieve the stock level for a specified product ID
-    Given a ProductID is provided as input
-    When the function ufnGetStock is called
-    Then the stock level for the product should be returned
-   
-  Scenario: Retrieve the stock level for an invalid product ID
-    Given an invalid ProductID is provided as input
-    When the function ufnGetStock is called
-    Then the stock level should be returned as 0
 ```
+Feature: Get Product Stock Level
+  As a database assistant
+  I want to calculate the stock level of a product
+  So that the system has up-to-date information on stock levels
+
+Scenario: Calculate stock level for a valid ProductID
+  Given a ProductID exists in the Production.ProductInventory table
+    And the LocationID is set to '6'
+  When the dbo.ufnGetStock function is executed with the ProductID
+  Then the stock level of the product should be returned as an integer
+
+Scenario: Calculate stock level for a non-existent ProductID
+  Given a ProductID does not exist in the Production.ProductInventory table
+  When the dbo.ufnGetStock function is executed with the ProductID
+  Then the stock level should be returned as 0
+```
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
+| sstselect | [PRODUCTION].[PRODUCTINVENTORY].[Quantity] | NA | NA |  | [PRODUCTION].[PRODUCTINVENTORY].[ProductID], [PRODUCTION].[PRODUCTINVENTORY].[LocationID] |  |  |  | [Production].[ProductInventory] |
+| sstmssqlif |  |  |  |  |  |  |  |  |  |
+| sstmssqlset |  |  |  |  |  |  |  |  |  |
+| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
+

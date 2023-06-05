@@ -66,6 +66,13 @@
 .td-sidebar {
   padding-bottom: 0.5rem;
 
+  ul ul {
+      padding-left: 0px !important; /* Adjust as needed */
+  }
+  ul li {
+      padding-left: 18px !important; /* Adjust as needed */
+  }
+
   .td-sidebar__inner {
     padding-top: 30px;
 

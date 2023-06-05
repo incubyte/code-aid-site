@@ -1,98 +1,138 @@
 ---
 title: "HumanResources.uspUpdateEmployeeHireInfo"
-author: GPT
-date: 2022-05-01
-categories:
-  - Technology
-  - Programming
+linkTitle: "HumanResources.uspUpdateEmployeeHireInfo"
+description: "HumanResources.uspUpdateEmployeeHireInfo"
 ---
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |
-| sstmssqlblock |  |  |  |  |  |  |
-| sstbegintran |  |  |  |  |  |  |
-| sstupdate | NA | [JobTitle], [HireDate], [CurrentFlag] | NA |  | [BusinessEntityID],  | [HumanResources].[Employee] |
-| sstinsert | NA | NA | [BusinessEntityID], [RateChangeDate], [Rate], [PayFrequency] | NA | NA | [HumanResources].[EmployeePayHistory] |
-| sstmssqlcommit |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |
-| sstmssqlrollback |  |  |  |  |  |  |
-| sstmssqlexec |  |  |  |  |  |  |
+# Stored Procedures
 
-## Overview
-This document describes the stored procedure `[HumanResources].[uspUpdateEmployeeHireInfo]` in the database. This procedure updates an existing employee's hire information and inserts a new record into the EmployeePayHistory table.
+## [HumanResources].[uspUpdateEmployeeHireInfo]
+### Summary
 
-## Details
 
-The procedure takes the following parameters:
+- **Number of Tables Accessed:** 2
+- **Lines of Code:** 43
+- **Code Complexity:** 3
+### Missing Indexes
 
-1. @BusinessEntityID [int] - Employee's Business Entity ID
-2. @JobTitle [nvarchar](50) - Employee's Job Title
-3. @HireDate [datetime] - Employee's Hire Date
-4. @RateChangeDate [datetime] - Date when the Rate was last changed
-5. @Rate [money] - Employee's pay rate
-6. @PayFrequency [tinyint] - Employee's pay frequency
-7. @CurrentFlag [dbo].[Flag] - Current employee flag
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
 
-## Information on data
 
-The stored procedure interacts with the following tables:
+### Parameters
 
-1. [HumanResources].[Employee]
-2. [HumanResources].[EmployeePayHistory]
+| Parameter Name | Data Type | Direction |
+|---|---|---|
+| @BusinessEntityID | INT | IN |
+| @JobTitle | NVARCHAR | IN |
+| @HireDate | DATETIME | IN |
+| @RateChangeDate | DATETIME | IN |
+| @Rate | MONEY | IN |
+| @PayFrequency | TINYINT | IN |
+| @CurrentFlag | [DBO] | IN |
 
-## Information on the tables
+{{< details "Sql Code" >}}
+```sql
 
-### HumanResources.Employee
+CREATE PROCEDURE [HumanResources].[uspUpdateEmployeeHireInfo]
+    @BusinessEntityID [int], 
+    @JobTitle [nvarchar](50), 
+    @HireDate [datetime], 
+    @RateChangeDate [datetime], 
+    @Rate [money], 
+    @PayFrequency [tinyint], 
+    @CurrentFlag [dbo].[Flag] 
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+    SET NOCOUNT ON;
 
-This table contains detailed employee information, such as:
+    BEGIN TRY
+        BEGIN TRANSACTION;
 
-- BusinessEntityID (int)
-- JobTitle (nvarchar(50))
-- HireDate (datetime)
-- CurrentFlag (Flag)
+        UPDATE [HumanResources].[Employee] 
+        SET [JobTitle] = @JobTitle 
+            ,[HireDate] = @HireDate 
+            ,[CurrentFlag] = @CurrentFlag 
+        WHERE [BusinessEntityID] = @BusinessEntityID;
 
-### HumanResources.EmployeePayHistory
+        INSERT INTO [HumanResources].[EmployeePayHistory] 
+            ([BusinessEntityID]
+            ,[RateChangeDate]
+            ,[Rate]
+            ,[PayFrequency]) 
+        VALUES (@BusinessEntityID, @RateChangeDate, @Rate, @PayFrequency);
 
-This table contains the pay history of the employees, such as:
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        -- Rollback any active or uncommittable transactions before
+        -- inserting information in the ErrorLog
+        IF @@TRANCOUNT > 0
+        BEGIN
+            ROLLBACK TRANSACTION;
+        END
 
-- BusinessEntityID (int)
-- RateChangeDate (datetime)
-- Rate (money)
-- PayFrequency (tinyint)
+        EXECUTE [dbo].[uspLogError];
+    END CATCH;
+END;
 
-## Possible optimization opportunities
-There are no specific optimization opportunities for the procedure.
-
-## Possible bugs
-There are no known bugs in this procedure.
-
-## Risk
-Since there is an UPDATE operation without a WHERE clause, it could potentially update all rows in the [HumanResources].[Employee] table. Therefore, users should be cautious while executing this procedure.
-
-## Code Complexity
-The procedure has a moderate level of complexity. It consists of a single transaction to ensure data consistency and uses TRY-CATCH blocks for error handling.
-
-## Refactoring Opportunities
-There are no specific refactoring opportunities for this procedure.
-
-## User Acceptance Criteria
-
-### Gherkin Scripts
-
-```gherkin
-Scenario: Update employee hire information and insert a new record in EmployeePayHistory
-Given a BusinessEntityID, JobTitle, HireDate, RateChangeDate, Rate, PayFrequency, and CurrentFlag
-When the stored procedure [HumanResources].[uspUpdateEmployeeHireInfo] is executed
-Then the employee's hire information should be updated with the provided values
-And a new record should be inserted into the EmployeePayHistory table
 ```
+{{< /details >}}
 
-```gherkin
-Scenario: Error handling in the stored procedure
-Given a BusinessEntityID, JobTitle, HireDate, RateChangeDate, Rate, PayFrequency, and CurrentFlag
-And an error occurred during the operation
-When the stored procedure [HumanResources].[uspUpdateEmployeeHireInfo] is executed
-Then the transaction should be rolled back
-And the error information should be logged using [dbo].[uspLogError]
-```
+CREATE PROCEDURE [HumanResources].[uspUpdateEmployeeHireInfo]
+    @BusinessEntityID [int], 
+    @JobTitle [nvarchar](50), 
+    @HireDate [datetime], 
+    @RateChangeDate [datetime], 
+    @Rate [money], 
+    @PayFrequency [tinyint], 
+    @CurrentFlag [dbo].[Flag] 
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        UPDATE [HumanResources].[Employee] 
+        SET [JobTitle] = @JobTitle 
+            ,[HireDate] = @HireDate 
+            ,[CurrentFlag] = @CurrentFlag 
+        WHERE [BusinessEntityID] = @BusinessEntityID;
+
+        INSERT INTO [HumanResources].[EmployeePayHistory] 
+            ([BusinessEntityID]
+            ,[RateChangeDate]
+            ,[Rate]
+            ,[PayFrequency]) 
+        VALUES (@BusinessEntityID, @RateChangeDate, @Rate, @PayFrequency);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        -- Rollback any active or uncommittable transactions before
+        -- inserting information in the ErrorLog
+        IF @@TRANCOUNT > 0
+        BEGIN
+            ROLLBACK TRANSACTION;
+        END
+
+        EXECUTE [dbo].[uspLogError];
+    END CATCH;
+END;
+
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqlset |  |  |  |  |  |  |  |  |  |
+| sstbegintran |  |  |  |  |  |  |  |  |  |
+| sstupdate | NA | [HireDate], [JobTitle], [CurrentFlag] | NA |  | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee] |
+| sstinsert | NA | NA | [BusinessEntityID], [RateChangeDate], [Rate], [PayFrequency] | NA | NA |  |  |  | [HumanResources].[EmployeePayHistory] |
+| sstmssqlcommit |  |  |  |  |  |  |  |  |  |
+| sstmssqlif |  |  |  |  |  |  |  |  |  |
+| sstmssqlrollback |  |  |  |  |  |  |  |  |  |
+| sstmssqlexec |  |  |  |  |  |  |  |  |  |
+

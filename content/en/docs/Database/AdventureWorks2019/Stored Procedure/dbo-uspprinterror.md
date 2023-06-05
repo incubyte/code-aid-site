@@ -1,24 +1,36 @@
 ---
 title: "dbo.uspPrintError"
-author: GPT
-date: 2022-05-01
-categories:
-  - Technology
-  - Programming
+linkTitle: "dbo.uspPrintError"
+description: "dbo.uspPrintError"
 ---
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |
-| sstmssqlprint |  |  |  |  |  |  |
-| sstmssqlprint |  |  |  |  |  |  |
+# Stored Procedures
 
-## Overview
-The stored procedure `uspPrintError` is used to print error information when an error occurs in the execution of a SQL script. It should be called within the scope of a CATCH block of a TRY...CATCH construct.
+## [dbo].[uspPrintError]
+### Summary
 
-## Details
-The procedure is defined as follows:
+
+- **Number of Tables Accessed:** 0
+- **Lines of Code:** 18
+- **Code Complexity:** 2
+### Missing Indexes
+
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
+
+
+### Parameters
+
+| Parameter Name | Data Type | Direction |
+|---|---|---|
+
+{{< details "Sql Code" >}}
 ```sql
+
+-- uspPrintError prints error information about the error that caused 
+-- execution to jump to the CATCH block of a TRY...CATCH construct. 
+-- Should be executed from within the scope of a CATCH block otherwise 
+-- it will return without printing any error information.
 CREATE PROCEDURE [dbo].[uspPrintError] 
 AS
 BEGIN
@@ -32,39 +44,81 @@ BEGIN
           ', Line ' + CONVERT(varchar(5), ERROR_LINE());
     PRINT ERROR_MESSAGE();
 END;
+
 ```
+{{< /details >}}
+## Overview
 
-## Information on data
-This procedure does not interact with any specific data or tables.
+The `uspPrintError` is a stored procedure that is used to print error information about an error that caused the execution to jump to the CATCH block of a TRY...CATCH construct. This procedure should be executed within the scope of a CATCH block; otherwise, it will return without printing any error information.
 
-## Information on the tables
-No tables are involved in this procedure.
+## Details
 
-## Possible optimization opportunities
-Since this procedure is just for printing error information, there are no immediate optimization opportunities.
+### Stored Procedure
 
-## Possible bugs
-No apparent bugs in the procedure.
+- Name: `uspPrintError`
+- Schema: `dbo`
+- Type: User-defined stored procedure
+
+### Parameters
+
+- None.
+
+## Information on Data
+
+No explicit data is involved in this stored procedure. It uses the built-in error functions to extract error information.
+
+## Information on the Tables
+
+- None.
+
+## Possible Optimization Opportunities
+
+- None.
+
+## Possible Bugs
+
+- None.
 
 ## Risk
-1. If the procedure is called outside of a CATCH block, it will not print any error information. 
+
+- None.
 
 ## Code Complexity
-The code complexity is low, as it comprises only a few lines of code for printing error information.
+
+The code of this stored procedure is quite simple and consists of the direct usage of several built-in error functions.
+
+```sql
+PRINT 'Error ' + CONVERT(varchar(50), ERROR_NUMBER()) +
+      ', Severity ' + CONVERT(varchar(5), ERROR_SEVERITY()) +
+      ', State ' + CONVERT(varchar(5), ERROR_STATE()) + 
+      ', Procedure ' + ISNULL(ERROR_PROCEDURE(), '-') + 
+      ', Line ' + CONVERT(varchar(5), ERROR_LINE());
+PRINT ERROR_MESSAGE();
+```
 
 ## Refactoring Opportunities
-None identified, as the procedure is simple and serves its purpose of printing error information.
+
+- Currently, there are no explicit refactoring opportunities.
 
 ## User Acceptance Criteria
-```gherkin
-Scenario: An error occurs during the execution of a script
-  Given a SQL script encounters an error during execution
-  When the script enters a CATCH block
-  Then uspPrintError should be called
-  And the error information should be printed
 
-Scenario: The stored procedure is called outside of a CATCH block
-  Given the execution of a SQL script without any errors
-  When the uspPrintError procedure is called
-  Then it should return without printing any error information
+```gherkin
+Feature: Print error information
+  Scenario: An error occurs and triggers a CATCH block
+    Given an error occurs and triggers a CATCH block in SQL code
+    When the uspPrintError stored procedure is called
+    Then it should print error information including number, severity, state, procedure, line, and message
+
+  Scenario: No error occurs
+    Given no error occurs in SQL code
+    When the uspPrintError stored procedure is called
+    Then it should not print any error information
 ```
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqlset |  |  |  |  |  |  |  |  |  |
+| sstmssqlprint |  |  |  |  |  |  |  |  |  |
+| sstmssqlprint |  |  |  |  |  |  |  |  |  |
+
