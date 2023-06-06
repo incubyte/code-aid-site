@@ -61,8 +61,8 @@ export function makeSvgScrollable(svgPointer: SVGSVGElement, viewBox: ViewBox) {
       const dx = clientX - startCoords.x;
       const dy = clientY - startCoords.y;
 
-      viewBox.x -= dx;
-      viewBox.y -= dy;
+      viewBox.x -= dx * 1.2;
+      viewBox.y -= dy * 1.2;
 
       svgPointer.setAttribute(
         "viewBox",
@@ -80,7 +80,6 @@ export function makeSvgScrollable(svgPointer: SVGSVGElement, viewBox: ViewBox) {
 
 export function makeSvgZoomable(svgPointer: SVGSVGElement, viewBox: ViewBox) {
   let scaleFactor = 1;
-  let zoomAmount = 0.1;
 
   svgPointer.addEventListener("wheel", handleZoom);
 
@@ -90,7 +89,7 @@ export function makeSvgZoomable(svgPointer: SVGSVGElement, viewBox: ViewBox) {
     const delta = Math.sign(-event.deltaY); // Reverse the sign of deltaY
     const isZoomingIn = delta > 0;
     const isZoomingOut = delta < 0;
-    zoomAmount = 0.01 * delta; // Adjust the zoom speed as desired
+    const zoomAmount = 0.05 * delta; // Adjust the zoom speed as desired
 
     const targetScaleFactor = scaleFactor + zoomAmount;
     const newWidth = viewBox.width / targetScaleFactor;
@@ -100,11 +99,8 @@ export function makeSvgZoomable(svgPointer: SVGSVGElement, viewBox: ViewBox) {
     const mouseX = event.clientX - svgPointer.getBoundingClientRect().left;
     const mouseY = event.clientY - svgPointer.getBoundingClientRect().top;
 
-    const scaleFactorDiff = targetScaleFactor - scaleFactor;
-    const dx = (mouseX - viewBox.x) * (scaleFactorDiff / targetScaleFactor);
-    const dy = (mouseY - viewBox.y) * (scaleFactorDiff / targetScaleFactor);
-
-    scaleFactor = targetScaleFactor;
+    const dx = (mouseX - viewBox.x) * (zoomAmount / targetScaleFactor);
+    const dy = (mouseY - viewBox.y) * (zoomAmount / targetScaleFactor);
 
     viewBox.x -= dx;
     viewBox.y -= dy;
@@ -133,10 +129,10 @@ export function makeSvgZoomable(svgPointer: SVGSVGElement, viewBox: ViewBox) {
       return;
     }
 
-    if ((viewBox.width > 1800 || viewBox.height > 900) && isZoomingOut) {
+    if ((viewBox.width > 9000) && isZoomingOut) {
       // zoom  limit reached
-      viewBox.width = 1800;
-      viewBox.height = 900;
+      viewBox.width = 9000;
+      viewBox.height = 4500;
       return;
     }
 
