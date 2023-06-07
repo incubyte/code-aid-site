@@ -5,7 +5,9 @@
   "main": "none.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "index": "hugo-lunr -i \"content/**\" -o public/index.json"
+    "index": "hugo-lunr -i \"content/**\" -o public/index.json",
+    "graph:start": "webpack-dev-server --open",
+    "graph:build": "webpack && cp -r static/graph-src/dev/index.js content/en/docs/Database/HRMS"
   },
   "repository": {
     "type": "git",
@@ -18,11 +20,16 @@
   },
   "homepage": "https://github.com/google/docsy-example#readme",
   "devDependencies": {
+    "@types/d3": "^7.4.0",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.3.7",
-    "postcss-cli": "^9.0.2"
+    "postcss-cli": "^9.0.2",
+    "ts-loader": "^9.4.3",
+    "webpack-cli": "^5.1.3",
+    "webpack-dev-server": "^4.15.0"
   },
   "dependencies": {
+    "d3": "^7.8.5",
     "hugo-lunr": "^0.0.4"
   }
 }
