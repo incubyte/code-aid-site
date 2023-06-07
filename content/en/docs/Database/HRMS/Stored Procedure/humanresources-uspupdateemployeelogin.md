@@ -1,94 +1,138 @@
 ---
 title: "HumanResources.uspUpdateEmployeeLogin"
-author: GPT
-date: 2022-05-01
-categories:
-  - Technology
-  - Programming
+linkTitle: "HumanResources.uspUpdateEmployeeLogin"
+description: "HumanResources.uspUpdateEmployeeLogin"
 ---
 
+# Stored Procedures
 
-| Statement Type | Select Columns | Set Columns | Insert Columns | Joins | Where Clause | Table Name |
-|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |
-| sstmssqlblock |  |  |  |  |  |  |
-| sstupdate | NA | [OrganizationNode], [LoginID], [JobTitle], [HireDate], [CurrentFlag] | NA |  | [BusinessEntityID],  | [HumanResources].[Employee] |
-| sstmssqlexec |  |  |  |  |  |  |
+## [HumanResources].[uspUpdateEmployeeLogin]
+### Summary
 
-## 1. Overview
 
-The `HumanResources.uspUpdateEmployeeLogin` stored procedure is used to update an employee's organization node, login ID, job title, hire date, and current flag based on the provided business entity ID.
+- **Number of Tables Accessed:** 1
+- **Lines of Code:** 26
+- **Code Complexity:** 2
+### Missing Indexes
 
-## 2. Details
+| Table Name | Column Name | Statement Type | Condition Type |
+|---|---|---|---|
 
-### Inputs
 
-- `@BusinessEntityID [int]`: The ID of the employee whose information is being updated.
-- `@OrganizationNode [hierarchyid]`: The updated organization node of the employee.
-- `@LoginID [nvarchar](256)`: The updated login ID of the employee.
-- `@JobTitle [nvarchar](50)`: The updated job title of the employee.
-- `@HireDate [datetime]`: The updated hire date of the employee.
-- `@CurrentFlag [dbo].[Flag]`: The updated current flag of the employee.
+### Parameters
 
-### Execution Context
+| Parameter Name | Data Type | Direction |
+|---|---|---|
+| @BusinessEntityID | INT | IN |
+| @OrganizationNode | [HIERARCHYID] | IN |
+| @LoginID | NVARCHAR | IN |
+| @JobTitle | NVARCHAR | IN |
+| @HireDate | DATETIME | IN |
+| @CurrentFlag | [DBO] | IN |
 
-The stored procedure is executed with the caller's permissions.
+{{< details "Sql Code" >}}
+```sql
 
-## 3. Information on data
+CREATE PROCEDURE [HumanResources].[uspUpdateEmployeeLogin]
+    @BusinessEntityID [int], 
+    @OrganizationNode [hierarchyid],
+    @LoginID [nvarchar](256),
+    @JobTitle [nvarchar](50),
+    @HireDate [datetime],
+    @CurrentFlag [dbo].[Flag]
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+    SET NOCOUNT ON;
 
-The procedure updates data in the `HumanResources.Employee` table.
+    BEGIN TRY
+        UPDATE [HumanResources].[Employee] 
+        SET [OrganizationNode] = @OrganizationNode 
+            ,[LoginID] = @LoginID 
+            ,[JobTitle] = @JobTitle 
+            ,[HireDate] = @HireDate 
+            ,[CurrentFlag] = @CurrentFlag 
+        WHERE [BusinessEntityID] = @BusinessEntityID;
+    END TRY
+    BEGIN CATCH
+        EXECUTE [dbo].[uspLogError];
+    END CATCH;
+END;
 
-## 4. Information on the tables
-
-The relevant table is `HumanResources.Employee`, which contains the following columns:
-
-- `BusinessEntityID [int]`: The primary key and the unique identifier for the employee.
-- `OrganizationNode [hierarchyid]`: The node within the organizational hierarchy.
-- `LoginID [nvarchar](256)`: The login ID of the employee.
-- `JobTitle [nvarchar](50)`: The employee's job title.
-- `HireDate [datetime]`: The date the employee was hired.
-- `CurrentFlag [dbo].[Flag]`: A flag indicating if the employee is currently active or not.
-
-## 5. Possible optimization opportunities
-
-None.
-
-## 6. Possible bugs
-
-None.
-
-## 7. Risk
-
-### 7.1. Update without WHERE clause
-
-There are no risks in this procedure related to running an update without a WHERE clause since the update statement contains the necessary WHERE clause.
-
-## 8. Code Complexity
-
-The code complexity for this stored procedure is low, as it only contains a single update statement and error handling with a try-catch block.
-
-## 9. Refactoring Opportunities
-
-None.
-
-## 10. User Acceptance Criteria
-
-### Gherkin Scripts
-
-```gherkin
-Feature: Update employee login information
-  As a database user
-  I want to be able to update employee login information
-  So that I can maintain accurate and up-to-date employee data
-
-Scenario: Update employee login information with valid inputs
-  Given I have the necessary employee data to update
-  When I call the uspUpdateEmployeeLogin stored procedure with valid inputs
-  Then the employee's login information should be updated in the HumanResources.Employee table
-
-Scenario: Update employee login information with invalid BusinessEntityID
-  Given I have the necessary employee data to update
-  When I call the uspUpdateEmployeeLogin stored procedure with an invalid BusinessEntityID
-  Then an error should be logged and the employee's login information should not be updated
 ```
+{{< /details >}}
+## Overview
+
+This markdown documentation provides information about the stored procedure `[HumanResources].[uspUpdateEmployeeLogin]` that is used to update the employee login information in a database.
+
+## Details
+
+Stored Procedure Name: `[HumanResources].[uspUpdateEmployeeLogin]`
+
+Parameters:
+1. @BusinessEntityID [int] - The unique identifier for the employee
+2. @OrganizationNode [hierarchyid] - The hierarchical position of the employee within the organization
+3. @LoginID [nvarchar](256) - The employee's login ID
+4. @JobTitle [nvarchar](50) - The employee's job title
+5. @HireDate [datetime] - The employee's hire date
+6. @CurrentFlag [dbo].[Flag] - A flag indicating if the employee is currently employed
+
+Execution Context: CALLER
+
+## Information on data
+
+The stored procedure updates the record in the `[HumanResources].[Employee]` table with the provided parameter values.
+
+## Information on the tables
+
+Source table: `[HumanResources].[Employee]`
+
+Columns affected:
+
+1. OrganizationNode
+2. LoginID
+3. JobTitle
+4. HireDate
+5. CurrentFlag
+
+## Possible optimization opportunities
+
+No optimization opportunities detected in the current code.
+
+## Possible bugs
+
+No apparent bugs detected in the current code.
+
+## Risk
+
+The query updates employee records without a WHERE clause, which may lead to unintended updates to other employee records.
+
+## Code Complexity
+
+The stored procedure's code is simple, involving only an update and error handling. No nested loops or logic structures exist.
+
+## Refactoring Opportunities
+
+No refactoring opportunities detected in the current code.
+
+## User Acceptance Criteria
+
+Feature: Update Employee Login Record
+
+Scenario: Successfully update an employee login record
+  Given there exists an employee with BusinessEntityID 1
+  When I execute [HumanResources].[uspUpdateEmployeeLogin] @BusinessEntityID = 1, @OrganizationNode = '/2/', @LoginID = 'new.employee', @JobTitle = 'New Title', @HireDate = '2023-01-01', @CurrentFlag = 1
+  Then the employee with BusinessEntityID 1 should have their LoginID, JobTitle, HireDate, and CurrentFlag updated
+
+Scenario: Fail to update a non-existent employee
+  Given there does not exist an employee with BusinessEntityID 9999
+  When I execute [HumanResources].[uspUpdateEmployeeLogin] @BusinessEntityID = 9999, @OrganizationNode = '/2/', @LoginID = 'new.employee', @JobTitle = 'New Title', @HireDate = '2023-01-01', @CurrentFlag = 1
+  Then an error should be logged
+### Statements
+
+| Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
+|---|---|---|---|---|---|---|---|---|---|
+| sstmssqlset |  |  |  |  |  |  |  |  |  |
+| sstupdate | NA | [OrganizationNode], [HireDate], [LoginID], [JobTitle], [CurrentFlag] | NA |  | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee] |
+| sstmssqlexec |  |  |  |  |  |  |  |  |  |
 
