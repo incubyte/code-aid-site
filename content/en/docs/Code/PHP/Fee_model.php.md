@@ -3,6 +3,15 @@ categories = ["Documentation"]
 title = "Fee_model.php"
 +++
 
+## File Summary
+
+- **File Path:** walnut codes\Fee_model.php
+- **LOC:** 6056
+- **Last Modified:** Git logs not found
+- **Number of Commits (Total / Last 6 Months / Last Month):** Git logs not found
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** Git logs not found
+- **Top Contributors:** Git logs not found
+
 
 ## Overview
 This script is a PHP class model named "Fee_Model" which handles all data related to fees within the session database. It's functions are designed to manage the fees, handle and validate interactions with the Tally database, and manage various installments for financial years.

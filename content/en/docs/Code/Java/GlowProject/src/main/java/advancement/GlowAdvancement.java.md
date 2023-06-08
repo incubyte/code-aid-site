@@ -3,6 +3,14 @@ categories = ["Documentation"]
 title = "GlowAdvancement.java"
 +++
 
+## File Summary
+
+- **File Path:** Glowstone\src\main\java\net\glowstone\advancement\GlowAdvancement.java
+- **LOC:** 117
+- **Last Modified:** 11 months 25 days
+- **Number of Commits (Total / Last 6 Months / Last Month):** 10 / 0 / 0
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 6 / 0 / 0
+- **Top Contributors:** mastercoms (4), Chris Hennick (2), Pr0methean (1)
 
 ## Overview
 
@@ -45,6 +53,131 @@ The `GlowAdvancement` class is a custom implementation of the `Advancement` inte
 9. `public @Nullable AdvancementDisplay getDisplay()`
 
    This method returns the display settings of the advancement, or null if the default settings are used.
+
+
+{{< details "Code " >}}
+```java
+package net.glowstone.advancement;
+
+import com.flowpowered.network.util.ByteBufUtils;
+import com.google.common.collect.ImmutableList;
+import io.netty.buffer.ByteBuf;
+import io.papermc.paper.advancement.AdvancementDisplay;
+import lombok.Data;
+import org.bukkit.NamespacedKey;
+import org.bukkit.advancement.Advancement;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+@Data
+public class GlowAdvancement implements Advancement {
+
+    private final NamespacedKey key;
+    private final GlowAdvancement parent;
+    private final List<String> criteriaIds = new ArrayList<>();
+    private final List<List<String>> requirements = new ArrayList<>();
+    private GlowAdvancementDisplay display = null;
+
+    /**
+     * Creates an advancement with the default notification.
+     *
+     * @param key    the namespace and name of the advancement
+     * @param parent the prerequisite advancement, or null
+     */
+    public GlowAdvancement(NamespacedKey key, GlowAdvancement parent) {
+        this.key = key;
+        this.parent = parent;
+    }
+
+    /**
+     * Creates an advancement.
+     *
+     * @param key     the namespace and name of the advancement
+     * @param parent  the prerequisite advancement, or null for no prerequisite
+     * @param display the parameters for the notification when this advancement is earned, or null
+     *                for the default notification
+     */
+    public GlowAdvancement(NamespacedKey key, GlowAdvancement parent,
+                           GlowAdvancementDisplay display) {
+        this.key = key;
+        this.parent = parent;
+        this.display = display;
+    }
+
+    /**
+     * Adds a criterion.
+     *
+     * @param criterion TODO: document where this ID comes from
+     */
+    public void addCriterion(String criterion) {
+        if (!criteriaIds.contains(criterion)) {
+            criteriaIds.add(criterion);
+        }
+    }
+
+    public void addRequirement(List<String> criteria) {
+        requirements.add(criteria);
+    }
+
+    @Override
+    public List<String> getCriteria() {
+        return ImmutableList.copyOf(criteriaIds);
+    }
+
+    @Override
+    public @NotNull @Unmodifiable Collection<Advancement> getChildren() {
+        return null;
+    }
+
+    @Override
+    public @NotNull Advancement getRoot() {
+        return null;
+    }
+
+    /**
+     * Writes a notification of earning this advancement to a byte buffer.
+     *
+     * @param buf a {@link ByteBuf}
+     * @return {@code buf} with this advancement written to it
+     * @throws IOException if a string is too long
+     */
+    public ByteBuf encode(ByteBuf buf) throws IOException {
+        buf.writeBoolean(parent != null);
+        if (parent != null) {
+            ByteBufUtils.writeUTF8(buf, parent.getKey().toString());
+        }
+        buf.writeBoolean(display != null);
+        if (display != null) {
+            display.encode(buf, true, true, false);
+        }
+        ByteBufUtils.writeVarInt(buf, criteriaIds.size());
+        for (String criteriaId : criteriaIds) {
+            ByteBufUtils.writeUTF8(buf, criteriaId);
+        }
+        ByteBufUtils.writeVarInt(buf, requirements.size());
+        for (List<String> requirement : requirements) {
+            ByteBufUtils.writeVarInt(buf, requirement.size());
+            for (String criterion : requirement) {
+                ByteBufUtils.writeUTF8(buf, criterion);
+            }
+        }
+        return buf;
+    }
+
+    public @Nullable AdvancementDisplay getDisplay() {
+        return display;
+    }
+}
+
+```
+{{< /details >}}
+
 
 
 ## Risks

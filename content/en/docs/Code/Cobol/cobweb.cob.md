@@ -4,6 +4,15 @@ title = "cobweb.cob"
 weight = 2
 +++
 
+## File Summary
+
+- **File Path:** COBWEB\cobweb.cob
+- **LOC:** 327
+- **Last Modified:** 9 years 5 months
+- **Number of Commits (Total / Last 6 Months / Last Month):** 5 / 0 / 0
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 1 / 0 / 0
+- **Top Contributors:** Addinall (5)
+
 
 ## Overview
 

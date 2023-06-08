@@ -3,6 +3,15 @@ categories = ["Documentation"]
 title = "Exam_controller.php"
 +++
 
+## File Summary
+
+- **File Path:** walnut codes\Exam_controller.php
+- **LOC:** 5847
+- **Last Modified:** Git logs not found
+- **Number of Commits (Total / Last 6 Months / Last Month):** Git logs not found
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** Git logs not found
+- **Top Contributors:** Git logs not found
+
 ## Overview
 
 The `Exam_controller` is a class that extends from `CI_Controller` and is responsible for managing Exam Marks and Exam metadata.

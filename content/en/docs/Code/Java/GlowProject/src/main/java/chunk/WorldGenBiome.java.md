@@ -3,6 +3,14 @@ categories = ["Documentation"]
 title = "WorldGenBiome.java"
 +++
 
+## File Summary
+
+- **File Path:** Glowstone\src\main\java\net\glowstone\chunk\WorldGenBiome.java
+- **LOC:** 53
+- **Last Modified:** 11 months 20 days
+- **Number of Commits (Total / Last 6 Months / Last Month):** 1 / 0 / 0
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 1 / 0 / 0
+- **Top Contributors:** kamcio96 (1)
 
 # Overview
 
@@ -34,6 +42,67 @@ The class is annotated with `@Data` and `@AllArgsConstructor` from the Lombok li
 18. `moodSound`: An `Optional<String>` holding the mood sound of the biome, if any.
 19. `particleProbability`: A float representing the probability of particle effects being generated in the biome.
 20. `particleOptions`: A String holding the options for particle effects.
+
+
+{{< details "Code " >}}
+```java
+package net.glowstone.chunk;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import java.util.Optional;
+import java.util.OptionalInt;
+
+@Data
+@AllArgsConstructor
+public class WorldGenBiome {
+
+    private String precipitation;
+
+    private float depth;
+
+    private float temperature;
+
+    private float scale;
+
+    private float downfall;
+
+    private String category;
+
+    private Optional<String> temperatureModifier;
+
+    private int skyColor;
+
+    private int waterFogColor;
+
+    private int fogColor;
+
+    private int waterColor;
+
+    private OptionalInt foliageColor;
+
+    private OptionalInt grassColor;
+
+    private Optional<String> grassColorModifier;
+
+    private Optional<String> music;
+
+    private Optional<String> ambientSound;
+
+    private Optional<String> additionsSound;
+
+    private Optional<String> moodSound;
+
+    private float particleProbability;
+
+    private String particleOptions;
+
+}
+
+```
+{{< /details >}}
+
 
 # Risks
 

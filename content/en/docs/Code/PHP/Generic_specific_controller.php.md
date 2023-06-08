@@ -3,6 +3,14 @@ categories = ["Documentation"]
 title = "Generic_specific_controller.php"
 +++
 
+## File Summary
+
+- **File Path:** walnut codes\Generic_specific_controller.php
+- **LOC:** 2979
+- **Last Modified:** Git logs not found
+- **Number of Commits (Total / Last 6 Months / Last Month):** Git logs not found
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** Git logs not found
+- **Top Contributors:** Git logs not found
 
 # Overview
 

@@ -4,6 +4,14 @@ title = "list-ledger.cob"
 weight = 5
 +++
 
+## File Summary
+
+- **File Path:** asdf\cobol\src\asdf-list-ledger.cob
+- **LOC:** 130
+- **Last Modified:** 5 years 0 months
+- **Number of Commits (Total / Last 6 Months / Last Month):** 2 / 0 / 0
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 1 / 0 / 0
+- **Top Contributors:** rightfold (2)
 
 ## Overview
 The given COBOL code is a ledger listing program that reads and displays transaction records for a specific group, provided with a UUID. The program parses and formats the input data for better readability.

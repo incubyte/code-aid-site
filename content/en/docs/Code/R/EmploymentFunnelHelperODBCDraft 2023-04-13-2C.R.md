@@ -3,6 +3,14 @@ categories = ["Documentation"]
 title = "EmploymentFunnelHelperODBCDraft 2023-04-13-2C.R"
 +++
 
+## File Summary
+
+- **File Path:** src\test\resources\test-files\EmploymentFunnelHelperODBCDraft 2023-04-13-2C.R
+- **LOC:** 565
+- **Last Modified:** Git logs not found
+- **Number of Commits (Total / Last 6 Months / Last Month):** Git logs not found
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** Git logs not found
+- **Top Contributors:** Git logs not found
 
 # EmploymentFunnelHelperODBCDraft 2023-04-13-2C.R
 ## Overview

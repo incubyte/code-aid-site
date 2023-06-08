@@ -3,6 +3,14 @@ categories = ["Documentation"]
 title = "CriterionProgress.java"
 +++
 
+## File Summary
+
+- **File Path:** Glowstone\src\main\java\net\glowstone\advancement\CriterionProgress.java
+- **LOC:** 13
+- **Last Modified:** 1 year 11 months
+- **Number of Commits (Total / Last 6 Months / Last Month):** 3 / 0 / 0
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 2 / 0 / 0
+- **Top Contributors:** mastercoms (2), momothereal (1)
 
 # Overview
 
@@ -36,6 +44,25 @@ The class has two properties:
 #### 2.2 Constructor
 
 Since the class uses the `@Data` annotation from Lombok, the constructor, along with the getters, setters, `equals`, `hashCode`, and `toString` methods are automatically generated.
+
+{{< details "Code " >}}
+```java
+package net.glowstone.advancement;
+
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
+public class CriterionProgress {
+
+    private final boolean achieved;
+    private final Date time;
+
+}
+```
+{{< /details >}}
+
 
 # Risks
 

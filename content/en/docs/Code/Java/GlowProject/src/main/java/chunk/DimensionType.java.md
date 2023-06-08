@@ -3,6 +3,14 @@ categories = ["Documentation"]
 title = "DimensionType.java"
 +++
 
+## File Summary
+
+- **File Path:** Glowstone\src\main\java\net\glowstone\chunk\DimensionType.java
+- **LOC:** 52
+- **Last Modified:** 11 months 20 days
+- **Number of Commits (Total / Last 6 Months / Last Month):** 1 / 0 / 0
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 1 / 0 / 0
+- **Top Contributors:** kamcio96 (1)
 
 ## Overview
 

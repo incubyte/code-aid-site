@@ -4,6 +4,14 @@ title = "create-group.cob"
 weight = 4
 +++
 
+## File Summary
+
+- **File Path:** asdf\cobol\src\asdf-create-group.cob
+- **LOC:** 59
+- **Last Modified:** 5 years 0 months
+- **Number of Commits (Total / Last 6 Months / Last Month):** 1 / 0 / 0
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 1 / 0 / 0
+- **Top Contributors:** rightfold (1)
 
 ## Overview
 

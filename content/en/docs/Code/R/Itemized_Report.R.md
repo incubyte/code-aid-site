@@ -3,6 +3,14 @@ categories = ["Documentation"]
 title = "Itemized_Report.R"
 +++
 
+## File Summary
+
+- **File Path:** src\test\resources\test-files\Itemized_Report.R
+- **LOC:** 62
+- **Last Modified:** Git logs not found
+- **Number of Commits (Total / Last 6 Months / Last Month):** Git logs not found
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** Git logs not found
+- **Top Contributors:** Git logs not found
 
 # Itemized_Report.R
 ## Overview

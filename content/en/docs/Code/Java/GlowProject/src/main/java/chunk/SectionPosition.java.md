@@ -3,6 +3,14 @@ categories = ["Documentation"]
 title = "SectionPosition.java"
 +++
 
+## File Summary
+
+- **File Path:** Glowstone\src\main\java\net\glowstone\chunk\SectionPosition.java
+- **LOC:** 22
+- **Last Modified:** 11 months 20 days
+- **Number of Commits (Total / Last 6 Months / Last Month):** 1 / 0 / 0
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 1 / 0 / 0
+- **Top Contributors:** kamcio96 (1)
 
 ## Overview
 
@@ -26,6 +34,36 @@ The `SectionPosition` class has three fields: `x`, `y`, and `z`, which are the t
 2. First, bitwise operations are applied on each of the coordinates with the corresponding masks: `x & 0x3FFFFF`, `y & 0xFFFFF`, and `z & 0x3FFFFF`.
 3. The individual masked values are then bitwise shifted and combined using the OR `|` operator.
 4. The resulting `long` value is returned.
+
+
+{{< details "Code " >}}
+```java
+package net.glowstone.chunk;
+
+import lombok.Data;
+
+@Data
+public class SectionPosition {
+
+    private final int x;
+    private final int y;
+    private final int z;
+
+    public static SectionPosition fromLong(long encoded) {
+        int sectionX = (int) (encoded >> 42);
+        int sectionY = (int) (encoded << 44 >> 44);
+        int sectionZ = (int) (encoded << 22 >> 42);
+        return new SectionPosition(sectionX, sectionY, sectionZ);
+    }
+
+    public long asLong() {
+        return ((x & 0x3FFFFF) << 42) | (y & 0xFFFFF) | ((z & 0x3FFFFF) << 20);
+    }
+}
+
+```
+{{< /details >}}
+
 
 ## Risks
 

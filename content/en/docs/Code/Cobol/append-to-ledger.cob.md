@@ -4,6 +4,14 @@ title = "append-to-ledger.cob"
 weight = 3
 +++
 
+## File Summary
+
+- **File Path:** asdf\cobol\src\asdf-append-to-ledger.cob
+- **LOC:** 89
+- **Last Modified:** 5 years 0 months
+- **Number of Commits (Total / Last 6 Months / Last Month):** 2 / 0 / 0
+- **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 1 / 0 / 0
+- **Top Contributors:** rightfold (2)
 
 ## Overview
 
