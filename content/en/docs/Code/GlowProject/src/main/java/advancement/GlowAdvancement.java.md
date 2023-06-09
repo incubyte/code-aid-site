@@ -5,55 +5,12 @@ title = "GlowAdvancement.java"
 
 ## File Summary
 
-- **File Path:** Glowstone\src\main\java\net\glowstone\advancement\GlowAdvancement.java
+- **File Path:** /home/chad/dev/Incubyte/Glowstone/src/main/java/net/glowstone/advancement/GlowAdvancement.java
 - **LOC:** 117
-- **Last Modified:** 11 months 25 days
+- **Last Modified:** 11 months 26 days
 - **Number of Commits (Total / Last 6 Months / Last Month):** 10 / 0 / 0
 - **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 6 / 0 / 0
 - **Top Contributors:** mastercoms (4), Chris Hennick (2), Pr0methean (1)
-
-## Overview
-
-The `GlowAdvancement` class is a custom implementation of the `Advancement` interface for a Minecraft server. It's responsible for parsing and storing the information related to an advancement, such as its name, parent advancement (if any), display properties, criteria, and requirements. The class also provides methods to add and manipulate the criteria and requirements of the advancement, as well as encoding the information into a `ByteBuf` when needed.
-
-## Function Explanations
-
-1. `public GlowAdvancement(NamespacedKey key, GlowAdvancement parent)`
-
-   This constructor initializes a new instance of `GlowAdvancement` with a given key, and a parent advancement. The `display` property is set to null, which means the default notification will be used when the advancement is earned.
-
-2. `public GlowAdvancement(NamespacedKey key, GlowAdvancement parent, GlowAdvancementDisplay display)`
-
-   This constructor initializes a new instance of `GlowAdvancement` with a given key, parent advancement, and custom display settings. It allows more control over the notification behavior when the advancement is earned.
-
-3. `public void addCriterion(String criterion)`
-
-   This method adds a new criterion to the list of criteria if it does not already exist.
-
-4. `public void addRequirement(List<String> criteria)`
-
-   This method adds a new requirement to the list of requirements.
-
-5. `public List<String> getCriteria()`
-
-   This method returns an immutable copy of the criteria list.
-
-6. `public @NotNull @Unmodifiable Collection<Advancement> getChildren()`
-
-   This method returns null, as it's not implemented yet. In the future, it should return a collection of child advancements.
-
-7. `public @NotNull Advancement getRoot()`
-
-   This method returns null, as it's also not implemented yet. In the future, it should return the root advancement of the tree this advancement belongs to.
-
-8. `public ByteBuf encode(ByteBuf buf) throws IOException`
-
-   This method encodes the information about the advancement into a `ByteBuf`. It writes various aspects such as the presence of a parent advancement, display settings, criteria, and requirements.
-
-9. `public @Nullable AdvancementDisplay getDisplay()`
-
-   This method returns the display settings of the advancement, or null if the default settings are used.
-
 
 {{< details "Code " >}}
 ```java
@@ -180,22 +137,76 @@ public class GlowAdvancement implements Advancement {
 
 
 
+## Overview
+
+This code represents a Java implementation of the `GlowAdvancement` class that implements the `Advancement` interface. The main purpose of this class is to handle advancements in a Minecraft game. It stores information such as the advancement key, parent advancement, criteria IDs, requirements, and advancement display.
+
+## Functions
+
+### GlowAdvancement Constructors
+
+There are two constructors for this class:
+
+1. `public GlowAdvancement(NamespacedKey key, GlowAdvancement parent)`: Takes in a NamespacedKey and a parent GlowAdvancement as input. It initializes the key and parent fields with the provided input parameters.
+
+2. `public GlowAdvancement(NamespacedKey key, GlowAdvancement parent, GlowAdvancementDisplay display)`: Takes in a NamespacedKey, a parent GlowAdvancement, and a GlowAdvancementDisplay as input. This constructor initializes the key, parent, and display fields with the provided input parameters.
+
+### addCriterion
+
+This function takes in a string `criterion` and adds it to the `criteriaIds` list if it doesn't already contain the provided criterion.
+
+### addRequirement
+
+This function takes in a list of strings `criteria` and adds it to the `requirements` list.
+
+### getCriteria
+
+This function returns an immutable copy of the `criteriaIds` list.
+
+### getChildren
+
+This function returns `null`. As there is no implementation to retrieve children advancements, it is a violation of the Liskov Substitution Principle (LSP) since it doesn't behave as expected from the implementation of the interface.
+
+### getRoot
+
+This function returns `null`. Similar to `getChildren`, this function violates the LSP because it doesn't behave as expected from the implementation of the interface.
+
+### encode
+
+This function takes in a `ByteBuf` and writes the content of the GlowAdvancement instance into the provided buffer. It returns the same buffer after writing the required data.
+
+### getDisplay
+
+This function returns the `display` field of the GlowAdvancement instance.
+
 ## Risks
 
 ### Security Issues
 
-No particular security issues have been detected in the code.
+No security issues have been identified in this code.
 
 ### Bugs
 
-- The method `getChildren` returns null, which can lead to NullPointerExceptions when calling code expects a collection of child advancements. It should return an empty collection or implement the actual functionality to return the child advancements.
-
-- The method `getRoot` also returns null, similar to the `getChildren` method. It should be implemented appropriately, returning the root advancement.
+1. Both `getChildren` and `getRoot` functions violate the LSP by returning null instead of providing the expected behavior defined in the Advancement interface.
 
 ## Refactoring Opportunities
 
-- The methods `getChildren` and `getRoot` should be implemented, or at least return a meaningful value (like an empty collection for `getChildren`), to avoid potential errors caused by null values.
+1. To adhere to the LSP, the implementation for `getChildren` and `getRoot` functions should be updated to provide the expected behavior as per the Advancement interface.
 
-- In the `addCriterion` method, consider using a `Set` instead of a `List` for `criteriaIds` to avoid duplicates and make the code simpler and more efficient.
+## User Acceptance Criteria
 
-- To simplify the encoding logic in the `ByteBuf encode(ByteBuf buf)` method, consider creating a helper method to handle the encoding of the individual components like criteria and requirements.
+```gherkin
+- Feature: GlowAdvancement
+  - Scenario: Add a criterion to the GlowAdvancement
+    - Given a GlowAdvancement instance
+    - When addCriterion() is called with a valid criterion
+    - Then the criterion list should be updated with the added criterion
+  - Scenario: Add a requirement to the GlowAdvancement
+    - Given a GlowAdvancement instance
+    - When addRequirement() is called with a valid list of criteria
+    - Then the requirements list should be updated with the added requirement
+  - Scenario: Write GlowAdvancement data to a byte buffer
+    - Given a GlowAdvancement instance
+    - When encode() is called with a ByteBuf instance
+    - Then the ByteBuf instance should be updated with the GlowAdvancement data
+```

@@ -5,45 +5,12 @@ title = "CriterionProgress.java"
 
 ## File Summary
 
-- **File Path:** Glowstone\src\main\java\net\glowstone\advancement\CriterionProgress.java
+- **File Path:** /home/chad/dev/Incubyte/Glowstone/src/main/java/net/glowstone/advancement/CriterionProgress.java
 - **LOC:** 13
 - **Last Modified:** 1 year 11 months
 - **Number of Commits (Total / Last 6 Months / Last Month):** 3 / 0 / 0
 - **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 2 / 0 / 0
 - **Top Contributors:** mastercoms (2), momothereal (1)
-
-# Overview
-
-This class is a part of the `net.glowstone.advancement` package and is a simple data class that represents the progress of a Criterion. This class has two properties: one for determining whether the criterion is achieved or not, and another for storing the time of achievement.
-
-## Code Structure
-
-1. Importing relevant packages and libraries
-2. CriterionProgress class definition
-   1. Properties
-   2. Constructor
-
-### 1. Importing Packages and Libraries
-
-This class imports the following packages:
-
-- `lombok.Data`: This annotation automatically generates getters and setters, an `equals`, a `hashCode`, and a `toString` method for the class.
-- `java.util.Date`: This class is used to store the date and time when the criterion was completed.
-
-### 2. CriterionProgress Class
-
-This class is responsible for maintaining the information about a criterion's progress.
-
-#### 2.1 Properties
-
-The class has two properties:
-
-1. `achieved (boolean)`: This boolean property is used to determine if the criterion has been achieved or not.
-2. `time (Date)`: This field is of type `Date` and stores the time at which the criterion was completed.
-
-#### 2.2 Constructor
-
-Since the class uses the `@Data` annotation from Lombok, the constructor, along with the getters, setters, `equals`, `hashCode`, and `toString` methods are automatically generated.
 
 {{< details "Code " >}}
 ```java
@@ -60,23 +27,76 @@ public class CriterionProgress {
     private final Date time;
 
 }
+
 ```
 {{< /details >}}
 
 
-# Risks
 
-## Security Issues
+# Overview
 
-As this class deals with date and time, there might be some concerns about whether it uses the correct timezone or not. However, this is a simple data class, and there is no code manipulation related to time and dates. Therefore, there are no obvious security concerns related to this class.
+This code is a simple Java class named `CriterionProgress` which belongs to the `net.glowstone.advancement` package. It's purpose is to represent the progress of an advancement criterion which consists of two fields - `achieved` and `time`. The `achieved` field is a boolean value to indicate whether the criterion has been achieved or not. The `time` field is a Date object representing when the criterion was achieved. The class uses the [Lombok](https://projectlombok.org) library annotation `@Data` to automatically generate getters, setters, and other utility methods.
 
-## Bugs
+## Sections
 
-There are no apparent bugs in this class:
+1. Class Declaration and Package
+2. Properties
+3. Lombok Annotation
 
-1. The class is quite simple and only contains two properties.
-2. Lombok properly generates the required methods.
+### 1. Class Declaration and Package
 
-# Refactoring Opportunities
+```java
+package net.glowstone.advancement;
 
-Because this class is simple and does not contain any complex code, and since the Lombok library is already managing the getter, setter, equals, hashCode, and toString methods, there are no obvious refactoring opportunities for improving this class.
+public class CriterionProgress {
+```
+
+This section defines the package that the class belongs to (`net.glowstone.advancement`) and declares the class `CriterionProgress`.
+
+### 2. Properties
+
+```java
+private final boolean achieved;
+private final Date time;
+```
+
+The class has two properties:
+
+1. `achieved`: A boolean value indicating whether the criterion has been achieved or not.
+2. `time`: A `java.util.Date` object representing the time when the criterion was achieved. The `final` keyword indicates that these fields cannot be changed after they are initialized.
+
+### 3. Lombok Annotation
+
+```java
+import lombok.Data;
+@Data
+```
+
+The `@Data` annotation from the Lombok library is used in this class. It automatically generates getters, setters, `equals()`, `hashCode()`, and `toString()` methods for the properties in the class.
+
+##  Risks
+
+### Security Issues
+
+None found.
+
+### Bugs
+
+None found.
+
+## Refactoring Opportunities
+
+As this code is short, simple, and adheres to the SOLID principles, there are no significant refactoring opportunities identified.
+
+## User Acceptance Criteria
+
+### Gherkin Scripts
+
+```gherkin
+Feature: CriterionProgress
+    Scenario: Create CriterionProgress object
+        Given a boolean value representing if the criterion has been achieved
+        And a Date object representing the time when the criterion was achieved
+        When I create a CriterionProgress object
+        Then the object should have the given values for achieved and time
+```
