@@ -5,54 +5,12 @@ title = "ChunkSection.java"
 
 ## File Summary
 
-- **File Path:** Glowstone\src\main\java\net\glowstone\chunk\ChunkSection.java
+- **File Path:** /home/chad/dev/Incubyte/Glowstone/src/main/java/net/glowstone/chunk/ChunkSection.java
 - **LOC:** 502
-- **Last Modified:** 11 months 27 days
+- **Last Modified:** 11 months 28 days
 - **Number of Commits (Total / Last 6 Months / Last Month):** 24 / 0 / 0
 - **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 6 / 0 / 0
 - **Top Contributors:** mastercoms (11), momothereal (7), Chris Hennick (2)
-
-# Overview
-This code implements the `ChunkSection` class, which represents a 16x16x16 cubic section of a chunk in a game (Glowstone) for managing block data, block light and sky light within a chunk. A chunk, in this case, is a unit of the terrain in the world of the Glowstone game.
-
-## ChunkSection
-### Class Variables
-1. `ARRAY_SIZE`: Integer constant representing the number of blocks in a chunk section.
-2. `EMPTY_BLOCK_LIGHT`: Byte constant representing block light level for empty chunk sections.
-3. `EMPTY_SKYLIGHT`: Byte constant representing sky light level for empty chunk sections.
-4. `DEFAULT_BLOCK_LIGHT`: Byte constant representing default block light level for chunk sections.
-5. `DEFAULT_SKYLIGHT`: Byte constant representing default sky light level for chunk sections.
-6. `GLOBAL_PALETTE_BITS_PER_BLOCK`: Integer constant representing the number of bits per block used in the global palette.
-7. `palette`: An optional `IntList` representing the block palette. It contains unique block types found in the chunk section. If it's `null`, a global palette is used.
-8. `data`: A `VariableValueArray` to store the block data (block types for this section).
-9. `skyLight`: A `NibbleArray` to store sky light data for the chunk section.
-10. `blockLight`: A `NibbleArray` to store block light data for the chunk section.
-11. `count`: An integer variable representing the number of non-air blocks in this chunk section, used to determine if the section is empty.
-
-### Constructors
-1. `ChunkSection()`: Constructs an empty `ChunkSection` with an array of size `ARRAY_SIZE` containing zeros.
-2. `ChunkSection(int[] types)`: Constructs an unlit `ChunkSection` with the given chunk data.
-3. `ChunkSection(int[] types, NibbleArray skyLight, NibbleArray blockLight)`: Constructs a `ChunkSection` with the specified chunk data, sky light data, and block light data.
-4. `ChunkSection(VariableValueArray data, @Nullable IntList palette, NibbleArray skyLight, NibbleArray blockLight)`: Constructs a `ChunkSection` with the given block data array, optional palette, sky light data, and block light data.
-
-### Methods
-1. `loadTypeArray(int[] types)`: Loads the contents of this chunk section from the given type array, initializing the palette.
-2. `fromNbt(CompoundTag sectionTag)`: Creates a new chunk section from the given NBT blob.
-3. `index(int x, int y, int z)`: Calculates the index into internal arrays for the given coordinates.
-4. `recount()`: Recounts the amount of non-air blocks in the chunk section.
-5. `snapshot()`: Takes a snapshot of this section which will not reflect future changes.
-6. `getBlockData(int x, int y, int z)`: Returns the `BlockData` object for the specified coordinates.
-7. `getType(int x, int y, int z)`: Gets the type at the given coordinates.
-8. `setType(int x, int y, int z, int value)`: Sets the type at the given coordinates.
-9. `getTypes()`: Returns the block type array.
-10. `getBlockLight(int x, int y, int z)`: Gets the block light at the given block.
-11. `setBlockLight(int x, int y, int z, byte light)`: Sets the block light at the given block.
-12. `getSkyLight(int x, int y, int z)`: Gets the sky light at the given block.
-13. `setSkyLight(int x, int y, int z, byte light)`: Sets the sky light at the given block.
-14. `isEmpty()`: Checks whether this chunk section is empty, i.e., doesn't need to be sent or saved.
-15. `writeToBuf(ByteBuf buf, boolean skylight)`: Writes this chunk section to the given ByteBuf.
-16. `writeToNbt(CompoundTag sectionTag)`: Writes this chunk section to a NBT compound.
-
 
 {{< details "Code " >}}
 ```java
@@ -563,13 +521,91 @@ public final class ChunkSection {
 {{< /details >}}
 
 
-# Risks
-## Security Issues
-None identified.
 
-## Bugs
-The implementation has the same issue that causes MC-80966. It assumes that a chunk section with only air blocks has no meaningful data. This assumption is incorrect for sections near light sources and can create lighting bugs.
+## Overview
+The given script represents a Java implementation of a single cubic section of a chunk, with all the data. A chunk section is a 16x16x16 part of a chunk in the Minecraft world.
 
-# Refactoring opportunities
-1. The function `getSize()` and `writeToNbt()` are deprecated and can be removed or replaced with more appropriate implementations.
-2. There is duplicated code when creating empty sections (in some constructors). This can be improved by calling the main constructor with appropriate parameters.
+## Explanation
+1. Import statements and initialization of constants, instance variables, and constructor.
+2. ChunkSection constructors and methods for creating ChunkSections using various input parameters.
+3. Methods for data handling, like: getting block data, getting and setting types, light levels (block light and sky light), checking if the chunk section is empty, etc.
+4. Methods for working with ByteBuf like: writeToBuf for writing chunk section to ByteBuf.
+5. Methods for working with NBT tags like: writeToNbt for writing a chunk section to a NBT compound.
+
+### Initializing Constants and Instance Variables
+- ARRAY_SIZE: Number of blocks in a chunk section.
+- EMPTY_BLOCK_LIGHT: Block light level for empty chunk sections.
+- EMPTY_SKYLIGHT: Sky light level for empty chunk sections.
+- DEFAULT_BLOCK_LIGHT: Default value for block light, used on new chunk sections.
+- DEFAULT_SKYLIGHT: Default value for sky light, used on new chunk sections.
+- GLOBAL_PALETTE_BITS_PER_BLOCK: The number of bits per block used in the global palette.
+
+### Constructors
+- **ChunkSection()**: Creates an empty ChunkSection.
+- **ChunkSection(int[] types)**: Creates a new unlit chunk section using the specified chunk data (block state IDs).
+- **ChunkSection(int[] types, NibbleArray skyLight, NibbleArray blockLight)**: Deprecated constructor which creates a ChunkSection with specified chunk data, skylight data, and blocklight data.
+- **ChunkSection(VariableValueArray data, IntList palette, NibbleArray skyLight, NibbleArray blockLight)**: Deprecated constructor which creates a ChunkSection with specified parameters.
+
+### Public Methods
+- **fromStateArray(int[] types)**: Creates a new unlit chunk section containing the given block types.
+- **loadTypeArray(int[] types)**: Loads the contents of this chunk section by initializing the palette and count.
+- **fromNbt(CompoundTag sectionTag)**: Creates a new chunk section from the given NBT blob.
+- **index(int x, int y, int z)**: Calculate the index into internal arrays for the given coordinates.
+- **recount()**: Recount the amount of non-air blocks in the chunk section.
+- **snapshot()**: Take a snapshot of this section which will not reflect future changes.
+- **getBlockData(int x, int y, int z)**: Get the BlockData object for the block at the given coordinates.
+- **getType(int x, int y, int z)**: Gets the type at the given coordinates.
+- **setType(int x, int y, int z, int value)**: Sets the type at the given coordinates.
+- **getTypes()**: Returns an integer array containing the types within this chunk section.
+- **getBlockLight(int x, int y, int z)**: Gets the block light at the given block.
+- **setBlockLight(int x, int y, int z, byte light)**: Sets the block light at the given block.
+- **getSkyLight(int x, int y, int z)**: Gets the sky light at the given block.
+- **setSkyLight(int x, int y, int z, byte light)**: Sets the sky light at the given block.
+- **isEmpty()**: Checks whether this chunk section is empty (i.e., doesn't need to be sent or saved).
+- **writeToBuf(ByteBuf buf, boolean skylight)**: Writes this chunk section to the given ByteBuf.
+- **writeToNbt(CompoundTag sectionTag)**: Writes this chunk section to a NBT compound.
+
+## Risks
+### Security Issues
+Currently, there are no apparent security issues.
+
+### Bugs
+Currently, no bugs have been identified.
+
+## Refactoring Opportunities
+There might be opportunities to refactor the code by possibly simplifying or combining the multiple constructors, or removing the deprecated constructors.
+
+## User Acceptance Criteria
+
+```gherkin
+Feature: ChunkSection actions
+
+  Scenario: Creating a new empty chunk section
+    Given an empty ChunkSection
+    When created
+    Then the new ChunkSection should be empty
+
+  Scenario: Loading the contents of this chunk section
+    Given an initialized palette
+    When loadTypeArray is called
+    Then the Palette and count should be updated accordingly
+
+  Scenario: Getting and setting block light
+    Given a ChunkSection
+    When calling getBlockLight with valid coordinates
+    Then the block light level should be returned
+    And when calling setBlockLight with valid coordinates and a new light level
+    The new block light level should be set at the given coordinates
+
+  Scenario: Getting and setting sky light
+    Given a ChunkSection
+    When calling getSkyLight with valid coordinates
+    Then the sky light level should be returned
+    And when calling setSkyLight with valid coordinates and a new light level
+    The new sky light level should be set at the given coordinates
+
+  Scenario: Calculating the index
+    Given a ChunkSection and valid coordinates
+    When calling index with the coordinates
+    Then the index for the given coordinates should be calculated
+```

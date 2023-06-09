@@ -5,155 +5,12 @@ title = "ChunkManager.java"
 
 ## File Summary
 
-- **File Path:** Glowstone\src\main\java\net\glowstone\chunk\ChunkManager.java
+- **File Path:** /home/chad/dev/Incubyte/Glowstone/src/main/java/net/glowstone/chunk/ChunkManager.java
 - **LOC:** 538
-- **Last Modified:** 11 months 27 days
+- **Last Modified:** 11 months 28 days
 - **Number of Commits (Total / Last 6 Months / Last Month):** 29 / 0 / 0
 - **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 8 / 0 / 0
 - **Top Contributors:** mastercoms (17), Chris Hennick (6), Momo (1)
-
-## Overview
-
-The ChunkManager class handles management of GlowChunk objects in memory, providing the ability to load and unload chunks as required, as well as generating new chunks, populating them, and storing biome information. This class is used in conjunction with a ChunkIoService to read and write chunks to disk.
-
-## Functions
-
-### ChunkManager Constructor
-
-The constructor initializes a new ChunkManager object with the specified I/O service and world generator.
-
-```java
-public ChunkManager(GlowWorld world, ChunkIoService service, ChunkGenerator generator)
-```
-
-### getChunk
-
-This function retrieves a chunk object representing the specified coordinates (x, and z), whether or not the chunk is loaded.
-
-```java
-public GlowChunk getChunk(int x, int z)
-public GlowChunk getChunk(GlowChunk.Key key)
-```
-
-### isChunkLoaded
-
-This function checks if the chunk at the specified coordinates (x, and z) is loaded.
-
-```java
-public boolean isChunkLoaded(int x, int z)
-```
-
-### isChunkInUse
-
-This function checks whether a chunk has locks on it preventing it from being unloaded.
-
-```java
-public boolean isChunkInUse(int x, int z)
-```
-
-### loadChunk
-
-This function attempts to load a chunk with specified coordinates optionally generating the chunk if needed.
-
-```java
-public boolean loadChunk(int x, int z, boolean generate)
-public boolean loadChunk(GlowChunk chunk, boolean generate)
-```
-
-### unloadOldChunks
-
-This method unloads chunks with no locks on them and removes them from the chunk map and lock set.
-
-```java
-public void unloadOldChunks()
-```
-
-### populateChunk
-
-This function populates a single chunk if needed using block populators.
-
-```java
-private void populateChunk(int x, int z, boolean force)
-```
-
-### forcePopulation
-
-This function forces a chunk to be populated by loading the chunks in an area around it.
-
-```java
-public void forcePopulation(int x, int z)
-```
-
-### generateChunk
-
-This function initializes a single chunk from the chunk generator.
-
-```java
-private void generateChunk(GlowChunk chunk, int x, int z)
-```
-
-### forceRegeneration
-
-This function forces generation of the specified chunk.
-
-```java
-public boolean forceRegeneration(int x, int z)
-```
-
-### getLoadedChunks
-
-This function returns an array of currently loaded GlowChunks.
-
-```java
-public GlowChunk[] getLoadedChunks()
-```
-
-### performSave
-
-This method performs save for a given chunk using the storage provider.
-
-```java
-public boolean performSave(GlowChunk chunk)
-```
-
-### getBiomeGridAtLowerRes and getBiomeGrid
-
-These functions return biome grid information for a chunk. The first one returns the grid at a lower resolution, while the second one returns the grid at full resolution.
-
-```java
-public int[] getBiomeGridAtLowerRes(int x, int z, int sizeX, int sizeZ)
-public int[] getBiomeGrid(int x, int z, int sizeX, int sizeZ)
-```
-
-### broadcastBlockChange and broadcastBlockChanges
-
-These methods queue block change notifications to all players in a specific chunk.
-
-```java
-public void broadcastBlockChange(GlowChunk.Key key, BlockChangeMessage message)
-public void broadcastBlockChanges(GlowChunk.Key key, Iterable<BlockChangeMessage> messages)
-```
-
-### getBlockChanges
-
-This function returns the list of block updates for a given chunk key.
-
-```java
-public List<BlockChangeMessage> getBlockChanges(GlowChunk.Key key)
-```
-
-### clearChunkBlockChanges
-
-This method clears the block update map.
-
-```java
-public void clearChunkBlockChanges()
-```
-
-### ChunkLock inner class
-
-This inner class represents a group of locks on chunks, preventing them from being unloaded while in use. It contains methods for acquiring and releasing locks on chunk keys, and clearing all locks.
-
 
 {{< details "Code " >}}
 ```java
@@ -700,20 +557,223 @@ public final class ChunkManager {
 {{< /details >}}
 
 
+
+# Overview
+
+This code is responsible for managing a Minecraft world's chunks. It loads, generates, saves, and unloads world chunks as needed.
+
+## Code Structure
+
+1. **Constructor:** Initializes the `ChunkManager` class.
+2. **Loading and unloading chunks:** Functions related to loading, unloading, and checking if chunks are loaded or in-use.
+3. **Population and generation:** Functions related to population and generating chunks.
+4. **Saving chunks:** Functions related to saving chunks.
+5. **Biome grids:** Functions related to biome grids for terrain generation.
+6. **Broadcasting block changes:** Functions related to broadcasting block changes to clients.
+7. **Chunk locking:** A nested `ChunkLock` class for locking chunks to prevent them from being unloaded while in use.
+
+## Functions
+
+### Constructor 
+
+```java
+public ChunkManager(GlowWorld world, ChunkIoService service, ChunkGenerator generator)
+```
+
+This function initializes the `ChunkManager` class with a `GlowWorld`, a `ChunkIoService`, and a `ChunkGenerator`.
+
+### Loading and Unloading Chunks
+
+#### `getChunk()`
+
+```java
+public GlowChunk getChunk(int x, int z)
+```
+
+This function takes an `(x, z)` coordinate pair and returns a `GlowChunk` object representing the corresponding chunk.
+
+#### `getChunk()`
+
+```java
+public GlowChunk getChunk(GlowChunk.Key key)
+```
+
+This function takes a `GlowChunk.Key` object and returns a `GlowChunk` object representing the corresponding chunk.
+
+#### `isChunkLoaded()`
+
+```java
+public boolean isChunkLoaded(int x, int z)
+```
+
+This function takes an `(x, z)` coordinate pair and returns a boolean value indicating if the corresponding chunk is loaded.
+
+#### `isChunkInUse()`
+
+```java
+public boolean isChunkInUse(int x, int z)
+```
+
+This function takes an `(x, z)` coordinate pair and returns a boolean value indicating if the corresponding chunk is in-use (locked).
+
+#### `loadChunk()`
+
+```java
+public boolean loadChunk(int x, int z, boolean generate)
+```
+
+This function takes an `(x, z)` coordinate pair and a boolean `generate` flag. It attempts to load the corresponding chunk from the `ChunkIoService`. If the chunk should be generated and generation is not disabled, the chunk is generated using the `ChunkGenerator`.
+
+#### `unloadOldChunks()`
+
+```java
+public void unloadOldChunks()
+```
+
+This function unloads old chunks that have no locks on them.
+
+### Population and Generation
+
+#### `populateChunk()`
+
+```java
+private void populateChunk(int x, int z, boolean force)
+```
+
+This function populates a chunk using its `BlockPopulator` unless it is already populated. 
+
+#### `generateChunk()`
+
+```java
+private void generateChunk(GlowChunk chunk, int x, int z)
+```
+
+This function generates a chunk using the `ChunkGenerator`.
+
+#### `forceRegeneration()`
+
+```java
+public boolean forceRegeneration(int x, int z)
+```
+
+This function forcibly regenerates a chunk at the specified `(x, z)` coordinates.
+
+### Saving Chunks
+
+#### `getLoadedChunks()`
+
+```java
+public GlowChunk[] getLoadedChunks()
+```
+
+This function returns an array of loaded `GlowChunk` objects.
+
+#### `performSave()`
+
+```java
+public boolean performSave(GlowChunk chunk)
+```
+
+This function saves a given `GlowChunk` using the `ChunkIoService`.
+
+### Biome Grids
+
+#### `getBiomeGridAtLowerRes()`
+
+```java
+public int[] getBiomeGridAtLowerRes(int x, int z, int sizeX, int sizeZ)
+```
+
+This function returns an array of biome grid values at lower resolution.
+
+#### `getBiomeGrid()`
+
+```java
+public int[] getBiomeGrid(int x, int z, int sizeX, int sizeZ)
+```
+
+This function returns an array of biome grid values.
+
+### Broadcasting Block Changes
+
+#### `broadcastBlockChange()`
+
+```java
+public void broadcastBlockChange(GlowChunk.Key key, BlockChangeMessage message)
+```
+
+This function queues a block change notification for all players in a given chunk.
+
+#### `broadcastBlockChanges()`
+
+```java
+public void broadcastBlockChanges(GlowChunk.Key key, Iterable<BlockChangeMessage> messages)
+```
+
+This function queues multiple block change notifications for all players in a given chunk.
+
+#### `getBlockChanges()`
+
+```java
+public List<BlockChangeMessage> getBlockChanges(GlowChunk.Key key)
+```
+
+This function returns a list of block change messages for a given chunk key.
+
+#### `clearChunkBlockChanges()`
+
+```java
+public void clearChunkBlockChanges()
+```
+
+This function clears all block change messages for all chunks.
+
+### ChunkLock class
+
+The `ChunkLock` class is a nested class that represents a group of locks on chunks to prevent them from being unloaded while in use. Chunks can be locked multiple times, and only be unloaded when all instances of the lock have been released.
+
+The class includes the following functions:
+
+- `acquire(Key key)`: Acquires a lock on the given chunk key.
+- `release(Key key)`: Releases a lock on the given chunk key.
+- `clear()`: Release all locks.
+
 ## Risks
 
-### Security issues
+### Security Issues
 
-There are no obvious security issues found in the code.
+No security issues have been detected.
 
 ### Bugs
 
-There are no obvious bugs found in the code.
+No bugs have been detected.
 
-## Refactoring opportunities
+## Refactoring Opportunities
 
-1. Remove duplicated code in the `getChunk` methods by consolidating their functionality.
-2. Consolidate the two methods `getBiomeGridAtLowerRes` and `getBiomeGrid` into a single method with a parameter specifying the required resolution.
-3. Use a more precise type for the `biomes` field in the BiomeGrid class instead of a byte array, to make it more understandable and less prone to errors.
-4. Extract the inner classes (BiomeGrid and ChunkLock) to their own separate files for better readability and maintainability.
-5. Replace manual array manipulation in `generateChunk` method with more expressive alternatives, such as Java streams.
+There are no significant refactoring opportunities to be done in this code without a thorough understanding of the requirements of the project and the interactions between different modules.
+
+## User Acceptance Criteria
+
+```gherkin
+Feature: Loading and unloading chunks using ChunkManager
+
+Scenario: Load a chunk at specified coordinates
+  Given a ChunkManager instance
+  When I call `loadChunk` with coordinates (x, z)
+  Then the chunk at (x, z) should be loaded
+
+Scenario: Unload a chunk with no locks
+  Given a loaded chunk at coordinates (x, z)
+  When I call `unloadOldChunks`
+  Then the chunk at (x, z) should be unloaded
+
+
+Feature: Chunk generation using ChunkManager
+
+Scenario: Generate a new chunk
+  Given a ChunkManager instance
+  When I call `forceRegeneration` with coordinates (x, z)
+  Then the chunk at (x, z) should be generated
+```
+
+###

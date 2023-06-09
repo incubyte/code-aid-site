@@ -5,59 +5,12 @@ title = "GlowAdvancementDisplay.java"
 
 ## File Summary
 
-- **File Path:** Glowstone\src\main\java\net\glowstone\advancement\GlowAdvancementDisplay.java
+- **File Path:** /home/chad/dev/Incubyte/Glowstone/src/main/java/net/glowstone/advancement/GlowAdvancementDisplay.java
 - **LOC:** 119
-- **Last Modified:** 11 months 25 days
+- **Last Modified:** 11 months 26 days
 - **Number of Commits (Total / Last 6 Months / Last Month):** 9 / 0 / 0
 - **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 6 / 0 / 0
 - **Top Contributors:** mastercoms (4), Aram Peres (1), momothereal (1)
-
-## Overview
-
-This code is for `GlowAdvancementDisplay` class in the Glowstone Minecraft server project. This class implements the `AdvancementDisplay` interface, representing the data and behavior associated with the visual representation of an advancement in the game. 
-
-## Functions
-
-### Constructor
-
-The class constructor initializes the following fields:
-
-1. `title`: The title for this advancement.
-2. `description`: The description for this advancement.
-3. `icon`: The icon to represent this advancement.
-4. `type`: The type of frame for the icon.
-5. `background`: The optional directory for the background to use in this advancement tab (used only for the root advancement).
-6. `x`: The x coordinate of the advancement.
-7. `y`: The y coordinate of the advancement.
-
-### encode
-
-The `encode` function writes this notification information to a `ByteBuf`:
-
-1. `buf`: the buffer to write to.
-2. `hasBackgroundTexture`: Whether the advancement notification has a background texture.
-3. `showToast`: Whether or not to show the toast pop up after completing this advancement.
-4. `hidden`: Whether or not to hide this advancement and all its children from the advancement screen until this advancement have been completed.
-
-The function returns the given `buf` after writing the notification to it.
-
-### Accessor Functions
-
-Several accessor functions are implemented for this class, which return the values of certain class fields:
-
-1. `frame()`: Returns `type`, the type of icon frame.
-2. `title()`: Returns `title`, the title component of the advancement.
-3. `description()`: Returns `description`, the description component of the advancement.
-4. `icon()`: Returns `icon`, the ItemStack representation of the icon.
-5. `doesShowToast()`: Returns `false`, indicating that a toast is not shown when the advancement is completed.
-6. `doesAnnounceToChat()`: Returns `false`, indicating that the advancement completion is not announced in chat.
-7. `isHidden()`: Returns `false`, indicating that the advancement is not hidden.
-8. `backgroundPath()`: Returns `background`, the NamespacedKey of the background path.
-
-## Noteworthy Data Operations
-
-1. The `encode` function writes various elements of the advancement display to a `ByteBuf`.
-
 
 {{< details "Code " >}}
 ```java
@@ -185,16 +138,71 @@ public class GlowAdvancementDisplay implements AdvancementDisplay {
 {{< /details >}}
 
 
+
+## Overview
+
+This class handles the display information for a specified Minecraft advancement. Primarily, it stores the title, description, icon, frame type, background, and coordinates. In addition, it provides methods to encode the display information into a ByteBuf object for transmission.
+
+## Function by Function Explanation
+
+### Public Constructor
+
+```java
+public GlowAdvancementDisplay(TextMessage title, TextMessage description, ItemStack icon, AdvancementDisplay.Frame type, NamespacedKey background, float x, float y)
+```
+This constructor initializes the GlowAdvancementDisplay object with the given title, description, icon, frame type, background, and x, y coordinates.
+
+### Encode Method
+
+```java
+public ByteBuf encode(ByteBuf buf, boolean hasBackgroundTexture, boolean showToast, boolean hidden) throws IOException
+```
+
+This method encodes the advancement display information into a ByteBuf. It takes the existing buffer, background texture, toast flag, and hidden flag as parameters. The method then constructs an integer, `flags`, representing the different flags and writes the information to the given buffer.
+
+1. Write `title` and `description` to the buffer using GlowBufUtils.writeChat
+2. Write `icon` to the buffer using GlowBufUtils.writeSlot
+3. Write the ordinal value of `type` to the buffer using ByteBufUtils.writeVarInt
+4. Write the `flags` integer to the buffer
+5. Write the `background` as strings to the buffer using ByteBufUtils.writeUTF8
+6. Write the `x` and `y` coordinate values to the buffer
+
+### Overrides
+
+The following overridden methods return specific values for the advancement display:
+
+- frame(): Returns the `type` (Frame).
+- title(): Returns null since the title is of type TextMessage and not Component (which is expected in the original method).
+- description(): Similar to title, returns null.
+- icon(): Returns the `icon` (ItemStack).
+- doesShowToast(), doesAnnounceToChat(), and isHidden(): All return false, as they are not part of the GlowAdvancementDisplay implementation.
+- backgroundPath(): Returns the `background` (NamespacedKey).
+
 ## Risks
 
 ### Security Issues
 
-1. It doesn't seem to have any security issues or vulnerabilities in this code.
+No security issues are found in this class.
 
 ### Bugs
 
-1. The class should override `title()` and `description()` methods to return typed values instead of `null` values.
+No critical bugs are detected in this class.
 
 ## Refactoring Opportunities
 
-1. The `encode` function could refactor the bitwise operation and encoding-related tasks to separate methods to improve readability and maintenance. For example, create methods like `encodeFlags()` and `encodeAdvancementData()`.
+1. In the overridden methods title() and description(), convert the TextMessage object to the Component type to return the correct value.
+2. Implement the missing features in the doesShowToast(), doesAnnounceToChat(), and isHidden() methods, which currently return false by default.
+
+## User Acceptance Criteria
+
+### Gherkin Scripts
+
+```gherkin
+Feature: GlowAdvancementDisplay
+  Scenario: Create and encode a GlowAdvancementDisplay
+    Given a title, description, icon, frame type, background, and x, y coordinates
+    When creating a new GlowAdvancementDisplay object
+    Then the object should be initialized with the provided data
+    And when encoding the object to a ByteBuf
+    Then the buffer should contain the advancement display information
+```

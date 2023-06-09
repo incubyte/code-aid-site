@@ -5,64 +5,12 @@ title = "GlowChunk.java"
 
 ## File Summary
 
-- **File Path:** Glowstone\src\main\java\net\glowstone\chunk\GlowChunk.java
+- **File Path:** /home/chad/dev/Incubyte/Glowstone/src/main/java/net/glowstone/chunk/GlowChunk.java
 - **LOC:** 1088
-- **Last Modified:** 11 months 20 days
+- **Last Modified:** 11 months 21 days
 - **Number of Commits (Total / Last 6 Months / Last Month):** 55 / 0 / 0
 - **Number of Unique Contributors (Total / Last 6 Months / Last Month):** 13 / 0 / 0
 - **Top Contributors:** mastercoms (25), momothereal (9), Chris Hennick (8)
-
-# Overview
-
-This code defines the GlowChunk class, which represents a chunk of the map in a Minecraft world. It includes the data and operations required to manage a chunk's blocks, entities, and block entities. A chunk is a 16x16x256 area in a Minecraft world.
-
-## Functions and methods
-
-### GlowChunk(GlowWorld world, int x, int z)
-
-Constructor for creating a new chunk with a specified X and Z coordinate in a given world.
-
-### toString()
-
-Returns the string representation of the chunk's location in the format "GlowChunk{world, x, z}".
-
-### getBlock(int x, int y, int z)
-
-Returns a GlowBlock at the specified X, Y, and Z coordinates within the chunk.
-
-### getEntities()
-
-Returns an Entity array of the entities residing in this chunk.
-
-### getRawEntities()
-
-Returns a collection of GlowEntity objects in this chunk.
-
-### getTileEntities(boolean useSnapshot)
-
-Returns a BlockState array containing block entities in the chunk. If `useSnapshot` is true, the method throws an UnsupportedOperationException.
-
-### getTileEntities(@NotNull Predicate<Block> blockPredicate, boolean useSnapshot)
-
-Returns a collection of BlockState objects in the chunk matching the specified block predicate.
-
-### getBlockEntities()
-
-Returns a GlowBlockState array containing the block entities residing in this chunk.
-
-### getRawBlockEntities()
-
-Returns an unmodifiable collection of the BlockEntity objects in this chunk.
-
-### isSlimeChunk()
-
-Returns whether the chunk is a slime chunk or not, based on a formula provided in Minecraft Gamepedia.
-
-### getChunkSnapshot()
-
-Returns a snapshot of the chunk.
-
-### getChunkSnapshot(boolean includeMaxBlockY, boolean includeBiome, boolean includeBiomeTempRain
 
 {{< details "Code " >}}
 ```java
@@ -1157,3 +1105,42 @@ public class GlowChunk implements Chunk {
 
 ```
 {{< /details >}}
+
+
+
+## Overview
+This code is part of the Glowstone project, an open-source Minecraft server implementation in Java. The `GlowChunk` class represents a chunk of the Minecraft map. The chunk stores block types, block metadata, block light, sky light, biome data, and height map, as well as block entities and Minecraft entities that reside in the chunk.
+
+## Function by Function Explanation
+
+### GlowChunk Constructor
+```java
+GlowChunk(GlowWorld world, int x, int z)
+```
+This is the constructor of the `GlowChunk` class. This constructor initializes the chunk with the given `GlowWorld` and x, z coordinates.
+
+### toString
+```java
+public String toString()
+```
+This method returns a string representation of the `GlowChunk`, formatted as "GlowChunk{world=world_name, x=X_coordinate, z=Z_coordinate}".
+
+### getBlock
+```java
+public @NotNull GlowBlock getBlock(int x, int y, int z)
+```
+This method takes x, y, and z coordinates as input and returns a `GlowBlock` object representing the block at the given coordinates within this chunk.
+
+### getEntities
+```java
+public Entity[] getEntities()
+```
+This method returns an array of all entities in this chunk.
+
+### getRawEntities
+```java
+public Collection<GlowEntity> getRawEntities()
+```
+This method returns an unmodifiable collection of all entities in this chunk.
+
+### get
