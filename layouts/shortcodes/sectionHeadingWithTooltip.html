@@ -1,0 +1,68 @@
+<details class="mt-4">
+  <summary class="h5 mb-1 ">{{(.Inner) | markdownify}} <span class="tooltip-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round"
+           stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="16" x2="12" y2="12"/>
+        <line x1="12" y1="8" x2="12" y2="8"/>
+      </svg>
+    </span></summary>
+  <p class="section-detail mt-2 mx-4">{{ (.Get 0) | markdownify }}</p>
+</details>
+
+<style>
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+  margin-left: 0.25rem;
+}
+
+.tooltip-icon {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 18rem;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%); /* To center the tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  font-size: 0.8rem;
+}
+
+.tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%); /* To center the tooltip arrow */
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.section-detail {
+  font-size:14px;
+}
+
+</style>
