@@ -35,6 +35,8 @@ Containerization
 {{< customCheckBox "Containerization tool used: UNKNOWN" >}}
 
 {{< /customCheckBox>}}{{<whyItMatters>}}
+Containerization is the process of packaging an application along with its required environment, libraries, and dependencies, all bundled into one package or "container". This container can then be run consistently on any infrastructure, which provides advantages in terms of portability, consistency, and efficiency. Docker and Kubernetes are popular tools used for containerization.
+
 - **Consistency:** Containerization ensures that your application runs the same way, every time, regardless of the environment. This eliminates the common problem of "it works on my machine".
 - **Scalability:** Containerized applications are easy to scale. Just spin up a new container when you need more capacity.
 - **Isolation:** Containers isolate your application and its dependencies from the rest of the system. This reduces conflicts between different parts of your system and increases security.
@@ -67,6 +69,8 @@ Database Migrations
 {{< customCheckBox "Database migration scripts present" >}}
 
 {{< /customCheckBox>}}{{<whyItMatters>}}
+Database migration scripts are sets of commands that bring your database from one state to another. These scripts, often written in SQL or a similar database language, update the schema of your database or change the data within it. Migration scripts can be thought of as version control for your database, allowing you to update, rollback, and manage your database schema effectively. They are an integral part of database management and are widely used in software development.
+
 - **Version Control:** Database migration scripts allow you to version control your database changes just like your application code. This is essential for consistency across environments.
 - **Collaboration:** Migration scripts enable multiple developers to collaborate on database changes without overwriting each other's work.
 - **Rollbacks:** In case of a problem, migration scripts allow you to roll back database changes to a previous state.
@@ -83,3 +87,7 @@ Database Schema Documentation
 {{< customCheckBox "Database schema documentation present" >}}
 checked
 {{< /customCheckBox>}}
+
+
+
+
