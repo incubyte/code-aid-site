@@ -118,7 +118,4 @@ Feature: Print error information
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlprint |  |  |  |  |  |  |  |  |  |
-| sstmssqlprint |  |  |  |  |  |  |  |  |  |
 

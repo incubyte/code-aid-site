@@ -185,16 +185,5 @@ Feature: Log error information within a CATCH block
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlprint |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
-| sstinsert | NA | NA | [UserName], [ErrorNumber], [ErrorSeverity], [ErrorState], [ErrorProcedure], [ErrorLine], [ErrorMessage] | NA | NA |  |  |  | [dbo].[ErrorLog] |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlprint |  |  |  |  |  |  |  |  |  |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
+| INSERT | NA | NA | [UserName], [ErrorNumber], [ErrorSeverity], [ErrorState], [ErrorProcedure], [ErrorLine], [ErrorMessage] | NA | NA |  |  |  | [dbo].[ErrorLog] |
 

@@ -132,7 +132,5 @@ Scenario: Fail to update a non-existent employee
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstupdate | NA | [OrganizationNode], [HireDate], [LoginID], [JobTitle], [CurrentFlag] | NA |  | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee] |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
+| UPDATE | NA | [OrganizationNode], [HireDate], [LoginID], [JobTitle], [CurrentFlag] | NA |  | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee] |
 

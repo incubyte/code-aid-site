@@ -152,18 +152,4 @@ Feature: Search candidate resumes using various search parameters
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstselect |  | NA | NA |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstselect | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] | NA | NA | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] |  |  |  |  | [HumanResources].[JobCandidate] |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstselect |  | NA | NA |  |  |  |  |  |  |
-| sstselect | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] | NA | NA | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] |  |  |  |  | [HumanResources].[JobCandidate] |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstselect |  | NA | NA |  |  |  |  |  |  |
-| sstselect | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] | NA | NA | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] |  |  |  |  | [HumanResources].[JobCandidate] |
-| sstselect |  | NA | NA |  |  |  |  |  |  |
-| sstselect | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] | NA | NA | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] |  |  |  |  | [HumanResources].[JobCandidate] |
 

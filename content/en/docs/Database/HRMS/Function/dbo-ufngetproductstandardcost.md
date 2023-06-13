@@ -126,7 +126,5 @@ Feature: Standard cost calculation for a product by order date
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstselect | [PRODUCTION].[PRODUCTCOSTHISTORY].[StandardCost] | NA | NA | [PRODUCTION].[PRODUCT].[ProductID], [PRODUCTION].[PRODUCTCOSTHISTORY].[ProductID], [PRODUCTION].[PRODUCTCOSTHISTORY].[StartDate], [PRODUCTION].[PRODUCTCOSTHISTORY].[EndDate] |  |  |  |  | [Production].[Product], [Production].[ProductCostHistory] |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
+| SELECT | [PRODUCTION].[PRODUCTCOSTHISTORY].[StandardCost] | NA | NA | [PRODUCTION].[PRODUCT].[ProductID], [PRODUCTION].[PRODUCTCOSTHISTORY].[ProductID], [PRODUCTION].[PRODUCTCOSTHISTORY].[StartDate], [PRODUCTION].[PRODUCTCOSTHISTORY].[EndDate] |  |  |  |  | [Production].[Product], [Production].[ProductCostHistory] |
 

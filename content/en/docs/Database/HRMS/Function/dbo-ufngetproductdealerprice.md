@@ -124,9 +124,5 @@ This document provides markdown documentation for the `ufnGetProductDealerPrice`
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstselect | [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[ListPrice] | NA | NA | [PRODUCTION].[PRODUCT].[ProductID], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[EndDate], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[ProductID], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[StartDate] |  |  |  |  | [Production].[ProductListPriceHistory], [Production].[Product] |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
+| SELECT | [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[ListPrice] | NA | NA | [PRODUCTION].[PRODUCT].[ProductID], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[EndDate], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[ProductID], [PRODUCTION].[PRODUCTLISTPRICEHISTORY].[StartDate] |  |  |  |  | [Production].[ProductListPriceHistory], [Production].[Product] |
 

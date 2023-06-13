@@ -115,5 +115,5 @@ Then the changes should be reflected in the [HumanResources].[vJobCandidateEmplo
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstselect | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] | NA | NA |  |  |  |  |  | [HumanResources].[JobCandidate] |
+| SELECT | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID] | NA | NA |  |  |  |  |  | [HumanResources].[JobCandidate] |
 

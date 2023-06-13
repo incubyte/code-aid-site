@@ -175,6 +175,6 @@ PIVOT
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstselect |  | NA | NA |  |  |  |  |  |  |
-| sstselect | [SALES].[SALESORDERHEADER].[SubTotal], [PERSON].[PERSON].[LastName], [HUMANRESOURCES].[EMPLOYEE].[JobTitle], [SALES].[SALESORDERHEADER].[OrderDate], [PERSON].[PERSON].[MiddleName], [PERSON].[PERSON].[FirstName], [SALES].[SALESORDERHEADER].[SalesPersonID], [SALES].[SALESTERRITORY].[Name], m | NA | NA | [SALES].[SALESPERSON].[BusinessEntityID], [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [SALES].[SALESORDERHEADER].[SalesPersonID], [SALES].[SALESPERSON].[TerritoryID], [SALES].[SALESTERRITORY].[TerritoryID], [PERSON].[PERSON].[BusinessEntityID] |  |  |  |  | [HumanResources].[Employee], [Sales].[SalesTerritory], [Sales].[SalesPerson], [Sales].[SalesOrderHeader], [Person].[Person] |
+| SELECT |  | NA | NA |  |  |  |  |  |  |
+| SELECT | [SALES].[SALESORDERHEADER].[SubTotal], [PERSON].[PERSON].[LastName], [HUMANRESOURCES].[EMPLOYEE].[JobTitle], [SALES].[SALESORDERHEADER].[OrderDate], [PERSON].[PERSON].[MiddleName], [PERSON].[PERSON].[FirstName], [SALES].[SALESORDERHEADER].[SalesPersonID], [SALES].[SALESTERRITORY].[Name], m | NA | NA | [SALES].[SALESPERSON].[BusinessEntityID], [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [SALES].[SALESORDERHEADER].[SalesPersonID], [SALES].[SALESPERSON].[TerritoryID], [SALES].[SALESTERRITORY].[TerritoryID], [PERSON].[PERSON].[BusinessEntityID] |  |  |  |  | [HumanResources].[Employee], [Sales].[SalesTerritory], [Sales].[SalesPerson], [Sales].[SalesOrderHeader], [Person].[Person] |
 

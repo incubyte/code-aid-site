@@ -191,21 +191,8 @@ The code has a moderate level of complexity due to the various `UPDATE` and `INS
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstinsert | NA | NA | [ProductID], [ReferenceOrderID], [ReferenceOrderLineID], [TransactionType], [TransactionDate], [Quantity], [ActualCost] | NA | NA |  |  |  | [Production].[TransactionHistory] |
-| sstselect | [SalesOrderDetailID], [SalesOrderID], [ProductID], [UnitPrice], [OrderQty] | NA | NA | [SalesOrderID], [SALES].[SALESORDERHEADER].[SalesOrderID] |  |  |  |  | inserted, [Sales].[SalesOrderHeader] |
-| sstupdate | NA |  | NA |  | [SALES].[CUSTOMER].[PersonID], [PERSON].[PERSON].[BusinessEntityID] |  |  |  | inserted, [Sales].[SalesOrderHeader], [Sales].[Customer], [Person].[Person] |
-| sstupdate | NA | [Sales].[SalesOrderHeader].[SubTotal] | NA |  | [SALES].[SALESORDERHEADER].[SalesOrderID] |  |  |  | [Sales].[SalesOrderHeader] |
-| sstselect | [SALES].[SALESORDERDETAIL].[LineTotal] | NA | NA |  | [SALES].[SALESORDERDETAIL].[SalesOrderID], [SALES].[SALESORDERHEADER].[SalesOrderID] |  |  |  | [Sales].[SalesOrderDetail] |
-| sstselect | [SALES].[SALESORDERHEADER].[SalesOrderID] | NA | NA |  |  |  |  |  | inserted |
-| sstupdate | NA |  | NA |  | [SALES].[CUSTOMER].[PersonID], [PERSON].[PERSON].[BusinessEntityID] |  |  |  | deleted, [Sales].[SalesOrderHeader], [Sales].[Customer], [Person].[Person] |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlrollback |  |  |  |  |  |  |  |  |  |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
+| UPDATE | NA | [Sales].[SalesOrderHeader].[SubTotal] | NA |  | [SALES].[SALESORDERHEADER].[SalesOrderID] |  |  |  | [Sales].[SalesOrderHeader] |
+| SELECT | [SALES].[SALESORDERDETAIL].[LineTotal] | NA | NA |  | [SALES].[SALESORDERDETAIL].[SalesOrderID], [SALES].[SALESORDERHEADER].[SalesOrderID] |  |  |  | [Sales].[SalesOrderDetail] |
+| SELECT | [SALES].[SALESORDERHEADER].[SalesOrderID] | NA | NA |  |  |  |  |  | inserted |
+| UPDATE | NA |  | NA |  | [SALES].[CUSTOMER].[PersonID], [PERSON].[PERSON].[BusinessEntityID] |  |  |  | deleted, [Sales].[SalesOrderHeader], [Sales].[Customer], [Person].[Person] |
 

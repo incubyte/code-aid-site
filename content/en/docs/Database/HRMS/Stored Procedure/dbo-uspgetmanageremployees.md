@@ -161,9 +161,8 @@ Feature: Retrieve Manager Employees
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstselect | [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA | [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [PERSON].[PERSON].[BusinessEntityID] |  |  |  |  | [HumanResources].[Employee], [Person].[Person] |
-| sstselect | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA |  |  |  |  |  |  |
-| sstselect | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [PERSON].[PERSON].[BusinessEntityID] | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee], [Person].[Person] |
-| sstselect | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [PERSON].[PERSON].[BusinessEntityID] |  |  |  |  | [HumanResources].[Employee], [Person].[Person] |
+| SELECT | [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA | [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [PERSON].[PERSON].[BusinessEntityID] |  |  |  |  | [HumanResources].[Employee], [Person].[Person] |
+| SELECT | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA |  |  |  |  |  |  |
+| SELECT | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [PERSON].[PERSON].[BusinessEntityID] | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee], [Person].[Person] |
+| SELECT | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [HUMANRESOURCES].[EMPLOYEE].[OrganizationNode], [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[FirstName] | NA | NA | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID], [PERSON].[PERSON].[BusinessEntityID] |  |  |  |  | [HumanResources].[Employee], [Person].[Person] |
 

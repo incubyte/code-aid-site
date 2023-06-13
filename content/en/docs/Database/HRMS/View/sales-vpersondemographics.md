@@ -125,5 +125,5 @@ Feature: Sales.vPersonDemographics view
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstselect | [PERSON].[PERSON].[BusinessEntityID] | NA | NA |  | [PERSON].[PERSON].[Demographics] |  |  |  | [Person].[Person] |
+| SELECT | [PERSON].[PERSON].[BusinessEntityID] | NA | NA |  | [PERSON].[PERSON].[Demographics] |  |  |  | [Person].[Person] |
 

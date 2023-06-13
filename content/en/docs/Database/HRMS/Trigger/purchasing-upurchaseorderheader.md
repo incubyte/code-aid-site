@@ -125,16 +125,4 @@ Feature: uPurchaseOrderHeader Trigger
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstupdate | NA | [Purchasing].[PurchaseOrderHeader].[RevisionNumber] | NA |  | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID] |  |  |  | [Purchasing].[PurchaseOrderHeader] |
-| sstselect | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID] | NA | NA |  |  |  |  |  | inserted |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlrollback |  |  |  |  |  |  |  |  |  |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
 

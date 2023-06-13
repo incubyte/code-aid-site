@@ -121,7 +121,5 @@ Scenario: Update an employee's personal information
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstupdate | NA | [NationalIDNumber], [BirthDate], [MaritalStatus], [Gender] | NA |  | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee] |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
+| UPDATE | NA | [NationalIDNumber], [BirthDate], [MaritalStatus], [Gender] | NA |  | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee] |
 

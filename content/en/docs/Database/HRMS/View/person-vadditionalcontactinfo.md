@@ -127,5 +127,5 @@ Feature: Retrieve additional contact information of persons
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstselect | [PERSON].[PERSON].[rowguid], [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[MiddleName], [PERSON].[PERSON].[FirstName], [PERSON].[PERSON].[ModifiedDate], [PERSON].[PERSON].[BusinessEntityID] | NA | NA |  | [PERSON].[PERSON].[AdditionalContactInfo] |  |  |  | [Person].[Person] |
+| SELECT | [PERSON].[PERSON].[rowguid], [PERSON].[PERSON].[LastName], [PERSON].[PERSON].[MiddleName], [PERSON].[PERSON].[FirstName], [PERSON].[PERSON].[ModifiedDate], [PERSON].[PERSON].[BusinessEntityID] | NA | NA |  | [PERSON].[PERSON].[AdditionalContactInfo] |  |  |  | [Person].[Person] |
 

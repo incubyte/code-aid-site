@@ -117,5 +117,5 @@ Potential refactoring can be considered by simplifying the XML namespaces declar
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstselect | [SALES].[STORE].[Name], [SALES].[STORE].[BusinessEntityID] | NA | NA |  |  |  |  |  | [Sales].[Store] |
+| SELECT | [SALES].[STORE].[Name], [SALES].[STORE].[BusinessEntityID] | NA | NA |  |  |  |  |  | [Sales].[Store] |
 
