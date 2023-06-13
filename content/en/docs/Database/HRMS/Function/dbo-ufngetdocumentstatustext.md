@@ -139,7 +139,4 @@ Scenario: Get Invalid Text
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
 

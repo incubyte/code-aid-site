@@ -119,5 +119,5 @@ Remember to follow the best practices while working with database objects, and p
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstselect | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID], [HUMANRESOURCES].[JOBCANDIDATE].[BusinessEntityID], [HUMANRESOURCES].[JOBCANDIDATE].[ModifiedDate] | NA | NA |  |  |  |  |  | [HumanResources].[JobCandidate] |
+| SELECT | [HUMANRESOURCES].[JOBCANDIDATE].[JobCandidateID], [HUMANRESOURCES].[JOBCANDIDATE].[BusinessEntityID], [HUMANRESOURCES].[JOBCANDIDATE].[ModifiedDate] | NA | NA |  |  |  |  |  | [HumanResources].[JobCandidate] |
 

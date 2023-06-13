@@ -127,12 +127,6 @@ END;
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstbegintran |  |  |  |  |  |  |  |  |  |
-| sstupdate | NA | [HireDate], [JobTitle], [CurrentFlag] | NA |  | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee] |
-| sstinsert | NA | NA | [BusinessEntityID], [RateChangeDate], [Rate], [PayFrequency] | NA | NA |  |  |  | [HumanResources].[EmployeePayHistory] |
-| sstmssqlcommit |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlrollback |  |  |  |  |  |  |  |  |  |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
+| UPDATE | NA | [HireDate], [JobTitle], [CurrentFlag] | NA |  | [HUMANRESOURCES].[EMPLOYEE].[BusinessEntityID] |  |  |  | [HumanResources].[Employee] |
+| INSERT | NA | NA | [BusinessEntityID], [RateChangeDate], [Rate], [PayFrequency] | NA | NA |  |  |  | [HumanResources].[EmployeePayHistory] |
 

@@ -154,26 +154,4 @@ Feature: Sales.uSalesOrderHeader Trigger
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstupdate | NA | [Sales].[SalesOrderHeader].[RevisionNumber] | NA |  | [SALES].[SALESORDERHEADER].[SalesOrderID] |  |  |  | [Sales].[SalesOrderHeader] |
-| sstselect | [SALES].[SALESORDERHEADER].[SalesOrderID] | NA | NA |  |  |  |  |  | inserted |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstupdate | NA | [Sales].[SalesPerson].[SalesYTD] | NA |  | [SALES].[SALESPERSON].[BusinessEntityID] |  |  |  | [Sales].[SalesPerson] |
-| sstselect | [SALES].[SALESORDERHEADER].[SubTotal] | NA | NA |  | [SALES].[SALESPERSON].[BusinessEntityID], [SALES].[SALESORDERHEADER].[Status], [SALES].[SALESORDERHEADER].[SalesPersonID] |  |  |  | [Sales].[SalesOrderHeader] |
-| sstselect | [SALES].[SALESPERSON].[SalesPersonID] | NA | NA |  |  |  |  |  | inserted |
-| sstupdate | NA | [Sales].[SalesTerritory].[SalesYTD] | NA |  | [SALES].[SALESTERRITORY].[TerritoryID] |  |  |  | [Sales].[SalesTerritory] |
-| sstselect | [SALES].[SALESORDERHEADER].[SubTotal] | NA | NA |  | [SALES].[SALESORDERHEADER].[TerritoryID], [SALES].[SALESORDERHEADER].[Status], [SALES].[SALESTERRITORY].[TerritoryID] |  |  |  | [Sales].[SalesOrderHeader] |
-| sstselect | [SALES].[SALESTERRITORY].[TerritoryID] | NA | NA |  |  |  |  |  | inserted |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlrollback |  |  |  |  |  |  |  |  |  |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
 

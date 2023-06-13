@@ -104,9 +104,5 @@ Scenario: Calculate stock level for a non-existent ProductID
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstselect | [PRODUCTION].[PRODUCTINVENTORY].[Quantity] | NA | NA |  | [PRODUCTION].[PRODUCTINVENTORY].[ProductID], [PRODUCTION].[PRODUCTINVENTORY].[LocationID] |  |  |  | [Production].[ProductInventory] |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
+| SELECT | [PRODUCTION].[PRODUCTINVENTORY].[Quantity] | NA | NA |  | [PRODUCTION].[PRODUCTINVENTORY].[ProductID], [PRODUCTION].[PRODUCTINVENTORY].[LocationID] |  |  |  | [Production].[ProductInventory] |
 

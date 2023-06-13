@@ -120,16 +120,4 @@ And the TransactionDate should be the current date
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstinsert | NA | NA | [ProductID], [ReferenceOrderID], [TransactionType], [TransactionDate], [Quantity] | NA | NA |  |  |  | [Production].[TransactionHistory] |
-| sstselect | [PRODUCTION].[WORKORDER].[ProductID], [PRODUCTION].[WORKORDER].[WorkOrderID], [PRODUCTION].[WORKORDER].[OrderQty] | NA | NA |  |  |  |  |  | inserted |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlrollback |  |  |  |  |  |  |  |  |  |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
 

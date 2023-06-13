@@ -152,18 +152,9 @@ Scenario: New Purchase Order Detail is inserted
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstinsert | NA | NA | [ProductID], [ReferenceOrderID], [ReferenceOrderLineID], [TransactionType], [TransactionDate], [Quantity], [ActualCost] | NA | NA |  |  |  | [Production].[TransactionHistory] |
-| sstselect | [ProductID], [PurchaseOrderDetailID], [PurchaseOrderID], [UnitPrice], [OrderQty] | NA | NA | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID], [PurchaseOrderID] |  |  |  |  | [Purchasing].[PurchaseOrderHeader], inserted |
-| sstupdate | NA | [Purchasing].[PurchaseOrderHeader].[SubTotal] | NA |  | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID] |  |  |  | [Purchasing].[PurchaseOrderHeader] |
-| sstselect | [PURCHASING].[PURCHASEORDERDETAIL].[LineTotal] | NA | NA |  | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID], [PURCHASING].[PURCHASEORDERDETAIL].[PurchaseOrderID] |  |  |  | [Purchasing].[PurchaseOrderDetail] |
-| sstselect | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID] | NA | NA |  |  |  |  |  | inserted |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlrollback |  |  |  |  |  |  |  |  |  |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
+| INSERT | NA | NA | [ProductID], [ReferenceOrderID], [ReferenceOrderLineID], [TransactionType], [TransactionDate], [Quantity], [ActualCost] | NA | NA |  |  |  | [Production].[TransactionHistory] |
+| SELECT | [ProductID], [PurchaseOrderDetailID], [PurchaseOrderID], [UnitPrice], [OrderQty] | NA | NA | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID], [PurchaseOrderID] |  |  |  |  | [Purchasing].[PurchaseOrderHeader], inserted |
+| UPDATE | NA | [Purchasing].[PurchaseOrderHeader].[SubTotal] | NA |  | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID] |  |  |  | [Purchasing].[PurchaseOrderHeader] |
+| SELECT | [PURCHASING].[PURCHASEORDERDETAIL].[LineTotal] | NA | NA |  | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID], [PURCHASING].[PURCHASEORDERDETAIL].[PurchaseOrderID] |  |  |  | [Purchasing].[PurchaseOrderDetail] |
+| SELECT | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID] | NA | NA |  |  |  |  |  | inserted |
 

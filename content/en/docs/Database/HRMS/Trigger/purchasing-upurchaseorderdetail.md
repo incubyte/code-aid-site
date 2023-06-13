@@ -187,20 +187,4 @@ Feature: Update Purchase Order Detail
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstinsert | NA | NA | [ProductID], [ReferenceOrderID], [ReferenceOrderLineID], [TransactionType], [TransactionDate], [Quantity], [ActualCost] | NA | NA |  |  |  | [Production].[TransactionHistory] |
-| sstselect | [ProductID], [PurchaseOrderDetailID], [PurchaseOrderID], [UnitPrice], [OrderQty] | NA | NA | [PURCHASING].[PURCHASEORDERDETAIL].[PurchaseOrderID], [PurchaseOrderID] |  |  |  |  | inserted, [Purchasing].[PurchaseOrderDetail] |
-| sstupdate | NA | [Purchasing].[PurchaseOrderHeader].[SubTotal] | NA |  | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID] |  |  |  | [Purchasing].[PurchaseOrderHeader] |
-| sstselect | [PURCHASING].[PURCHASEORDERDETAIL].[LineTotal] | NA | NA |  | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID], [PURCHASING].[PURCHASEORDERDETAIL].[PurchaseOrderID] |  |  |  | [Purchasing].[PurchaseOrderDetail] |
-| sstselect | [PURCHASING].[PURCHASEORDERHEADER].[PurchaseOrderID] | NA | NA |  |  |  |  |  | inserted |
-| sstupdate | NA | [Purchasing].[PurchaseOrderDetail].[ModifiedDate] | NA |  | [PURCHASING].[PURCHASEORDERDETAIL].[PurchaseOrderDetailID], [PURCHASING].[PURCHASEORDERDETAIL].[PurchaseOrderID] |  |  |  | inserted, [Purchasing].[PurchaseOrderDetail] |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlrollback |  |  |  |  |  |  |  |  |  |
-| sstmssqlexec |  |  |  |  |  |  |  |  |  |
 

@@ -140,12 +140,4 @@ Feature: Maintain Person Demographics data
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstmssqldeclare |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstmssqlreturn |  |  |  |  |  |  |  |  |  |
-| sstmssqlset |  |  |  |  |  |  |  |  |  |
-| sstmssqlif |  |  |  |  |  |  |  |  |  |
-| sstupdate | NA | [Person].[Person].[Demographics] | NA |  | [PERSON].[PERSON].[Demographics], [PERSON].[PERSON].[BusinessEntityID] |  |  |  | inserted, [Person].[Person] |
-| sstupdate | NA |  | NA |  | [PERSON].[PERSON].[Demographics], [PERSON].[PERSON].[BusinessEntityID] |  |  |  | inserted, [Person].[Person] |
 

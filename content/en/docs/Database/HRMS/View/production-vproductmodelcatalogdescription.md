@@ -154,5 +154,5 @@ WHERE [CatalogDescription] IS NOT NULL;
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstselect | [PRODUCTION].[PRODUCTMODEL].[Name], [PRODUCTION].[PRODUCTMODEL].[rowguid], [PRODUCTION].[PRODUCTMODEL].[ProductModelID], [PRODUCTION].[PRODUCTMODEL].[ModifiedDate] | NA | NA |  | [PRODUCTION].[PRODUCTMODEL].[CatalogDescription] |  |  |  | [Production].[ProductModel] |
+| SELECT | [PRODUCTION].[PRODUCTMODEL].[Name], [PRODUCTION].[PRODUCTMODEL].[rowguid], [PRODUCTION].[PRODUCTMODEL].[ProductModelID], [PRODUCTION].[PRODUCTMODEL].[ModifiedDate] | NA | NA |  | [PRODUCTION].[PRODUCTMODEL].[CatalogDescription] |  |  |  | [Production].[ProductModel] |
 

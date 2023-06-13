@@ -116,5 +116,5 @@ Feature: Retrieve state, province, and country information
 
 | Statement Type | Select Columns | Set Columns | Insert Columns | Joins Columns | Where Columns | Order By Columns | Group By Columns | Having Columns | Table Name |
 |---|---|---|---|---|---|---|---|---|---|
-| sstselect | [PERSON].[STATEPROVINCE].[StateProvinceCode], [PERSON].[COUNTRYREGION].[Name], [PERSON].[STATEPROVINCE].[IsOnlyStateProvinceFlag], [PERSON].[STATEPROVINCE].[StateProvinceID], [PERSON].[STATEPROVINCE].[TerritoryID], [PERSON].[COUNTRYREGION].[CountryRegionCode], [PERSON].[STATEPROVINCE].[Name] | NA | NA | [PERSON].[COUNTRYREGION].[CountryRegionCode], [PERSON].[STATEPROVINCE].[CountryRegionCode] |  |  |  |  | [Person].[CountryRegion], [Person].[StateProvince] |
+| SELECT | [PERSON].[STATEPROVINCE].[StateProvinceCode], [PERSON].[COUNTRYREGION].[Name], [PERSON].[STATEPROVINCE].[IsOnlyStateProvinceFlag], [PERSON].[STATEPROVINCE].[StateProvinceID], [PERSON].[STATEPROVINCE].[TerritoryID], [PERSON].[COUNTRYREGION].[CountryRegionCode], [PERSON].[STATEPROVINCE].[Name] | NA | NA | [PERSON].[COUNTRYREGION].[CountryRegionCode], [PERSON].[STATEPROVINCE].[CountryRegionCode] |  |  |  |  | [Person].[CountryRegion], [Person].[StateProvince] |
 
