@@ -1,0 +1,37 @@
+version: "3"
+services:
+  code-aid:
+    image: code-aid:latest
+    environment:
+      - INPUT_DIR=/input
+      - OUTPUT_DIR=/code-aid-parser-output
+      - args_include=*.java
+      - FILTER=*.java
+    volumes:
+      - /home/chad/dev/Incubyte/code-aid:/input
+      - /home/chad/dev/Incubyte/code-aid-output:/code-aid-output
+    network_mode: "host"
+    working_dir: /code-aid-parser
+    command:
+      - sh
+      - -c
+      - |
+        node src/main.js &&
+        cd /app &&
+        java -jar app.jar
+  code-aid-db:
+    image: code-aid-db:latest
+    volumes:
+      - /home/chad/dev/Incubyte/code-aid-db-output:/code-aid-db/markdownOutput
+    network_mode: "host"
+    working_dir: /code-aid-db
+    command: java -jar app.jar
+  code-aid-site:
+    image: code-aid-site:latest
+    volumes:
+      - /home/chad/dev/Incubyte/code-aid-output:/app/content/en/docs/Code
+      - /home/chad/dev/Incubyte/code-aid-db-output:/app/content/en/docs/Database
+    working_dir: /app
+    ports:
+      - 1313:1313
+    command: watch -n 10 hugo server --bind=0.0.0.0
