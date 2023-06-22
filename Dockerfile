@@ -25,8 +25,5 @@ WORKDIR /app
 # Copy the contents of your local Hugo project into the container
 COPY . .
 
-# Expose the default Hugo server port (1313) for external access
-EXPOSE 1313
-
 # Start the Hugo server when the container is run
-CMD ["hugo", "server"]
+CMD ["hugo", "server", "--bind=0.0.0.0"]
