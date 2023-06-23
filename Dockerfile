@@ -1,13 +1,28 @@
-# Use Alpine Linux as the base image
-FROM alpine:latest
+FROM code-aid:latest AS codeaid
+FROM code-aid-db:latest AS codeaiddb
 
-# Install required dependencies
-RUN apk add --no-cache \
-  curl \
-  git
+FROM node:18
+
+#code aid
+ENV INPUT_DIR /input
+ENV OUTPUT_DIR /code-aid-parser-output
+
+COPY --from=codeaid /code-aid-parser ./code-aid-parser
+COPY --from=codeaid /code-aid ./code-aid
+WORKDIR /code-aid-parser
+
+WORKDIR /code-aid
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jdk
+
+#code aid db
+WORKDIR /
+COPY --from=codeaiddb /code-aid-db ./code-aid-db
+
+#code aid site
 
 # Install Go
-RUN apk add --no-cache go
+RUN apt-get install -y golang
 
 # Set the Go environment variables
 ENV GOPATH /go
@@ -20,10 +35,7 @@ RUN curl -L -o /tmp/hugo.tar.gz https://github.com/gohugoio/hugo/releases/downlo
   rm -rf /tmp/hugo.tar.gz
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /code-aid-site
 
 # Copy the contents of your local Hugo project into the container
 COPY . .
-
-# Start the Hugo server when the container is run
-CMD ["hugo", "server", "--bind=0.0.0.0"]
