@@ -7,7 +7,7 @@ services:
     ports:
       - 8529:8529
     volumes:
-      - /home/chad/dev/Incubyte/code-aid-db-output:/var/lib/arangodb3
+      - C:\Users\DELL\Desktop\arangodbbackup:/var/lib/arangodb3
   code-aid-site:
     depends_on:
       - arangodb
@@ -29,6 +29,8 @@ services:
       - -c
       - |
         node src/main.js &&
+        cd /code-aid-site &&
+        ./wait-for-arangodb.sh arangodb 8529 root test123 &&
         cd /code-aid &&
         java -jar app.jar &&
         cd /code-aid-db &&
