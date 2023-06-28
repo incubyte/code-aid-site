@@ -1,8 +1,8 @@
 ---
-categories: [ "Examples", "Placeholders" ]
-tags: [ "test","docs" ]
-title: "GlowStone"
-linkTitle: "GlowStone"
+categories: ["Examples", "code"]
+tags: ["code","docs"]
+title: "Glowstone"
+linkTitle: "Glowstone"
 weight: -2
 description: >
   What does your user need to know to try your project?
@@ -24,9 +24,20 @@ checked
 Build Tools
 {{</sectionHeadingWithTooltip>}}
 
-{{< customCheckBox "Build tools used: Gradle (Kotlin)" >}}
-checked
-{{< /customCheckBox>}}
+{{< customCheckBox "Build tools used: UNKNOWN" >}}
+
+{{< /customCheckBox>}}{{<whyItMatters>}}
+Build tools are a set of programs that automate the creation of executable applications from source code. Building incorporates compiling, linking, and packaging the code into a usable or executable form. Essentially, build tools take care of the process that transforms your source code into a version of the software that can be executed. Examples of build tools include Maven, Gradle, and npm.
+
+###### Why it matters:
+- **Standardization and Automation:** Build tools help standardize the process of building, testing, and deploying software. They can automate repetitive tasks, reduce errors, and increase productivity.
+- **Dependency Management:** Build tools handle dependencies for you, making sure that the correct versions of libraries and frameworks are used.
+- **Integration:** Build tools often integrate with testing frameworks and deployment tools, facilitating continuous integration and continuous deployment (CI/CD) practices.
+
+###### Quick Start:
+Consider using Maven (for Java projects) or npm (for JavaScript projects) as a starting point. These tools will help you automate your build processes and manage dependencies effectively. Learn more in the [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/index.html) or [npm Docs](https://docs.npmjs.com/about-npm/).
+{{</whyItMatters>}}
+
 
 {{<sectionHeadingWithTooltip "We determine the containerization tool your project uses by looking for specific configuration files in the root directory. For instance, any file with Dockerfile in the name suggests Docker, files with .lxc extension suggests LXC/LXD, Podfile indicates Podman, and so on. If none of these files are found, the containerization tool will be marked as unknown">}}
 Containerization
@@ -50,17 +61,37 @@ Docker is the most popular tool for containerization. Get started by creating a 
 Continuous Integration/Continuous Deployment (CI/CD)
 {{</sectionHeadingWithTooltip>}}
 
-{{< customCheckBox "CI/CD configuration present: GitHub Actions" >}}
-checked
-{{< /customCheckBox>}}
+{{< customCheckBox "CI/CD configuration present: UNKNOWN" >}}
+
+{{< /customCheckBox>}}{{<whyItMatters>}}
+Continuous Integration/Continuous Deployment (CI/CD) tools are a crucial part of modern software development practices. These tools automate the steps in the software release process, such as integration, testing, and deployment. By using CI/CD tools, developers can frequently merge code changes into a central repository where builds and tests are run. Popular CI/CD tools include Jenkins, Travis CI, CircleCI, and GitLab CI/CD.
+
+- **Automated Testing and Deployment:** CI/CD tools automate the process of testing and deploying your code. This reduces the risk of human error, and ensures that your application is always running the latest, most stable version of your code.
+- **Rapid Feedback:** With CI/CD, you get rapid feedback on any changes you make. If a change breaks something, you'll know immediately, and can fix the issue before it reaches the production environment.
+- **Improved Collaboration:** CI/CD tools help teams work together more efficiently. Since all changes are tested and deployed automatically, teams can focus on writing great code, rather than manually managing the release process.
+
+###### Quick Start:
+Jenkins is a popular open-source CI/CD tool that's worth considering. It's highly customizable and supports a wide range of plugins. Get started with [Jenkins](https://www.jenkins.io/doc/book/getting-started/) to automate your build, test, and deployment processes.
+{{</whyItMatters>}}
+
 
 {{<sectionHeadingWithTooltip "This service looks for the presence of tests in your codebase by scanning for file patterns that typically denote tests. Common patterns include names containing 'Test', 'test', 'Spec', 'spec', 'Should', 'should' and so on. These patterns are sought in all directories of your project. If such files are detected, it indicates that your project likely has a testing mechanism in place.">}}
 Testing
 {{</sectionHeadingWithTooltip>}}
 
 {{< customCheckBox "Testing" >}}
-checked
-{{< /customCheckBox>}}
+
+{{< /customCheckBox>}}{{<whyItMatters>}}
+Software testing is the process of evaluating a software item to detect differences between given input and expected output. Testing assesses the quality of the product and ensures that the software is error-free, reliable, and performs effectively. It can be automated or carried out manually and can be as simple as a few lines of code or as complex as a suite of extensive programs.
+
+- **Quality Assurance:** Testing helps ensure that your code functions as expected, and catches bugs or errors before they reach production.
+- **Refactoring Confidence:** With a good test suite, you can refactor or add features with the confidence that you haven't inadvertently broken existing functionality.
+- **Documentation:** Tests can serve as documentation by clearly showing what functionality is expected from the code.
+
+###### Quick Start:
+Different languages and frameworks often have their own set of testing tools. For example, JUnit for Java, pytest for Python, Jest for JavaScript, etc. Consider setting up unit tests, integration tests, and end-to-end tests to have a comprehensive testing strategy. Explore the testing tools and libraries for your specific language or framework to get started.
+{{</whyItMatters>}}
+
 
 {{<sectionHeadingWithTooltip "We look for migration scripts in your project by searching for specific file patterns within your codebase. Common patterns include directories labeled 'migrations', 'Migrations', 'EFMigrations', or 'DbMigrations', and files with names ending in 'Migration' with various language-specific file extensions like '.java', '.py', '.rb', '.js', '.php', '.go', '.r', or '.cob'. If files matching these patterns are found, we consider that your project uses migration scripts">}}
 Database Migrations
@@ -85,8 +116,17 @@ Database Schema Documentation
 {{</sectionHeadingWithTooltip>}}
 
 {{< customCheckBox "Database schema documentation present" >}}
-checked
-{{< /customCheckBox>}}
+
+{{< /customCheckBox>}}{{<whyItMatters>}}
+A database schema is a blueprint or structure that represents the logical configuration of the entire database. It defines how data is organized and how relationships are enforced in the data. The schema lays out the tables, fields, relationships, indexes, and views of the database. It is essential in determining how data is stored, organized, and manipulated.
+
+- **Data Integrity:** Defining a schema for your database helps to ensure data integrity by imposing rules on the data being inserted.
+- **Efficient Queries:** A well-defined schema can make queries more efficient and easier to write.
+- **Clear Structure:** A schema provides a clear structure of the database, making it easier to understand the data and how it relates to other data.
+
+###### Quick Start:
+Most database systems have tools or language features for defining schemas. For example, SQL-based systems often use DDL (Data Definition Language) commands to create and modify schemas. NoSQL databases like MongoDB allow you to define schemas using JavaScript-like syntax. Look into the documentation of your database system to learn more about defining schemas.
+{{</whyItMatters>}}
 
 
 
