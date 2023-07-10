@@ -1,7 +1,8 @@
 {{ define "main" }}
 <section class="row td-search-result">
 <div class="col-12 col-md-8 offset-md-2">
-<h2 class="ml-4">{{ .Title }}</h2>
+<h2 class="mb-4">{{ .Title }}</h2>
+<hr>
 <link href="
 https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css
 " rel="stylesheet">
@@ -27,7 +28,8 @@ const searchResultsDiv = document.querySelector("#search-results");
     const response = await fetch(`http://localhost:3000/embedding?collectionName=code&query=${query}`);
     const data = await response.json();
     const codeList = data.map(o => {
-      return {name: o.payload.name, body: o.payload.code, link: o.payload.link};
+      const strippedCode = (o.payload.code).substring(0,100);
+      return {name: o.payload.name, body: `${strippedCode}`, link: o.payload.link};
     });
     renderSearchResults(codeList);
   }
@@ -38,7 +40,7 @@ const searchResultsDiv = document.querySelector("#search-results");
         result.classList.add("search-result");
         result.innerHTML = `
             <h3><a href="${origin}/docs/code/${code.link}">${code.name}</a></h3>
-            <pre><code class="lang-java">${code.body}</code></pre>
+            <pre><code class="lang-php ml-4">${code.body}<span>\n\t...<span></code></pre>
         `;
         searchResultsDiv.appendChild(result);
     });
