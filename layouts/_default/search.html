@@ -1,7 +1,7 @@
 {{ define "main" }}
 <section class="row td-search-result">
 <div class="col-12 col-md-8 offset-md-2">
-<h2 class="mb-4">{{ .Title }}</h2>
+<h2 class="mb-4" id="title"></h2>
 <hr>
 <link href="
 https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css
@@ -23,25 +23,67 @@ const origin = window.location.origin;
 const params = (new URL(document.location)).searchParams;
 const query = params.get("q");
 const searchResultsDiv = document.querySelector("#search-results");
-    
+const titleDiv = document.querySelector("#title"); 
+titleDiv.innerHTML = `Search results for "${query}"`;   
+
   async function searchResults(query) {
     const response = await fetch(`http://localhost:3000/embedding?collectionName=code&query=${query}`);
     const data = await response.json();
     const codeList = data.map(o => {
-      const strippedCode = (o.payload.code).substring(0,100);
-      return {name: o.payload.name, body: `${strippedCode}`, link: o.payload.link};
+      
+      return {name: o.payload.name, body: o.payload.code, link: o.payload.link};
     });
     renderSearchResults(codeList);
+  }
+
+  function getLines(code) {
+    return code.split("\n").length;
   }
 
   function renderSearchResults(codeList) {
     codeList.forEach(code => {
         const result = document.createElement("div");
+        result.classList.add("search-result", "card", "mb-2");
+        const preElement = document.createElement("pre");
+        preElement.classList.add("card-body", "p-1");
+        const codeElement = document.createElement("code");
+        codeElement.classList.add("lang-php", "ml-4");
+
+        const fullCode = code.body;
+        const strippedCode = fullCode.substring(0,100);
+        
+        const toggleButton = document.createElement("button");
+        toggleButton.classList.add("btn", "btn-sm", "btn-outline-primary", "mb-2", "d-block", "mx-auto", "w-25");
+        
+        toggleButton.textContent = "show more";
+        toggleButton.addEventListener("click", () => {
+          if (toggleButton.textContent === "show more") {
+            toggleButton.textContent = "show less";
+            codeElement.textContent = fullCode;
+          } else {
+            toggleButton.textContent = "show more";
+            codeElement.textContent = strippedCode;
+          }
+        });
+
+
+        codeElement.classList.add("lang-php", "ml-4");
+        codeElement.textContent = strippedCode;
+        preElement.appendChild(codeElement);
+
+
         result.classList.add("search-result");
+
+        const strippedLink = code.link.split("#")[0];
         result.innerHTML = `
-            <h3><a href="${origin}/docs/code/${code.link}">${code.name}</a></h3>
-            <pre><code class="lang-php ml-4">${code.body}<span>\n\t...<span></code></pre>
+            <div class="mt-3"></div>
+            <p class="bg-white m-auto p-auto"><a href="${origin}/docs/code/${code.link}">${strippedLink}</a></p>
+            <hr/>
         `;
+
+        result.appendChild(preElement);
+        if(getLines(code.body) > 5) result.appendChild(toggleButton);
+
         searchResultsDiv.appendChild(result);
     });
   }
