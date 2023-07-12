@@ -37,7 +37,7 @@ titleDiv.innerHTML = `Search results for <span style="color: blue; font-size: 28
         const preElement = document.createElement("pre");
         preElement.classList.add("card-body", "p-0");
         const codeElement = document.createElement("code");
-        codeElement.classList.add("ml-4", "p-0");
+        codeElement.classList.add("ml-4", "p-0", "my-2");
         
 
         const language = hljs.highlightAuto(code.body).language;
@@ -81,7 +81,7 @@ titleDiv.innerHTML = `Search results for <span style="color: blue; font-size: 28
         });
 
 
-        codeElement.classList.add("lang-php", "ml-4");
+        codeElement.classList.add("ml-4");
         codeElement.textContent = strippedCode;
         preElement.appendChild(codeElement);
 
@@ -90,9 +90,9 @@ titleDiv.innerHTML = `Search results for <span style="color: blue; font-size: 28
 
         const strippedLink = code.link.split("#")[0];
         result.innerHTML = `
-            <div class="mt-3"></div>
-            <p class="bg-white mx-3 p-0 mb-0"><a href="${origin}/docs/code/${code.link}">${strippedLink}</a></p>
-            <hr/>
+            <div class="py-1 border-bottom border-light bg-light">
+            <p class=" mx-3 p-0 mb-0"><a href="${origin}/docs/code/${code.link}">${strippedLink}</a></p>
+            </div>
         `;
 
         result.appendChild(preElement);
@@ -121,6 +121,12 @@ titleDiv.innerHTML = `Search results for <span style="color: blue; font-size: 28
   .toggle-button {
     font-size: 12px;
     color: #b9bce1;
+  }
+  .border-light {
+    border-color: rgba(0, 0, 0, 0.125) !important;
+  }
+  .bg-light {
+    background-color: #f5f4f4 !important;
   }
 </style>
 
