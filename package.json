@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/d3": "^7.4.0",
     "autoprefixer": "^10.4.0",
-    "postcss": "^8.3.7",
+    "postcss": "^8.4.26",
     "postcss-cli": "^9.0.2",
     "ts-loader": "^9.4.3",
     "webpack-cli": "^5.1.3",
