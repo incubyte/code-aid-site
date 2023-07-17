@@ -1,7 +1,12 @@
 <input type="search" id="nlp-search" class="form-control td-search-input" placeholder='{{ T "ui_search" }}' aria-label="{{ T "ui_search" }}" autocomplete="off">
 
-<script>    
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('q');
+
     const nlpInput = document.querySelector("#nlp-search");
+    nlpInput.value = searchParam;
+    
     nlpInput.addEventListener('keydown', (event) => {
         if( event.keyCode === 13 ) {
             // get the search term
