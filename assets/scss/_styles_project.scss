@@ -60,11 +60,12 @@
 // prevent overflow of long names in sidebar
 // --------------------------------------------------
 .td-sidebar-nav__section > ul {
-  overflow-wrap: break-word;
+  overflow-wrap: nowrap;
 }
 
 .td-sidebar {
   padding-bottom: 0.5rem;
+  text-wrap: nowrap !important;
 
   ul ul {
       padding-left: 0px !important; /* Adjust as needed */
