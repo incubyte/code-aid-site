@@ -590,7 +590,7 @@ if ( ! function_exists('redirect'))
 
 
 ## Code block 1
-#### Code Complexity: 448
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url` function is used to create a local URL based on the basepath. It takes an optional `$uri` parameter which can be a string or an array of segments. It also takes an optional `$protocol` parameter which specifies the protocol to use in the URL. If no protocol is specified, the function will use the protocol specified in the `config.php` file. The function returns the generated URL as a string.
 

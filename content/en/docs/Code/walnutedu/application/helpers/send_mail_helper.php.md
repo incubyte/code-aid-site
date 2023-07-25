@@ -709,7 +709,7 @@ class Send_mail_helper
 
 
 ## send_mail
-#### Code Complexity: 761
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 The `send_mail` function is used to send emails to multiple recipients. It supports different email vendors such as SendGrid, Mailgun, SMTP, and AWS SES. The function first checks the email vendor selected and includes the necessary vendor-specific files. It then determines the server host name and includes the appropriate vendor-specific files based on the host name. Next, it checks the mail IDs provided and prepares the BCC and CC email addresses if they are present. It then sets the from name and from email address based on the sender array. Finally, it sends the email using the selected email vendor.
 
@@ -1182,7 +1182,7 @@ public static function send_mail($mail_ids, $content_message, $subject, $attachm
 {{< /details >}}
 
 ## get_sender_data
-#### Code Complexity: 38
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to get the sender data from the database based on the provided sender information. It first checks the environment and then retrieves the sender data from the appropriate database table.
 
@@ -1262,7 +1262,7 @@ public static function get_sender_data($sender_info)
 {{< /details >}}
 
 ## fetch_bcc_email
-#### Code Complexity: 22
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to fetch the BCC email address for a given school ID. It first determines the server host name and based on that, it sets the database prefix. Then, it loads the CodeIgniter database library and selects the admin_email_id from the walnut_school_master table for the given school ID. If a result is found, it returns the admin_email_id. Otherwise, it returns NULL.
 
@@ -1324,7 +1324,7 @@ public static function fetch_bcc_email($school_id)
 {{< /details >}}
 
 ## get_aws_data
-#### Code Complexity: 38
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to get AWS data for a given domain. It first determines the database prefix based on the server host name. Then, it checks the CI_VERSION constant to determine if CodeIgniter is being used. If CodeIgniter is being used, it loads the database library, selects all columns from the 'aws_key_secret_master' table where the 'domain_name' column matches the given domain, and returns the result. If CodeIgniter is not being used, it executes a SQL query to select all columns from the 'aws_key_secret_master' table where the 'domain_name' column matches the given domain, and returns the result.
 
@@ -1399,7 +1399,7 @@ public static function get_aws_data($domain)
 {{< /details >}}
 
 ## get_vendorname_data
-#### Code Complexity: 38
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to get vendor name data from the database based on the server host name. It first determines the database prefix based on the server host name. Then, it checks the CI_VERSION constant to determine if CodeIgniter is being used. If CodeIgniter is being used, it loads the database library, selects all columns from the email_vendor_configuration table where the flag is 1, and returns the result. If CodeIgniter is not being used, it executes a SQL query using the mysqli extension and returns the result.
 

@@ -333,7 +333,7 @@ class Missing_documents_controller extends CI_Controller
 
 
 ## __construct
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This is the constructor function for a class. It initializes the class by performing the following tasks:
 
@@ -361,7 +361,7 @@ public function __construct()
 {{< /details >}}
 
 ## index
-#### Code Complexity: 622
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is the index function of a controller. It is responsible for displaying the student list and managing missing documents. It retrieves data from the database and passes it to the view for rendering. The function also handles form submissions and filters the student list based on the selected class, division, document status, and document name.
 
@@ -638,7 +638,7 @@ public function index()
 {{< /details >}}
 
 ## ajax_division_list
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to retrieve the division data based on the class ID provided through an AJAX request. It then loads a view with the retrieved data.
 
@@ -670,7 +670,7 @@ public function ajax_division_list()
 {{< /details >}}
 
 ## document_list
-#### Code Complexity: 15
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function retrieves a list of documents based on the class ID provided. It then processes the data and returns a unique list of document names.
 

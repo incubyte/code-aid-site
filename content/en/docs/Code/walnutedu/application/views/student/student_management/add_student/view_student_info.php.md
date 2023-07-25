@@ -4307,7 +4307,7 @@ title = "view_student_info.php"
 
 
 ## Code block 1
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4321,7 +4321,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 2
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4335,7 +4335,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 3
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4349,7 +4349,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 4
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4363,7 +4363,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 5
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4377,7 +4377,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 6
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4391,7 +4391,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 7
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4405,7 +4405,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 8
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4419,7 +4419,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 9
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4433,7 +4433,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 10
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4447,7 +4447,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 11
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4461,7 +4461,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 12
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4475,7 +4475,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 13
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4489,7 +4489,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 14
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4503,7 +4503,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 15
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4517,7 +4517,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 16
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4531,7 +4531,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 17
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `base_url()` function is a helper function in CodeIgniter that returns the base URL of the application. The base URL is the URL of the root directory of the CodeIgniter installation. It is typically used to generate URLs for links, assets, and other resources.
 
@@ -4542,7 +4542,7 @@ echo base_url();
 {{< /details >}}
 
 ## Code block 18
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `base_url()` function is a helper function in CodeIgniter that returns the base URL of the application. The base URL is the URL of the root directory of the CodeIgniter installation. It is typically used to generate URLs for links, assets, and other resources.
 
@@ -4553,7 +4553,7 @@ echo base_url();
 {{< /details >}}
 
 ## Code block 19
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4567,7 +4567,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 20
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4581,7 +4581,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 21
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4595,7 +4595,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 22
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `site_url()` function returns the URL of the site's homepage. It is a helper function that retrieves the value of the `siteurl` option from the WordPress database and appends any additional path or query parameters specified.
 
@@ -4609,7 +4609,7 @@ echo site_url();
 {{< /details >}}
 
 ## Code block 23
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function echoes the value of the variable $page_title.
 
@@ -4620,7 +4620,7 @@ echo $page_title;
 {{< /details >}}
 
 ## Code block 24
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$page_date` variable is used to display the current date on a web page. It is typically used in PHP templates to dynamically generate the date and display it to the user.
 
@@ -4631,7 +4631,7 @@ echo $page_date;
 {{< /details >}}
 
 ## Code block 25
-#### Code Complexity: 15
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to set the values of three variables based on the value of the `parent_status` property of the `stud_info_array[0]` object. If the `parent_status` is 'both', then the `checked_both` variable is set to 'checked' and the `disabled` variable is set to 'disabled'. If the `parent_status` is 'single_father', then the `checked_father` variable is set to 'checked' and the `disabled` variable is set to 'disabled'. If the `parent_status` is 'single_mother', then the `checked_mother` variable is set to 'checked' and the `disabled` variable is set to 'disabled'.
 
@@ -4651,7 +4651,7 @@ $checked_both = '';$disabled = '';if($stud_info_array[0] ->parent_status == 'bot
 {{< /details >}}
 
 ## Code block 26
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function retrieves the value of the 'lms_id' property from the 'stud_temp_data' object.
 
@@ -4662,7 +4662,7 @@ echo $stud_temp_data->lms_id
 {{< /details >}}
 
 ## Code block 27
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if there is an error message stored in the session flash data. If there is, it displays an alert with the error message.
 
@@ -4683,7 +4683,7 @@ if($this->session->flashdata('error_msg') != NULL) {
 {{< /details >}}
 
 ## Code block 28
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to generate an HTML select option with a default selected value based on the value of the variable $admission_startup_status. If $admission_startup_status is true, the default selected value will be $next_academic_year. Otherwise, the default selected value will be empty.
 
@@ -4704,7 +4704,7 @@ $current_selected = 'selected';if ($admission_startup_status)
 {{< /details >}}
 
 ## Code block 29
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$current_selected` variable stores the currently selected value. It is used to keep track of the selected value in a dropdown or select input field.
 
@@ -4715,7 +4715,7 @@ echo $current_selected;
 {{< /details >}}
 
 ## Code block 30
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The variable `academic_year` stores the current academic year. It is used to keep track of the current year in an educational institution. The value of `academic_year` is typically a string representing the year, such as '2021-2022'.
 
@@ -4726,7 +4726,7 @@ echo $academic_year;
 {{< /details >}}
 
 ## Code block 31
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The variable `academic_year` stores the current academic year. It is used to keep track of the current year in an educational institution. The value of `academic_year` is typically a string representing the year, such as '2021-2022'.
 
@@ -4737,7 +4737,7 @@ echo $academic_year;
 {{< /details >}}
 
 ## Code block 32
-#### Code Complexity: 18
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to generate an HTML option element for the academic year. It checks if the admission startup status is true and if the selected academic year is equal to the next academic year. If both conditions are true, it sets the 'next_selected' variable to 'selected'. Then, it generates an option element with the value and text set to the next academic year, and the 'next_selected' variable is used to add the 'selected' attribute to the option element. After that, it checks if the selected academic year is equal to the current academic year. If true, it sets the 'current_selected' variable to 'selected'.
 
@@ -4760,7 +4760,7 @@ if ($admission_startup_status)
 {{< /details >}}
 
 ## Code block 33
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$current_selected` variable stores the currently selected value. It is used to keep track of the selected value in a dropdown or select input field.
 
@@ -4771,7 +4771,7 @@ echo $current_selected;
 {{< /details >}}
 
 ## Code block 34
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The variable `academic_year` stores the current academic year. It is used to keep track of the current year in an educational institution. The value of `academic_year` is typically a string representing the year, such as '2021-2022'.
 
@@ -4782,7 +4782,7 @@ echo $academic_year;
 {{< /details >}}
 
 ## Code block 35
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The variable `academic_year` stores the current academic year. It is used to keep track of the current year in an educational institution. The value of `academic_year` is typically a string representing the year, such as '2021-2022'.
 
@@ -4793,7 +4793,7 @@ echo $academic_year;
 {{< /details >}}
 
 ## Code block 36
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is checking if the variable `$stud_temp_data` is set. If it is set, it will display a label with the class `label_color` and a span with the class `imp` containing an asterisk. If the variable is not set, it will display a label without any classes and a span with the class `imp` containing an asterisk.
 
@@ -4814,7 +4814,7 @@ if (isset($stud_temp_data))
 {{< /details >}}
 
 ## Code block 37
-#### Code Complexity: 21
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a part of a PHP script that generates a dropdown list of class options. It checks if the variable $class_rows is not NULL and then iterates over each element in the $class_rows array. For each element, it checks if the value of the 'admission_to' property in the $stud_temp_data object is equal to the 'class_id' property in the current $row_class object. If they are equal, it sets the $class_selected variable to 'selected'. It then checks if the 'class_id' property in the current $row_class object is not in the array [20, 21, 22]. If it is not in the array, it generates an HTML option element with the value attribute set to the 'class_id' property and the inner text set to the 'class_name' property in the current $row_class object. Finally, it echoes the generated HTML option element.
 
@@ -4846,7 +4846,7 @@ if ($class_rows != NULL)
 {{< /details >}}
 
 ## Code block 38
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is checking if the variable $stud_temp_data is set. If it is set, it will display a label with the text 'Division: *' in a specific color. If it is not set, it will display a label with the text 'Division: *' in the default color.
 
@@ -4867,7 +4867,7 @@ if (isset($stud_temp_data))
 {{< /details >}}
 
 ## Code block 39
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the variable `$division_rows` is not null and if it has more than 0 rows. If both conditions are true, it iterates over each row in `$division_rows` and prints an HTML `<option>` element with the value and name of each division.
 
@@ -4884,7 +4884,7 @@ if ($division_rows != NULL && $division_rows -> num_rows() > 0)
 {{< /details >}}
 
 ## Code block 40
-#### Code Complexity: 21
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to generate an HTML option element for a select dropdown. It checks the value of the variable $admission_startup_status and if it is true, it adds the option 'New student' to the dropdown. The selected attribute is added to the option if the value of $student_api_data['student_status'] is 'new-student'.
 
@@ -4904,7 +4904,7 @@ if ($admission_startup_status)
 {{< /details >}}
 
 ## Code block 41
-#### Code Complexity: 9
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the 'student_status' key exists in the 'student_api_data' array. If it exists, it checks if the value is equal to 'current-student'. If it is, it returns the string 'selected=selected', otherwise it returns an empty string.
 
@@ -4918,7 +4918,7 @@ echo isset($student_api_data['student_status']) ? ($student_api_data['student_st
 {{< /details >}}
 
 ## Code block 42
-#### Code Complexity: 18
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks the value of the variable $admission_startup_status. If the value is true, it checks if the value of $sel_academic_year is equal to $next_academic_year. If it is, it sets the variable $new_selected to 'selected'. Then, it checks if the value of $sel_academic_year is equal to $academic_year. If it is, it sets the variable $current_sta_selected to 'selected'. Finally, it generates an HTML option element with the value '1' and the text 'New student', and adds the $new_selected variable to the option element if it is set.
 
@@ -4945,7 +4945,7 @@ if ($admission_startup_status)
 {{< /details >}}
 
 ## Code block 43
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$current_sta_selected` variable is used to store the currently selected value from a dropdown list or radio button. It is typically used in PHP code to retrieve the selected value and perform further actions based on that value.
 
@@ -4956,7 +4956,7 @@ echo $current_sta_selected;
 {{< /details >}}
 
 ## Code block 44
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `student_last_school_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `student_last_school_name`. Otherwise, it returns `NULL`.
 
@@ -4967,7 +4967,7 @@ echo isset($stud_temp_data->student_last_school_name) ? $stud_temp_data->student
 {{< /details >}}
 
 ## Code block 45
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to display a label for the KG Shift for 1st Standard. If the variable $stud_temp_data is set, the label will have a class 'label_color'. Otherwise, the label will not have any class.
 
@@ -4987,7 +4987,7 @@ if (isset($stud_temp_data))
 {{< /details >}}
 
 ## Code block 46
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `stud_f_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `stud_f_name`, otherwise it returns `NULL`.
 
@@ -5013,7 +5013,7 @@ echo isset($stud_temp_data->stud_f_name) ? $stud_temp_data->stud_f_name : NULL;
 {{< /details >}}
 
 ## Code block 47
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `stud_l_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `stud_l_name`, otherwise it returns `NULL`.
 
@@ -5024,7 +5024,7 @@ echo isset($stud_temp_data->stud_l_name) ? $stud_temp_data->stud_l_name : NULL;
 {{< /details >}}
 
 ## Code block 48
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `adhar_card_no` exists in the object `$stud_temp_data`. If it exists, it returns the value of `adhar_card_no`, otherwise it returns `NULL`.
 
@@ -5035,7 +5035,7 @@ echo isset($stud_temp_data->adhar_card_no) ? $stud_temp_data->adhar_card_no : NU
 {{< /details >}}
 
 ## Code block 49
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of gender options. It checks if the current gender option is selected based on the value stored in the `$stud_temp_data->gender` variable. If the current gender option is selected, it adds the 'selected' attribute to the `<option>` tag. Finally, it outputs the gender option as an HTML `<option>` tag.
 
@@ -5061,7 +5061,7 @@ foreach ($gender as $key => $val_gender)
 {{< /details >}}
 
 ## Code block 50
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function generates a dropdown list of nationalities. It iterates over an array of nationalities and creates an option element for each nationality. If a nationality is selected, it adds the 'selected' attribute to the option element. The function then returns the generated HTML code for the dropdown list.
 
@@ -5087,7 +5087,7 @@ foreach ($nationality as $key => $national_val)
 {{< /details >}}
 
 ## Code block 51
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `other_nationality` exists in the object `$stud_temp_data`. If it exists, it returns the value of `other_nationality`, otherwise it returns `NULL`.
 
@@ -5098,7 +5098,7 @@ echo isset($stud_temp_data->other_nationality) ? $stud_temp_data->other_national
 {{< /details >}}
 
 ## Code block 52
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of mother tongues. For each mother tongue, it checks if it matches the mother tongue stored in the `$stud_temp_data` object. If there is a match, it sets the `$mothertounge_selected` variable to 'selected'. It then generates an HTML `<option>` element with the mother tongue as the value and text. Finally, it echoes the generated HTML.
 
@@ -5126,7 +5126,7 @@ foreach ($mothertoungue_array as $key => $mothertoungue_val)
 {{< /details >}}
 
 ## Code block 53
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `other_mother_tongue` exists in the object `$stud_temp_data`. If it exists, it returns the value of `other_mother_tongue`, otherwise it returns `NULL`.
 
@@ -5137,7 +5137,7 @@ echo isset($stud_temp_data->other_mother_tongue) ? $stud_temp_data->other_mother
 {{< /details >}}
 
 ## Code block 54
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to generate a dropdown list of religions. It iterates over the `$religion` array and for each key-value pair, it checks if the `religion` property of `$stud_temp_data` is equal to the current key. If it is, the `selected` attribute is added to the `<option>` tag. Finally, the key and value are used to generate an `<option>` tag.
 
@@ -5158,7 +5158,7 @@ ksort($religion);foreach ($religion as $key => $religion_val)
 {{< /details >}}
 
 ## Code block 55
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `other_religion` exists in the object `$stud_temp_data`. If it exists, it returns the value of `other_religion`, otherwise it returns `NULL`.
 
@@ -5169,7 +5169,7 @@ echo isset($stud_temp_data->other_religion) ? $stud_temp_data->other_religion : 
 {{< /details >}}
 
 ## Code block 56
-#### Code Complexity: 39
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of categories. For each category, it checks if it matches the selected category in the `$stud_temp_data` object. If there is a match, it sets the `$category_selected` variable to 'selected'. Finally, it generates an HTML `<option>` element with the category key as the value and the category value as the displayed text.
 
@@ -5218,7 +5218,7 @@ foreach ($category as $key => $category_val)
 {{< /details >}}
 
 ## Code block 57
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `other_category` exists in the object `$stud_temp_data`. If it exists, it returns the value of `other_category`, otherwise it returns `NULL`.
 
@@ -5229,7 +5229,7 @@ echo isset($stud_temp_data->other_category) ? $stud_temp_data->other_category : 
 {{< /details >}}
 
 ## Code block 58
-#### Code Complexity: 25
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to generate a dropdown list of caste options. It iterates over the 'caste' array and for each element, it checks if it matches the selected caste value. If it does, it sets the 'selected' attribute for that option. Finally, it generates the HTML code for the dropdown list.
 
@@ -5267,7 +5267,7 @@ ksort($caste);foreach ($caste as $key => $caste_val)
 {{< /details >}}
 
 ## Code block 59
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `other_caste` exists in the object `stud_temp_data`. If it exists, it returns the value of `other_caste`, otherwise it returns `NULL`.
 
@@ -5278,7 +5278,7 @@ echo isset($stud_temp_data->other_caste) ? $stud_temp_data->other_caste : NULL;
 {{< /details >}}
 
 ## Code block 60
-#### Code Complexity: 18
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to generate a dropdown list of subcastes. It iterates over the $subcaste array and for each subcaste, it checks if it matches the selected subcaste stored in $stud_temp_data->subcaste. If there is a match, the option is marked as selected. Finally, it generates an HTML option element for each subcaste.
 
@@ -5309,7 +5309,7 @@ ksort($subcaste);foreach ($subcaste as $key => $subcaste_val)
 {{< /details >}}
 
 ## Code block 61
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `other_subcaste` exists in the object `$stud_temp_data`. If it exists, it returns the value of `other_subcaste`, otherwise it returns `NULL`.
 
@@ -5320,7 +5320,7 @@ echo isset($stud_temp_data->other_subcaste) ? $stud_temp_data->other_subcaste : 
 {{< /details >}}
 
 ## Code block 62
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is checking if the variable `$stud_temp_data` is set. If it is set, it will display a label with the text 'Date Of Birth: *' and a CSS class 'label_color'. If it is not set, it will display a label with the text 'Date Of Birth: *'.
 
@@ -5340,7 +5340,7 @@ if (isset($stud_temp_data))
 {{< /details >}}
 
 ## Code block 63
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the variable `$stud_temp_data->b_date` is set. If it is set, it converts the value to a date format using the `date` function and returns it. If it is not set, it returns `NULL`.
 
@@ -5366,7 +5366,7 @@ echo (isset($stud_temp_data->b_date))?date('d-m-Y', strtotime($stud_temp_data->b
 {{< /details >}}
 
 ## Code block 64
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `b_city` exists in the object `$stud_temp_data`. If it exists, it returns the value of `b_city`, otherwise it returns `NULL`.
 
@@ -5377,7 +5377,7 @@ echo isset($stud_temp_data->b_city) ? $stud_temp_data->b_city : NULL;
 {{< /details >}}
 
 ## Code block 65
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the `mother_mobile_no` property of the `$stud_temp_data` object is not empty. If it is not empty, it assigns the value of `mother_mobile_no` to the `stud_mobile_no` variable. Otherwise, it assigns the value of `father_mobile_no` to the `stud_mobile_no` variable.
 
@@ -5393,7 +5393,7 @@ if ($stud_temp_data->mother_mobile_no != '')
 {{< /details >}}
 
 ## Code block 66
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the variable $stud_mobile_no is set. If it is set, it trims any leading zeros from the value and returns it. If $stud_mobile_no is not set, it returns NULL.
 
@@ -5408,7 +5408,7 @@ echo isset($stud_mobile_no) ? ltrim($stud_mobile_no, '0') : NULL;
 {{< /details >}}
 
 ## Code block 67
-#### Code Complexity: 49
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of blood groups and generates HTML options for a select dropdown. It also checks if the current blood group is selected and sets the 'selected' attribute accordingly.
 
@@ -5466,7 +5466,7 @@ foreach ($blood_group as $key => $stud_bloodgroup_val)
 {{< /details >}}
 
 ## Code block 68
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `bld_house` exists in the object `$stud_temp_data`. If it exists, it returns the value of `bld_house`. If it doesn't exist, it returns `NULL`.
 
@@ -5477,7 +5477,7 @@ echo isset($stud_temp_data->bld_house) ? $stud_temp_data->bld_house : NULL;
 {{< /details >}}
 
 ## Code block 69
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `sub_area` exists in the object `$stud_temp_data`. If it exists, it returns the value of `sub_area`, otherwise it returns `NULL`.
 
@@ -5488,7 +5488,7 @@ echo isset($stud_temp_data->sub_area) ? $stud_temp_data->sub_area : NULL;
 {{< /details >}}
 
 ## Code block 70
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `pin` exists in the object `$stud_temp_data`. If it exists, it returns the value of `pin`. If it doesn't exist, it returns `NULL`.
 
@@ -5502,7 +5502,7 @@ echo isset($stud_temp_data->pin) ? $stud_temp_data->pin : NULL;
 {{< /details >}}
 
 ## Code block 71
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property 'city' exists in the object 'stud_temp_data'. If it exists, it returns the value of 'city'. If it doesn't exist, it returns the string 'Pune'.
 
@@ -5513,7 +5513,7 @@ echo isset($stud_temp_data->city) ? $stud_temp_data->city : "Pune";
 {{< /details >}}
 
 ## Code block 72
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `country` exists in the object `$stud_temp_data`. If it exists, it returns the uppercase value of `country`. Otherwise, it returns `NULL`.
 
@@ -5543,7 +5543,7 @@ echo isset($stud_temp_data->country) ? (strtoupper($stud_temp_data->country)): N
 {{< /details >}}
 
 ## Code block 73
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property 'state' exists in the object 'stud_temp_data'. If it exists, it returns the value of 'state'. If it doesn't exist, it returns the string 'Maharashtra'.
 
@@ -5554,7 +5554,7 @@ echo isset($stud_temp_data->state) ? $stud_temp_data->state : "Maharashtra";
 {{< /details >}}
 
 ## Code block 74
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `landmark` exists in the object `$stud_temp_data`. If it exists, it returns the uppercase value of `landmark`. Otherwise, it returns `NULL`.
 
@@ -5584,7 +5584,7 @@ echo isset($stud_temp_data->landmark) ? (strtoupper($stud_temp_data->landmark)):
 {{< /details >}}
 
 ## Code block 75
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the 'student_contact_no' key exists in the 'student_api_data' array. If it exists, it trims any leading zeros from the value and returns it. If it doesn't exist, it returns NULL.
 
@@ -5610,7 +5610,7 @@ echo isset($student_api_data['student_contact_no']) ? ltrim($student_api_data['s
 {{< /details >}}
 
 ## Code block 76
-#### Code Complexity: 5
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the `name_validation` property of the `stud_data` object is set and true. If it is true, it sets the `checked_spcase` variable to 'checked'.
 
@@ -5627,7 +5627,7 @@ $checked_spcase = '';if (isset($stud_data->name_validation) && $stud_data->name_
 {{< /details >}}
 
 ## Code block 77
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$checked_spcase` variable is used to store the value of a checkbox input field in a PHP script. It is typically used in form processing to determine if the checkbox has been checked or not. The value of `$checked_spcase` will be `true` if the checkbox is checked, and `false` if it is not checked.
 
@@ -5638,7 +5638,7 @@ echo $checked_spcase;
 {{< /details >}}
 
 ## Code block 78
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks the value of the `parent_status` property of the `$stud_temp_data` object. If the value is 'single_mother', it sets the `$checked_mother` variable to 'checked'. If the value is 'single_father', it sets the `$checked_father` variable to 'checked'. If the value is neither 'single_mother' nor 'single_father', it sets the `$checked_both` variable to 'checked'.
 
@@ -5657,7 +5657,7 @@ if (strtolower($stud_temp_data->parent_status) == 'single_mother')
 {{< /details >}}
 
 ## Code block 79
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The variable `$checked_both` is a boolean variable that indicates whether both conditions have been checked. It is used to track the status of two conditions and determine if both conditions have been met.
 
@@ -5668,7 +5668,7 @@ echo $checked_both;
 {{< /details >}}
 
 ## Code block 80
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$checked_father` variable is used to store the value of whether the father has been checked or not. It is typically used in a form or checkbox scenario where the user can select or deselect the option for the father. The value of `$checked_father` can be either `true` or `false`.
 
@@ -5679,7 +5679,7 @@ echo $checked_father;
 {{< /details >}}
 
 ## Code block 81
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$checked_mother` variable is used to store the value of the `mother` checkbox. It is typically used in a form submission process to determine if the `mother` checkbox was checked or not.
 
@@ -5690,7 +5690,7 @@ echo $checked_mother;
 {{< /details >}}
 
 ## Code block 82
-#### Code Complexity: 14
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a conditional statement that checks the value of the variable $checked_both. If $checked_both is false, it displays a form field for the single parent reason. If $checked_both is true, it hides the form field.
 
@@ -5727,7 +5727,7 @@ if (!$checked_both)
 {{< /details >}}
 
 ## Code block 83
-#### Code Complexity: 22
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a conditional statement written in PHP. It checks the value of the variable $checked_both and displays different HTML elements based on its value. If $checked_both is false, it displays a radio button group for the user to select whether they are divorced or not. If $checked_both is true, it hides the radio button group.
 
@@ -5775,7 +5775,7 @@ if (!$checked_both)
 {{< /details >}}
 
 ## Code block 84
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `father_f_name` exists in the object `stud_temp_data`. If it exists, it returns the value of `father_f_name`, otherwise it returns `NULL`.
 
@@ -5786,7 +5786,7 @@ echo isset($stud_temp_data->father_f_name) ? $stud_temp_data->father_f_name : NU
 {{< /details >}}
 
 ## Code block 85
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `father_m_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `father_m_name`, otherwise it returns `NULL`.
 
@@ -5797,7 +5797,7 @@ echo isset($stud_temp_data->father_m_name) ? $stud_temp_data->father_m_name : NU
 {{< /details >}}
 
 ## Code block 86
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `father_s_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `father_s_name`, otherwise it returns `NULL`.
 
@@ -5808,7 +5808,7 @@ echo isset($stud_temp_data->father_s_name) ? $stud_temp_data->father_s_name : NU
 {{< /details >}}
 
 ## Code block 87
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `father_email` exists in the object `stud_temp_data`. If it exists, it returns the value of `father_email`. Otherwise, it returns `NULL`.
 
@@ -5819,7 +5819,7 @@ echo isset($stud_temp_data->father_email) ? $stud_temp_data->father_email : NULL
 {{< /details >}}
 
 ## Code block 88
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the variable `$stud_temp_data->father_mobile_no` is set. If it is set, it trims any leading zeros from the value and returns it. If it is not set, it returns `NULL`.
 
@@ -5849,7 +5849,7 @@ echo isset($stud_temp_data->father_mobile_no) ? ltrim($stud_temp_data->father_mo
 {{< /details >}}
 
 ## Code block 89
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array called $id_type. For each element in the array, it assigns the key to the variable $key and the value to the variable $val_fath_IDType. Inside the loop, it generates an HTML option element with the value attribute set to the key and the inner text set to the value. This option element is then echoed out using PHP. This code is typically used to generate a dropdown select list with options populated from an array.
 
@@ -5870,7 +5870,7 @@ foreach ($id_type as $key => $val_fath_IDType)
 {{< /details >}}
 
 ## Code block 90
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array called $blood_group. For each element in the array, it assigns the key to the variable $key and the value to the variable $father_blood_val. Inside the loop, it generates an HTML option element with the value attribute set to the key and the inner text set to the value. This option element is then echoed out using PHP. This code is typically used to generate a dropdown list of options based on the values in the $blood_group array.
 
@@ -5891,7 +5891,7 @@ foreach ($blood_group as $key => $father_blood_val)
 {{< /details >}}
 
 ## Code block 91
-#### Code Complexity: 5
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the `father_hobbies` property is set in the `stud_temp_data` object. If it is set, it splits the value by comma and stores the result in the `fath_arr` array.
 
@@ -5917,7 +5917,7 @@ $fath_arr = array();if(isset($stud_temp_data->father_hobbies))
 {{< /details >}}
 
 ## Code block 92
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the value 'Drawing' exists in the array $fath_arr and prints 'checked' if it does.
 
@@ -5939,7 +5939,7 @@ for ($i=0; $i < count($fath_arr); $i++)
 {{< /details >}}
 
 ## Code block 93
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called `$fath_arr`. It checks each element of the array and if the element is equal to the string 'Painting', it prints 'checked'.
 
@@ -5959,7 +5959,7 @@ for ($i=0; $i < count($fath_arr); $i++)
 {{< /details >}}
 
 ## Code block 94
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called `$fath_arr`. It checks each element of the array and if the element is equal to the string 'Swimming', it echoes the string 'checked'.
 
@@ -5980,7 +5980,7 @@ for ($i=0; $i < count($fath_arr); $i++)
 {{< /details >}}
 
 ## Code block 95
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called `$fath_arr`. It checks each element of the array and if the element is equal to the string 'Craft', it echoes the string 'checked'.
 
@@ -6002,7 +6002,7 @@ for ($i=0; $i < count($fath_arr); $i++)
 {{< /details >}}
 
 ## Code block 96
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called `$fath_arr`. It checks each element of the array and if the element is equal to the string 'Dance', it echoes the string 'checked'.
 
@@ -6022,7 +6022,7 @@ for ($i=0; $i < count($fath_arr); $i++)
 {{< /details >}}
 
 ## Code block 97
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called `$fath_arr`. It checks each element of the array and if the element is equal to the string 'Photography', it echoes the string 'checked'.
 
@@ -6043,7 +6043,7 @@ for ($i=0; $i < count($fath_arr); $i++)
 {{< /details >}}
 
 ## Code block 98
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the value 'Singing' exists in the array $fath_arr and prints 'checked' if it does.
 
@@ -6065,7 +6065,7 @@ for ($i=0; $i < count($fath_arr); $i++)
 {{< /details >}}
 
 ## Code block 99
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called $fath_arr. It checks each element of the array and if the element is equal to 'Gardening', it prints 'checked'.
 
@@ -6087,7 +6087,7 @@ for ($i=0; $i < count($fath_arr); $i++)
 {{< /details >}}
 
 ## Code block 100
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called `$fath_arr`. It checks each element of the array and if the element is equal to the string 'Teaching', it prints 'checked'.
 
@@ -6108,7 +6108,7 @@ for ($i=0; $i < count($fath_arr); $i++)
 {{< /details >}}
 
 ## Code block 101
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `father_other_hobby` exists in the object `$stud_temp_data`. If it exists, it returns the value of `father_other_hobby`, otherwise it returns `NULL`.
 
@@ -6119,7 +6119,7 @@ echo isset($stud_temp_data->father_other_hobby) ? $stud_temp_data->father_other_
 {{< /details >}}
 
 ## Code block 102
-#### Code Complexity: 18
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of qualifications. It checks if the father's education qualification is set and compares it with each qualification in the array. If a match is found, the 'selected' attribute is added to the option element. Finally, the option element is echoed with the qualification key as the value and the qualification value as the text.
 
@@ -6154,7 +6154,7 @@ foreach ($qualification as $key => $val_fath_qualification)
 {{< /details >}}
 
 ## Code block 103
-#### Code Complexity: 26
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of professions. For each profession, it checks if the profession matches the value stored in the `$stud_temp_data->father_profession` variable. If there is a match, it sets the `$fath_profession_selected` variable to 'selected'. Finally, it generates an HTML `<option>` element with the profession as the value and the profession name as the displayed text.
 
@@ -6195,7 +6195,7 @@ foreach ($profession as $key => $father_profession_val)
 {{< /details >}}
 
 ## Code block 104
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the variable $stud_temp_data->father_profession_other is set. If it is set, it returns the value of $stud_temp_data->father_profession_other. Otherwise, it returns NULL.
 
@@ -6206,7 +6206,7 @@ echo isset($stud_temp_data->father_profession_other) ? $stud_temp_data->father_p
 {{< /details >}}
 
 ## Code block 105
-#### Code Complexity: 18
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of annual incomes. For each income, it checks if the father's annual income is set in the student's temporary data. If it is set, it converts the father's annual income to lowercase and compares it with the current key in the loop. If they match, it sets the 'selected' attribute for the option element. Finally, it generates an HTML option element with the key as the value and the income value as the text.
 
@@ -6240,7 +6240,7 @@ foreach ($annual_income as $key => $fath_income_val)
 {{< /details >}}
 
 ## Code block 106
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `father_company_name` exists in the object `stud_temp_data`. If it exists, it returns the uppercase value of `father_company_name`. Otherwise, it returns `NULL`.
 
@@ -6268,7 +6268,7 @@ echo isset($stud_temp_data->father_company_name) ? (strtoupper($stud_temp_data->
 {{< /details >}}
 
 ## Code block 107
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `father_designation` exists in the object `$stud_temp_data`. If it exists, it returns the uppercase value of `father_designation`. Otherwise, it returns `NULL`.
 
@@ -6294,7 +6294,7 @@ echo isset($stud_temp_data->father_designation) ? (strtoupper($stud_temp_data->f
 {{< /details >}}
 
 ## Code block 108
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `father_office_address` exists in the object `$stud_temp_data`. If it exists, it returns the uppercase value of `father_office_address`. Otherwise, it returns `NULL`.
 
@@ -6320,7 +6320,7 @@ echo isset($stud_temp_data->father_office_address) ? (strtoupper($stud_temp_data
 {{< /details >}}
 
 ## Code block 109
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `mother_f_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `mother_f_name`, otherwise it returns `NULL`.
 
@@ -6331,7 +6331,7 @@ echo isset($stud_temp_data->mother_f_name) ? $stud_temp_data->mother_f_name : NU
 {{< /details >}}
 
 ## Code block 110
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `mother_m_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `mother_m_name`, otherwise it returns `NULL`.
 
@@ -6342,7 +6342,7 @@ echo isset($stud_temp_data->mother_m_name) ? $stud_temp_data->mother_m_name : NU
 {{< /details >}}
 
 ## Code block 111
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `mother_s_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `mother_s_name`, otherwise it returns `NULL`.
 
@@ -6353,7 +6353,7 @@ echo isset($stud_temp_data->mother_s_name) ? $stud_temp_data->mother_s_name : NU
 {{< /details >}}
 
 ## Code block 112
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `mother_email_id` exists in the object `$stud_temp_data`. If it exists, it returns the value of `mother_email_id`, otherwise it returns `NULL`.
 
@@ -6364,7 +6364,7 @@ echo isset($stud_temp_data->mother_email_id) ? $stud_temp_data->mother_email_id 
 {{< /details >}}
 
 ## Code block 113
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the variable `$stud_temp_data->mother_mobile_no` is set. If it is set, it trims any leading zeros from the value and returns it. If it is not set, it returns `NULL`.
 
@@ -6394,7 +6394,7 @@ echo isset($stud_temp_data->mother_mobile_no) ? ltrim($stud_temp_data->mother_mo
 {{< /details >}}
 
 ## Code block 114
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to generate a dropdown list of options based on the values in the $id_type array. It iterates over each element in the array and creates an <option> element with the key as the value and the value as the displayed text.
 
@@ -6415,7 +6415,7 @@ foreach ($id_type as $key => $val_moth_IDType)
 {{< /details >}}
 
 ## Code block 115
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array called $blood_group. For each iteration, it assigns the current key to the variable $key and the current value to the variable $mother_blood_group_val. Inside the loop, it generates an HTML option element with the value attribute set to the current key and the inner text set to the current value. This option element is then echoed out using PHP. This code is typically used to generate a dropdown list of options based on the values in the $blood_group array.
 
@@ -6434,7 +6434,7 @@ foreach ($blood_group as $key => $mother_blood_group_val)
 {{< /details >}}
 
 ## Code block 116
-#### Code Complexity: 5
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet initializes an empty array called `fath_arr`. It then checks if the variable `$stud_temp_data->mother_hobbies` is set. If it is set, it splits the value of `$stud_temp_data->mother_hobbies` using the comma (`,`) as the delimiter and stores the resulting values in an array called `moth_arr`.
 
@@ -6448,7 +6448,7 @@ $fath_arr = array();if(isset($stud_temp_data->mother_hobbies))
 {{< /details >}}
 
 ## Code block 117
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called `moth_arr`. It checks each element of the array and if the element is equal to 'Drawing', it prints 'checked'.
 
@@ -6469,7 +6469,7 @@ for ($i=0; $i < count($moth_arr); $i++)
 {{< /details >}}
 
 ## Code block 118
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet iterates over an array called `moth_arr` and checks if each element is equal to the string 'Painting'. If a match is found, it prints 'checked'.
 
@@ -6491,7 +6491,7 @@ for ($i=0; $i < count($moth_arr); $i++)
 {{< /details >}}
 
 ## Code block 119
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called `moth_arr`. It checks each element of the array and if the element is equal to 'Swimming', it prints 'checked'.
 
@@ -6513,7 +6513,7 @@ for ($i=0; $i < count($moth_arr); $i++)
 {{< /details >}}
 
 ## Code block 120
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called `moth_arr`. It checks each element of the array and if the element is equal to 'Craft', it prints 'checked'.
 
@@ -6534,7 +6534,7 @@ for ($i=0; $i < count($moth_arr); $i++)
 {{< /details >}}
 
 ## Code block 121
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called `moth_arr`. It checks each element of the array and if the element is equal to the string 'Dance', it prints 'checked'.
 
@@ -6556,7 +6556,7 @@ for ($i=0; $i < count($moth_arr); $i++)
 {{< /details >}}
 
 ## Code block 122
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a loop that iterates over an array called `moth_arr`. It checks each element of the array and if the element is equal to the string 'Photography', it prints 'checked'.
 
@@ -6578,7 +6578,7 @@ for ($i=0; $i < count($moth_arr); $i++)
 {{< /details >}}
 
 ## Code block 123
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet iterates over an array called `moth_arr` and checks if each element is equal to the string 'Singing'. If a match is found, it prints 'checked'.
 
@@ -6600,7 +6600,7 @@ for ($i=0; $i < count($moth_arr); $i++)
 {{< /details >}}
 
 ## Code block 124
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the value 'Gardening' exists in the array $moth_arr and if it does, it echoes 'checked'.
 
@@ -6622,7 +6622,7 @@ for ($i=0; $i < count($moth_arr); $i++)
 {{< /details >}}
 
 ## Code block 125
-#### Code Complexity: 13
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the value 'Teaching' exists in the array $moth_arr and prints 'checked' if it does.
 
@@ -6644,7 +6644,7 @@ for ($i=0; $i < count($moth_arr); $i++)
 {{< /details >}}
 
 ## Code block 126
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `mother_other_hobbies` exists in the object `$stud_temp_data`. If it exists, it returns the value of `mother_other_hobbies`, otherwise it returns `NULL`.
 
@@ -6655,7 +6655,7 @@ echo isset($stud_temp_data->mother_other_hobbies) ? $stud_temp_data->mother_othe
 {{< /details >}}
 
 ## Code block 127
-#### Code Complexity: 18
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of qualifications. For each qualification, it checks if it matches the father's education stored in the `$stud_temp_data` variable. If there is a match, the option is marked as selected in the HTML dropdown list. Finally, the option is displayed in the dropdown list.
 
@@ -6689,7 +6689,7 @@ foreach ($qualification as $key => $val_moth_qualification)
 {{< /details >}}
 
 ## Code block 128
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to generate a dropdown list of qualifications. It iterates over an array of qualifications and creates an option element for each qualification.
 
@@ -6710,7 +6710,7 @@ foreach ($qualification as $key => $val_moth_qualification)
 {{< /details >}}
 
 ## Code block 129
-#### Code Complexity: 26
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of moth professions. For each profession, it checks if the mother's profession in the student's temporary data matches the current profession. If it does, it sets the 'selected' attribute for the option element. Finally, it generates an HTML option element with the profession as the value and the profession name as the text.
 
@@ -6751,7 +6751,7 @@ foreach ($moth_profession_array as $key => $moth_profession_val)
 {{< /details >}}
 
 ## Code block 130
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the variable $stud_temp_data->mother_profession_other is set. If it is set, it returns the value of $stud_temp_data->mother_profession_other. Otherwise, it returns NULL.
 
@@ -6762,7 +6762,7 @@ echo isset($stud_temp_data->mother_profession_other) ? $stud_temp_data->mother_p
 {{< /details >}}
 
 ## Code block 131
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of annual incomes. For each element in the array, it generates an HTML option element with the key as the value and the monthly income value as the displayed text.
 
@@ -6783,7 +6783,7 @@ foreach ($annual_income as $key => $moth_income_val)
 {{< /details >}}
 
 ## Code block 132
-#### Code Complexity: 18
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of annual incomes. For each income, it checks if the mother's annual income is set and if it matches the current income. If it does, it sets the 'selected' attribute for the option element. Finally, it generates an HTML option element with the income key as the value and the income value as the displayed text.
 
@@ -6819,7 +6819,7 @@ foreach ($annual_income as $key => $moth_income_val)
 {{< /details >}}
 
 ## Code block 133
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `mother_company_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `mother_company_name`, otherwise it returns `NULL`.
 
@@ -6830,7 +6830,7 @@ echo (isset($stud_temp_data->mother_company_name))?$stud_temp_data->mother_compa
 {{< /details >}}
 
 ## Code block 134
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the variable `$stud_temp_data->mother_designation` is set. If it is set, it returns the value of `$stud_temp_data->mother_designation`. Otherwise, it returns `NULL`.
 
@@ -6841,7 +6841,7 @@ echo (isset($stud_temp_data->mother_designation))?$stud_temp_data->mother_design
 {{< /details >}}
 
 ## Code block 135
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `mother_office_address` exists in the object `$stud_temp_data`. If it exists, it returns the value of `mother_office_address`. Otherwise, it returns `NULL`.
 
@@ -6869,7 +6869,7 @@ echo (isset($stud_temp_data->mother_office_address))?$stud_temp_data->mother_off
 {{< /details >}}
 
 ## Code block 136
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `guardian_f_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `guardian_f_name`, otherwise it returns `NULL`.
 
@@ -6880,7 +6880,7 @@ echo isset($stud_temp_data->guardian_f_name) ? $stud_temp_data->guardian_f_name 
 {{< /details >}}
 
 ## Code block 137
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `guardian_m_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `guardian_m_name`, otherwise it returns `NULL`.
 
@@ -6891,7 +6891,7 @@ echo isset($stud_temp_data->guardian_m_name) ? $stud_temp_data->guardian_m_name 
 {{< /details >}}
 
 ## Code block 138
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `guardian_s_name` exists in the object `$stud_temp_data`. If it exists, it returns the value of `guardian_s_name`, otherwise it returns `NULL`.
 
@@ -6902,7 +6902,7 @@ echo isset($stud_temp_data->guardian_s_name) ? $stud_temp_data->guardian_s_name 
 {{< /details >}}
 
 ## Code block 139
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the `guardian_email_id` property exists in the `$stud_temp_data` object. If it exists, it returns the value of `guardian_email_id`, otherwise it returns `NULL`.
 
@@ -6928,7 +6928,7 @@ echo isset($stud_temp_data->guardian_email_id) ? $stud_temp_data->guardian_email
 {{< /details >}}
 
 ## Code block 140
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the `guardian_mobile_no` property of the `$stud_temp_data` object is set. If it is set, it trims any leading zeros from the value and returns it. If it is not set, it returns `NULL`.
 
@@ -6954,7 +6954,7 @@ echo isset($stud_temp_data->guardian_mobile_no) ? ltrim($stud_temp_data->guardia
 {{< /details >}}
 
 ## Code block 141
-#### Code Complexity: 26
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of professions. For each profession, it checks if the guardian profession in the student data matches the current profession. If it does, it sets the `guardian_profession_selected` variable to 'selected'. Finally, it generates an HTML option element with the profession as the value and the profession value as the text.
 
@@ -6996,7 +6996,7 @@ foreach ($profession as $key => $guardian_profession_val)
 {{< /details >}}
 
 ## Code block 142
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array called $annual_income. For each element in the array, it assigns the key to the variable $key and the value to the variable $guardian_income_val. Inside the loop, it generates an HTML option element with the value attribute set to the key and the inner text set to the value. This option element is then echoed out to the output. This code is typically used in HTML forms to generate a dropdown list of options based on an array.
 
@@ -7018,7 +7018,7 @@ foreach ($annual_income as $key => $guardian_income_val)
 {{< /details >}}
 
 ## Code block 143
-#### Code Complexity: 18
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of annual incomes. For each income, it checks if the guardian's annual income is set and if it matches the current income. If it does, it sets the 'selected' attribute for the option element. Finally, it generates an HTML option element with the income as the value and the corresponding label.
 
@@ -7052,7 +7052,7 @@ foreach ($annual_income as $key => $guardian_income_val)
 {{< /details >}}
 
 ## Code block 144
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array called $annual_income. For each element in the array, it assigns the key to the variable $key and the value to the variable $guardian_income_val. Inside the loop, it generates an HTML option element with the value attribute set to the key and the inner text set to the value. This option element is then echoed out to the output. This code is typically used in HTML forms to generate a dropdown list of options based on an array.
 
@@ -7074,7 +7074,7 @@ foreach ($annual_income as $key => $guardian_income_val)
 {{< /details >}}
 
 ## Code block 145
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the variable `$stud_temp_data->guardian_add1` is set. If it is set, it returns the value of `$stud_temp_data->guardian_add1`. Otherwise, it returns `NULL`.
 
@@ -7085,7 +7085,7 @@ echo (isset($stud_temp_data->guardian_add1))?$stud_temp_data->guardian_add1: NUL
 {{< /details >}}
 
 ## Code block 146
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the variable `$stud_temp_data->guardian_add2` is set. If it is set, it returns the value of `$stud_temp_data->guardian_add2`. Otherwise, it returns `NULL`.
 
@@ -7096,7 +7096,7 @@ echo (isset($stud_temp_data->guardian_add2))?$stud_temp_data->guardian_add2: NUL
 {{< /details >}}
 
 ## Code block 147
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the 'guardian_area' key exists in the 'student_api_data' array. If it exists, it returns the value associated with the key. Otherwise, it returns NULL.
 
@@ -7107,7 +7107,7 @@ echo isset($student_api_data['guardian_area']) ? $student_api_data['guardian_are
 {{< /details >}}
 
 ## Code block 148
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the 'guardian_landmark' key exists in the 'student_api_data' array. If it exists, it returns the value associated with the key. Otherwise, it returns NULL.
 
@@ -7118,7 +7118,7 @@ echo isset($student_api_data['guardian_landmark']) ? $student_api_data['guardian
 {{< /details >}}
 
 ## Code block 149
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `guardian_city` exists in the object `stud_temp_data`. If it exists, it returns the value of `guardian_city`. Otherwise, it returns `NULL`.
 
@@ -7129,7 +7129,7 @@ echo isset($stud_temp_data->guardian_city) ? $stud_temp_data->guardian_city : NU
 {{< /details >}}
 
 ## Code block 150
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the `guardian_pin` property exists in the `$stud_temp_data` object. If it exists, it returns the value of `guardian_pin`, otherwise it returns `NULL`.
 
@@ -7140,7 +7140,7 @@ echo isset($stud_temp_data->guardian_pin) ? $stud_temp_data->guardian_pin : NULL
 {{< /details >}}
 
 ## Code block 151
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `day_care_contact_info` exists in the object `$stud_temp_data`. If it exists, it returns the value of `day_care_contact_info`. Otherwise, it returns `NULL`.
 
@@ -7151,7 +7151,7 @@ echo (isset($stud_temp_data->day_care_contact_info))?$stud_temp_data->day_care_c
 {{< /details >}}
 
 ## Code block 152
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function retrieves the value of the 'lms_id' property from the 'stud_temp_data' object.
 
@@ -7162,7 +7162,7 @@ echo $stud_temp_data->lms_id
 {{< /details >}}
 
 ## Code block 153
-#### Code Complexity: 10
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks the value of the `bus_service_required` property of the `stud_temp_data` object and sets the `checked_bus_yes` and `checked_bus_no` variables accordingly. If the `bus_service_required` property is equal to '1', the `checked_bus_yes` variable is set to 'checked'. If the `bus_service_required` property is equal to '0', the `checked_bus_no` variable is set to 'checked'.
 
@@ -7178,7 +7178,7 @@ $checked_bus_yes = '';if ($stud_temp_data->bus_service_required == '1') {
 {{< /details >}}
 
 ## Code block 154
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$checked_bus_yes` variable is being echoed. It is assumed that this variable holds a boolean value indicating whether a bus has been checked or not.
 
@@ -7189,7 +7189,7 @@ echo $checked_bus_yes;
 {{< /details >}}
 
 ## Code block 155
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The variable `$checked_bus_no` is being echoed. It is assumed that this variable holds the value of a checked bus number.
 
@@ -7200,7 +7200,7 @@ echo $checked_bus_no;
 {{< /details >}}
 
 ## Code block 156
-#### Code Complexity: 10
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks the value of the `catering` property of the `$stud_temp_data` object. If the value is '1', it sets the variable `$checked_catering_yes` to 'checked'. If the value is '0', it sets the variable `$checked_catering_no` to 'checked'.
 
@@ -7217,7 +7217,7 @@ if ($stud_temp_data->catering == '1')
 {{< /details >}}
 
 ## Code block 157
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The variable `$checked_catering_yes` is being echoed. It is assumed that this variable holds a boolean value indicating whether catering is checked or not.
 
@@ -7228,7 +7228,7 @@ echo $checked_catering_yes;
 {{< /details >}}
 
 ## Code block 158
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The variable `$checked_catering_no` is being echoed. It is assumed that this variable holds a value that needs to be displayed to the user.
 
@@ -7239,7 +7239,7 @@ echo $checked_catering_no;
 {{< /details >}}
 
 ## Code block 159
-#### Code Complexity: 10
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to set the value of two variables based on the value of `$stud_temp_data->student_bro_sis_inschool`. If the value is '1', then `$checked_sisbroschool_yes` is set to 'checked'. If the value is '0', then `$checked_sisbroschool_no` is set to 'checked'.
 
@@ -7258,7 +7258,7 @@ $checked_sisbroschool_yes = '';if ($stud_temp_data->student_bro_sis_inschool == 
 {{< /details >}}
 
 ## Code block 160
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$checked_sisbroschool_yes` variable is being echoed. It is assumed that this variable holds a boolean value indicating whether the user has checked the 'Sisbro School' option. The purpose of echoing this variable is to display the user's selection on the webpage.
 
@@ -7269,7 +7269,7 @@ echo $checked_sisbroschool_yes;
 {{< /details >}}
 
 ## Code block 161
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$checked_sisbroschool_no` variable is being echoed. It is assumed that this variable has been previously defined and assigned a value.
 
@@ -7280,7 +7280,7 @@ echo $checked_sisbroschool_no;
 {{< /details >}}
 
 ## Code block 162
-#### Code Complexity: 12
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a conditional statement that checks if the value of `$stud_temp_data->student_bro_sis_inschool` is equal to '1'. If it is, then it displays a text input field with the id 'info_brosisrefno_div' and pre-populates it with the value of `$stud_temp_data->student_bro_sis_ref_no` if it is set. If the value of `$stud_temp_data->student_bro_sis_inschool` is not equal to '1', then it hides the text input field.
 
@@ -7305,7 +7305,7 @@ if ($stud_temp_data->student_bro_sis_inschool == '1')
 {{< /details >}}
 
 ## Code block 163
-#### Code Complexity: 10
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks the value of the `student_isexistingstudent` property of the `stud_temp_data` object and sets the `checked_exist_student_yes` and `checked_exist_student_no` variables accordingly. If the value is '1', the `checked_exist_student_yes` variable is set to 'checked'. If the value is '0', the `checked_exist_student_no` variable is set to 'checked'.
 
@@ -7324,7 +7324,7 @@ $checked_exist_student_yes = '';if ($stud_temp_data->student_isexistingstudent =
 {{< /details >}}
 
 ## Code block 164
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$checked_exist_student_yes` variable is used to store the result of a check for the existence of a student. It is a boolean variable that indicates whether a student exists or not.
 
@@ -7335,7 +7335,7 @@ echo $checked_exist_student_yes;
 {{< /details >}}
 
 ## Code block 165
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$checked_exist_student_no` variable is used to store the result of checking whether a student number exists in the system. It is typically used in conditional statements to determine if a student number is valid or not.
 
@@ -7346,7 +7346,7 @@ echo $checked_exist_student_no;
 {{< /details >}}
 
 ## Code block 166
-#### Code Complexity: 12
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a conditional statement that checks if the value of `$stud_temp_data->student_isexistingstudent` is equal to '1'. If it is, then it displays a `<div>` element with an input field for the existing reference number. If it is not, then it displays the same `<div>` element but with the input field hidden.
 
@@ -7371,7 +7371,7 @@ if ($stud_temp_data->student_isexistingstudent == '1') {
 {{< /details >}}
 
 ## Code block 167
-#### Code Complexity: 10
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to set the value of two variables based on the value of `$stud_temp_data->student_isdisability`. If the value is 'yes', then `$checked_isdisability_yes` is set to 'checked'. If the value is 'no', then `$checked_isdisability_no` is set to 'checked'.
 
@@ -7390,7 +7390,7 @@ $checked_isdisability_yes = '';if ($stud_temp_data->student_isdisability == 'yes
 {{< /details >}}
 
 ## Code block 168
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$checked_isdisability_yes` variable is used to store the value of a checkbox input field that indicates whether a person has a disability. It is typically used in a form submission process to determine if the user has selected the option for having a disability.
 
@@ -7401,7 +7401,7 @@ echo $checked_isdisability_yes;
 {{< /details >}}
 
 ## Code block 169
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$checked_isdisability_no` variable is used to store the value of the 'Is Disability' checkbox when it is unchecked. It is typically used in conditional statements to determine if the checkbox is unchecked.
 
@@ -7412,7 +7412,7 @@ echo $checked_isdisability_no;
 {{< /details >}}
 
 ## Code block 170
-#### Code Complexity: 12
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a conditional statement that checks if the student has a disability. If the student has a disability, a text input field is displayed where the student can describe their disability. If the student does not have a disability, the text input field is hidden.
 
@@ -7436,7 +7436,7 @@ if ($stud_temp_data->student_isdisability == 'yes') {
 {{< /details >}}
 
 ## Code block 171
-#### Code Complexity: 10
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to set the values of two variables based on the value of `$stud_temp_data->allergies`. If the value is 'yes', then `$checked_allergies_yes` is set to 'checked'. If the value is 'no', then `$checked_allergies_no` is set to 'checked'.
 
@@ -7455,7 +7455,7 @@ $checked_allergies_yes = '';if ($stud_temp_data->allergies == 'yes') {
 {{< /details >}}
 
 ## Code block 172
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The variable `$checked_allergies_yes` is a boolean variable that stores whether all allergies have been checked or not. It is typically used in conditional statements to determine the flow of the program based on whether all allergies have been checked or not.
 
@@ -7466,7 +7466,7 @@ echo $checked_allergies_yes;
 {{< /details >}}
 
 ## Code block 173
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The variable `$checked_allergies_no` is used to store the value of whether all allergies have been checked or not. It is a boolean variable that can have two possible values: `true` if all allergies have been checked, and `false` if not.
 
@@ -7477,7 +7477,7 @@ echo $checked_allergies_no;
 {{< /details >}}
 
 ## Code block 174
-#### Code Complexity: 12
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a conditional statement that checks if the variable `$stud_temp_data->allergies` is equal to 'yes'. If it is, a `<div>` element with the id `info_allergies_div` is displayed, containing an input field for describing allergies. The value of the input field is set to the value of `$stud_temp_data->other_allergies` if it is set, otherwise it is set to `NULL`. If the variable is not equal to 'yes', the `<div>` element is still displayed, but the input field is hidden.
 
@@ -7502,7 +7502,7 @@ if ($stud_temp_data->allergies == 'yes') {
 {{< /details >}}
 
 ## Code block 175
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the variable `$stud_temp_data->student_primary_contact_number` is set. If it is set, it trims any leading zeros from the value and returns it. If it is not set, it returns `NULL`.
 
@@ -7534,7 +7534,7 @@ echo isset($stud_temp_data->student_primary_contact_number) ? ltrim($stud_temp_d
 {{< /details >}}
 
 ## Code block 176
-#### Code Complexity: 3
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the property `student_emergency_contact_no` exists in the object `$stud_temp_data`. If it exists, it trims any leading zeros from the value and returns it. If it doesn't exist, it returns `NULL`.
 
@@ -7560,7 +7560,7 @@ echo isset($stud_temp_data->student_emergency_contact_no) ? ltrim($stud_temp_dat
 {{< /details >}}
 
 ## Code block 177
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to generate a dropdown list of handicap options. It iterates over an array of handicap values and creates an option element for each value.
 
@@ -7581,7 +7581,7 @@ foreach ($handicap as $key => $handicap_val)
 {{< /details >}}
 
 ## Code block 178
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is checking if the variable `$stud_temp_data` is set. If it is set, it will display a label with the text 'Referral Student: *' and a CSS class 'label_color'. If it is not set, it will display a label with the text 'Referral Student: *'.
 
@@ -7602,7 +7602,7 @@ if (isset($stud_temp_data))
 {{< /details >}}
 
 ## Code block 179
-#### Code Complexity: 10
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to set the values of two variables based on the value of `$stud_temp_data->student_referral`. If the value is 'yes', then `$checked_yes` is set to 'checked' and `$disabled` is set to 'disabled'. If the value is 'no', then `$checked_no` is set to 'checked'.
 
@@ -7624,7 +7624,7 @@ $checked_yes = '';$disabled = '';if($stud_temp_data->student_referral == 'yes')
 {{< /details >}}
 
 ## Code block 180
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `echo` function is used to output one or more strings. It takes a variable or a string as an argument and displays it on the screen.
 
@@ -7638,7 +7638,7 @@ echo $checked_yes;
 {{< /details >}}
 
 ## Code block 181
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `echo` function is used to output one or more strings. In this case, the variable `$checked_no` is being echoed, which means its value will be displayed on the screen.
 
@@ -7649,7 +7649,7 @@ echo $checked_no;
 {{< /details >}}
 
 ## Code block 182
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is checking if the variable `$stud_temp_data` is set. If it is set, it will display a label with the text 'Referral Student School: *' and a CSS class 'label_color'. If it is not set, it will display a label with the text 'Referral Student School: *'.
 
@@ -7670,7 +7670,7 @@ if (isset($stud_temp_data))
 {{< /details >}}
 
 ## Code block 183
-#### Code Complexity: 19
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is a foreach loop that iterates over an array of school data. For each school, it generates a radio button with the school name and an input field for a referral number. If the referral number matches the one stored in the student's temporary data, the radio button is checked. If the student has a referral, an additional input field for the referral number is displayed. The code also includes a button to view the referral details.
 
@@ -7709,7 +7709,7 @@ foreach ($ret_school_data as $key => $value)
 {{< /details >}}
 
 ## Code block 184
-#### Code Complexity: 5
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to determine the path of the student's image file. It first checks if the image file exists in the specified location. If the file does not exist, it sets the image path to a default 'no-photo-available' image. If the file exists, it sets the image path to the actual image file.
 
@@ -7729,7 +7729,7 @@ $stuImage = "./student_img/no-photo-available.jpg";$stuImage = "/walsh_upload_im
 {{< /details >}}
 
 ## Code block 185
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to store the path of the student's image file. It takes a path as input and assigns it to the $student_image_path variable.
 
@@ -7740,7 +7740,7 @@ $student_image_path = NULL;
 {{< /details >}}
 
 ## Code block 186
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `echo` function is used to output the value of a variable or expression. In this case, the variable `$stuImage` is being echoed, which means its value will be displayed on the screen.
 
@@ -7751,7 +7751,7 @@ echo $stuImage;
 {{< /details >}}
 
 ## Code block 187
-#### Code Complexity: 15
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code block checks if the value of `$stud_temp_data->if_divorced` is 'yes'. If it is, then it displays a section for court order document.
 
@@ -7793,7 +7793,7 @@ if ($stud_temp_data->if_divorced == 'yes')
 {{< /details >}}
 
 ## Code block 188
-#### Code Complexity: 5
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to set the value of the $birthImage variable based on the availability of the birth certificate image file. If the image file exists, the $birthImage variable is set to the path of the image file. If the image file does not exist, the $birthImage variable is set to a default image path.
 
@@ -7813,7 +7813,7 @@ $birthImage = "./student_img/no-photo-available.jpg";$birthImage = "/walsh_uploa
 {{< /details >}}
 
 ## Code block 189
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to echo the value of the variable $birthImage.
 
@@ -7824,7 +7824,7 @@ echo $birthImage;
 {{< /details >}}
 
 ## Code block 190
-#### Code Complexity: 5
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function sets the value of the variable `adharImage` based on the availability of the adhar card image file. If the file exists, the variable is set to the path of the image file. If the file does not exist, the variable is set to the path of a default image file.
 
@@ -7844,7 +7844,7 @@ $adharImage = "./student_img/no-photo-available.jpg";$adharImage = "/walsh_uploa
 {{< /details >}}
 
 ## Code block 191
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to echo the value of the variable $adharImage.
 
@@ -7855,7 +7855,7 @@ echo $adharImage;
 {{< /details >}}
 
 ## Code block 192
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$certificate_path` variable is used to store the path of a certificate file. It is initially set to `NULL`.
 
@@ -7866,7 +7866,7 @@ $certificate_path = NULL;
 {{< /details >}}
 
 ## Code block 193
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `certificate_path` variable stores the path to a certificate file. It is used in the code to specify the location of the certificate file when it needs to be accessed or used.
 
@@ -7877,7 +7877,7 @@ echo $certificate_path
 {{< /details >}}
 
 ## Code block 194
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `$certificate_path` variable is used to store the path of a certificate file. It is initially set to `NULL`.
 
@@ -7888,7 +7888,7 @@ $certificate_path = NULL;
 {{< /details >}}
 
 ## Code block 195
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `certificate_path` variable stores the path to a certificate file. It is used in the code to specify the location of the certificate file when it needs to be accessed or used.
 

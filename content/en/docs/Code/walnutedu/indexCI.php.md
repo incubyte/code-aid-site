@@ -336,7 +336,7 @@ require_once BASEPATH.'core/CodeIgniter.php';
 
 
 ## Code block 1
-#### Code Complexity: 72
+{{< complexityLabel "Moderate" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet is used to set up the environment for a CodeIgniter application. It checks the environment variable `CI_ENV` to determine the current environment (development, testing, or production) and sets the appropriate error reporting level and display settings. It also sets the paths for the system, application, and view folders. Finally, it includes the CodeIgniter core file to start the application.
 

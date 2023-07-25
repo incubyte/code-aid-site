@@ -20,7 +20,6 @@ titleDiv.innerHTML = `Search results for <span style="color: blue; font-size: 28
     const response = await fetch(`http://localhost:3000/embedding?collectionName=code&query=${query}`);
     const data = await response.json();
     const codeList = data.map(o => {
-      
       return {name: o.payload.name, body: o.payload.code, link: o.payload.link};
     });
     renderSearchResults(codeList);
@@ -91,7 +90,7 @@ titleDiv.innerHTML = `Search results for <span style="color: blue; font-size: 28
         const strippedLink = code.link.split("#")[0];
         result.innerHTML = `
             <div class="py-1 border-bottom border-light bg-light">
-            <p class=" mx-3 p-0 mb-0"><a href="${origin}/docs/code/${code.link}">${strippedLink}</a></p>
+            <p class=" mx-3 p-0 mb-0"><a href="${origin}/docs/code/${code.link.toLowerCase()}">${strippedLink}</a></p>
             </div>
         `;
 

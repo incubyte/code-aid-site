@@ -894,7 +894,7 @@ title = "Employee_controller.php"
 
 
 ## Code block 1
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `Walmiki_interface_controller` is a system controller that handles the interface between the Walmiki system and other components. It provides functions for managing user interfaces, handling user input, and interacting with the Walmiki system.
 
@@ -911,7 +911,7 @@ require_once(APPPATH.'controllers/system/Walmiki_interface_controller.php');
 {{< /details >}}
 
 ## __construct
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This is the constructor function for a class. It initializes the parent class, starts a session, sets the default timezone, loads a Google login library, and loads several models and libraries. It also checks the expiration of a Google login token and loads a Google Classroom library.
 
@@ -934,7 +934,7 @@ public function __construct()
 {{< /details >}}
 
 ## index
-#### Code Complexity: 76
+{{< complexityLabel "Moderate" >}}{{< /complexityLabel >}}
 ### Overview
 This function is the default load for the employee view list. It retrieves information about the organization, retrieves all user information, retrieves staff information, and generates a list of users for display.
 
@@ -1068,7 +1068,7 @@ function index(){ //default load for employee view list
 {{< /details >}}
 
 ## check_username_exist
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to check if a username exists in the walnutedu domain. It takes the email ID as input and checks if the user exists in the walnutedu domain by querying the database and using the Google Classroom and Google Login APIs.
 
@@ -1111,7 +1111,7 @@ function check_username_exist(){ //check user exist in walnutedu domain or not
 {{< /details >}}
 
 ## crud
-#### Code Complexity: 52
+{{< complexityLabel "Moderate" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for handling the CRUD operations for employees. It retrieves data from the Google Classroom API, the School_model, and the Employee_model. It also fetches data from the Google group and Walnut Role Master. Based on the operation specified in the `$_POST['emp_operation']` variable, it either adds a new employee, updates an existing employee, or deletes an employee. The function then loads the appropriate view based on the operation.
 
@@ -1243,7 +1243,7 @@ function crud(){//open model for create and edit
 {{< /details >}}
 
 ## insert_employee
-#### Code Complexity: 82
+{{< complexityLabel "Moderate" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to insert an employee into the database and Google. It takes the employee details from the POST request and performs the following steps:
 
@@ -1417,7 +1417,7 @@ function insert_employee(){ //Insert Employee in database and google
 {{< /details >}}
 
 ## update_employee
-#### Code Complexity: 215
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to update an employee in the database and Google. It retrieves the employee data from the form inputs and performs the necessary updates in the database and Google. It also handles updating the employee's group membership in Google.
 
@@ -1626,7 +1626,7 @@ function update_employee(){ //Update Employee in database and google
 {{< /details >}}
 
 ## ajax_employee_list
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for retrieving all employee data from the database and displaying it in a view. It first calls the `get_all_employees` method of the `Employee_model` class to fetch the employee data. Then, it passes the retrieved data to the `ajax_employee_list` view for rendering.
 
@@ -1645,7 +1645,7 @@ function ajax_employee_list(){
 {{< /details >}}
 
 ## staff_report
-#### Code Complexity: 57
+{{< complexityLabel "Moderate" >}}{{< /complexityLabel >}}
 ### Overview
 The `staff_report` function generates a staff report. It retrieves staff details from the `Staff_report_model` and school details from the `School_model`. It also fetches subject details and class information from the `Staff_report_model`. The function then organizes the retrieved data into an array and passes it to the view for display.
 
@@ -1735,7 +1735,7 @@ function staff_report()
 {{< /details >}}
 
 ## inactive_employee
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to display the details of inactive employees. It sets the page data for the date and title, retrieves the inactive employee details from the Employee_model, and loads the view to display the data.
 
@@ -1762,7 +1762,7 @@ function inactive_employee()
 {{< /details >}}
 
 ## active_employee
-#### Code Complexity: 14
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to activate an employee. It retrieves the employee ID and school ID from the input, then uses the Google Classroom API to authenticate and get an access token. It then retrieves the selected user's information using the access token. If the user's primary email is not empty, it updates the employee's status to active in the database and updates the Walnut user. Finally, it retrieves the information of the activated employee and returns true. If the user's primary email is empty, it returns 'No data'.
 
@@ -1817,7 +1817,7 @@ function active_employee()
 {{< /details >}}
 
 ## show_user
-#### Code Complexity: 132
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 The `show_user` function is responsible for displaying user information. It retrieves user data from the Google Classroom API and the MGR system, and then displays the information on the page. The function also retrieves organization unit information from the Google API and filters the user data based on the organization units. The function handles suspended users and retrieves group information for each user. Finally, the function loads the view template and passes the data to be displayed on the page.
 
@@ -1962,7 +1962,7 @@ public function show_user()
 {{< /details >}}
 
 ## google_inactive_employee
-#### Code Complexity: 104
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to process a CSV file containing employee data and update the status of inactive employees in the database. It first checks if the uploaded file is a CSV file. If it is, the function reads the file and extracts the data. It then iterates over each row of data and checks if the employee is inactive. If the employee is inactive, it updates the status of the employee in the database and also updates the corresponding Walnut user. Finally, it returns a success message.
 

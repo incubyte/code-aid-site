@@ -323,7 +323,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Cancel') {
 
 
 ## Code block 1
-#### Code Complexity: 10
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet includes several PHP includes and instantiates a Bank object. It also fetches bank IDs from the database and stores them in an array. Finally, it checks if a form has been submitted and if the submit button value is 'Cancel', it redirects the user to a specific URL.
 
@@ -346,7 +346,7 @@ include "../Config.php";$newForm = 0;$messages = array();include './institute/ne
 {{< /details >}}
 
 ## Code block 2
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for generating the head section of the HTML header. It includes the meta tags, title, and CSS stylesheets. The function takes in the title of the page and an array of CSS files as parameters. It then generates the appropriate HTML code for the head section.
 
@@ -374,7 +374,7 @@ include("header_head.php");
 {{< /details >}}
 
 ## Code block 3
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function calculates the count of elements in the array `$b_id` and adds 1 to the result.
 
@@ -385,7 +385,7 @@ echo count($b_id)+1
 {{< /details >}}
 
 ## Code block 4
-#### Code Complexity: 5
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet generates a string of HTML options for a select dropdown. It starts with a default option 'Select Bank' and then loops through an array of field names to generate additional options. The generated string is then modified to replace double quotes with single quotes.
 
@@ -405,7 +405,7 @@ $str = "<option class='input' selected='selected'>Select Bank</option>";for($i=0
 {{< /details >}}
 
 ## Code block 5
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to output the value of the variable $str.
 
@@ -416,7 +416,7 @@ echo $str
 {{< /details >}}
 
 ## Code block 6
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for generating a markdown documentation for a given function. It takes in the function details such as overview, user acceptance criteria, refactoring opportunities, and risks and bugs, and generates a markdown document with all the information.
 
@@ -442,7 +442,7 @@ include("../upload/header.php");
 {{< /details >}}
 
 ## Code block 7
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the count of the `$messages` array is greater than 0. If it is, it generates a `<div>` element with the id `msg` and class `msg_not_found`. It then iterates over each element in the `$messages` array and echoes it followed by a line break. Finally, it closes the `<div>` element.
 
@@ -465,7 +465,7 @@ if (count($messages) > 0) {
 {{< /details >}}
 
 ## Code block 8
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function returns the filename of the currently executing script, relative to the document root. It is a superglobal variable, which means it is always available in all scopes throughout a script. The value of `$_SERVER['PHP_SELF']` is the path and filename of the currently executing script, including any query string parameters. For example, if the current script is located at `http://example.com/index.php`, then `$_SERVER['PHP_SELF']` will return `/index.php`. This can be useful for generating self-referencing URLs or for determining the current page in a navigation menu.
 
@@ -476,7 +476,7 @@ echo $_SERVER['PHP_SELF'];
 {{< /details >}}
 
 ## Code block 9
-#### Code Complexity: 8
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet includes two conditional statements that determine whether to include a new institute form or an edit institute form based on the values of the variables $newForm and $editForm. If $newForm is equal to 1, the newInstituteForm.inc.php file is included. If $editForm is equal to 1, the editInstituteForm.inc.php file is included.
 
@@ -494,7 +494,7 @@ if ($newForm == 1)
 {{< /details >}}
 
 ## Code block 10
-#### Code Complexity: 10
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the 'action' parameter is set in the request and if its value is 'Add New Institute'. If both conditions are true, it includes the 'newInstituteForm.inc.php' file. 
 
@@ -515,7 +515,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'Add New Institute') {
 {{< /details >}}
 
 ## Code block 11
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `viewInstitute` function is responsible for displaying the details of an institute. It retrieves the institute information from the database and renders it on the webpage.
 
@@ -541,7 +541,7 @@ include './institute/viewInstitute.inc.php';
 {{< /details >}}
 
 ## Code block 12
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `include` function is used to include the contents of a PHP file into another PHP file. It is commonly used to include reusable code or templates.
 

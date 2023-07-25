@@ -1833,7 +1833,7 @@ class Collection_controller extends Defaulter_check_controller
 
 
 ## Code block 1
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `Defaulter_check_controller` class is responsible for checking if a user is a defaulter or not. It contains various methods to perform this check.
 
@@ -1850,7 +1850,7 @@ require_once(APPPATH.'controllers/account/Defaulter_check_controller.php');
 {{< /details >}}
 
 ## __construct
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This is the constructor function of a class. It initializes various models and libraries that are required for the class.
 
@@ -1881,7 +1881,7 @@ public function __construct()
 {{< /details >}}
 
 ## index
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to display the landing view for managing collection of fees and deposits. It sets up the necessary data for the view, such as the page name, icon, title, date, description, and breadcrumb. It also loads the main template view.
 
@@ -1905,7 +1905,7 @@ function index($collection_type = 'fee'){
 {{< /details >}}
 
 ## fetch_student_details
-#### Code Complexity: 20
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function fetches the details of a student based on the given reference number. It retrieves the student's full name, class name, and division name from the Student_model. It also retrieves the financial years and academic year from the System_model. It then loads the student_view view with the fetched data.
 
@@ -1984,7 +1984,7 @@ function fetch_student_details(){
 {{< /details >}}
 
 ## fetch_installment_details
-#### Code Complexity: 40
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to fetch installment details for a specific student. It retrieves the school ID and academic year from the session. It also retrieves the collection type, reference number, and selected financial year from the input. If the collection type is 'dep' and the student's admission year is different from the selected financial year, the function updates the selected financial year to the student's admission year. It then computes the continuity class for the student based on the reference number, selected financial year, academic year, and school ID. It retrieves the payplan details for the reference number, computed class ID, selected financial year, collection type, and school ID. If the view flag is 'yes', the function fetches the installment information and loads the installment view. If the view flag is 'payplan', the function fetches the payplan details and returns the payplan name and student admission year. Otherwise, the function retrieves the class name and returns it along with the computed class ID and payplan.
 
@@ -2050,7 +2050,7 @@ function fetch_installment_details($view_flag = 'yes'){
 {{< /details >}}
 
 ## fetch_entity_details
-#### Code Complexity: 11
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to fetch entity details based on the given parameters. It retrieves the school ID and academic year from the session. It also retrieves the collection type, reference number, selected financial year, selected installment ID, and pay plan ID from the input. It then calls the `fetch_student_specific_info` function to get the student admission year. Depending on the collection type, it calls the `fetch_fees_details` function with different parameters. Finally, it checks if the fetched yearly heads are null and either returns false or loads the entity view.
 
@@ -2100,7 +2100,7 @@ function fetch_entity_details(){
 {{< /details >}}
 
 ## fetch_transaction_details
-#### Code Complexity: 229
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function fetches transaction details for a given ref_no and collection type. It retrieves various data such as session_school_id, user_name, academic_year, financial_year, collection_type, ref_no, selected_financial_year, selected_installment_id, payplan_id, saved_key, tab_mode, defaulter_check, stud_parent_data, status, stud_class_id, academic_year, target_path, fee_flag, dep_flag, transaction_history, yearly_heads, concession_details, and payment_modes. It also checks for already paid transactions and sets the is_paid flag accordingly.
 
@@ -2288,7 +2288,7 @@ function fetch_transaction_details(){
 {{< /details >}}
 
 ## save_transaction
-#### Code Complexity: 134
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 The `save_transaction` function is responsible for saving a transaction. It takes an optional parameter `api_call` which is used to determine the source of the payment data. If `api_call` is `0` or `'0'`, it is converted to `FALSE`, otherwise it is converted to `TRUE`. The function then retrieves the payment data based on the `api_call` value and performs various operations to save the transaction. It also handles undertaking form accept data and updates the student status. Finally, it generates and returns a receipt.
 
@@ -2537,7 +2537,7 @@ function save_transaction($api_call = 0){
 {{< /details >}}
 
 ## generate_receipt
-#### Code Complexity: 82
+{{< complexityLabel "Moderate" >}}{{< /complexityLabel >}}
 ### Overview
 The `generate_receipt` function is responsible for generating a receipt for a transaction. It takes in several parameters including `$api_call`, `$return`, and `$receipt_json`. The function first converts the `$api_call` and `$return` parameters to booleans. Then, depending on the value of `$receipt_json`, it either retrieves the receipt data from the input or from the JSON response of an API call. The function then fetches information about the transaction history and payment mode using the `fetch_transaction_history` and `fetch_payment_mode_refno` functions from the `Fee_model` class. It calculates the total amount and convenience amount for the transaction and generates a receipt PDF using the `receipt_pdf` function. Finally, it returns the name of the generated PDF file.
 
@@ -2670,7 +2670,7 @@ public function generate_receipt($api_call = 0, $return = 0, $receipt_json = NUL
 {{< /details >}}
 
 ## receipt_pdf
-#### Code Complexity: 15
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function generates a PDF receipt for a transaction. It takes various parameters such as the reference number, transaction history, total amount, institute and school IDs, session school ID, collection type, receipt letterhead, duplicate flag, mail flag, financial year, deposit refund year, mobile flag, manager call flag, payment class ID, and return refund flag. It fetches the header image data from the School_model. Depending on the return refund flag, it loads the appropriate view file for the receipt. It then generates the receipt HTML using the loaded view and the provided data. If the duplicate flag is true and the manager call flag is true, it calls the receipt_attachment function to generate an attachment for the receipt. If the mail flag is true, it calls the mail_receipt function to send the receipt via email. Finally, it returns either the path of the generated PDF or the receipt HTML.
 
@@ -2748,7 +2748,7 @@ public function receipt_pdf($ref_no, $transaction_history, $total_amount, $ref_i
 {{< /details >}}
 
 ## mail_receipt
-#### Code Complexity: 45
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to send a receipt email to parents. It fetches the parent emails from the database, generates the email content, and sends the email using the Send_mail_helper class. If the collection type is 'dep' (deposit) and it is not a duplicate receipt, it also sends a welcome email to the parents.
 
@@ -2840,7 +2840,7 @@ function mail_receipt($ref_no, $session_school_id, $ref_school_id, $ref_institut
 {{< /details >}}
 
 ## convert_student_status
-#### Code Complexity: 157
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to convert the student status based on certain conditions. It fetches the student status from the database and checks if it is equal to 6 or 7. If it is 6, the new status is set to 1. If it is 7, the new status is set to 2. If the student status is neither 6 nor 7, the function returns 0. It then checks if the student admission year is different from the current academic year. If it is different, it performs some calculations and checks to determine if the status can be changed. If the status can be changed, it updates the student status in the database and performs some additional actions related to Google Classroom. Finally, it returns a status code indicating the success or failure of the operation.
 
@@ -3029,7 +3029,7 @@ public function convert_student_status($ref_no, $selected_financial_year, $paypl
 {{< /details >}}
 
 ## is_mobile
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function checks if the user is accessing the website from a mobile device. It uses the `$_SERVER['HTTP_USER_AGENT']` variable to get the user agent string and then matches it against a regular expression to determine if it is a mobile device or not. If the user agent string matches any of the patterns in the regular expression, the function returns `TRUE` indicating that the user is accessing the website from a mobile device. Otherwise, it returns `FALSE` indicating that the user is accessing the website from a web browser.
 
@@ -3066,7 +3066,7 @@ public function is_mobile()
 {{< /details >}}
 
 ## receipt_attachment
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function generates a PDF receipt attachment for a given reference number, session school ID, and output. It uses the Dompdf library to convert the HTML output into a PDF file. The PDF file is then saved in the 'collection_receipts' folder in the application's uploads directory. The function returns an array containing the path to the generated PDF file and an attachment array with the encoded PDF content, type, and name.
 
@@ -3109,7 +3109,7 @@ public function receipt_attachment($ref_no, $session_school_id, $output)
 {{< /details >}}
 
 ## welcome_email_service
-#### Code Complexity: 58
+{{< complexityLabel "Moderate" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for sending a welcome email to a student. It retrieves the necessary data from the database, replaces placeholders in the email content with actual values, and sends the email to the parent(s) of the student. It also saves the email content in the database and sends a notification to the student's app.
 
@@ -3250,7 +3250,7 @@ public function welcome_email_service($email_parent_array, $session_school_id, $
 {{< /details >}}
 
 ## fetch_deposit_details
-#### Code Complexity: 36
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to fetch deposit details based on a reference number. It retrieves the reference number from the input post data and the school ID from the session. It then calls the `get_parent_emails` method of the `Student_model` to get the parent emails associated with the reference number. If parent emails are found, it creates an array of email addresses and names. It then calls the `fetch_trahistory_details` method of the `Fee_model` to fetch transaction history details based on the reference number and school ID. If transaction history details are found, it retrieves the institute ID, school ID, and class ID from the result and calls the `welcome_email_service` method to send a welcome email to the parent emails. If transaction history details are not found, it calls the `check_concession_present` method of the `Fee_model` to check if there is a concession present for the reference number and school ID. If a concession is found, it retrieves the institute ID, school ID, and class ID from the result and calls the `welcome_email_service` method to send a welcome email to the parent emails.
 
@@ -3325,7 +3325,7 @@ public function fetch_deposit_details()
 {{< /details >}}
 
 ## generate_receipt_link
-#### Code Complexity: 198
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 The `generate_receipt_link` function is used to generate a receipt link for a transaction. It takes in various parameters such as `api_call`, `return`, and `receipt_json` to determine the behavior of the function. The function converts the `api_call` and `return` parameters to booleans and then processes the `receipt_json` parameter to extract necessary information. It then fetches transaction history and payment data based on the provided parameters. The function calculates the total amount, discounts, late fees, and convenience amount for the transaction. It also handles refund data and generates a receipt PDF. Finally, it returns the receipt PDF name or a dash if no data is found.
 
@@ -3532,7 +3532,7 @@ public function generate_receipt_link($api_call = 0, $return = 0, $receipt_json 
 {{< /details >}}
 
 ## receipt_pdf_link
-#### Code Complexity: 15
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function generates a PDF receipt for a transaction. It takes various parameters such as reference number, transaction history, total amount, institute ID, school ID, session school ID, collection type, receipt letterhead, duplicate flag, mail flag, financial year, deposit refund year, mobile flag, manager call flag, payment class ID, return refund flag, total discount, head data, and total late fee. It fetches the header image data from the School_model and creates an array of data to be passed to the view. Depending on the return refund flag, it loads the appropriate view file for generating the receipt HTML. If the duplicate flag is true and the manager call flag is true, it calls the receipt_attachment function to generate an attachment for the receipt. If the mail flag is true, it calls the mail_receipt function to send the receipt via email. Finally, it returns either the path of the attachment or the receipt HTML.
 
@@ -3615,7 +3615,7 @@ public function receipt_pdf_link($ref_no, $transaction_history, $total_amount, $
 {{< /details >}}
 
 ## send_undertaking_form
-#### Code Complexity: 70
+{{< complexityLabel "Moderate" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for sending an undertaking form to the parents of a student. It retrieves the parent data from the database based on the school ID and reference number. If the parent data exists, it retrieves the father and mother email addresses and sends an email to both of them. The email contains a link to download the undertaking form. The function also handles different scenarios based on the student's status and academic year.
 
@@ -3718,7 +3718,7 @@ public function send_undertaking_form($refno, $school_id,$stud_year,$collection_
 {{< /details >}}
 
 ## generate_student_otp
-#### Code Complexity: 101
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to generate an OTP (One-Time Password) for a student. It first checks if the user is accessing the system from a mobile device or a web browser. Then it collects the necessary information from the user input and generates an OTP using the `Generate_otp_helper` class. If the OTP is successfully generated, it checks if the reference number provided by the user is valid. If it is valid, it retrieves the parent data of the student from the database. It then sends the OTP to the parent's mobile number via SMS and to the parent's email address. Finally, it returns a success or failure message based on the status of the SMS and email sending operations.
 
@@ -3833,7 +3833,7 @@ public function generate_student_otp()
 {{< /details >}}
 
 ## validate_parent_otp
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to validate the parent OTP entered by the user. It calls the `valid_otp` function from the `Generate_otp_helper` class to check if the entered OTP is valid. If the OTP is valid, it returns '1'. If the OTP is invalid, it echoes 'Entered OTP is invalid.' and returns.
 
@@ -3869,7 +3869,7 @@ public function validate_parent_otp()
 {{< /details >}}
 
 ## view_pending_transaction
-#### Code Complexity: 48
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to view pending transactions for students. It fetches the necessary data from the database and passes it to the view for display.
 
@@ -3961,7 +3961,7 @@ public function view_pending_transaction()
 {{< /details >}}
 
 ## save_in_student_app
-#### Code Complexity: 7
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to save data in the student app. It takes the reference number, class ID, original preview content, and school ID as parameters. It fetches the school database name based on the school ID. Then it creates an array with the necessary data to be saved in the student app. It replaces double quotes with single quotes in the detail text area. Finally, it inserts the data into the student app database and returns true if successful, false otherwise.
 
@@ -4018,7 +4018,7 @@ public function save_in_student_app($refno,$class_id,$original_preview_content,$
 {{< /details >}}
 
 ## send_welcome_notification
-#### Code Complexity: 25
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for sending a welcome notification to a student who has been accepted into a school. It retrieves the necessary data from the database, constructs the notification message, and sends it to the student's mobile device using a push notification service. The function also saves the notification data in the database for future reference.
 

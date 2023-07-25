@@ -87,9 +87,26 @@
     padding-top: 30px;
 }
 
+@media(min-width: 768px) {
+  .td-sidebar-nav {
+      min-height: calc(100vh - 6rem);
+      overflow-y: auto;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 4px;
+}
+
 // --------------------------------------------------
 // remove whitespace after footer
 // --------------------------------------------------
 footer {
     min-height: auto;
+    display: none !important;
 }

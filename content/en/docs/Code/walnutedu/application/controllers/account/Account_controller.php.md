@@ -3617,7 +3617,7 @@ class Account_controller extends Defaulter_check_controller
 
 
 ## Code block 1
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `Defaulter_check_controller` class is responsible for checking if a user is a defaulter or not. It contains various methods to perform this check.
 
@@ -3634,7 +3634,7 @@ require_once(APPPATH.'controllers/account/Defaulter_check_controller.php');
 {{< /details >}}
 
 ## __construct
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This is the constructor function of a class. It initializes various models and libraries that are required for the class.
 
@@ -3664,7 +3664,7 @@ public function __construct()
 {{< /details >}}
 
 ## index
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is the index function for the Student Account module. It sets up the data needed for the view and loads the main template.
 
@@ -3703,7 +3703,7 @@ function index(){
 {{< /details >}}
 
 ## fetch_student_account
-#### Code Complexity: 661
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 The `fetch_student_account` function is used to fetch the student account details including financial years, academic years, transaction data, defaulter check, and remaining fee calculations. It also handles the payment modes and bank details for the student.
 
@@ -4371,7 +4371,7 @@ function fetch_student_account(){
 {{< /details >}}
 
 ## check_concession
-#### Code Complexity: 7
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to calculate the pending fees total for a student. It takes several parameters including the student's reference number, class ID, current year, total expected amount, total fee amount paid, installment ID, expected school fee, expected institute fee, and school ID. It first checks if there is any concession given to the student by calling the `check_student_concession_fee` function. If a concession is found, it is added to the `concession_given` variable. If no concession is found, `concession_given` is set to 0. Then, the function calculates the pending fees total by subtracting the total fee amount paid and the concession given from the total expected amount. Finally, it returns the pending fees total.
 
@@ -4415,7 +4415,7 @@ public function check_concession($refno, $class_id, $current_year, $total_expect
 {{< /details >}}
 
 ## fetch_installment_details
-#### Code Complexity: 36
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to fetch installment details based on the given parameters. It retrieves the school ID from the session, the academic year from the System_model, and the collection type, reference number, and selected financial year from the input. It then calls the Fee_model to get the computed continuity class and payplan details based on the reference number, selected financial year, academic year, and school ID. If the view flag is 'yes', it fetches the installment information and loads the 'ajax_installment' view. If the view flag is 'payplan', it fetches the payplan details and returns the payplan name. Otherwise, it gets the class name from the Class_division_model and returns the class name, class ID, and payplan.
 
@@ -4479,8 +4479,272 @@ function fetch_installment_details($view_flag = 'yes'){
 ```
 {{< /details >}}
 
+## save_transaction
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
+{{< details "source code " >}}
+```php
+function save_transaction(){
+        $inst_split_array = unserialize(base64_decode($_POST['split_array']));
+        $payment_details = unserialize(base64_decode($_POST['payment_details']));
+        $installment_id = $_POST['installment_id'];
+        $installment_id_array = explode(',',$installment_id);
+        $partial_id_array = $_POST['partial_id_array'];
+        // $custom_plan      = $_POST['custom_plan'];
+        $partial_ids = explode(',',$partial_id_array);
+        $install_id = '';
+        $final_trans_details = array();
+        $school_array = array();
+        $institute_array = array();
+        foreach ($inst_split_array as $inst_key => $inst_value) 
+        {
+            $head_data = [];
+            $head_inst_data = [];
+            $ret_data = '';
+            $discount = 0;
+            foreach ($inst_value as $trans_inst_key => $trans_inst_value) 
+            {
+                if ($inst_key == $trans_inst_value['install_id']) 
+                {
+                    if($trans_inst_value['payplan_sch_id'] == $trans_inst_value['school_id'])
+                    {
+                        $payment_sch_data = array();
+                        foreach($payment_details as $pay_key => $pay_val)
+                        {
+                            if($trans_inst_value['payplan_sch_id'] == $pay_val->sch_id && $trans_inst_value['payplan_inst_id'] == $pay_val->inst_id)
+                            {
+                                array_push($payment_sch_data,(object)$pay_val);
+                            }
+                        }
+                        $other_discount = $_POST['concession_spilt_other'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $discount = $_POST['concession_spilt'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $discount_type = $_POST['concession_type'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $referral_discount = $_POST['referral_discount'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $payplan_discount = $_POST['payplan_discount'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $late_fee = $_POST['late_fee_value'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $ret_data = array(
+                                    'head_id' => $trans_inst_value['payplan_head_id'], 
+                                    'head_amount' => $trans_inst_value['payplan_install_amt']-$discount+$late_fee,
+                                    'head_amount_main' => $trans_inst_value['payplan_install_amt'],
+                                    'discount' => $other_discount,
+                                    'late_fee' => $late_fee,
+                                    'referral_discount' => $referral_discount,
+                                    'payplan_discount' => $payplan_discount,
+                                    'discount_type' => $discount_type);
+                        array_push($head_data,(object)$ret_data);
+
+                        $data_ret['ref_no']                  = strtoupper($trans_inst_value['ref_no']);
+                        $data_ret['collection_type']          = 'fee';//$trans_inst_value['collection_type'];
+                        $data_ret['payment_class_id']         = $trans_inst_value['class_id'];
+                        $data_ret['selected_installment_id']  = $trans_inst_value['install_id'];
+                        $data_ret['selected_financial_year']  = $trans_inst_value['academic_year'];
+                        $data_ret['payplan_id']               = (int)$trans_inst_value['payplan_id'];
+                        $data_ret['head_data']                = $head_data;
+                        $data_ret['yearly_setup_id']          = $trans_inst_value['yearly_setup_id'];
+                        $data_ret['ref_school_id']            = (int)$trans_inst_value['payplan_sch_id'];
+                        $data_ret['ref_institute_id']         = (int)$trans_inst_value['payplan_inst_id'];
+                        $data_ret['session_school_id']        = (int)$trans_inst_value['school_id'];
+                        $data_ret['user_name']                = $trans_inst_value['user_name'];
+                        $data_ret['install_name']                = $trans_inst_value['installment_name'];
+                        $data_ret['payment_details']          = array_values($payment_sch_data);
+                        $data_ret['custom_plan']                = $trans_inst_value['custom_plan'];
+                    }else{
+                        $payment_inst_data = array();
+                        foreach($payment_details as $pay_key => $pay_val)
+                        {
+                            if($trans_inst_value['payplan_sch_id'] == $pay_val->sch_id && $trans_inst_value['payplan_inst_id'] == $pay_val->inst_id)
+                            {
+                                array_push($payment_inst_data,(object)$pay_val);
+                            }
+                        }
+                        $other_discount = $_POST['concession_spilt_other'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $discount = $_POST['concession_spilt'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $discount_type = $_POST['concession_type'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $referral_discount = $_POST['referral_discount'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $payplan_discount = $_POST['payplan_discount'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $late_fee = $_POST['late_fee_value'.$trans_inst_value['payplan_head_id'].$trans_inst_value['install_id']];
+                        $ret_data = array(
+                                    'head_id' => $trans_inst_value['payplan_head_id'], 
+                                    'head_amount' => $trans_inst_value['payplan_install_amt']-$discount+$late_fee,
+                                    'head_amount_main' => $trans_inst_value['payplan_install_amt'],
+                                    'discount' => $other_discount,
+                                    'late_fee' => $late_fee,
+                                    'referral_discount' => $referral_discount,
+                                    'payplan_discount' => $payplan_discount,
+                                    'discount_type' => $discount_type);
+                        array_push($head_inst_data,(object)$ret_data);
+
+                        $data_inst_ret['ref_no']                  = strtoupper($trans_inst_value['ref_no']);
+                        $data_inst_ret['collection_type']          = 'fee';//$trans_inst_value['collection_type'];
+                        $data_inst_ret['payment_class_id']         = $trans_inst_value['class_id'];
+                        $data_inst_ret['selected_installment_id']  = $trans_inst_value['install_id'];
+                        $data_inst_ret['selected_financial_year']  = $trans_inst_value['academic_year'];
+                        $data_inst_ret['payplan_id']               = (int)$trans_inst_value['payplan_id'];
+                        $data_inst_ret['head_data']                = $head_inst_data;
+                        $data_inst_ret['yearly_setup_id']          = $trans_inst_value['yearly_setup_id'];
+                        $data_inst_ret['ref_school_id']            = (int)$trans_inst_value['payplan_sch_id'];
+                        $data_inst_ret['ref_institute_id']         = (int)$trans_inst_value['payplan_inst_id'];
+                        $data_inst_ret['session_school_id']        = (int)$trans_inst_value['school_id'];
+                        $data_inst_ret['user_name']                = $trans_inst_value['user_name'];
+                        $data_inst_ret['install_name']             = $trans_inst_value['installment_name'];
+                        $data_inst_ret['payment_details']          = array_values($payment_inst_data);
+                        $data_inst_ret['custom_plan']              = $trans_inst_value['custom_plan'];
+                    }
+                }
+            }
+            array_push($school_array, $data_ret);
+            array_push($institute_array,$data_inst_ret);
+        }
+        $final_trans_details = array_filter(array_merge($school_array,$institute_array));
+        $final_trans_details = array_values($final_trans_details);
+        
+        foreach ($final_trans_details as $save_key => $payment_data) 
+        {
+            $ref_no                   = strtoupper($payment_data['ref_no']);
+            $collection_type          = $payment_data['collection_type'];
+            $payment_class_id         = $payment_data['payment_class_id'];
+            $selected_installment_id  = $payment_data['selected_installment_id'];
+            $selected_financial_year  = $payment_data['selected_financial_year'];
+            $payplan_id               = (int)$payment_data['payplan_id'];
+            $head_data                = $payment_data['head_data'];
+            $yearly_setup_id          = $payment_data['yearly_setup_id'];
+            $ref_school_id            = (int)$payment_data['ref_school_id'];
+            $ref_institute_id         = (int)$payment_data['ref_institute_id'];
+            $session_school_id        = (int)$payment_data['session_school_id'];
+            $user_name                = $payment_data['user_name'];
+            $payment_details          = $payment_data['payment_details'];
+            $accept_status            = $this->input->post('accept_status');
+            $parent_otp               = $this->input->post('parent_otp');
+            $current_class_id         = $this->input->post('current_class_id');
+            $install_name             = $payment_data['install_name'];
+            $custom_plan              = $payment_data['custom_plan'];
+
+            $late_payment_data = NULL; // Todo - Late fee  flag & late fee amount (will come from UI)
+
+            $academic_year = $this -> System_model -> get_academic_year();
+            $transaction_id = 0;
+
+            // Get actual deposit refunt amount for refund calculation
+            $ret_refund_data = $this-> Fee_model->get_refund_data($payment_class_id,$selected_financial_year,$head_data[0]->head_id,$session_school_id);
+            $refund_amt = $ret_refund_data[0]->refund_amount;
+            
+            if($custom_plan == 0)
+            {
+                // Already Paid Check
+                $paid_status = $this-> Fee_model ->check_paid_unpaid($ref_no, $selected_financial_year, $payplan_id, $selected_installment_id, $session_school_id, $ref_school_id, $ref_institute_id,$collection_type);
+            }else{
+                $paid_status = NULL;
+            }
+            
+            if($paid_status != NULL) {
+                echo -3;return;
+            } else {
+                $this->load->model('account/Receipt_model');
+                // echo $payment_details;return;
+                $transaction_id = $this-> Receipt_model ->save_transaction($session_school_id, $academic_year, $selected_financial_year, $user_name, $selected_installment_id, $payplan_id, $head_data, $yearly_setup_id, $ref_school_id, $ref_institute_id,$collection_type, $late_payment_data, $ref_no, $payment_class_id, $payment_details[0],$refund_amt);
+
+                //Errors
+                if ($transaction_id === 0) { // Failure
+                    echo 0;return;
+                }
+                if ($transaction_id === -1) { // Transaction failure
+                    echo -1;return;
+                }
+                if ($transaction_id === -2) { // Amount mismatch
+                    echo -2;return;
+                }
+            }
+            //update partial id paid status
+            if(count($partial_id_array) > 0)
+            {
+                $paid_status_update = $this -> Fee_model -> update_student_partial_paid_status($partial_ids,$ref_no,$session_school_id);
+            }
+            // To save undertaking form accept data
+            if ($accept_status == 2) 
+            {
+                $data['school_id']          = $session_school_id;
+                $data['refno']              = $ref_no;
+                $data['class_id']           = $payment_class_id;
+                $data['academic_year']      = $selected_financial_year;
+                $data['link_status']        = $accept_status;
+                $data['parent_otp']         = $parent_otp;
+                $data['link_response']      = 'YES';
+                $data['link_reason']        = 'Accepted while paying fees in school';
+                $data['submitted_date']     = date("Y-m-d h:i:s");
+                if ($_SERVER['HTTP_HOST'] == 'localhost') 
+                {
+                    $data['user_ip'] = '192.168.1.2'; // TODO remove temp IP address - - Locally it returns ::1    
+                } else 
+                {
+                    $data['user_ip']   = $_SERVER['REMOTE_ADDR']; // Client IP address 
+                }
+                $data['useragent']     = $_SERVER['HTTP_USER_AGENT'];
+                $data['dep_link_status']    = NULL;
+                $data['dep_useragent']      = NULL;
+                $data['dep_link_response']  = NULL;
+                $data['dep_user_ip']        = NULL;
+                $data['dep_link_reason']    = NULL;
+                $data['dep_otp']            = NULL;
+                $data['dep_submitted_date'] = NULL;
+
+                $continuity_result = $this-> Continuity_form_model -> fetch_undertaking_link_data($ref_no,$data,$selected_financial_year);
+                if ($continuity_result != NULL) 
+                {
+                    $data['dep_link_status']    = $continuity_result->dep_link_status;
+                    $data['dep_useragent']      = $continuity_result->dep_user_name;
+                    $data['dep_link_response']  = $continuity_result->dep_link_response;
+                    $data['dep_user_ip']        = $continuity_result->dep_ip_address;
+                    $data['dep_link_reason']    = $continuity_result->dep_link_reason;
+                    $data['dep_otp']            = $continuity_result->dep_parent_otp;
+                    $data['dep_submitted_date'] = $continuity_result->dep_submitted_date;
+
+                    $result = $this-> Continuity_form_model ->update_continuity_info($data);
+                }else{
+                    $result = $this-> Continuity_form_model ->save_continuity_data($data);
+                }
+                if ($continuity_result->link_status != 2) 
+                {
+                    $this->send_undertaking_form($ref_no, $session_school_id,$selected_financial_year,$collection_type);
+                }
+            }
+            $student_status = $this-> Student_model ->fetch_student_specific_info($ref_no, $session_school_id, 'status');
+
+            if($collection_type != 'exam' && ($student_status == 6 || $student_status == 7))
+            {
+                // Student status change
+                $this->convert_student_status($ref_no, $selected_financial_year, $payplan_id, $selected_installment_id, $collection_type, $session_school_id);
+            }
+
+            // Send data to show receipts
+            $receipt_json = json_encode(
+                                        array(
+                                            'transaction_id'     => $transaction_id,
+                                            'collection_type'    => $collection_type,
+                                            'ref_no'             => $ref_no,
+                                            'payment_class_id'   => $payment_class_id,
+                                            'payplan_id'         => $payplan_id,
+                                            'installment_id'     => $selected_installment_id,
+                                            'financial_year'     => $selected_financial_year,
+                                            'academic_year'      => $academic_year,
+                                            'ref_school_id'      => $ref_school_id,
+                                            'ref_institute_id'   => $ref_institute_id,
+                                            'session_school_id'  => $session_school_id,
+                                            'receipt_letterhead' => $payment_details[0]->receipt_letterhead,
+                                            'is_duplicate'       => FALSE,
+                                            'is_mail'            => TRUE,
+                                            'is_mobile'          => $is_mobile,
+                                            'head_data'          => $head_data,
+                                            'install_name'       => $install_name,
+                                            'custom_plan'        => $custom_plan
+                                        )
+                                    );
+            echo $this->generate_receipt(0, 0, $receipt_json);
+        }
+	}
+```
+{{< /details >}}
+
 ## generate_receipt
-#### Code Complexity: 240
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function generates a receipt for a transaction. It takes in various parameters such as the API call flag, return flag, receipt JSON, and other transaction details. It converts the API call and return flags to booleans and then processes the receipt JSON to extract the necessary information. It then fetches transaction and payment data from the database based on the provided details. It calculates the total amount, convenience amount, and deposit refund year. Finally, it generates a PDF receipt and returns the file name.
 
@@ -4699,7 +4963,7 @@ public function generate_receipt($api_call = 0, $return = 0, $receipt_json = NUL
 {{< /details >}}
 
 ## receipt_pdf
-#### Code Complexity: 15
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function generates a PDF receipt for a transaction. It takes various parameters such as reference number, transaction history, total amount, institute ID, school ID, session school ID, collection type, receipt letterhead, duplicate flag, mail flag, financial year, deposit refund year, mobile flag, manager call flag, payment class ID, total discount, head data, and total late fee. It then fetches the header image data from the School_model, creates an array of data to be passed to the view, and loads the appropriate view based on the institute ID. If the duplicate flag is true and the manager call flag is true, it calls the receipt_attachment function and stores the return value in the ret_receipt_array. If the mail flag is true, it calls the mail_receipt function. Finally, it returns either the return path from the ret_receipt_array or the receipt HTML depending on the duplicate and manager call flags.
 
@@ -4781,7 +5045,7 @@ public function receipt_pdf($ref_no, $transaction_history, $total_amount, $ref_i
 {{< /details >}}
 
 ## mail_receipt
-#### Code Complexity: 41
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to send a receipt email to parents. It fetches the parent emails from the database, generates the email content and attachments, and sends the email using the Send_mail_helper class. If the institute ID is 1 and it is not a duplicate receipt, it also sends a welcome email.
 
@@ -4878,7 +5142,7 @@ function mail_receipt($ref_no, $session_school_id, $ref_school_id, $ref_institut
 {{< /details >}}
 
 ## convert_student_status
-#### Code Complexity: 149
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to convert the student status based on certain conditions. It fetches the student status from the database and checks if it is equal to 6 or 7. If it is 6, the new status is set to 1. If it is 7, the new status is set to 2. It then checks if the student admission year is different from the current academic year. If it is different, it performs some calculations and checks to determine if the status can be changed. If the status can be changed, it updates the student status in the database and performs some actions related to Google Classroom.
 
@@ -5069,7 +5333,7 @@ public function convert_student_status($ref_no, $selected_financial_year, $paypl
 {{< /details >}}
 
 ## receipt_attachment
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function generates a PDF receipt attachment for a given reference number, session school ID, and output. It uses the Dompdf library to convert the HTML output into a PDF file. The PDF file is then saved in the 'collection_receipts' folder in the application's uploads directory. The function returns an array containing the path to the generated PDF file and an attachment array with the encoded PDF content, type, and name.
 
@@ -5112,7 +5376,7 @@ public function receipt_attachment($ref_no, $session_school_id, $output)
 {{< /details >}}
 
 ## welcome_email_service
-#### Code Complexity: 38
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for sending a welcome email to a student. It retrieves the necessary data from the database, replaces placeholders in the email content with actual values, and sends the email to the parent(s) of the student.
 
@@ -5208,7 +5472,7 @@ public function welcome_email_service($email_parent_array, $session_school_id, $
 {{< /details >}}
 
 ## fetch_transaction_details
-#### Code Complexity: 132
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function fetches transaction details for a payment. It retrieves payment data from the input, including unpaid transactions, payment details, installment ID, and partial ID array. It also retrieves the current class ID and concession and late fee data. It then processes the unpaid transactions and applies any applicable concessions. Finally, it sorts the transactions by due date and returns the transaction details.
 
@@ -5475,7 +5739,7 @@ public function fetch_transaction_details()
 {{< /details >}}
 
 ## fetch_elligible_students
-#### Code Complexity: 408
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function fetches eligible students based on the given data and class selected flag. It retrieves the academic year and next year from the System_model. It then checks the fee or deposit selected flag and sets the fee_selected_flag accordingly. It checks the refnos for their pending fees/deposits and stores the payment details in an array. It also computes the class id and fetches partial fee data or yearly fee heads based on the availability. It calculates the unpaid amount, minimum due date, and total fee head amount for each installment. It then creates a payment details array with all the necessary details and returns it.
 
@@ -5745,7 +6009,7 @@ public function fetch_elligible_students($data, $class_selected_flag)
 {{< /details >}}
 
 ## fetch_discount_details
-#### Code Complexity: 186
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function fetches discount details for a student. It retrieves various data related to discounts such as concession data, fee head details, installment details, etc.
 
@@ -6009,7 +6273,7 @@ public function fetch_discount_details()
 {{< /details >}}
 
 ## save_partial_transaction
-#### Code Complexity: 30
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `save_partial_transaction` function is responsible for saving partial transactions. It takes the necessary data from the `$_POST` array, processes it, and saves the transaction in the database. It also generates a receipt for the transaction.
 
@@ -6190,7 +6454,7 @@ function save_partial_transaction(){
 {{< /details >}}
 
 ## insert_link_data
-#### Code Complexity: 42
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `insert_link_data` function is responsible for inserting link data into the database. It retrieves the necessary data from the session and input, performs some checks, and then inserts the data into the database. It also sends a payment link if the data is successfully inserted.
 
@@ -6275,7 +6539,7 @@ public function insert_link_data()
 {{< /details >}}
 
 ## generate_unique_refno_key
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function generates a unique reference number key based on various input parameters. It concatenates the input parameters with a Unix timestamp and a random string of bytes to create the key. The key is then returned as a string.
 
@@ -6299,7 +6563,7 @@ private function generate_unique_refno_key($ref_no, $payplan, $installment, $fin
 {{< /details >}}
 
 ## generate_short_payment_link
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function generates a short payment link using the Bitfly service. It takes a long link as input and returns a short link.
 
@@ -6335,7 +6599,7 @@ private function generate_short_payment_link($link){
 {{< /details >}}
 
 ## generate_payment_link
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function generates a payment link for a given reference number, reference fees data, and payment class ID. It first generates a unique reference number key using the `generate_unique_refno_key` function. Then, it creates a long link by concatenating the school ID and the unique reference number key. Finally, it saves the payment link details using the `save_payment_link_details` function in the `Fee_model`.
 
@@ -6354,7 +6618,7 @@ private function generate_payment_link($refno, $ref_fees_data, $payment_class_id
 {{< /details >}}
 
 ## fetch_payment_link
-#### Code Complexity: 15
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for fetching the payment link for a given reference number and data. It calls the `fetch_student_payment_link` method of the `Fee_model` class to get the payment link data. If the data is not null and the link is not null, it generates a long link and a short link using the `generate_short_payment_link` method. Finally, it returns an array containing the long link and the short link. If the data or the link is null, it returns null.
 
@@ -6383,7 +6647,7 @@ private function fetch_payment_link($refno, $data)
 {{< /details >}}
 
 ## send_payment_link
-#### Code Complexity: 121
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for sending a payment link to the parent of a student. It retrieves the necessary data from the database, constructs the email content, and sends the email to the parent.
 
@@ -6556,7 +6820,7 @@ private function send_payment_link($refno, $data)
 {{< /details >}}
 
 ## view_payplan
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for displaying the student payplan page. It sets up the necessary data for the page and loads the corresponding view.
 
@@ -6581,7 +6845,7 @@ public function view_payplan()
 {{< /details >}}
 
 ## insert_student_payplan
-#### Code Complexity: 20
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `insert_student_payplan` function is responsible for inserting payment plans for students. It retrieves the financial years, academic year, and student information from the database. Then, for each student and financial year, it retrieves the pay plan details and installment setup details. Finally, it inserts the payment plan for each installment.
 
@@ -6701,7 +6965,7 @@ function insert_student_payplan(){
 {{< /details >}}
 
 ## student_payplan
-#### Code Complexity: 48
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `student_payplan` function is responsible for managing all incoming and outgoing credits and debits on the Student Account. It retrieves data related to the student's payplan and displays it on the page.
 
@@ -6795,7 +7059,7 @@ function student_payplan(){
 {{< /details >}}
 
 ## generate_student_otp
-#### Code Complexity: 101
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to generate an OTP (One-Time Password) for a student. It first checks if the user is accessing the system from a mobile device or a web browser. Then it collects the necessary information from the user input and generates an OTP using the `Generate_otp_helper` class. If the OTP is successfully generated, it checks if the reference number provided by the user is valid. If it is valid, it retrieves the parent data of the student from the database. It then sends the OTP to the parent's mobile number via SMS and to the parent's email address. Finally, it returns a success or failure message based on the status of the SMS and email sending operations.
 
@@ -6910,7 +7174,7 @@ public function generate_student_otp()
 {{< /details >}}
 
 ## validate_parent_otp
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to validate the parent OTP entered by the user. It calls the `valid_otp` function from the `Generate_otp_helper` class to check if the entered OTP is valid. If the OTP is valid, it returns '1'. If the OTP is invalid, it echoes 'Entered OTP is invalid.' and returns.
 
@@ -6946,7 +7210,7 @@ public function validate_parent_otp()
 {{< /details >}}
 
 ## send_undertaking_form
-#### Code Complexity: 70
+{{< complexityLabel "Moderate" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for sending an undertaking form to the parents of a student. It retrieves the parent data from the database based on the school ID and reference number. It then sends an email to the parents with the undertaking form attached.
 
@@ -7045,7 +7309,7 @@ public function send_undertaking_form($refno, $school_id,$stud_year,$collection_
 {{< /details >}}
 
 ## save_in_student_app
-#### Code Complexity: 7
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to save data in the student app. It takes the reference number, class ID, original preview content, and school ID as parameters. It fetches the school database name based on the school ID. Then it creates an array with the necessary data to be saved in the student app. It replaces double quotes with single quotes in the detail text area. Finally, it inserts the data into the student app database and returns true if successful, false otherwise.
 
@@ -7102,7 +7366,7 @@ public function save_in_student_app($refno,$class_id,$original_preview_content,$
 {{< /details >}}
 
 ## bulk_date_change
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for displaying the bulk due date change page. It sets up the necessary data for the page and loads the view template.
 
@@ -7124,7 +7388,7 @@ public function bulk_date_change()
 {{< /details >}}
 
 ## import_bulk_date_csv
-#### Code Complexity: 367
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to import bulk data from a CSV file. It reads the CSV file, validates the data, and saves it to the database.
 
@@ -7347,7 +7611,7 @@ public function import_bulk_date_csv()
 {{< /details >}}
 
 ## update_profile_due_date
-#### Code Complexity: 35
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `update_profile_due_date` function is responsible for updating the due dates of fee profiles for all students in a school. It retrieves the list of reference numbers for all students in the school and then iterates over each reference number to update the fee profiles. For each fee profile, it retrieves the current academic year, next academic year, and previous academic year from the system model. It then computes the continuity class for the student based on the selected financial year and current academic year. Next, it retrieves the payplan details for the reference number, computed class, and financial year. If the payplan details are not found, it displays an error message. If the payplan details are found, it fetches the fee profile details for the reference number, school ID, computed class ID, financial year, and payplan. If the fee profile details are not null, it iterates over each fee profile and updates the payment information by modifying the due dates. Finally, it updates the fee profile in the database.
 
