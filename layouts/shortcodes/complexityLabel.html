@@ -1,0 +1,45 @@
+{{ $label := .Get 0 }}
+{{ $complexity := .Get 1  }}
+{{ $color := "" }}
+{{ $backgroundColor := "" }}
+{{ if eq $label "Good" }}
+  {{ $color = "green" }}
+  {{ $backgroundColor = "#deffde" }}
+  <span class="green-label">{{ .Inner }}</span>
+{{ else if eq $label "Moderate" }}
+  {{ $color = "orange" }}
+  {{ $backgroundColor = "#fff4e1" }}
+  <span class="orange-label">{{ .Inner }}</span>
+{{ else }}
+  {{ $color = "red" }}
+  {{ $backgroundColor = "#ffe9e9" }}
+  <span class="hard-label">{{ .Inner }}</span>
+{{ end }}
+
+<blockquote data-toggle="tooltip" data-placement="bottom" title="{{ $complexity }}" class="{{ $color }}-label" style="border-left: 6px solid {{ $color }};">
+    <span class="{{ $color }}-label" >Code Complexity: {{ $label }}</span>
+</blockquote>
+
+<style>
+  .green-label {
+      color: green;
+  }
+  
+  .orange-label {
+      color: orange;
+  }
+  
+  .red-label {
+      color: red;
+  }
+
+  blockquote {
+    width: fit-content;
+  }
+</style>
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>

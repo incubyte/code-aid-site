@@ -1870,7 +1870,7 @@ class Student_generic_controller_HO extends CI_Controller
 
 
 ## __construct
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This is the constructor function of a class. It initializes the class and sets up necessary configurations and dependencies. It also checks if the user is logged in and sets the default timezone. It loads various models, helpers, libraries, and sets up session. 
 
@@ -1903,7 +1903,7 @@ public function __construct()
 {{< /details >}}
 
 ## index
-#### Code Complexity: 7
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is the index method of a controller. It is responsible for rendering the view for managing generic emails. It sets up the necessary data for the view, such as page title, description, breadcrumb, and school data. It then loads the main template view with the necessary data.
 
@@ -1947,7 +1947,7 @@ public function index()
 {{< /details >}}
 
 ## show_mail_type
-#### Code Complexity: 949
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 The `show_mail_type` function is responsible for displaying the mail type based on the selected school and module type. It retrieves the necessary data from the database and sets it in the `$data` array. It also handles the selection of class, division, and status for generating the mail.
 
@@ -2405,8 +2405,122 @@ public function show_mail_type(){
 ```
 {{< /details >}}
 
+## send_test_email_sms_generic
+{{< complexityLabel "Moderate" >}}{{< /complexityLabel >}}
+{{< details "source code " >}}
+```php
+public function send_test_email_sms_generic(){
+
+		// Test Email/SMS
+		$sel_school_id = $_POST['selected_school_id'];
+
+		if ($_POST['test_email_add'] != NULL || $_POST['test_email_add'] != '') {
+			$email_sms_recipient_value = $_POST['test_email_add'];	
+		} else {
+			$email_sms_recipient_value = NULL;
+			echo "Please enter test Email-ID/SMS no.!~FALSE";
+			return;
+		}
+
+		// Email/SMS Flag
+		if (isset($_POST['mail_or_sms'])) {
+			if ($_POST['mail_or_sms'] != NULL && $_POST['mail_or_sms'] != '') {
+				$mail_or_sms = $_POST['mail_or_sms'];
+			}
+		}else{
+			echo "Please select either E-mail or SMS!~FALSE";
+			return;
+		}
+
+		// check insert feedback image
+		$insert_img_flag = $_POST['feedback_flag'];
+		$temp_id = $_POST['temp_id'];
+		$sender_id = $_POST['sender_id'];
+		$name_template = 'Firstname Lastname';
+
+		$preview_content = read_file('./application/views/student/generic_specific/email_content/generic_email_content_'.$_POST['file_no'].'.txt');
+		$preview_content = str_replace('<<name_template>>', $name_template, $preview_content);
+
+		// Mail OR SMS
+		if ($mail_or_sms == 'email') {
+			$mail_array = array();
+			$temp_mail_array =  array(
+									'email' => trim($email_sms_recipient_value), 
+									'name' => 'TEST',
+									'type' => 'to'
+								);
+			array_push($mail_array, $temp_mail_array);
+
+			$subject_content = read_file('./application/views/student/generic_specific/email_content/generic_subject_content_'.$_POST['file_no'].'.txt');
+
+			if ($insert_img_flag == 1) 
+			{	
+				// Here For TEST mail we use Random Refno, 1- Feedback id, 0 - Mail format (0 - TEST mail ,1- Sent To ALL)
+				$mail_template = $this ->insert_feedback_image($subject_content,$sel_school_id,'ha01',1,0);	
+				$preview_content .= $mail_template;
+			}
+
+			// Attachment code starts here
+			$attachments = array();
+			if (isset($_SESSION['attachment_csv_data'])) {
+
+				$csv_data                          = $_SESSION['attachment_csv_data'];
+				$send_csv_data                     = array();
+				$refnos                            = array_keys($csv_data);
+				$send_csv_data['column']           = $csv_data['column'];
+				$send_csv_data[$refnos[1]]         = $csv_data[$refnos[1]];
+				$send_csv_data['send_to_app_flag'] = FALSE;
+
+				$attachment_result = $this->do_attachment($preview_content, $send_csv_data, $refnos[1]);
+				$preview_content = $attachment_result['preview_content'];
+				$attachments     = $attachment_result['attachments'];
+			}
+			// Attachment code ends here
+			$email_sender_info = array('module_code' => 'GENERIC_EMAIL', 'school_id' => $sel_school_id, 'ref_sch_id' => '0', 'ref_inst_id' => '0');
+			$email_sender = Send_mail_helper::get_sender_data($email_sender_info);
+
+			// BCC Emails
+			$email_sender_array = array(
+											'sender_name' => $email_sender['sender_name'],
+											'from_email'  => $email_sender['from_email'],
+							                'school_id'   => $sel_school_id,
+							                'bcc_email'   => TRUE
+										);
+			
+			$email_status = Send_mail_helper::send_mail($mail_array, $preview_content, "TEST EMAIL - ".$subject_content, $attachments, $email_sender_array);
+			if ($email_status) {
+				echo "Test email has been sent to ".$email_sms_recipient_value.". Please check.~TRUE";
+			}else{
+				echo "Failed! Email not sent.~FALSE";
+			}
+		}else{
+			$preview_content = $preview_content.'##'.$temp_id.'##'.'**'.$sender_id.'**';
+			$email_sender_info = array('module_code' => 'GENERIC_EMAIL', 'school_id' => $sel_school_id, 'ref_sch_id' => '0', 'ref_inst_id' => '0');
+			$sms_sender = Send_sms_helper::get_sms_sender($email_sender_info);
+			$sms_sender_array = array('sms_sender_name' => $sms_sender);
+
+			if ($this->remaining_sms_count() >= 1) {
+				$sms_status = Send_sms_helper::send_sms($email_sms_recipient_value, $preview_content,$sms_sender_array);
+				if ($sms_status) {
+					echo "Test SMS has been sent to ".$email_sms_recipient_value." Please check.~TRUE";
+				}else{
+					echo "Failed! SMS not sent.~FALSE";
+				}
+			}else{
+				echo "Insufficient SMS balance!~FALSE";
+			}
+		}
+		//Always send test notification to app
+		if (true) {
+			$push_notification_status = Send_push_notification_helper::send_push_notification(null, "(TEST) ".$subject_content, "{}");
+		}		
+		return;
+	}
+```
+{{< /details >}}
+
 ## check_ref_no_exist
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to check if a reference number exists in the database for a selected school. It takes the reference number and the selected school ID from the POST request and calls the `ref_no_exist_ho` method of the `Generic_model` class to check if the reference number exists. The result is then printed.
 
@@ -2439,7 +2553,7 @@ public function check_ref_no_exist(){
 {{< /details >}}
 
 ## send_to_all
-#### Code Complexity: 112
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 The `send_to_all` function is responsible for sending generic emails or SMS to selected recipients. It retrieves the necessary data from the POST request and calls the `send_mail_all` function to send the emails or SMS.
 
@@ -2588,7 +2702,7 @@ public function send_to_all(){
 {{< /details >}}
 
 ## send_content_to_app
-#### Code Complexity: 79
+{{< complexityLabel "Moderate" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to send content to the app. It takes several parameters including comma_separated_refno, refno, sel_class, sel_div, subject_content, original_preview_content, msg_type, and sel_school_id. It first initializes an array called student_app with null values for ref_no, class_id, division_id, subject_id, unit_id, and sel_school_id. It then assigns the values of subject_content, msg_type, and original_preview_content to the corresponding keys in the student_app array. If comma_separated_refno is 'YES', it assigns the values of refno, sel_class, and sel_div to the corresponding keys in the student_app array and calls the save_in_student_app function. If the save_in_student_app function returns true, it returns true, otherwise it returns false. If comma_separated_refno is 'NO', it checks if sel_class is not equal to '0'. If it is not equal to '0', it assigns the values of sel_class and sel_div to the corresponding keys in the student_app array and calls the save_in_student_app function. If the save_in_student_app function returns true, it returns true, otherwise it returns false. If sel_class is equal to '0', it retrieves the class_div_data from the Generic_model and assigns the values of class_id and division_id from each row in the class_div_data to the corresponding keys in the student_app array. It then calls the save_in_student_app function for each row in the class_div_data. If all the save_in_student_app function calls return true, it returns true, otherwise it returns false.
 
@@ -2658,7 +2772,7 @@ public function send_content_to_app($comma_seperated_refno, $refno, $sel_class, 
 {{< /details >}}
 
 ## save_in_student_app
-#### Code Complexity: 7
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to save a student application in the student app. It takes a student app object as input and extracts the necessary data from it to create a new record in the database. The function sets default values for some fields and also includes the current date and time as the created and modified dates. After inserting the data, it checks if the insertion was successful and returns a boolean value accordingly.
 
@@ -2714,7 +2828,7 @@ public function save_in_student_app($student_app){
 {{< /details >}}
 
 ## write_email_template
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for writing an email template. It takes the email content and template subject value from the POST request and saves them in separate files. It also generates a random number to be used as part of the file names. Finally, it returns a success message along with the random number.
 
@@ -2761,7 +2875,7 @@ public function write_email_template() {
 {{< /details >}}
 
 ## remaining_sms_count
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function retrieves the remaining SMS count from an API. It makes a GET request to the API endpoint and parses the response to extract the remaining balance. The balance is then converted to an integer and returned.
 
@@ -2797,7 +2911,7 @@ public function remaining_sms_count(){
 {{< /details >}}
 
 ## send_email
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to send an email. It takes an email parameter as input and sends an email using the Send_mail_helper class. The email parameter should contain the attachments, email code, selected school ID, and other necessary information. It retrieves the sender data using the email code and selected school ID. Then it constructs an email sender array with the sender name, from email, school ID, and BCC email flag. Finally, it calls the send_mail function of the Send_mail_helper class to send the email with the parent mail array, preview content, subject content, attachments, and email sender array.
 
@@ -2841,7 +2955,7 @@ public function send_email($email_parameter){
 {{< /details >}}
 
 ## upload_attachments
-#### Code Complexity: 416
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 The `upload_attachments` function is responsible for handling the upload of attachments. It first retrieves AWS data using the `get_aws_data` method from the `System_model` class. Then, it checks if the `attachment_file` is set in the `$_FILES` array. If it is set, it proceeds with the upload process. It sets the upload directory path and allowed file types in the `$config` array. It then loads the `upload` library and attempts to upload the file. If the upload fails, it returns an error message. If the upload is successful, it retrieves the uploaded file data and performs further processing. It reads the file content, parses it as CSV, and stores the data in arrays. It performs various checks and validations on the CSV data, such as checking the number of columns, file names, file extensions, and file existence. Finally, it stores the attachment data in the `$_SESSION['attachment_csv_data']` array and returns a success message.
 
@@ -3057,7 +3171,7 @@ public function upload_attachments(){
 {{< /details >}}
 
 ## do_attachment
-#### Code Complexity: 35
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `do_attachment` function is responsible for processing attachments in a given CSV data. It retrieves AWS data, gets the attachment directory path, and initializes variables for file name, file extensions, attachment type, mime type, attachments, and image data. It then iterates through the CSV data to process each attachment. For each attachment, it checks if the file name is not empty. If not empty, it gets the attachment path, file extension, content ID, and file contents from AWS. It checks if the attachment ID is present in the preview content. If present, it replaces the attachment ID with the image in the preview content and sets the attachment type to 'inline'. If not present, it sets the attachment type to 'attachment' and gets the mime type from the file contents. It then adds the attachment details to the attachments array. Finally, it returns the updated preview content, attachments array, and image data.
 
@@ -3125,7 +3239,7 @@ public function do_attachment($preview_content, $csv_data, $refno){
 {{< /details >}}
 
 ## insert_schedule_data
-#### Code Complexity: 15
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to insert schedule data into the database. It retrieves the necessary data from the POST request and inserts it into the 'schedule_data' table. The function also handles the attachment of CSV data and sets the appropriate flags and values for the schedule data.
 
@@ -3192,7 +3306,7 @@ public function insert_schedule_data()
 {{< /details >}}
 
 ## schedule_email_sms
-#### Code Complexity: 29
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to schedule email and SMS notifications. It retrieves schedule data from the database and passes it to the view for display. It also retrieves class and division data based on the schedule data.
 
@@ -3246,7 +3360,7 @@ public function schedule_email_sms()
 {{< /details >}}
 
 ## delete_schedule_data
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to delete schedule data from the database. It takes the selected school ID and the primary ID of the schedule as input. It then calls the `delete_schedule_details_ho` method of the `Generic_model` class to delete the schedule details. If the deletion is successful, it returns '1'. Otherwise, it returns 'Could not Delete.'.
 
@@ -3290,7 +3404,7 @@ public function delete_schedule_data()
 {{< /details >}}
 
 ## fetch_student_data
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for fetching student data based on the given reference number and school ID. It first retrieves the reference number and school ID from the input. Then, it calls the `get_student_details_ho` method of the `Generic_model` to get the student details. If the returned data is not empty, it assigns it to the `ret_refno_data` variable. Finally, it loads the `view_student_details` view and passes the `ret_refno_data` to it.
 
@@ -3329,7 +3443,7 @@ public function fetch_student_data()
 {{< /details >}}
 
 ## fetch_teacher_data
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for fetching teacher data based on the provided teacher ID and school ID. It retrieves the teacher's details using the `get_teacher_admin_details` method from the `Generic_specific_model` class. If the teacher data is found, it is passed to the view `view_teacher_details` to display the teacher's details. If no teacher data is found, a NULL value is passed to the view.
 
@@ -3371,7 +3485,7 @@ public function fetch_teacher_data()
 {{< /details >}}
 
 ## fetch_admin_data
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for fetching admin data based on the admin ID provided. It retrieves the admin ID from the input post data and then calls the `get_teacher_admin_details` method of the `Generic_specific_model` class to fetch the admin details. If the admin data is found, it is passed to the view `view_admin_details` for display.
 
@@ -3413,7 +3527,7 @@ public function fetch_admin_data()
 {{< /details >}}
 
 ## send_all_schedule_data
-#### Code Complexity: 40
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function sends all schedule data to the appropriate recipients. It retrieves the schedule data from the `Generic_specific_model` and loops through each schedule to send the data. It performs various operations on the schedule data such as splitting strings, decoding JSON, and inserting feedback map data. Finally, it calls the `send_mail_all` function to send the email to the recipients.
 
@@ -3472,7 +3586,7 @@ public function send_all_schedule_data()
 {{< /details >}}
 
 ## send_mail_all
-#### Code Complexity: 653
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to send emails to multiple recipients. It takes in various parameters such as the array of reference numbers, array of teacher IDs, array of admin IDs, flag to determine if the email is generic or specific, file number, flag to determine if the email should be sent to the app, comma-separated reference numbers, class, division, flag to determine if the email is for mail or SMS, array of additional email/SMS recipients, flag to determine if attachments should be included, CSV data, module flag, selected school ID, flag to determine if images should be inserted, UNIX timestamp, template ID, and sender ID.
 
@@ -3828,7 +3942,7 @@ public function send_mail_all($ref_no_array,$teacher_id_array,$admin_id_array,$g
 {{< /details >}}
 
 ## ajax_division_list_ho
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to retrieve and display a list of divisions based on the selected class and school. It takes the class ID and selected school ID as input parameters. It then calls the `get_all_division_data_generic` method of the `Generic_model` to retrieve the division data. The retrieved data is then passed to the `view_ajax_division_list` view for rendering.
 
@@ -3859,7 +3973,7 @@ public function ajax_division_list_ho()
 {{< /details >}}
 
 ## insert_feedback_image
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to insert a feedback image into the database. It takes the subject, school ID, reference number, Unix timestamp, and mail format as input parameters. It then generates three links (yes, maybe, and no) based on the input parameters. Finally, it loads a feedback email template and returns it.
 
@@ -3883,7 +3997,7 @@ public function insert_feedback_image($subject,$sel_school_id,$refno,$unix_times
 {{< /details >}}
 
 ## email_tag_ho
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for displaying the email tag page in the HO (Head Office) section of the application. It sets up the necessary data for the page and loads the view file.
 
@@ -3921,7 +4035,7 @@ public function email_tag_ho()
 {{< /details >}}
 
 ## add_email_tag
-#### Code Complexity: 14
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to add an email tag. It takes the tag name from the POST request and inserts it into the database. Before inserting, it checks if the tag name already exists in the database. If it exists, it returns '1'. If the insertion is successful, it returns '2'.
 
@@ -3960,7 +4074,7 @@ public function add_email_tag()
 {{< /details >}}
 
 ## ajax_update_tag_row
-#### Code Complexity: 1
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to update a tag row in the database using an AJAX request. It retrieves the edit ID and edit value from the AJAX POST request, and then calls the `update_email_tag_data` method of the `Generic_model` to update the tag data in the database. The updated data is then returned as a response.
 
@@ -3996,7 +4110,7 @@ public function ajax_update_tag_row()
 {{< /details >}}
 
 ## tag_config_delete
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to delete a tag configuration. It takes the primary ID of the tag as input and calls the `tag_auth_config_delete` method of the `Generic_model` class to delete the tag configuration. If the deletion is successful, it returns '1'.
 

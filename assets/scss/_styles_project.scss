@@ -60,7 +60,7 @@
 // prevent overflow of long names in sidebar
 // --------------------------------------------------
 .td-sidebar-nav__section > ul {
-  overflow-wrap: break-word;
+  overflow-wrap: nowrap;
 }
 
 .td-sidebar-nav {
@@ -69,6 +69,7 @@
 
 .td-sidebar {
   padding-bottom: 0.5rem;
+  text-wrap: nowrap !important;
 
   ul ul {
       padding-left: 0px !important; /* Adjust as needed */
@@ -97,9 +98,26 @@ nav.foldable-nav .ul-1 .with-child > input ~ label:before {
     padding-top: 30px;
 }
 
+@media(min-width: 768px) {
+  .td-sidebar-nav {
+      min-height: calc(100vh - 6rem);
+      overflow-y: auto;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 4px;
+}
+
 // --------------------------------------------------
 // remove whitespace after footer
 // --------------------------------------------------
 footer {
     min-height: auto;
+    display: none !important;
 }

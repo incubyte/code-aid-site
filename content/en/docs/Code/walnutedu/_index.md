@@ -1,8 +1,8 @@
 ---
 categories: ["Examples", "code"]
 tags: ["code","docs"]
-title: "walnut"
-linkTitle: "walnut"
+title: "walnutedu"
+linkTitle: "walnutedu"
 weight: -2
 description: >
   What does your user need to know to try your project?

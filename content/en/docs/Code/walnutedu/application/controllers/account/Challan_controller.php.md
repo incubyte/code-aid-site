@@ -864,7 +864,7 @@ class Challan_controller extends CI_Controller
 
 
 ## __construct
-#### Code Complexity: 2
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This is the constructor function of a class. It initializes the class by performing the following tasks:
 
@@ -890,7 +890,7 @@ public function __construct()
 {{< /details >}}
 
 ## view
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for rendering the view for the Challan page. It sets up the necessary data for the view, such as page name, icon, title, date, description, and breadcrumb. It also retrieves class data from the Class_division_model and passes it to the view. Finally, it loads the main template and renders the view.
 
@@ -925,7 +925,7 @@ public function view()
 {{< /details >}}
 
 ## get_class_id
-#### Code Complexity: 16
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to get the class ID based on the reference number provided in the POST data. It retrieves the class information from the database and returns the class ID, division ID, and academic year of the student. It also retrieves the class data and division data from the database and passes it to the view for rendering.
 
@@ -1002,7 +1002,7 @@ public function get_class_id()
 {{< /details >}}
 
 ## get_installment_info
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to get the installment information for a student. It retrieves the student class ID and academic year from the POST data, calls the `get_installment_id` method of the `challan_model` to get the installment ID, and then loads a view to display the installment information.
 
@@ -1042,7 +1042,7 @@ public function get_installment_info()
 {{< /details >}}
 
 ## get_student_fee_info
-#### Code Complexity: 309
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to get the fee information of a student. It retrieves the necessary data from the database based on the input parameters and returns the fee details.
 
@@ -1379,7 +1379,7 @@ public function get_student_fee_info()
 {{< /details >}}
 
 ## get_school_name
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to get the school name for a given student class, installment, and academic year. It retrieves the school name from the `challan_model`.
 
@@ -1418,7 +1418,7 @@ public function get_school_name()
 {{< /details >}}
 
 ## view_challan_print
-#### Code Complexity: 578
+{{< complexityLabel "Extreme" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to view and print challan. It retrieves the necessary data from the database and generates a PDF file containing the challan details.
 

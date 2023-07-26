@@ -1,0 +1,24 @@
+<input type="search" id="nlp-search" class="form-control td-search-input" placeholder='{{ T "ui_search" }}' aria-label="{{ T "ui_search" }}" autocomplete="off">
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('q');
+
+    const nlpInput = document.querySelector("#nlp-search");
+    nlpInput.value = searchParam;
+    
+    nlpInput.addEventListener('keydown', (event) => {
+        if( event.keyCode === 13 ) {
+            // get the search term
+            const searchTerm = event.target.value;
+            // redirect to the search page
+            window.location.href = `/search/?q=${searchTerm}`;
+        }
+    });
+</script>
+
+<style>
+    input {
+        width: 300px !important;
+    }
+</style>

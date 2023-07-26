@@ -322,7 +322,7 @@ $sch_ins_id = (isset($_POST['sch_ins_id'])) ? (trim($_POST['sch_ins_id'])) : '';
 
 
 ## Code block 1
-#### Code Complexity: 10
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet includes several PHP statements and functions. It starts by including the 'Config.php' file, setting the value of the variable 'newForm' to 0, and initializing an empty array called 'messages'. Then, it includes three PHP files: 'newSchool.inc.php', 'deleteSchool.inc.php', and 'editSchool.inc.php'. After that, it requires the 'classBank.php' file and creates an instance of the 'Bank' class. It fetches the bank names using the 'fetch_Bank' method of the 'Bank' class and assigns the result to the 'fieldNames' variable. It then executes a SQL query to select the 'walnut_bank_id' from the 'walnut_bank_account_details' table and stores the result in the 'bank_id' variable. Finally, it loops through the 'bank_id' result and adds each value to the 'b_id' array. If the 'submit' POST variable is set and its value is 'Cancel', it redirects the user to the 'schoolsetup.php' page with the 'action' parameter set to 'Cancelled'.
 
@@ -338,7 +338,7 @@ include_once("../Config.php");$newForm = 0;$messages = array();include './school
 {{< /details >}}
 
 ## Code block 2
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is responsible for generating the head section of the HTML header. It includes the meta tags, title, and CSS stylesheets. The function takes in the title of the page and an array of CSS files as parameters. It then generates the appropriate HTML code for the head section.
 
@@ -366,7 +366,7 @@ include("header_head.php");
 {{< /details >}}
 
 ## Code block 3
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function calculates the count of elements in the array `$b_id` and adds 1 to the result.
 
@@ -377,7 +377,7 @@ echo count($b_id)+1
 {{< /details >}}
 
 ## Code block 4
-#### Code Complexity: 5
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet generates a string of HTML options for a dropdown select element. It starts with a default option 'Select Bank' that is selected by default. Then, it iterates over an array of field names and appends an option element for each field name. The value of each option is set to the corresponding category ID, and the text of each option is set to the bank name. Finally, it replaces any double quotes in the string with single quotes.
 
@@ -397,7 +397,7 @@ $str = "<option selected='selected'>Select Bank</option>";for($i=0; count($field
 {{< /details >}}
 
 ## Code block 5
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function is used to output the value of the variable $str.
 
@@ -408,7 +408,7 @@ echo $str
 {{< /details >}}
 
 ## Code block 6
-#### Code Complexity: 20
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the `sch_ins_id` parameter is set in the URL or in the POST data. If it is set, it assigns the value to the `$sch_ins_id` variable. The value is decoded from base64 if it is set in the URL. This code is commonly used in PHP scripts to retrieve and process data from the URL or form submissions.
 
@@ -426,7 +426,7 @@ $sch_ins_id = (isset($_POST['sch_ins_id'])) ? (trim($_POST['sch_ins_id'])) : '';
 {{< /details >}}
 
 ## Code block 7
-#### Code Complexity: 6
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the count of the array $messages is greater than 0. If it is, it generates a div element with the id 'msg' and class 'msg_not_found'. It then iterates over each element in the $messages array and echoes it followed by a line break. Finally, it closes the div element.
 
@@ -448,7 +448,7 @@ if (count($messages) > 0) {
 {{< /details >}}
 
 ## Code block 8
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This function returns the filename of the currently executing script, relative to the document root. It is a superglobal variable, which means it is always available in all scopes throughout a script. The value of `$_SERVER['PHP_SELF']` is the path and filename of the currently executing script, including any query string parameters. For example, if the current script is located at `http://example.com/index.php`, then `$_SERVER['PHP_SELF']` will return `/index.php`. This can be useful for generating self-referencing URLs or for determining the current page in a navigation menu.
 
@@ -459,7 +459,7 @@ echo $_SERVER['PHP_SELF'];
 {{< /details >}}
 
 ## Code block 9
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The variable `$sch_ins_id` is used to store the value of the `sch_ins_id` column from a database table. It is typically used in PHP code to retrieve and manipulate the value of the `sch_ins_id` column.
 
@@ -470,7 +470,7 @@ echo $sch_ins_id;
 {{< /details >}}
 
 ## Code block 10
-#### Code Complexity: 11
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 This code snippet checks if the 'action' parameter is set in the request and if it is equal to 'Add New School' or the decoded value of 'Add New School'. If the condition is true, it includes the 'newSchoolForm.inc.php' file. Then, it checks if the 'action' parameter is set in the request and if it is equal to 'Edit' or the decoded value of 'Edit'. If the condition is true, it includes the 'editSchoolForm.inc.php' file.
 
@@ -494,7 +494,7 @@ if(isset($_REQUEST['action']) && ( $_REQUEST['action']== 'Add New School' || url
 {{< /details >}}
 
 ## Code block 11
-#### Code Complexity: 0
+{{< complexityLabel "Good" >}}{{< /complexityLabel >}}
 ### Overview
 The `viewSchool` function is responsible for displaying the details of a school. It retrieves the school information from the database and renders it on the webpage.
 
