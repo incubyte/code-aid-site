@@ -138,15 +138,35 @@ export default function ForceGraph(
       "max-width: 100%; height: auto; height: intrinsic; border: 1px solid black;"
     );
 
+    const linkTypeColor = d3.scaleOrdinal<string>()
+    .domain(["INSERT", "DELETE", "SELECT", "UPDATE"])
+    .range(["#98FB98", "red", "#87CEEB", "#F4A460"]);
+
+  // Define the arrow marker
+  svg.append("defs").append("marker")
+  .attr("id", "arrow")
+  .attr("viewBox", "0 -5 10 10")
+  .attr("refX", 25) // Arrowhead position along the line
+  .attr("refY", 0)
+  .attr("markerWidth", 4)
+  .attr("markerHeight", 5)
+  .attr("orient", "auto")
+  .append("path")
+  .attr("d", "M0,-5L10,0L0,5")
+  .attr("fill", (color) => 'grey'); // Path for the arrowhead shape
+
+
   const edge = svg
     .append("g")
-    .attr("stroke", linkStroke)
+    .selectAll("line")
+    .data(edges) 
+    .join("line")
+    .attr("stroke", (d: Link) => linkTypeColor(d.type))
     .attr("stroke-opacity", linkStrokeOpacity)
     .attr("stroke-width", linkStrokeWidth)
     .attr("stroke-linecap", linkStrokeLinecap)
-    .selectAll("line")
-    .data(edges)
-    .join("line");
+    .attr("marker-end",`url(#arrow)`);
+
 
   const edgeLabel = svg
     .selectAll(".link-label")
