@@ -30,7 +30,7 @@ circle {
 }
 
 .legend-svg {
-  top: 5.8%;
+  top: 0%;
   right: 0%;
   position: absolute;
   cursor: pointer;
@@ -47,7 +47,9 @@ circle {
   background-color: white;
   color: #333;
   cursor: pointer;
-  position: absolute
+  position: absolute;
+  left: 8px;
+  top: 10px;
 }
 
 #edgeTypeDropdown option {
