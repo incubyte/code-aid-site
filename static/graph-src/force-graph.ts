@@ -139,8 +139,8 @@ export default function ForceGraph(
     );
 
     const linkTypeColor = d3.scaleOrdinal<string>()
-    .domain(["INSERT", "DELETE", "SELECT", "UPDATE"])
-    .range(["#98FB98", "red", "#87CEEB", "#F4A460"]);
+    .domain(["INSERT", "DELETE", "SELECT", "UPDATE", "TRIGGER"])
+    .range(["#98FB98", "red", "#87CEEB", "#F4A460", "violet"]);
 
   // Define the arrow marker
   svg.append("defs").append("marker")
@@ -256,6 +256,43 @@ export default function ForceGraph(
     .attr("font-size", legendTextSize)
     .attr("alignment-baseline", "middle");
 
+    const dropdown = document.getElementById('edgeTypeDropdown') as HTMLSelectElement;
+
+    dropdown.addEventListener('change', () => {
+      const selectedEdgeType = dropdown.value;
+      updateGraph(selectedEdgeType);
+    });
+
+    function updateGraph(selectedEdgeType: string){
+
+      let visibleNodeIds = new Set();
+      const visibelNodes = new Set();
+      const visibleEdges = [];
+  
+      if (selectedEdgeType === "ALL") {
+        nodes.forEach((node) => visibelNodes.add(node.id));
+        visibleEdges.push(...edges);
+      } else {
+        edges.forEach((edge) => {
+          if (edge.type === selectedEdgeType) {
+            visibleNodeIds.add((edge.source as any).id);
+            visibleNodeIds.add((edge.target as any).id);
+            visibleEdges.push(edge);
+          }
+        });
+      }
+
+      nodes.forEach((node) => {
+        if (visibleNodeIds.has(node.id)) {
+          visibelNodes.add(node.id);
+        }
+      });
+
+      node.style("display", (d) => (visibelNodes.has(d.id) ? "initial" : "none"));
+      nodeLabel.style("display", (d) => (visibelNodes.has(d.id) ? "initial" : "none"));
+      edge.style("display", (d) => (visibleEdges.includes(d) ? "initial" : "none"));
+      edgeLabel.style("display", (d) => (visibleEdges.includes(d) ? "initial" : "none"));
+    }
 
   function ticked() {
     edge
