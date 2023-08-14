@@ -128,8 +128,8 @@ export default function ForceGraph(
     .attr("width", viewBox.width)
     .attr("height", viewBox.height)
     .attr("viewBox", [
-      -viewBox.width / 2,
-      -viewBox.height / 2,
+      -viewBox.x,
+      -viewBox.y,
       viewBox.width,
       viewBox.height,
     ])
