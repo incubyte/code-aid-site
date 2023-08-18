@@ -17,7 +17,7 @@ const titleDiv = document.querySelector("#title");
 titleDiv.innerHTML = `Search results for <span style="color: blue; font-size: 28px">${query}</span>`;   
 
   async function searchResults(query) {
-    const response = await fetch(`http://localhost:3000/embedding?collectionName=code&query=${query}`);
+    const response = await fetch(`http://localhost:3000/embedding?collectionName=cats&query=${query}`);
     const data = await response.json();
     const codeList = data.map(o => {
       return {name: o.payload.name, body: o.payload.code, link: o.payload.link};

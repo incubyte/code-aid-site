@@ -5,6 +5,7 @@
 node_modules/
 hugo_stats.json
 mr2
+cats
 
 # Executable may be added to repository
 hugo.exe
