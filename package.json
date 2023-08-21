@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "index": "hugo-lunr -i \"content/**\" -o public/index.json",
-    "graph:start": "webpack-dev-server --open",
-    "graph:build": "webpack && cp -r static/graph-src/dev/index.js content/en/docs/Database/HRMS"
+    "security:start": "cd  static/security-issues &&  npm run start ",
+    "graph:start": "cd  static/database-graph &&  npm run start",
+    "security:build": "cd static/security-issues && npm run build && cp dist/index.js ../../content/en/docs/Code/walnutedu/security-issues",
+    "graph:build": "cd static/database-graph && npm run build &&  cp dist/index.js ../../content/en/docs/Database/HRMS"
   },
   "repository": {
     "type": "git",
@@ -20,16 +22,11 @@
   },
   "homepage": "https://github.com/google/docsy-example#readme",
   "devDependencies": {
-    "@types/d3": "^7.4.0",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.3.7",
-    "postcss-cli": "^9.0.2",
-    "ts-loader": "^9.4.3",
-    "webpack-cli": "^5.1.3",
-    "webpack-dev-server": "^4.15.0"
+    "postcss-cli": "^9.0.2"
   },
   "dependencies": {
-    "d3": "^7.8.5",
     "hugo-lunr": "^0.0.4"
   }
 }

@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './static/graph-src/index.ts',
+  entry: './src/index.ts',
   devtool: 'inline-source-map',
   mode: "development",
   module: {
@@ -19,9 +19,9 @@ module.exports = {
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, 'static/graph-src/dev')
+    path: path.resolve(__dirname, 'dist')
   },
   devServer: {
-    static: path.join(__dirname, 'static/graph-src/dev'),
+    static: path.join(__dirname, 'dist'),
   }
 };
