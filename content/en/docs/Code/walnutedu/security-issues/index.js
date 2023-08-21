@@ -1,7 +1,6 @@
 let result;
 let currentPage = 1;
-const itemsPerPage = 10; // Adjust as needed
-
+const ITEMS_PER_PAGE = 10;
 
 function getImpactColor(impact) {
     let color = "";
@@ -24,35 +23,31 @@ impactSelection.addEventListener("change", function () {
 async function getJsonData() {
     const res = await fetch('./scan_results.json');
     result = await res.json();
-    filterToJava(result);
+    return result;
 }
 
-function filterToJava(data) {
-    result = data.results.filter(obj => obj.path.includes(".java"));
-    renderToHtml(result, currentPage, itemsPerPage);
+function filterIssues(data, pattern) {
+    result = data.results.filter(obj => obj.path.includes(pattern));
+    return result;
 }
 
-function renderToHtml(data, currentPage, itemsPerPage) {
-    console.log(location.href);
-    if(impactSelection.value !== "all"){
+function renderToHtml(data, currentPage, ITEMS_PER_PAGE) {
+    if (impactSelection.value !== "all") {
         data = result.filter(issue => issue.extra.metadata.impact === impactSelection.value);
     }
     const container = document.getElementById("container");
     container.innerHTML = "";
 
-    // Calculate the range of items to render
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
     const itemsToRender = data.slice(startIndex, endIndex);
 
-    // Render each item
     itemsToRender.forEach(issue => {
         const securityIssueData = document.createElement("div");
         securityIssueData.style.marginTop = "20px";
         securityIssueData.style.marginBottom = "20px";
 
         title = issue.path.split("/").pop();
-        // console.log(title);
         const path = document.createElement("p");
         path.innerHTML = "<strong>Path:</strong> " + issue.path;
 
@@ -85,86 +80,76 @@ function renderToHtml(data, currentPage, itemsPerPage) {
         container.appendChild(securityIssueData);
     });
 
-    // Render the pagination controls
-
     renderPaginationControls(data.length, currentPage);
 }
 
 
 function filterBasedOnConfidence(impact, result) {
 
-  if (impact === "all") {
-      renderToHtml(result, 1, itemsPerPage);
-      return;
-  }
-  const filteredData = result.filter(issue => issue.extra.metadata.impact === impact);
-  renderToHtml(filteredData, currentPage, itemsPerPage);
+    if (impact === "all") {
+        renderToHtml(result, 1, ITEMS_PER_PAGE);
+        return;
+    }
+    const filteredData = result.filter(issue => issue.extra.metadata.impact === impact);
+    renderToHtml(filteredData, currentPage, ITEMS_PER_PAGE);
 }
 
 
 function renderPaginationControls(totalItems, currentPage) {
-  
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
     const paginationContainer = document.getElementById("pagination");
     paginationContainer.innerHTML = "";
 
     // Render the "Previous" button
     const prevButton = document.createElement("button");
-    if(currentPage == 1){
-      prevButton.style.display="None";
+    if (currentPage == 1) {
+        prevButton.style.display = "None";
     }
     prevButton.className = "page-link";
     prevButton.textContent = "Previous";
     prevButton.addEventListener("click", function () {
         if (currentPage > 1) {
             currentPage--;
-            renderToHtml(result, currentPage, itemsPerPage);
-
+            window.location.hash = `${currentPage}`;
         }
     });
 
-    // Render the "Next" button
     const nextButton = document.createElement("button");
-    if(currentPage == totalPages){
-      nextButton.style.display="None";
+    if (currentPage == totalPages) {
+        nextButton.style.display = "None";
     }
     nextButton.className = "page-link";
     nextButton.textContent = "Next";
     nextButton.addEventListener("click", function () {
         if (currentPage < totalPages) {
             currentPage++;
-            renderToHtml(result, currentPage, itemsPerPage);
+            window.location.hash = `${currentPage}`;
         }
     });
 
-    // Render the initial set of page numbers
     paginationContainer.appendChild(prevButton);
     const initialPageCount = 5;
     const startPage = Math.max(1, currentPage - Math.floor(initialPageCount / 2));
     const endPage = Math.min(totalPages, startPage + initialPageCount - 1);
     for (let i = startPage; i <= endPage; i++) {
-        // Render a button for each page number
-
         const pageButton = document.createElement("button");
-        if(totalPages == 1 ){
-          pageButton.style.display="none";
+        if (totalPages == 1) {
+            pageButton.style.display = "none";
         }
 
         pageButton.className = "page-link";
         pageButton.textContent = i;
         pageButton.addEventListener("click", function () {
-            renderToHtml(result, i, itemsPerPage);
+            window.location.hash = `${i}`;
         });
         if (i === currentPage) {
-          pageButton.style.color="white";
-          pageButton.style.background="#0e3252";
-          // pageButton.classList.add("current-page");
-      }
+            pageButton.style.color = "white";
+            pageButton.style.background = "#0e3252";
+        }
         paginationContainer.appendChild(pageButton);
     }
-    
 
-    // Add an ellipsis and "More" button if needed
+
     if (endPage < totalPages) {
         const ellipsis = document.createElement("span");
         ellipsis.textContent = "...";
@@ -174,23 +159,31 @@ function renderPaginationControls(totalItems, currentPage) {
         moreButton.className = "page-link";
         moreButton.textContent = "More";
         moreButton.addEventListener("click", function () {
-            renderToHtml(result, endPage + 1, itemsPerPage);
+            window.location.hash = `${endPage + 1}`;
+            // renderToHtml(result, endPage + 1, ITEMS_PER_PAGE);
         });
-        paginationContainer.style.display="flex";
-        
+        paginationContainer.style.display = "flex";
+
         paginationContainer.appendChild(moreButton);
     }
 
-    // Add the "Previous" button before the page numbers
-
-
-    // ... (your existing code for page numbers and "More" button)
-
-    // Render the "Next" button
     paginationContainer.appendChild(nextButton);
 }
 
-// Fetch and render data when the page loads
-getJsonData();
+async function main() {
+    const result = await getJsonData();
+    const filteredIssues = filterIssues(result, ".java");
+    const hash = parseInt(window.location.hash.replace("#", ""));
+    let currentPage = 1;
+    if (hash.length !== 0) {
+        currentPage = parseInt(hash);
+    }
+    renderToHtml(filteredIssues, currentPage, ITEMS_PER_PAGE);
+}
 
+window.addEventListener("hashchange", () => {
+    const currentPage = parseInt(window.location.hash.replace("#", ""));
+    renderToHtml(result, currentPage, ITEMS_PER_PAGE);
+})
 
+main();
