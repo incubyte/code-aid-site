@@ -1,6 +1,18 @@
 import { getImpactColor, Impact } from "./impact-color";
 
-let result: any[];
+type Issue = {
+  path: string;
+  extra: {
+    metadata: {
+      impact: Impact;
+      cwe: string;
+    };
+    message: string;
+    lines: string;
+  };
+};
+
+let result: Issue[];
 let currentPage = 1;
 const ITEMS_PER_PAGE = 10;
 
@@ -10,25 +22,25 @@ impactSelection.addEventListener("change", function () {
   filterBasedOnImpact(selectedImpact, result);
 });
 
-async function getJsonData(): Promise<any> {
+async function getSecurityIssues(): Promise<Issue[]> {
   const res = await fetch("./scan_results.json");
-  result = await res.json();
-  return result;
+  const data = await res.json();
+  return data.results;
 }
 
-function filterIssues(data: any, pattern: string): any[] {
-  result = data.results.filter((obj: any) => obj.path.includes(pattern));
+function filterIssues(results: Issue[], pattern: string): Issue[] {
+  result = results.filter((obj) => obj.path.includes(pattern));
   return result;
 }
 
 function renderToHtml(
-  data: any[],
+  results: Issue[],
   currentPage: number,
   ITEMS_PER_PAGE: number
 ): void {
   if (impactSelection.value !== "all") {
-    data = result.filter(
-      (issue: any) => issue.extra.metadata.impact === impactSelection.value
+    results = result.filter(
+      (issue) => issue.extra.metadata.impact === impactSelection.value
     );
   }
   const container = document.getElementById("container") as HTMLDivElement;
@@ -36,9 +48,9 @@ function renderToHtml(
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const itemsToRender = data.slice(startIndex, endIndex);
+  const itemsToRender = results.slice(startIndex, endIndex);
 
-  itemsToRender.forEach((issue: any) => {
+  itemsToRender.forEach((issue) => {
     const securityIssueData = document.createElement("div");
     securityIssueData.style.marginTop = "20px";
     securityIssueData.style.marginBottom = "20px";
@@ -81,16 +93,16 @@ function renderToHtml(
     container.appendChild(securityIssueData);
   });
 
-  renderPaginationControls(data.length, currentPage);
+  renderPaginationControls(results.length, currentPage);
 }
 
-function filterBasedOnImpact(impact: string, result: any[]): void {
+function filterBasedOnImpact(impact: string, result: Issue[]): void {
   if (impact === "all") {
     renderToHtml(result, 1, ITEMS_PER_PAGE);
     return;
   }
   const filteredData = result.filter(
-    (issue: any) => issue.extra.metadata.impact === impact
+    (issue) => issue.extra.metadata.impact === impact
   );
   renderToHtml(filteredData, currentPage, ITEMS_PER_PAGE);
 }
@@ -174,7 +186,7 @@ function renderPaginationControls(
 }
 
 async function main(): Promise<void> {
-  const result = await getJsonData();
+  const result = await getSecurityIssues();
   const filteredIssues = filterIssues(result, ".java");
   const hash = parseInt(window.location.hash.replace("#", ""));
   let currentPage = 1;
