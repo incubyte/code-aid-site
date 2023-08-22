@@ -1,24 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .filter-button {
+            margin: 5px;
+            width: 200px;
+            height: 50px;
+            color: #333;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .filter-button.selected {
+            color: #fff;
+            background-color: #007bff;
+            border: 1px solid #007bff;
+        }
+
+        .filter-button:hover {
+            border: 3px solid #007bff;
+        }
+
+        #filter-using-impact {
+            display: flex;
+        }
+
+        #filter-using-language {
+            display: flex;
+        }
+    </style>
 </head>
 
 <body>
-    <label for="filter">Filter</label>
-    <select id="impact">
-        <option value="all"></option>
-        <option value="LOW">Low</option>
-        <option value="MEDIUM">Medium</option>
-        <option value="HIGH">High</option>
-    </select>
+    <div id="filter-using-impact">
+        <h1>Impact</h1>
+        <div id="filter-impact-buttons"></div>
+    </div>
+    <div id="filter-using-language">
+        <h1>Language</h1>
+        <div id="filter-language-buttons"></div>
+    </div>
 
     <div id="container"></div>
     <div id="pagination"></div>
 
     <script src="./index.js"></script>
-
 </body>
+
 </html>
