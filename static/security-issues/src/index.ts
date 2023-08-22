@@ -1,25 +1,13 @@
+import { getImpactColor, Impact } from "./impact-color";
+
 let result: any[];
 let currentPage = 1;
 const ITEMS_PER_PAGE = 10;
 
-type ImpactType = "HIGH" | "MEDIUM" | "LOW";
-
-function getImpactColor(impact: ImpactType): string {
-  let color = "";
-  if (impact === "HIGH") {
-    color = "red";
-  } else if (impact === "MEDIUM") {
-    color = "yellow";
-  } else {
-    color = "green";
-  }
-  return color;
-}
-
 const impactSelection = document.getElementById("impact") as HTMLSelectElement;
 impactSelection.addEventListener("change", function () {
   const selectedImpact = impactSelection.value;
-  filterBasedOnConfidence(selectedImpact, result);
+  filterBasedOnImpact(selectedImpact, result);
 });
 
 async function getJsonData(): Promise<any> {
@@ -55,7 +43,6 @@ function renderToHtml(
     securityIssueData.style.marginTop = "20px";
     securityIssueData.style.marginBottom = "20px";
 
-    const title = issue.path.split("/").pop() as string;
     const path = document.createElement("p");
     path.innerHTML = "<strong>Path:</strong> " + issue.path;
 
@@ -65,7 +52,7 @@ function renderToHtml(
       issue.extra.metadata.impact +
       "<br/>";
     impact.style.borderLeft =
-      "5px solid " + getImpactColor(issue.extra.metadata.impact as ImpactType);
+      "5px solid " + getImpactColor(issue.extra.metadata.impact as Impact);
     impact.style.padding = "4px";
 
     const ul = document.createElement("ul");
@@ -97,7 +84,7 @@ function renderToHtml(
   renderPaginationControls(data.length, currentPage);
 }
 
-function filterBasedOnConfidence(impact: string, result: any[]): void {
+function filterBasedOnImpact(impact: string, result: any[]): void {
   if (impact === "all") {
     renderToHtml(result, 1, ITEMS_PER_PAGE);
     return;

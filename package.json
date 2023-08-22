@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "index": "hugo-lunr -i \"content/**\" -o public/index.json",
-    "security:start": "cd  static/security-issues &&  npm run start ",
-    "graph:start": "cd  static/database-graph &&  npm run start",
+    "security:start": "cd static/security-issues &&  npm run start",
+    "graph:start": "cd static/database-graph &&  npm run start",
     "security:build": "cd static/security-issues && npm run build && cp dist/index.js ../../content/en/docs/Code/walnutedu/security-issues",
     "graph:build": "cd static/database-graph && npm run build &&  cp dist/index.js ../../content/en/docs/Database/HRMS"
   },
