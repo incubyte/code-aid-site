@@ -6,6 +6,7 @@ type Issue = {
     metadata: {
       impact: Impact;
       cwe: string;
+      owasp: string[];
     };
     message: string;
     lines: string;
@@ -77,10 +78,15 @@ function renderToHtml(
     message.innerHTML =
       "<strong>Message:</strong> " + issue.extra.message + "<br/>";
 
+    const owasp = document.createElement("li");
+    owasp.innerHTML =
+      "<strong>owasp:</strong> " + issue.extra.metadata.owasp + "<br/>";
+
     const code = document.createElement("li");
     code.innerHTML = "<strong>code:</strong>" + issue.extra.lines + "<br/>";
 
     ul.appendChild(cwe);
+    ul.appendChild(owasp);
     ul.appendChild(message);
     ul.appendChild(code);
 
