@@ -63,6 +63,10 @@
   overflow-wrap: nowrap;
 }
 
+.td-sidebar-nav {
+  text-wrap: nowrap;  
+}
+
 .td-sidebar {
   padding-bottom: 0.5rem;
   text-wrap: nowrap !important;
@@ -73,6 +77,9 @@
   ul li {
       padding-left: 18px !important; /* Adjust as needed */
   }
+  li li {
+    padding-left: 7px !important;
+  }
 
   .td-sidebar__inner {
     padding-top: 30px;
@@ -81,6 +88,10 @@
       padding-top: 10px;
     }
   }
+}
+
+nav.foldable-nav .ul-1 .with-child > input ~ label:before {
+  margin: 0px -13px;
 }
 
 .td-sidebar-toc {
