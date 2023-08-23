@@ -1,60 +1,93 @@
-import { ITEMS_PER_PAGE } from "../contants";
+import { ITEMS_PER_PAGE } from "../constants";
 import { SecurityIssuesHashUrl } from "../security-issue-hash";
 import { Impact, Issue } from "../types";
 import { getImpactColor } from "./impact-color";
 
-export const renderIssues = (container: HTMLDivElement, securityIssuesHashUrl: SecurityIssuesHashUrl, issues: Issue[]) => {
-    container.innerHTML = "";
+export const renderIssues = (
+  container: HTMLDivElement,
+  securityIssuesHashUrl: SecurityIssuesHashUrl,
+  issues: Issue[]
+) => {
+  container.innerHTML = "";
 
-    const startIndex = (securityIssuesHashUrl.getPageNumber() - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    const itemsToRender = issues.slice(startIndex, endIndex);
+  const startIndex =
+    (securityIssuesHashUrl.getPageNumber() - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const itemsToRender = issues.slice(startIndex, endIndex);
 
-    itemsToRender.forEach((issue) => {
-        const securityIssueData = document.createElement("div");
-        securityIssueData.style.marginTop = "20px";
-        securityIssueData.style.marginBottom = "20px";
+  itemsToRender.forEach((issue, index) => {
+    const securityIssueData = document.createElement("div");
+    securityIssueData.classList.add("security-issue");
 
-        const path = document.createElement("p");
-        path.innerHTML = "<strong>Path:</strong> " + issue.path;
+    // Create a header for the accordion
+    const header = createAccordionHeader(issue, index);
 
-        const impact = document.createElement("div");
-        impact.innerHTML =
-            "<strong>Security impact:</strong> " +
-            issue.extra.metadata.impact +
-            "<br/>";
-        impact.style.borderLeft =
-            "5px solid " + getImpactColor(issue.extra.metadata.impact as Impact);
-        impact.style.padding = "4px";
+    // Create a content container for the details
+    const content = createAccordionContent(issue);
 
-        const ul = document.createElement("ul");
+    // Add the header and content to the accordion
+    securityIssueData.appendChild(header);
+    securityIssueData.appendChild(content);
 
-        const cwe = document.createElement("li");
-        cwe.innerHTML =
-            "<strong>CWE:</strong> " + issue.extra.metadata.cwe + "<br/>";
+    container.appendChild(securityIssueData);
+  });
+};
 
-        const message = document.createElement("li");
-        message.innerHTML =
-            "<strong>Message:</strong> " + issue.extra.message + "<br/>";
+function createAccordionHeader(issue: Issue, index: number): HTMLDivElement {
+  const header = document.createElement("div");
+  header.classList.add("accordion-header");
+  header.innerHTML = `<strong>Path:</strong> ${issue.path}`;
+  header.addEventListener("click", () => toggleAccordionContent(index));
+  header.style.borderLeft = `5px solid ${getImpactColor(
+    issue.extra.metadata.impact as Impact
+  )}`;
+  return header;
+}
 
-        const owasp = document.createElement("li");
-        owasp.innerHTML =
-            "<strong>owasp:</strong> " + issue.extra.metadata.owasp + "<br/>";
+function createAccordionContent(issue: Issue): HTMLDivElement {
+  const content = document.createElement("div");
+  content.classList.add("accordion-content");
+  content.classList.add("active");
 
-        const code = document.createElement("li");
-        code.innerHTML = "<strong>code:</strong>" + issue.extra.lines + "<br/>";
+  const ul = createUnorderedList([
+    `CWE| ${issue.extra.metadata.cwe}`,
+    `Message| ${issue.extra.message}`,
+    `OWASP| ${issue.extra.metadata.owasp}`,
+    `Code| ${issue.extra.lines}`,
+  ]);
 
-        ul.appendChild(cwe);
-        ul.appendChild(owasp);
-        ul.appendChild(message);
-        ul.appendChild(code);
+  content.style.borderLeft = `5px solid ${getImpactColor(
+    issue.extra.metadata.impact as Impact
+  )}`;
 
-        securityIssueData.appendChild(document.createElement("hr"));
+  appendChildren(content, [ul]);
 
-        securityIssueData.appendChild(path);
-        securityIssueData.appendChild(impact);
-        securityIssueData.appendChild(ul);
+  return content;
+}
 
-        container.appendChild(securityIssueData);
-    });
+function toggleAccordionContent(index: number): void {
+  const content = document.querySelectorAll(".accordion-content")[
+    index
+  ] as HTMLDivElement;
+  content.classList.toggle("active");
+}
+
+function createUnorderedList(items: string[]): HTMLUListElement {
+  const ul = document.createElement("ul");
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    const parts = item.split("|");
+    if (parts.length === 2) {
+      li.innerHTML = `<strong>${parts[0]}:</strong> ${parts[1]}<br/>`;
+    } else {
+      console.log(parts);
+      li.textContent = item;
+    }
+    ul.appendChild(li);
+  });
+  return ul;
+}
+
+function appendChildren(parent: HTMLElement, children: HTMLElement[]): void {
+  children.forEach((child) => parent.appendChild(child));
 }

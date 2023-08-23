@@ -4,7 +4,7 @@ export class FilterImpactButtons {
   constructor(
     private readonly impactButtonsContainer: HTMLDivElement,
     allImpacts: string[],
-    private readonly securityIssuesHashUrl: SecurityIssuesHashUrl,
+    private readonly securityIssuesHashUrl: SecurityIssuesHashUrl
   ) {
     allImpacts.forEach((impact) => {
       const selectedImpacts = securityIssuesHashUrl.getImpacts();
@@ -19,7 +19,10 @@ export class FilterImpactButtons {
       filterButton.addEventListener("click", function () {
         filterButton.classList.toggle("selected");
         if (filterButton.classList.contains("selected")) {
-          securityIssuesHashUrl.setImpacts([...securityIssuesHashUrl.getImpacts(), impact]);
+          securityIssuesHashUrl.setImpacts([
+            ...securityIssuesHashUrl.getImpacts(),
+            impact,
+          ]);
         } else {
           securityIssuesHashUrl.setImpacts(
             securityIssuesHashUrl.getImpacts().filter((imp) => imp !== impact)
@@ -37,7 +40,7 @@ export class FilterLanguageButtons {
   constructor(
     private readonly languageButtonsContainer: HTMLDivElement,
     allLanguages: string[],
-    private readonly securityIssuesHashUrl: SecurityIssuesHashUrl,
+    private readonly securityIssuesHashUrl: SecurityIssuesHashUrl
   ) {
     allLanguages.forEach((language) => {
       const selectedLanguages = securityIssuesHashUrl.getLanguages();
@@ -51,10 +54,15 @@ export class FilterLanguageButtons {
       filterButton.addEventListener("click", function () {
         filterButton.classList.toggle("selected");
         if (filterButton.classList.contains("selected")) {
-          securityIssuesHashUrl.setLanguages([...securityIssuesHashUrl.getLanguages(), language]);
+          securityIssuesHashUrl.setLanguages([
+            ...securityIssuesHashUrl.getLanguages(),
+            language,
+          ]);
         } else {
           securityIssuesHashUrl.setLanguages(
-            securityIssuesHashUrl.getLanguages().filter((lang) => lang !== language)
+            securityIssuesHashUrl
+              .getLanguages()
+              .filter((lang) => lang !== language)
           );
         }
         securityIssuesHashUrl.setPageNumber(1);
