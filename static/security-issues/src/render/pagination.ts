@@ -81,8 +81,6 @@ export const renderPagination = (
       securityIssuesHashUrl.setPageNumber(endPage + 1);
       securityIssuesHashUrl.setPageNumber(endPage + 1);
     });
-    paginationContainer.style.display = "flex";
-
     paginationContainer.appendChild(moreButton);
   }
 
