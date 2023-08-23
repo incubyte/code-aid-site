@@ -1,12 +1,12 @@
 import { ITEMS_PER_PAGE } from "../contants";
-import { GlobalState } from "../state";
+import { SecurityIssuesHashUrl } from "../security-issue-hash";
 import { Impact, Issue } from "../types";
 import { getImpactColor } from "./impact-color";
 
-export const renderIssues = (container: HTMLDivElement, globalState: GlobalState, issues: Issue[]) => {
+export const renderIssues = (container: HTMLDivElement, securityIssuesHashUrl: SecurityIssuesHashUrl, issues: Issue[]) => {
     container.innerHTML = "";
 
-    const startIndex = (globalState.getPageNumber() - 1) * ITEMS_PER_PAGE;
+    const startIndex = (securityIssuesHashUrl.getPageNumber() - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
     const itemsToRender = issues.slice(startIndex, endIndex);
 

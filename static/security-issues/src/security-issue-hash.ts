@@ -3,15 +3,15 @@ export class SecurityIssuesHashUrl {
     private languages: string[] = [];
     private pageNumber;
 
-    constructor(private readonly hash: string) {
-        const data = this.getDataFromUrl(hash);
+    constructor() {
+        const data = this.getDataFromUrl(window.location.hash);
         this.pageNumber = data.pageNumber;
         this.impacts = data.impacts;
         this.languages = data.languages;
     }
 
-    getHash(): string {
-        return this.hash;
+    getStateAsUrl(): string {
+        return window.location.hash.replace("#", "");
     }
 
     updateUrl(): void {
@@ -26,17 +26,17 @@ export class SecurityIssuesHashUrl {
         window.location.hash = hashArray.join("&");
     }
 
-    updateImpacts(impacts: string[]): void {
+    setImpacts(impacts: string[]): void {
         this.impacts = impacts;
         this.updateUrl();
     }
 
-    updateLanguages(languages: string[]): void {
+    setLanguages(languages: string[]): void {
         this.languages = languages;
         this.updateUrl();
     }
 
-    updatePageNumber(pageNumber: number): void {
+    setPageNumber(pageNumber: number): void {
         this.pageNumber = pageNumber;
         this.updateUrl();
     }
@@ -65,11 +65,23 @@ export class SecurityIssuesHashUrl {
         return { impacts, languages, pageNumber };
     }
 
+    getImpacts(): string[] {
+        return this.impacts;
+    }
+
+    getLanguages(): string[] {
+        return this.languages;
+    }
+
+    getPageNumber(): number {
+        return this.pageNumber;
+    }
+
     getData(): { impacts: string[], languages: string[], pageNumber: number } {
         return { impacts: this.impacts, languages: this.languages, pageNumber: this.pageNumber };
     }
 
     isEmpty(): boolean {
-        return this.hash === "";
+        return this.getStateAsUrl() === "";
     }
 }

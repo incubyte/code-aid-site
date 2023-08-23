@@ -1,15 +1,13 @@
 import { SecurityIssuesHashUrl } from "../security-issue-hash";
-import { GlobalState } from "../state";
 
 export class FilterImpactButtons {
   constructor(
     private readonly impactButtonsContainer: HTMLDivElement,
     allImpacts: string[],
     private readonly securityIssuesHashUrl: SecurityIssuesHashUrl,
-    private readonly globalState: GlobalState
   ) {
     allImpacts.forEach((impact) => {
-      const selectedImpacts = globalState.getImpacts();
+      const selectedImpacts = securityIssuesHashUrl.getImpacts();
       const filterButton = document.createElement("button");
       filterButton.className = "filter-button";
       filterButton.classList.add(`${impact.toLocaleLowerCase()}-button`);
@@ -21,15 +19,13 @@ export class FilterImpactButtons {
       filterButton.addEventListener("click", function () {
         filterButton.classList.toggle("selected");
         if (filterButton.classList.contains("selected")) {
-          globalState.setImpacts([...globalState.getImpacts(), impact]);
+          securityIssuesHashUrl.setImpacts([...securityIssuesHashUrl.getImpacts(), impact]);
         } else {
-          globalState.setImpacts(
-            globalState.getImpacts().filter((imp) => imp !== impact)
+          securityIssuesHashUrl.setImpacts(
+            securityIssuesHashUrl.getImpacts().filter((imp) => imp !== impact)
           );
         }
-        globalState.setPageNumber(1);
-        securityIssuesHashUrl.updatePageNumber(globalState.getPageNumber());
-        securityIssuesHashUrl.updateImpacts(globalState.getImpacts());
+        securityIssuesHashUrl.setPageNumber(1);
       });
 
       impactButtonsContainer.appendChild(filterButton);
@@ -42,10 +38,9 @@ export class FilterLanguageButtons {
     private readonly languageButtonsContainer: HTMLDivElement,
     allLanguages: string[],
     private readonly securityIssuesHashUrl: SecurityIssuesHashUrl,
-    private readonly globalState: GlobalState
   ) {
     allLanguages.forEach((language) => {
-      const selectedLanguages = globalState.getLanguages();
+      const selectedLanguages = securityIssuesHashUrl.getLanguages();
       const filterButton = document.createElement("button");
       filterButton.className = "filter-button";
       filterButton.textContent = `${language}`;
@@ -56,15 +51,13 @@ export class FilterLanguageButtons {
       filterButton.addEventListener("click", function () {
         filterButton.classList.toggle("selected");
         if (filterButton.classList.contains("selected")) {
-          globalState.setLanguages([...globalState.getLanguages(), language]);
+          securityIssuesHashUrl.setLanguages([...securityIssuesHashUrl.getLanguages(), language]);
         } else {
-          globalState.setLanguages(
-            globalState.getLanguages().filter((lang) => lang !== language)
+          securityIssuesHashUrl.setLanguages(
+            securityIssuesHashUrl.getLanguages().filter((lang) => lang !== language)
           );
         }
-        globalState.setPageNumber(1);
-        securityIssuesHashUrl.updatePageNumber(globalState.getPageNumber());
-        securityIssuesHashUrl.updateLanguages(globalState.getLanguages());
+        securityIssuesHashUrl.setPageNumber(1);
       });
 
       languageButtonsContainer.appendChild(filterButton);

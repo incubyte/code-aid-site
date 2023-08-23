@@ -3,7 +3,6 @@ import { FilterImpactButtons, FilterLanguageButtons } from "./render/filter-butt
 import { renderIssues } from "./render/issues";
 import { renderPagination } from "./render/pagination";
 import { SecurityIssuesHashUrl } from "./security-issue-hash";
-import { GlobalState } from "./state";
 
 const main = async () => {
     // 1. fetch JSON data
@@ -12,32 +11,30 @@ const main = async () => {
     const { allImpacts, allLanguages } = getSecurityIssuesMetadata(resultsWithLanguages);
 
     // 1. analyse the current browser URL (hash)
-    const securityIssuesHashUrl = new SecurityIssuesHashUrl(window.location.hash);
+    const securityIssuesHashUrl = new SecurityIssuesHashUrl();
     if (securityIssuesHashUrl.isEmpty()) {
-        securityIssuesHashUrl.updateImpacts(allImpacts);
-        securityIssuesHashUrl.updateLanguages(allLanguages);
+        securityIssuesHashUrl.setImpacts(allImpacts);
+        securityIssuesHashUrl.setLanguages(allLanguages);
     }
 
     const { impacts, languages, pageNumber } = securityIssuesHashUrl.getData();
-    // 3. assign data to global state configuration
-    const globalState = new GlobalState(impacts, languages, pageNumber);
 
     // 4. filter JSON data using global configuration
-    const filteredResults = filterIssues(resultsWithLanguages, globalState.getImpacts(), globalState.getLanguages());
+    const filteredResults = filterIssues(resultsWithLanguages, impacts, languages);
 
     // 5. render the buttons and pagination UI
-    const filterImpactButtons = new FilterImpactButtons(document.getElementById("filter-impact-buttons") as HTMLDivElement, allImpacts, securityIssuesHashUrl, globalState);
-    const filterLanguageButtons = new FilterLanguageButtons(document.getElementById("filter-language-buttons") as HTMLDivElement, allLanguages, securityIssuesHashUrl, globalState);
+    const filterImpactButtons = new FilterImpactButtons(document.getElementById("filter-impact-buttons") as HTMLDivElement, allImpacts, securityIssuesHashUrl);
+    const filterLanguageButtons = new FilterLanguageButtons(document.getElementById("filter-language-buttons") as HTMLDivElement, allLanguages, securityIssuesHashUrl);
 
     // 6. render the filtered data into HTML
-    renderIssues(document.getElementById("container") as HTMLDivElement, globalState, filteredResults);
-    renderPagination(document.getElementById("pagination") as HTMLDivElement, filteredResults.length, globalState, securityIssuesHashUrl);
+    renderIssues(document.getElementById("container") as HTMLDivElement, securityIssuesHashUrl, filteredResults);
+    renderPagination(document.getElementById("pagination") as HTMLDivElement, filteredResults.length, securityIssuesHashUrl);
 
     // 7. listen to hash change event
     window.addEventListener("hashchange", () => {
-        const filteredResults = filterIssues(resultsWithLanguages, globalState.getImpacts(), globalState.getLanguages());
-        renderIssues(document.getElementById("container") as HTMLDivElement, globalState, filteredResults);
-        renderPagination(document.getElementById("pagination") as HTMLDivElement, filteredResults.length, globalState, securityIssuesHashUrl);
+        const filteredResults = filterIssues(resultsWithLanguages, securityIssuesHashUrl.getImpacts(), securityIssuesHashUrl.getLanguages());
+        renderIssues(document.getElementById("container") as HTMLDivElement, securityIssuesHashUrl, filteredResults);
+        renderPagination(document.getElementById("pagination") as HTMLDivElement, filteredResults.length, securityIssuesHashUrl);
     });
 }
 
