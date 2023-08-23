@@ -79,8 +79,7 @@ export function makeSvgScrollable(svgPointer: SVGSVGElement, viewBox: ViewBox) {
 }
 
 export function makeSvgZoomable(svgPointer: SVGSVGElement, viewBox: ViewBox) {
-  let scaleFactor = 1;
-
+  let firstTime = true;
   svgPointer.addEventListener("wheel", handleZoom);
 
   function handleZoom(event: WheelEvent) {
@@ -91,19 +90,24 @@ export function makeSvgZoomable(svgPointer: SVGSVGElement, viewBox: ViewBox) {
     const isZoomingOut = delta < 0;
     const zoomAmount = 0.05 * delta; // Adjust the zoom speed as desired
 
-    const targetScaleFactor = scaleFactor + zoomAmount;
+    const targetScaleFactor = 1 + zoomAmount;
     const newWidth = viewBox.width / targetScaleFactor;
     const newHeight = viewBox.height / targetScaleFactor;
 
     // Apply zoom only if within the allowed limits
-    const mouseX = event.clientX - svgPointer.getBoundingClientRect().left;
-    const mouseY = event.clientY - svgPointer.getBoundingClientRect().top;
+    const mouseX = viewBox.x + viewBox.width * (event.clientX - svgPointer.getBoundingClientRect().left) / 1200;
+    const mouseY = viewBox.y + viewBox.height * (event.clientY - svgPointer.getBoundingClientRect().top) / 600;
 
-    const dx = (mouseX - viewBox.x) * (zoomAmount / targetScaleFactor);
-    const dy = (mouseY - viewBox.y) * (zoomAmount / targetScaleFactor);
+    const dx = mouseX- viewBox.x;
+    const dxdash = dx * newWidth / viewBox.width;
+    const vxdash = mouseX - dxdash;
 
-    viewBox.x -= dx;
-    viewBox.y -= dy;
+    console.log(dx, dxdash,mouseX, viewBox.x, vxdash);
+
+    const dy = mouseY - viewBox.y;
+    const dydash = dy * newHeight / viewBox.height;
+    const vydash = mouseY - dydash;
+
 
     if(isZoomingIn) {
       if(newWidth > viewBox.width) {
@@ -121,10 +125,10 @@ export function makeSvgZoomable(svgPointer: SVGSVGElement, viewBox: ViewBox) {
     viewBox.height = newHeight;
 
 
-    if ((viewBox.width < 450 || viewBox.height < 250) && isZoomingIn) {
-      
+    if ((viewBox.width < 500 || viewBox.height < 250) && isZoomingIn) {
+
       // zoom in limit reached
-      viewBox.width = 450;
+      viewBox.width = 500;
       viewBox.height = 250;
       return;
     }
@@ -135,6 +139,11 @@ export function makeSvgZoomable(svgPointer: SVGSVGElement, viewBox: ViewBox) {
       viewBox.height = 4500;
       return;
     }
+
+
+    viewBox.x = firstTime ? viewBox.width / 2 : vxdash;
+    viewBox.y = firstTime ? viewBox.height / 2 : vydash;
+    firstTime = false;
 
     svgPointer.setAttribute(
       "viewBox",
