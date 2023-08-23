@@ -9,9 +9,13 @@ export class FilterImpactButtons {
     private readonly globalState: GlobalState
   ) {
     allImpacts.forEach((impact) => {
+      const selectedImpacts = globalState.getImpacts();
       const filterButton = document.createElement("button");
       filterButton.className = "filter-button";
       filterButton.textContent = `${impact}`;
+      if (selectedImpacts.includes(impact)) {
+        filterButton.classList.add("selected");
+      }
 
       filterButton.addEventListener("click", function () {
         filterButton.classList.toggle("selected");
@@ -40,9 +44,13 @@ export class FilterLanguageButtons {
     private readonly globalState: GlobalState
   ) {
     allLanguages.forEach((language) => {
+      const selectedLanguages = globalState.getLanguages();
       const filterButton = document.createElement("button");
       filterButton.className = "filter-button";
       filterButton.textContent = `${language}`;
+      if (selectedLanguages.includes(language)) {
+        filterButton.classList.add("selected");
+      }
 
       filterButton.addEventListener("click", function () {
         filterButton.classList.toggle("selected");

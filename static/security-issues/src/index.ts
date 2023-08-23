@@ -5,22 +5,24 @@ import { renderPagination } from "./render/pagination";
 import { SecurityIssuesHashUrl } from "./security-issue-hash";
 import { GlobalState } from "./state";
 
-// global data layer
-// URL layer
-// HTML layer
-
 const main = async () => {
+    // 1. fetch JSON data
+    const results = await getSecurityIssues();
+    const resultsWithLanguages = getIssuesWithLanguageLabel(results);
+    const { allImpacts, allLanguages } = getSecurityIssuesMetadata(resultsWithLanguages);
+
     // 1. analyse the current browser URL (hash)
     const securityIssuesHashUrl = new SecurityIssuesHashUrl(window.location.hash);
+    if (securityIssuesHashUrl.isEmpty()) {
+        securityIssuesHashUrl.updateImpacts(allImpacts);
+        securityIssuesHashUrl.updateLanguages(allLanguages);
+    }
 
     const { impacts, languages, pageNumber } = securityIssuesHashUrl.getData();
     // 3. assign data to global state configuration
     const globalState = new GlobalState(impacts, languages, pageNumber);
 
-    // 4. fetch JSON data and filter data using global configuration
-    const results = await getSecurityIssues();
-    const resultsWithLanguages = getIssuesWithLanguageLabel(results);
-    const { allImpacts, allLanguages } = getSecurityIssuesMetadata(resultsWithLanguages);
+    // 4. filter JSON data using global configuration
     const filteredResults = filterIssues(resultsWithLanguages, globalState.getImpacts(), globalState.getLanguages());
 
     // 5. render the buttons and pagination UI
