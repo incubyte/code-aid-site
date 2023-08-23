@@ -1,23 +1,23 @@
 {{ $label := .Get 0 }}
 {{ $complexity := .Get 1  }}
 {{ $color := "" }}
-{{ $backgroundColor := "" }}
+{{ $emoji := " " }}
 {{ if eq $label "Good" }}
-  {{ $color = "green" }}
-  {{ $backgroundColor = "#deffde" }}
+  {{ $color = "#00d26a" }}
+  {{ $emoji = "🟢" }}
   <span class="green-label">{{ .Inner }}</span>
 {{ else if eq $label "Moderate" }}
-  {{ $color = "orange" }}
-  {{ $backgroundColor = "#fff4e1" }}
+  {{ $color = "#ffb02e" }}
+  {{ $emoji = "⚠️" }}
   <span class="orange-label">{{ .Inner }}</span>
 {{ else }}
-  {{ $color = "red" }}
-  {{ $backgroundColor = "#ffe9e9" }}
+  {{ $color = "#f8312f" }}
+  {{ $emoji = "💥" }}
   <span class="hard-label">{{ .Inner }}</span>
 {{ end }}
 
-<blockquote data-toggle="tooltip" data-placement="bottom" title="{{ $complexity }}" class="{{ $color }}-label" style="border-left: 6px solid {{ $color }};">
-    <span class="{{ $color }}-label" >Code Complexity: {{ $label }}</span>
+<blockquote data-toggle="tooltip" data-placement="bottom" style="border-left: 6px solid {{ $color }};" title="{{ $complexity }}">
+    <span>{{ $emoji }} Code Complexity: {{ $label }}</span>
 </blockquote>
 
 <style>

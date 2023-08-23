@@ -1,0 +1,45 @@
+{{ $label := .Get 0 }}
+{{ $complexity := .Get 1  }}
+{{ $color := "" }}
+{{ $emoji := " " }}
+{{ if eq $label "LOW" }}
+  {{ $color = "#00d26a" }}
+  {{ $emoji = "🟢" }}
+  <span class="green-label">{{ .Inner }}</span>
+{{ else if eq $label "MEDIUM" }}
+  {{ $color = "#ffb02e" }}
+  {{ $emoji = "⚠️" }}
+  <span class="orange-label">{{ .Inner }}</span>
+{{ else }}
+  {{ $color = "#f8312f" }}
+  {{ $emoji = "💥" }}
+  <span class="hard-label">{{ .Inner }}</span>
+{{ end }}
+
+<blockquote data-toggle="tooltip" data-placement="bottom" style="border-left: 6px solid {{ $color }};" title="{{ $complexity }}">
+    <span>Security Impact: {{ $label }}</span> <span style="padding: 0px 10px;">{{ $emoji }}</span>
+</blockquote>
+
+<style>
+  .green-label {
+      color: green;
+  }
+  
+  .orange-label {
+      color: orange;
+  }
+  
+  .red-label {
+      color: red;
+  }
+
+  blockquote {
+    width: fit-content;
+  }
+</style>
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>

@@ -1,0 +1,78 @@
+.graph-svg {
+  cursor: grab;
+  user-select: none;
+  z-index: 1;
+}
+
+.graph-svg:active {
+  cursor: grabbing;
+}
+
+circle {
+  cursor: pointer;
+}
+
+.link-label {
+  font-size: 10px;
+  fill: #3b3b3b;
+  pointer-events: none;
+}
+
+.node-label {
+  font-size: 10px;
+  fill: #3b3b3b;
+  transform: translate(5px, -8px);
+}
+
+#graph-container {
+  position: relative;
+  display: inline-block;
+}
+
+.legend-svg {
+  top: 0%;
+  right: 0%;
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
+}
+
+#edgeTypeDropdown {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px;
+  width: 200px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  position: absolute;
+  left: 8px;
+  top: 10px;
+}
+
+#edgeTypeDropdown option {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  background-color: white;
+  color: #333;
+}
+
+#edgeTypeDropdown option:hover {
+  background-color: #f5f5f5;
+}
+
+
+#edgeTypeDropdown::after {
+  content: '\25BC'; 
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+
+#edgeTypeDropdown:hover::after {
+  color: #666;
+}

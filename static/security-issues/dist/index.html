@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .filter-button {
+        margin: 5px;
+        width: 80px;
+        color: #333;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 50px;
+        font-weight: bold;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .filter-button.selected {
+        color: #fff;
+        background-color: #007bff;
+        border: 1px solid #007bff;
+      }
+
+      .filter-button:hover {
+        border: 1px solid #007bff;
+      }
+
+      .high-button.selected {
+        background-color: #ff4500;
+        border: 1px solid #ff4500;
+      }
+      .medium-button.selected {
+        background-color: #ff6600;
+        border: 1px solid #ff6600;
+      }
+      .low-button.selected {
+        background-color: #008a45;
+        border: 1px solid #008a45;
+      }
+
+      .security-issue {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .accordion-header {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .accordion-header.active {
+        background-color: #ddd;
+      }
+
+      .accordion-content {
+        padding: 10px;
+        display: none;
+      }
+
+      .accordion-content.active {
+        display: block;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css"
+    />
+  </head>
+
+  <body>
+    <div id="filter-using-impact">
+      <h2>Filters</h2>
+      <div id="filter-impact-buttons"></div>
+      <div id="filter-language-buttons"></div>
+    </div>
+
+    <div id="container"></div>
+    <div id="pagination"></div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
