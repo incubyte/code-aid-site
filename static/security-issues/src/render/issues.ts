@@ -2,6 +2,7 @@ import { ITEMS_PER_PAGE } from "../constants";
 import { SecurityIssuesHashUrl } from "../security-issue-hash";
 import { Impact, Issue } from "../types";
 import { getImpactColor } from "./impact-color";
+const hljs = require("highlight.js");
 
 export const renderIssues = (
   container: HTMLDivElement,
@@ -50,10 +51,10 @@ function createAccordionContent(issue: Issue): HTMLDivElement {
   content.classList.add("active");
 
   const ul = createUnorderedList([
-    `CWE| ${issue.extra.metadata.cwe}`,
-    `Message| ${issue.extra.message}`,
-    `OWASP| ${issue.extra.metadata.owasp}`,
-    `Code| ${issue.extra.lines}`,
+    `CWE||| ${issue.extra.metadata.cwe}`,
+    `Message||| ${issue.extra.message}`,
+    `OWASP||| ${issue.extra.metadata.owasp}`,
+    `Code||| ${issue.extra.lines}`,
   ]);
 
   content.style.borderLeft = `5px solid ${getImpactColor(
@@ -76,9 +77,14 @@ function createUnorderedList(items: string[]): HTMLUListElement {
   const ul = document.createElement("ul");
   items.forEach((item) => {
     const li = document.createElement("li");
-    const parts = item.split("|");
+    const parts = item.split("|||");
     if (parts.length === 2) {
-      li.innerHTML = `<strong>${parts[0]}:</strong> ${parts[1]}<br/>`;
+      if (parts[0] === "Code") {
+        const code = hljs.highlightAuto(parts[1]).value;
+        li.innerHTML = `<strong>${parts[0]}:</strong><br/><pre><code>${code}</code></pre>`;
+      } else {
+        li.innerHTML = `<strong>${parts[0]}:</strong> ${parts[1]}<br/>`;
+      }
     } else {
       console.log(parts);
       li.textContent = item;
