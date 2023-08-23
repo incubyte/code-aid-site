@@ -46,6 +46,7 @@ export const renderPagination = (paginationContainer: HTMLDivElement, totalItems
         pageButton.textContent = i + "";
         pageButton.addEventListener("click", function () {
             securityIssuesHashUrl.updatePageNumber(i);
+            globalState.setPageNumber(i);
         });
         if (i === globalState.getPageNumber()) {
             pageButton.style.color = "white";

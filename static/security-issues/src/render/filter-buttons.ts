@@ -12,6 +12,7 @@ export class FilterImpactButtons {
       const selectedImpacts = globalState.getImpacts();
       const filterButton = document.createElement("button");
       filterButton.className = "filter-button";
+      filterButton.classList.add(`${impact.toLocaleLowerCase()}-button`);
       filterButton.textContent = `${impact}`;
       if (selectedImpacts.includes(impact)) {
         filterButton.classList.add("selected");
