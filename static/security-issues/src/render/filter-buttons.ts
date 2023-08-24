@@ -38,22 +38,30 @@ export class FilterImpactButtons {
 
 export class FilterLanguageButtons {
   constructor(
-    private readonly languageButtonsContainer: HTMLDivElement,
+    private readonly languageListContainer: HTMLDivElement,
     allLanguages: string[],
     private readonly securityIssuesHashUrl: SecurityIssuesHashUrl
   ) {
     allLanguages.forEach((language) => {
       const selectedLanguages = securityIssuesHashUrl.getLanguages();
-      const filterButton = document.createElement("button");
-      filterButton.className = "filter-button";
-      filterButton.textContent = `${language}`;
+
+      const languageContainer = document.createElement("div");
+      const languageLabel = document.createElement("label");
+      const checkboxButton = document.createElement("INPUT");
+      checkboxButton.setAttribute("type", "checkbox");
+      checkboxButton.classList.add("checkbox");
+      checkboxButton.setAttribute("id", `${language}`);
+
+      languageLabel.textContent = `${language}`;
+      languageLabel.setAttribute("for", `${language}`);
       if (selectedLanguages.includes(language)) {
-        filterButton.classList.add("selected");
+        checkboxButton.setAttribute("checked", "true");
+        checkboxButton.classList.add("checked");
       }
 
-      filterButton.addEventListener("click", function () {
-        filterButton.classList.toggle("selected");
-        if (filterButton.classList.contains("selected")) {
+      checkboxButton.addEventListener("change", function () {
+        checkboxButton.classList.toggle("checked");
+        if (checkboxButton.classList.contains("checked")) {
           securityIssuesHashUrl.setLanguages([
             ...securityIssuesHashUrl.getLanguages(),
             language,
@@ -67,8 +75,13 @@ export class FilterLanguageButtons {
         }
         securityIssuesHashUrl.setPageNumber(1);
       });
+      languageContainer.appendChild(checkboxButton);
+      languageContainer.appendChild(languageLabel);
 
-      languageButtonsContainer.appendChild(filterButton);
+      languageContainer.classList.add("language-margin");
+      languageListContainer.classList.add("language-list");
+
+      languageListContainer.appendChild(languageContainer);
     });
   }
 }
