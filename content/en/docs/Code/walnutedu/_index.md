@@ -12,6 +12,27 @@ description: >
 
 This document provides a high-level overview of the key aspects of the project's codebase and its development practices.
 
+
+| Language              |  files            |  blank  | comment |  code  |
+|-----------------------|-------------------|---------|---------|--------|
+| Java                    |                 76 |      891 |        28 |     3999 |
+| CSS                     |                  2 |       49 |         0 |      214 |
+| Bourne Shell            |                  1 |       27 |       115 |      102 |
+| HTML                    |                  6 |        3 |         0 |     2670 |
+| JSON                    |                  4 |        0 |         0 |       85 |
+| Text                    |                  2 |        0 |         0 |        2 |
+| Properties              |                  3 |        0 |         1 |        8 |
+| YAML                    |                  5 |        2 |         0 |      119 |
+| Dockerfile              |                  1 |        1 |         0 |        4 |
+| R                       |                 11 |      789 |       390 |     3074 |
+| XML                     |                 13 |        5 |         2 |     2491 |
+| JavaScript              |                  1 |       45 |         1 |      148 |
+| DOS Batch               |                  1 |       21 |         2 |       69 |
+| Gradle                  |                  2 |       16 |         0 |       75 |
+| Markdown                |                 23 |      982 |         0 |     3955 |
+| SUM:                  |                  151 |    2831 |      539 |   17015 |
+
+
 {{<sectionHeadingWithTooltip "Our system identifies the version control system (VCS) being used by looking for specific files in the project root directory. These files include .git for Git, .svn for Subversion, .hg for Mercurial, p4config.txt for Perforce, and CVS for CVS. If none of these files are found, the VCS will be marked as unknown.">}}
 Source Control
 {{</sectionHeadingWithTooltip>}}

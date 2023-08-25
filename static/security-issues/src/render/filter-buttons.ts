@@ -55,10 +55,10 @@ export class FilterLanguageButtons {
       const checkboxButton = document.createElement("INPUT");
       checkboxButton.setAttribute("type", "checkbox");
       checkboxButton.classList.add("checkbox");
-      checkboxButton.setAttribute("id", `${language}`);
+      checkboxButton.setAttribute("id", `${language.key}`);
 
       languageLabel.textContent = `${language.key} (x${language.value})`;
-      languageLabel.setAttribute("for", `${language}`);
+      languageLabel.setAttribute("for", `${language.key}`);
       if (selectedLanguages.includes(language.key)) {
         checkboxButton.setAttribute("checked", "true");
         checkboxButton.classList.add("checked");
