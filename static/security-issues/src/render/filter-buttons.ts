@@ -1,18 +1,23 @@
 import { SecurityIssuesHashUrl } from "../security-issue-hash";
 
+export type Counter = {
+  key: string;
+  value: number;
+}
+
 export class FilterImpactButtons {
   constructor(
     private readonly impactButtonsContainer: HTMLDivElement,
-    allImpacts: string[],
+    allImpactsWithCount: Counter[],
     private readonly securityIssuesHashUrl: SecurityIssuesHashUrl
   ) {
-    allImpacts.forEach((impact) => {
+    allImpactsWithCount.forEach((impactWithCount) => {
       const selectedImpacts = securityIssuesHashUrl.getImpacts();
       const filterButton = document.createElement("button");
       filterButton.className = "filter-button";
-      filterButton.classList.add(`${impact.toLocaleLowerCase()}-button`);
-      filterButton.textContent = `${impact}`;
-      if (selectedImpacts.includes(impact)) {
+      filterButton.classList.add(`${impactWithCount.key.toLocaleLowerCase()}-button`);
+      filterButton.textContent = `${impactWithCount.key} (x${impactWithCount.value})`;
+      if (selectedImpacts.includes(impactWithCount.key)) {
         filterButton.classList.add("selected");
       }
 
@@ -21,11 +26,11 @@ export class FilterImpactButtons {
         if (filterButton.classList.contains("selected")) {
           securityIssuesHashUrl.setImpacts([
             ...securityIssuesHashUrl.getImpacts(),
-            impact,
+            impactWithCount.key,
           ]);
         } else {
           securityIssuesHashUrl.setImpacts(
-            securityIssuesHashUrl.getImpacts().filter((imp) => imp !== impact)
+            securityIssuesHashUrl.getImpacts().filter((imp) => imp !== impactWithCount.key)
           );
         }
         securityIssuesHashUrl.setPageNumber(1);
@@ -39,10 +44,10 @@ export class FilterImpactButtons {
 export class FilterLanguageButtons {
   constructor(
     private readonly languageListContainer: HTMLDivElement,
-    allLanguages: string[],
+    allLanguagesWithCount: Counter[],
     private readonly securityIssuesHashUrl: SecurityIssuesHashUrl
   ) {
-    allLanguages.forEach((language) => {
+    allLanguagesWithCount.forEach((language) => {
       const selectedLanguages = securityIssuesHashUrl.getLanguages();
 
       const languageContainer = document.createElement("div");
@@ -52,9 +57,9 @@ export class FilterLanguageButtons {
       checkboxButton.classList.add("checkbox");
       checkboxButton.setAttribute("id", `${language}`);
 
-      languageLabel.textContent = `${language}`;
+      languageLabel.textContent = `${language.key} (x${language.value})`;
       languageLabel.setAttribute("for", `${language}`);
-      if (selectedLanguages.includes(language)) {
+      if (selectedLanguages.includes(language.key)) {
         checkboxButton.setAttribute("checked", "true");
         checkboxButton.classList.add("checked");
       }
@@ -64,13 +69,13 @@ export class FilterLanguageButtons {
         if (checkboxButton.classList.contains("checked")) {
           securityIssuesHashUrl.setLanguages([
             ...securityIssuesHashUrl.getLanguages(),
-            language,
+            language.key,
           ]);
         } else {
           securityIssuesHashUrl.setLanguages(
             securityIssuesHashUrl
               .getLanguages()
-              .filter((lang) => lang !== language)
+              .filter((lang) => lang !== language.key)
           );
         }
         securityIssuesHashUrl.setPageNumber(1);

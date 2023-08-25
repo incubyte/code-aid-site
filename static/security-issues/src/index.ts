@@ -16,17 +16,17 @@ const main = async () => {
   // 1. fetch JSON data
   const results = await getSecurityIssues();
   const resultsWithLanguages = getIssuesWithLanguageLabel(results);
-  const { allImpacts, allLanguages } =
+  const { allImpactsWithCount, allLanguagesWithCount } =
     getSecurityIssuesMetadata(resultsWithLanguages);
 
   // 1. analyse the current browser URL (hash)
   const securityIssuesHashUrl = new SecurityIssuesHashUrl();
   if (securityIssuesHashUrl.isEmpty()) {
-    securityIssuesHashUrl.setImpacts(allImpacts);
-    securityIssuesHashUrl.setLanguages(allLanguages);
+    securityIssuesHashUrl.setImpacts(allImpactsWithCount.map(o => o.key));
+    securityIssuesHashUrl.setLanguages(allLanguagesWithCount.map(o => o.key));
   }
 
-  const { impacts, languages, pageNumber } = securityIssuesHashUrl.getData();
+  const { impacts, languages } = securityIssuesHashUrl.getData();
 
   // 4. filter JSON data using global configuration
   const filteredResults = filterIssues(
@@ -38,12 +38,12 @@ const main = async () => {
   // 5. render the buttons and pagination UI
   const filterImpactButtons = new FilterImpactButtons(
     document.getElementById("filter-impact-buttons") as HTMLDivElement,
-    allImpacts,
+    allImpactsWithCount,
     securityIssuesHashUrl
   );
   const filterLanguageButtons = new FilterLanguageButtons(
     document.getElementById("filter-language-buttons") as HTMLDivElement,
-    allLanguages,
+    allLanguagesWithCount,
     securityIssuesHashUrl
   );
 

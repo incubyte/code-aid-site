@@ -1,3 +1,4 @@
+import { Counter } from "./render/filter-buttons";
 import { Issue } from "./types";
 
 export const filterIssues = (
@@ -28,12 +29,24 @@ export const getIssuesWithLanguageLabel = (results: Issue[]): Issue[] => {
 
 export const getSecurityIssuesMetadata = (
   results: Issue[]
-): { allImpacts: string[]; allLanguages: string[] } => {
-  const allLanguages: string[] = [];
+): { allImpactsWithCount: Counter[]; allLanguagesWithCount: Counter[] } => {
+  const allLanguagesWithCount: Counter[] = [];
+  const allImpactsWithCount: Counter[] = [];
   results.forEach((result) => {
-    if (!allLanguages.includes(result.language)) {
-      allLanguages.push(result.language);
+    const language = result.language;
+    const impact = result.extra.metadata.impact;
+    const languageIndex = allLanguagesWithCount.findIndex((lang) => lang.key === language);
+    const impactIndex = allImpactsWithCount.findIndex((imp) => imp.key === impact);
+    if (languageIndex === -1) {
+      allLanguagesWithCount.push({ key: language, value: 1 });
+    } else {
+      allLanguagesWithCount[languageIndex].value++;
+    }
+    if (impactIndex === -1) {
+      allImpactsWithCount.push({ key: impact, value: 1 });
+    } else {
+      allImpactsWithCount[impactIndex].value++;
     }
   });
-  return { allImpacts: ["LOW", "MEDIUM", "HIGH"], allLanguages };
+  return { allImpactsWithCount, allLanguagesWithCount };
 };
