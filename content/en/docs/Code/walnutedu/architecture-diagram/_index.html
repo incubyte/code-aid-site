@@ -1,0 +1,68 @@
++++
+title = "Architecture Diagram"
+linkTitle = "Architecture Diagram"
+weight = -1
++++
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Architecture Diagram</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script defer src="index.js"></script>
+    <link rel="stylesheet" href="index.css"/>
+</head>
+<body>
+<div id="filter-panel">
+    <div class="filter-section">
+        <h4>Name</h4>
+        <input type="text" id="name-filter" placeholder="Filter by name"/>
+    </div>
+    <div class="filter-section">
+        <h4>LOC</h4>
+        <label
+        >Min:
+            <input type="range" id="loc-filter-min" min="0" max="1000" value="0"
+            /></label>
+        <label
+        >Max:
+            <input type="range" id="loc-filter-max" min="0" max="1000" value="0"
+            /></label>
+        <div>
+            <p>Min Selected Value: <span id="min-selected-value">0</span></p>
+            <p>Max Selected Value: <span id="max-selected-value">1000</span></p>
+        </div>
+    </div>
+
+    <div class="filter-section">
+        <h4>Code Dependencies</h4>
+        <div>
+            <input type="checkbox" id="code-dependencies-checkbox" checked/>
+            <label for="code-dependencies-checkbox">Show Code Dependencies</label>
+        </div>
+        <div>
+            <input type="checkbox" id="couplings-checkbox"/>
+            <label for="couplings-checkbox">Show Change Couplings</label>
+        </div>
+        <div>
+            <label
+            >Coupling Strength:
+                <input type="range" id="coupling-threshold" min="0" max="1" value="0" step="0.1"
+                /></label>
+            <div>
+                <p>Selected Value: <span id="coupling-threshold-value">0</span></p>
+            </div>
+        </div>
+    </div>
+    <div id="button-section">
+        <button id="apply-filters">Apply Filters</button>
+        <button id="reset-filters">Reset Filters</button>
+    </div>
+</div>
+
+<div id="chart"></div>
+</body>
+</html>

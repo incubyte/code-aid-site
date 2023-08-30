@@ -1,4 +1,105 @@
-<details class="mt-4">
-  <summary class="h3 mb-0">{{ (.Get 0) | markdownify }}</summary>
-  {{ .Inner | markdownify }}
+<details class="details-container mt-4">
+    <summary class="details-header h3 mb-0">
+        <span>{{ (.Get 0) | markdownify }}</span>
+        {{ if (.Get 1) }}
+        <button
+                onclick="handleButtonClick(this.getAttribute('data-functionName'), this)"
+                data-functionName="{{ (.Get 1) }}"
+                class="generate-test-btn">
+            Generate Test
+            <div class="loading-spinner" style="display:none;"></div>
+        </button>
+        {{ end }}
+    </summary>
+    <div class="details-content">
+        {{ .Inner | markdownify }}
+    </div>
+    <div class="result"></div>
 </details>
+
+
+<style>
+    /* Add to your styles.css */
+    .details-container {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .details-header {
+        background: #f5f5f5;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .details-content {
+        padding: 10px;
+        border-top: 1px solid #ccc;
+    }
+
+    .generate-test-btn {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin-left: 20px;
+        cursor: pointer;
+    }
+
+    .result {
+        padding: 10px;
+        background-color: #e9ecef;
+    }
+
+    .loading-spinner {
+        display: inline-block;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 3px solid #fff;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+
+</style>
+
+<script>
+    async function handleButtonClick(functionName, buttonElement) {
+        // Show loading spinner
+        const loadingSpinner = buttonElement.querySelector('.loading-spinner');
+        loadingSpinner.style.display = 'inline-block';
+
+        fetch(`http://localhost:3000/embedding/integrationtest?link=${functionName}`)
+            .then(data => data.json())
+            .then(html => {
+                const resultDiv = buttonElement.closest('details').querySelector('.result');
+                resultDiv.innerHTML = html.test;
+
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+            })
+            .catch(error => {
+                // Handle error
+                console.error(error);
+
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+            });
+    }
+
+
+</script>
