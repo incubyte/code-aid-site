@@ -22,8 +22,8 @@ const main = async () => {
   // 1. analyse the current browser URL (hash)
   const securityIssuesHashUrl = new SecurityIssuesHashUrl();
   if (securityIssuesHashUrl.isEmpty()) {
-    securityIssuesHashUrl.setImpacts(allImpactsWithCount.map(o => o.key));
-    securityIssuesHashUrl.setLanguages(allLanguagesWithCount.map(o => o.key));
+    securityIssuesHashUrl.setImpacts(allImpactsWithCount.map((o) => o.key));
+    securityIssuesHashUrl.setLanguages(allLanguagesWithCount.map((o) => o.key));
   }
 
   const { impacts, languages } = securityIssuesHashUrl.getData();
