@@ -34,3 +34,11 @@ type Package = {
   id: string;
   url: string;
 };
+
+type Issue = {
+  fileName: string;
+  filePath: string;
+  packages?: Package[];
+  vulnerabilities?: Vulnerability;
+  language: string;
+};

@@ -102,7 +102,7 @@ const addVulnerabilies = (
     description.innerHTML =
       "<strong>Description:</strong> " + vulnerability.description;
     severity.innerHTML = "<strong>Severity:</strong> " + vulnerability.severity;
-    severity.classList.add("badge", "badge-pill", "badge-success");
+    severity.classList.add("badge", "badge-primary");
     attackVector.innerHTML =
       "<strong>Threat vector:</strong> " +
       getCleanedAttackVector(vulnerability.cvssv3?.attackVector);
