@@ -1,13 +1,53 @@
 import { SecurityIssuesHashUrl } from "../security-issue-hash";
 
 export type Counter = {
-  key: string;
+  key: string ;
   value: number;
 };
 
+export class FilterSeverityButtons {
+  constructor(
+    private readonly severityButtonsContainer: HTMLDivElement,
+    allSeveritiesWithCount: Counter[],
+    private readonly securityIssuesHashUrl: SecurityIssuesHashUrl
+  ) {
+    allSeveritiesWithCount.forEach((severityWithCount) => {
+      const selectedSeverities = securityIssuesHashUrl.getSeverities();
+      const filterButton = document.createElement("button");
+      filterButton.className = "filter-button";
+      filterButton.classList.add(
+        `${severityWithCount.key.toLocaleLowerCase()}-button`
+      );
+      filterButton.textContent = `${severityWithCount.key} (x${severityWithCount.value})`;
+      if (selectedSeverities.includes(severityWithCount.key)) {
+        filterButton.classList.add("selected");
+      }
+
+      filterButton.addEventListener("click", function () {
+        filterButton.classList.toggle("selected");
+        if (filterButton.classList.contains("selected")) {
+          securityIssuesHashUrl.setSeverities([
+            ...securityIssuesHashUrl.getSeverities(),
+            severityWithCount.key,
+          ]);
+        } else {
+          securityIssuesHashUrl.setSeverities(
+            securityIssuesHashUrl
+              .getSeverities()
+              .filter((serverity) => serverity !== severityWithCount.key)
+          );
+        }
+        securityIssuesHashUrl.setPageNumber(1);
+      });
+
+      severityButtonsContainer.appendChild(filterButton);
+    });
+  }
+}
+
 export class FilterLanguageButtons {
   constructor(
-    languageListContainer: HTMLDivElement,
+    private readonly languageListContainer: HTMLDivElement,
     allLanguagesWithCount: Counter[],
     private readonly securityIssuesHashUrl: SecurityIssuesHashUrl
   ) {

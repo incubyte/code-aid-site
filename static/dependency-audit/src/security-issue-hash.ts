@@ -1,12 +1,12 @@
 export class SecurityIssuesHashUrl {
-  private severity: string[] = [];
+  private severities: string[] = [];
   private languages: string[] = [];
   private pageNumber;
 
   constructor() {
     const data = this.getDataFromUrl(window.location.hash);
     this.pageNumber = data.pageNumber;
-    this.severity = data.impacts;
+    this.severities = data.serverities;
     this.languages = data.languages;
   }
 
@@ -16,8 +16,8 @@ export class SecurityIssuesHashUrl {
 
   updateUrl(): void {
     const hashArray: string[] = [];
-    if (this.severity.length > 0) {
-      hashArray.push(`impact=${this.severity.join(",")}`);
+    if (this.severities.length > 0) {
+      hashArray.push(`severity=${this.severities.join(",")}`);
     }
     if (this.languages.length > 0) {
       hashArray.push(`language=${this.languages.join(",")}`);
@@ -26,8 +26,8 @@ export class SecurityIssuesHashUrl {
     window.location.hash = hashArray.join("&");
   }
 
-  setSeverity(impacts: string[]): void {
-    this.severity = impacts;
+  setSeverities(serverity: string[]): void {
+    this.severities = serverity;
     this.updateUrl();
   }
 
@@ -42,7 +42,7 @@ export class SecurityIssuesHashUrl {
   }
 
   getDataFromUrl(hash: string): {
-    impacts: string[];
+    serverities: string[];
     languages: string[];
     pageNumber: number;
   } {
@@ -66,11 +66,11 @@ export class SecurityIssuesHashUrl {
         pageNumber = Number(value);
       }
     });
-    return { impacts: severity, languages, pageNumber };
+    return { serverities: severity, languages, pageNumber };
   }
 
-  getSeverity(): string[] {
-    return this.severity;
+  getSeverities(): string[] {
+    return this.severities;
   }
 
   getLanguages(): string[] {
@@ -83,7 +83,7 @@ export class SecurityIssuesHashUrl {
 
   getData(): { severity: string[]; languages: string[]; pageNumber: number } {
     return {
-      severity: this.severity,
+      severity: this.severities,
       languages: this.languages,
       pageNumber: this.pageNumber,
     };

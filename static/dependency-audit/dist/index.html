@@ -17,6 +17,43 @@
         display: flex;
       }
 
+      .badge.badge-critical {
+        color: white;
+        background-color: rgb(146, 19, 19);
+      }
+
+      .badge.badge-low {
+        color: white;
+        background-color: green;
+      }
+
+      .badge.badge-medium {
+        color: white;
+        background-color: yellow;
+      }
+      .badge.badge-high {
+        color: white;
+        background-color: rgb(255, 0, 0);
+      }
+
+      .badge.badge-moderate {
+        color: white;
+        background-color: #007bff;
+      }
+
+      .high-button.selected {
+        background-color: #ff4500;
+        border: 1px solid #ff4500;
+      }
+      .medium-button.selected {
+        background-color: #ff6600;
+        border: 1px solid #ff6600;
+      }
+      .low-button.selected {
+        background-color: #008a45;
+        border: 1px solid #008a45;
+      }
+
       .filter-button {
         margin: 5px;
         width: 160px;
@@ -139,6 +176,7 @@
 
   <body>
     Filters
+    <div id="filter-severity-buttons"></div>
     <div id="filter-language-buttons"></div>
     <div id="container"></div>
     <div id="pagination"></div>

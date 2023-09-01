@@ -39,6 +39,6 @@ type Issue = {
   fileName: string;
   filePath: string;
   packages?: Package[];
-  vulnerabilities?: Vulnerability;
+  vulnerabilities: Vulnerability;
   language: string;
 };

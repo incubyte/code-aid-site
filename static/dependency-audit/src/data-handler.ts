@@ -4,8 +4,8 @@ const isIssuesEmpty = (issue: DependencyIssue) => {
   return issue.vulnerabilities?.length === undefined;
 };
 
-export const getDependencyIssues = async (): Promise<DependencyIssue[]> => {
-  const res = await fetch("./telebright-dependency-check-report.json");
+export const getDependencyIssues = async (): Promise<Issue[]> => {
+  const res = await fetch("./cats-dependency-check-report.json");
   const data = await res.json();
   const dependencyIssues = data.dependencies;
   const finalDependecyIssues: Issue[] = [];
@@ -15,31 +15,37 @@ export const getDependencyIssues = async (): Promise<DependencyIssue[]> => {
     }
   );
   filteredDependencyIssues.forEach((issue: DependencyIssue) => {
-    issue.filePath = issue.filePath.replace(
-      "/mnt/c/Users/DELL/Desktop/dev/",
-      ""
-    );
+    issue.filePath = issue.filePath.replace("/mnt/d/", "");
+    if (issue.filePath.includes("package-lock.json")) {
+      issue.filePath = issue.filePath + ".node";
+    }
   });
 
   filteredDependencyIssues.forEach((issue: DependencyIssue) => {
     convertToSaprateEle(issue).forEach((ele) => finalDependecyIssues.push(ele));
-
-    // finalDependecyIssues.(convertToSaprateEle(issue));
   });
 
-  return filteredDependencyIssues;
+  finalDependecyIssues.forEach((issue) => {
+    issue.vulnerabilities.severity =
+      issue.vulnerabilities.severity.toUpperCase();
+  });
+
+  return finalDependecyIssues;
 };
 
 export const filteredDependencyIssues = (
-  results: DependencyIssue[],
-  languages: string[]
-): DependencyIssue[] => {
-  return results.filter((obj) => languages.includes(obj.language));
+  results: Issue[],
+  languages: string[],
+  severities: string[]
+): Issue[] => {
+  return results.filter(
+    (obj) =>
+      languages.includes(obj.language) &&
+      severities.includes(obj.vulnerabilities.severity)
+  );
 };
 
-export const getIssuesWithLanguageLabel = (
-  results: DependencyIssue[]
-): DependencyIssue[] => {
+export const getIssuesWithLanguageLabel = (results: Issue[]): Issue[] => {
   return results.map((result) => {
     const language = result.filePath.split("/").pop()?.split(".").pop();
     return { ...result, language: language ? language : "" };
@@ -47,31 +53,44 @@ export const getIssuesWithLanguageLabel = (
 };
 
 export const getSecurityIssuesMetadata = (
-  results: DependencyIssue[]
-): { allLanguagesWithCount: Counter[] } => {
+  results: Issue[]
+): { allLanguagesWithCount: Counter[]; allSeverityWithCount: Counter[] } => {
   const allLanguagesWithCount: Counter[] = [];
-  const allImpactsWithCount: Counter[] = [];
+  const allSeveritiesWithCount: Counter[] = [];
   results.forEach((result) => {
     const language = result.language;
+    const severity = result.vulnerabilities?.severity;
     const languageIndex = allLanguagesWithCount.findIndex(
       (lang) => lang.key === language
+    );
+    const severityIndex = allSeveritiesWithCount.findIndex(
+      (sev) => sev.key === severity
     );
     if (languageIndex === -1) {
       allLanguagesWithCount.push({ key: language, value: 1 });
     } else {
       allLanguagesWithCount[languageIndex].value++;
     }
+    if (severityIndex === -1) {
+      allSeveritiesWithCount.push({ key: severity ? severity : "", value: 1 });
+    } else {
+      allSeveritiesWithCount[severityIndex].value++;
+    }
   });
-  return { allLanguagesWithCount };
+  return {
+    allLanguagesWithCount,
+    allSeverityWithCount: allSeveritiesWithCount,
+  };
 };
 
 function convertToSaprateEle(issue: DependencyIssue): Issue[] {
   const convertedIssues: Issue[] = [];
   const { filePath, fileName, language, packages, vulnerabilities } = issue;
-  const singleIssue: Issue = {
+  const singleIssue: any = {
     fileName,
     filePath,
     language,
+    packages,
   };
   vulnerabilities?.forEach((vulnerability) => {
     convertedIssues.push(constructIssueObj(singleIssue, vulnerability));
@@ -81,12 +100,12 @@ function convertToSaprateEle(issue: DependencyIssue): Issue[] {
 }
 
 const constructIssueObj = (
-  singleIssue: Issue,
-  vulnerability: Vulnerability
+  singleIssue: any,
+  vulnerabilities: Vulnerability
 ): Issue => {
   const obj = {
     ...singleIssue,
-    vulnerability,
+    vulnerabilities,
   };
   return obj;
 };

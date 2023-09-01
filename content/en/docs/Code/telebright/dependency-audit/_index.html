@@ -25,7 +25,44 @@ weight = -1
 
       .badge.badge-critical {
         color: white;
-        background-color: red;
+        background-color: rgb(146, 19, 19);
+      }
+
+      .badge.badge-low {
+        color: white;
+        background-color: #008a45;
+      }
+
+      .badge.badge-medium {
+        color: white;
+        background-color: #ff6600;
+      }
+      .badge.badge-high {
+        color: white;
+        background-color: rgb(255, 0, 0);
+      }
+
+      .badge.badge-moderate {
+        color: white;
+        background-color: #007bff;
+      }
+
+      .filter-button.high-button.selected {
+        background-color: #ff4500;
+        border: 1px solid #ff4500;
+      }
+      .filter-button.medium-button.selected {
+        background-color: #ff6600;
+        border: 1px solid #ff6600;
+      }
+      .filter-button.low-button.selected {
+        background-color: #008a45;
+        border: 1px solid #008a45;
+      }
+
+      .filter-button.critical-button.selected {
+        background-color: rgb(146, 19, 19);
+        border: 1px solid rgb(146, 19, 19);
       }
 
       .filter-button {
@@ -153,8 +190,10 @@ weight = -1
   </head>
 
   <body>
-    <h2>Filters</h2>
+    <h2 style="margin: 0px; padding: 5px">Filters</h2>
+    <div id="filter-severity-buttons"></div>
     <div id="filter-language-buttons"></div>
+
     <div id="container"></div>
     <div id="pagination"></div>
     <script src="./index.js"></script>
