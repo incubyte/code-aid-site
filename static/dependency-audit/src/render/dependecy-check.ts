@@ -35,6 +35,7 @@ const getIssueContainer = (issue: Issue): HTMLDivElement => {
 
 const getHeader = (issue: Issue): HTMLHeadElement => {
   const header = document.createElement("header");
+  header.classList.add("header");
   const fileName = document.createElement("p");
   const filePath = document.createElement("p");
   fileName.innerHTML = "<strong>File Name:</strong> " + issue.fileName;
@@ -48,14 +49,19 @@ const getHeader = (issue: Issue): HTMLHeadElement => {
 function addPacakges(issueSection: HTMLElement, issue: Issue) {
   if (issue.packages?.length === undefined) return;
   const packages = document.createElement("div");
-  const div = document.createElement("div");
 
+  const div = document.createElement("div");
   const p = document.createElement("p");
+
+  const arrowSpan = getArrow();
+  div.classList.add("d-none");
 
   p.classList.add("packages");
   p.innerHTML = "<strong>Packages:</strong>";
+  p.prepend(arrowSpan);
   p.addEventListener("click", () => {
     div.classList.toggle("d-none");
+    arrowSpan.classList.toggle("rotate-arrow");
   });
 
   const ul = document.createElement("ul");
@@ -136,11 +142,24 @@ const addVulnerabilies = (issueSection: HTMLElement, issue: Issue) => {
 
   if (issue.vulnerabilities.references.length !== undefined) {
     const strong = document.createElement("strong");
-    strong.textContent = "References:";
+    strong.innerHTML = "References:";
+    strong.style.cursor = "pointer";
+
+    const arrowSpan = getArrow();
+    strong.prepend(arrowSpan);
+
+    const div = document.createElement("div");
+    div.classList.add("d-none");
+
     references.appendChild(strong);
-    strong.addEventListener("click", () => {});
+
+    strong.addEventListener("click", () => {
+      const arrow = document.getElementById("arrow") as HTMLSpanElement;
+      div.classList.toggle("d-none");
+      arrowSpan.classList.toggle("rotate-arrow");
+    });
+
     issue.vulnerabilities?.references?.forEach((reference) => {
-      const div = document.createElement("div");
       const a = document.createElement("a");
       const li = document.createElement("li");
       a.setAttribute("href", reference.url);
@@ -155,12 +174,20 @@ const addVulnerabilies = (issueSection: HTMLElement, issue: Issue) => {
   li.style.border = "1px solid #ddd";
   li.style.padding = "10px";
   ul.appendChild(li);
-  // });
 
   vulnerabilities.appendChild(ul);
 
   issueSection.appendChild(vulnerabilities);
 };
+
+function getArrow() {
+  const arrowSpan = document.createElement("span");
+  arrowSpan.innerHTML = "► ";
+  arrowSpan.style.transition = "transform 0.3s ease";
+  arrowSpan.style.display = "inline-block";
+  arrowSpan.style.margin = "3px";
+  return arrowSpan;
+}
 
 function getContentSkeleton() {
   const label = document.createElement("label");
@@ -178,7 +205,7 @@ function getContentSkeleton() {
   const confidentialImpact = document.createElement("p");
   const integrityImpact = document.createElement("p");
   const availabilityImpact = document.createElement("p");
-  const references = document.createElement("p");
+  const references = document.createElement("div");
   return {
     description,
     severity,
