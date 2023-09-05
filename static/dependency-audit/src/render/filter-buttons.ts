@@ -1,8 +1,21 @@
 import { SecurityIssuesHashUrl } from "../security-issue-hash";
 
 export type Counter = {
-  key: string ;
+  key: string;
   value: number;
+};
+
+const customSort = (data: Counter[]): Counter[] => {
+  const order: string[] = ["CRITICAL", "HIGH", "MODERATE", "MEDIUM", "LOW"];
+  return data.sort((a, b) => {
+    const indexA: number = order.indexOf(a.key);
+    const indexB: number = order.indexOf(b.key);
+    if (indexA === indexB) {
+      return b.value - a.value;
+    }
+
+    return indexA - indexB;
+  });
 };
 
 export class FilterSeverityButtons {
@@ -11,6 +24,7 @@ export class FilterSeverityButtons {
     allSeveritiesWithCount: Counter[],
     private readonly securityIssuesHashUrl: SecurityIssuesHashUrl
   ) {
+    allSeveritiesWithCount = customSort(allSeveritiesWithCount);
     allSeveritiesWithCount.forEach((severityWithCount) => {
       const selectedSeverities = securityIssuesHashUrl.getSeverities();
       const filterButton = document.createElement("button");

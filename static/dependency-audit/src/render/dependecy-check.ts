@@ -154,18 +154,18 @@ const addVulnerabilies = (issueSection: HTMLElement, issue: Issue) => {
     references.appendChild(strong);
 
     strong.addEventListener("click", () => {
-      const arrow = document.getElementById("arrow") as HTMLSpanElement;
       div.classList.toggle("d-none");
       arrowSpan.classList.toggle("rotate-arrow");
     });
 
     issue.vulnerabilities?.references?.forEach((reference) => {
       const a = document.createElement("a");
-      const li = document.createElement("li");
+      const referenceLi = document.createElement("li");
       a.setAttribute("href", reference.url);
       a.textContent = reference.url;
-
-      div.appendChild(li.appendChild(a));
+      referenceLi.appendChild(a);
+      div.style.paddingLeft = "15px";
+      div.appendChild(referenceLi);
       references.appendChild(div);
     });
     li.appendChild(references);

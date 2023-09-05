@@ -9,7 +9,7 @@
     "security:start": "cd static/security-issues &&  npm run start",
     "graph:start": "cd static/database-graph &&  npm run start",
     "dependency:start": "cd static/dependency-audit &&  npm run start",
-    "dependency:build": "cd static/dependency-audit &&  npm run build && cp dist/index.js ../../content/en/docs/Code/telebright/dependency-audit",
+    "dependency:build": "cd static/dependency-audit &&  npm run build && cp dist/index.js ../../content/en/docs/Code/Cats/dependency-audit",
     "security:build": "cd static/security-issues && npm run build && cp dist/index.js ../../content/en/docs/Code/walnutedu/security-issues",
     "graph:build": "cd static/database-graph && npm run build &&  cp dist/index.js ../../content/en/docs/Database/HRMS"
   },
