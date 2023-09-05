@@ -17,7 +17,7 @@ services:
   code-embeddings:
     image: code-embeddings:latest
     environment:
-      - OPENAI_API_KEY=sk-1234567890
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       - ARANGODB_URL=http://arangodb:8529
       - QDRANT_URL=http://qdrant:6333
       - ARANGODB_NAME=code-embedding
@@ -46,6 +46,7 @@ services:
       - OUTPUT_DIR=/code-aid-parser-output
       - datasources_arangodb_host=arangodb
       - code_embeddings_url=http://code-embeddings:3000
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     volumes:
       - ${CODEBASE_DIR}:/input
       - ${BASE_FOLDER}\output:/output
