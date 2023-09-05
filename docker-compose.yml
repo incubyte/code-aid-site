@@ -46,7 +46,6 @@ services:
       - OUTPUT_DIR=/code-aid-parser-output
       - datasources_arangodb_host=arangodb
       - code_embeddings_url=http://code-embeddings:3000
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
     volumes:
       - ${CODEBASE_DIR}:/input
       - ${BASE_FOLDER}\output:/output
@@ -58,6 +57,5 @@ services:
         npm ci &&
         node src/main.js &&
         cd /code-aid &&
-        ./wait-for-code-embeddings.sh code-embeddings 3000 &&
         java -jar app.jar &&
         touch /output/ready
