@@ -7,36 +7,56 @@ services:
     ports:
       - 8529:8529
     volumes:
-      - C:\Users\DELL\Desktop\arangodbbackup:/var/lib/arangodb3
-  code-aid-site:
-    depends_on:
-      - arangodb
-    image: code-aid-site:latest
-    environment:
-      - args_include=*.java
-      - FILTER=*.java
-      - datasources_default_url=jdbc:sqlserver://host.docker.internal:1433;database=AdventureWorks2019
-      - datasources_default_username=sonar1
-      - datasources_default_password=sonartest
-      - datasources_arangodb_host=arangodb
-    volumes:
-      - C:\Users\DELL\Desktop\jar-for-code-aid\Glowstone:/input
-    working_dir: /code-aid-parser
+      - ${BASE_FOLDER}\arangodbbackup:/var/lib/arangodb3
+  qdrant:
+    image: qdrant/qdrant:latest
     ports:
-      - 1313:1313
+      - 6333:6333
+    volumes:
+      - ${BASE_FOLDER}\qdrant:/data
+  code-embeddings:
+    image: code-embeddings:latest
+    environment:
+      - OPENAI_API_KEY=sk-1234567890
+      - ARANGODB_URL=http://arangodb:8529
+      - QDRANT_URL=http://qdrant:6333
+      - ARANGODB_NAME=code-embedding
+    ports:
+      - 3000:3000
     command:
       - sh
       - -c
       - |
-        node src/main.js &&
-        cd /code-aid-site &&
         ./wait-for-arangodb.sh arangodb 8529 root test123 &&
+        ./wait-for-qdrant.sh qdrant 6333 &&
+        npm install &&
+        node main.js
+  code-aid:
+    depends_on:
+      - code-embeddings
+    image: code-aid:latest
+    working_dir: /code-aid-parser
+    environment:
+      - args_include=*.java
+      - args_parsedjson=/code-aid-parser-output
+      - args_output=/output
+      - args_input=/input
+      - FILTER=*.java
+      - INPUT_DIR=/input
+      - OUTPUT_DIR=/code-aid-parser-output
+      - datasources_arangodb_host=arangodb
+      - code_embeddings_url=http://code-embeddings:3000
+    volumes:
+      - ${CODEBASE_DIR}:/input
+      - ${BASE_FOLDER}\output:/output
+    command:
+      - sh
+      - -c
+      - |
+        rm -rf /output/ready &&
+        npm ci &&
+        node src/main.js &&
         cd /code-aid &&
+        ./wait-for-code-embeddings.sh code-embeddings 3000 &&
         java -jar app.jar &&
-        cd /code-aid-db &&
-        java -jar app.jar &&
-        cd /code-aid-site &&
-        cp -r /code-aid-db/markdownOutput /code-aid-site/content/en/docs &&
-        cp -r /code-aid-output /code-aid-site/content/en/docs &&
-        hugo server --bind 0.0.0.0
-        
+        touch /output/ready
