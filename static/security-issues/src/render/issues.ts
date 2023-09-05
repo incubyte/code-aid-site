@@ -47,6 +47,11 @@ function createAccordionHeader(issue: Issue, index: number): HTMLDivElement {
 
 function createAccordionContent(issue: Issue): HTMLDivElement {
   const content = document.createElement("div");
+  const resolveIssue = document.createElement("button");
+  resolveIssue.innerHTML = "show solution";
+  resolveIssue.onclick = () => {
+    getSolution(content, issue);
+  };
   content.classList.add("accordion-content");
   content.classList.add("active");
 
@@ -62,6 +67,7 @@ function createAccordionContent(issue: Issue): HTMLDivElement {
   )}`;
 
   appendChildren(content, [ul]);
+  content.appendChild(resolveIssue);
 
   return content;
 }
@@ -96,4 +102,48 @@ function createUnorderedList(items: string[]): HTMLUListElement {
 
 function appendChildren(parent: HTMLElement, children: HTMLElement[]): void {
   children.forEach((child) => parent.appendChild(child));
+}
+
+async function getSolution(content: HTMLDivElement, data: Issue) {
+  const url = "http://localhost:3000/embedding/resolveissue";
+  const headers = {
+    "Content-Type": "application/json", // Specify the content type as JSON
+  };
+  const { message, lines } = data.extra;
+  const { cwe, owasp } = data.extra.metadata;
+
+  const requestBody = JSON.stringify({ cwe, message, owasp, code: lines });
+
+  await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: requestBody,
+  })
+    .then((response) => {
+      console.log(response);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Response:", data);
+
+      const aiResult = document.createElement("ul");
+      const solutionDescription = document.createElement("li");
+      solutionDescription.innerHTML =
+        "<strong>Description:</strong>" + data.solution_description;
+      const updatedCode = document.createElement("li");
+      const code = hljs.highlightAuto(data.updated_code).value;
+      const language = hljs.highlightAuto(code).language;
+      console.log(code);
+
+      updatedCode.innerHTML = `<strong>Code:</strong><br/><pre><code class=${language} >${code}</code></pre`;
+      aiResult.appendChild(solutionDescription);
+      aiResult.appendChild(updatedCode);
+      content.appendChild(aiResult);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
