@@ -51,11 +51,12 @@ services:
       - args_parsedjson=/code-aid-parser-output
       - args_output=/${OUTPUT_DIR_NAME}
       - args_input=/input
+      - args_codeembeddingscollection=code
       - FILTER=*.java
       - INPUT_DIR=/input
       - OUTPUT_DIR=/code-aid-parser-output
       - datasources_arangodb_host=arangodb
-      - code_embeddings_url=http://code-embeddings:3000
+      - args_codeembeddingsurl=http://code-embeddings:3000
     volumes:
       - ${CODEBASE_DIR}:/input
       - ${BASE_FOLDER}\${OUTPUT_DIR_NAME}:/${OUTPUT_DIR_NAME}
@@ -69,3 +70,17 @@ services:
         cd /code-aid &&
         java -jar app.jar &&
         touch /${OUTPUT_DIR_NAME}/ready
+  code-aid-site:
+    depends_on:
+      - code-aid
+    image: code-aid-site:latest
+    ports:
+      - 1313:1313
+    volumes:
+      - ${BASE_FOLDER}\${OUTPUT_DIR_NAME}:/code-aid-site/content/en/docs/Code/${OUTPUT_DIR_NAME}
+    command:
+      - sh
+      - -c
+      - |
+        ./wait-for-code-aid-finish.sh /code-aid-site/content/en/docs/Code/${OUTPUT_DIR_NAME}/ready &&
+        hugo server --bind 0.0.0.0

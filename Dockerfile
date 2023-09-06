@@ -9,5 +9,3 @@ ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 WORKDIR /code-aid-site
 
 COPY . .
-
-CMD ["hugo", "server", "--bind", "0.0.0.0"]
