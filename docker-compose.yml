@@ -14,6 +14,16 @@ services:
       - 6333:6333
     volumes:
       - ${BASE_FOLDER}\qdrant:/data
+  semgrep:
+    image: returntocorp/semgrep:latest
+    volumes:
+      - ${CODEBASE_DIR}:/src
+      - ${BASE_FOLDER}\security-output:/output
+    command:
+      - sh
+      - -c
+      - |
+        semgrep --config=auto --json --output=/output/results.json
   code-embeddings:
     image: code-embeddings:latest
     environment:
