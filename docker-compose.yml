@@ -49,7 +49,7 @@ services:
     environment:
       - args_include=*.java
       - args_parsedjson=/code-aid-parser-output
-      - args_output=/output
+      - args_output=/${OUTPUT_DIR_NAME}
       - args_input=/input
       - FILTER=*.java
       - INPUT_DIR=/input
@@ -58,14 +58,14 @@ services:
       - code_embeddings_url=http://code-embeddings:3000
     volumes:
       - ${CODEBASE_DIR}:/input
-      - ${BASE_FOLDER}\output:/output
+      - ${BASE_FOLDER}\${OUTPUT_DIR_NAME}:/${OUTPUT_DIR_NAME}
     command:
       - sh
       - -c
       - |
-        rm -rf /output/ready &&
+        rm -rf /${OUTPUT_DIR_NAME}/ready &&
         npm ci &&
         node src/main.js &&
         cd /code-aid &&
         java -jar app.jar &&
-        touch /output/ready
+        touch /${OUTPUT_DIR_NAME}/ready
