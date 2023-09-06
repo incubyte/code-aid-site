@@ -17,87 +17,114 @@ weight = -1
         border: 1px solid #ccc;
         background-color: #fff;
         transition: all 0.3s ease-in-out;
-    }
+      }
 
-    .filter-button.selected {
+      .filter-button.selected {
         color: #fff;
         background-color: #007bff;
         border: 1px solid #007bff;
-    }
+      }
 
-    .filter-button:hover {
+      .filter-button:hover {
         border: 1px solid #007bff;
-    }
+      }
 
-    .high-button.selected {
+      .high-button.selected {
         background-color: #ff4500;
         border: 1px solid #ff4500;
-    }
-    .medium-button.selected {
+      }
+      .medium-button.selected {
         background-color: #ff6600;
         border: 1px solid #ff6600;
-    }
-    .low-button.selected {
+      }
+      .low-button.selected {
         background-color: #008a45;
         border: 1px solid #008a45;
-    }
+      }
 
-    .security-issue {
+      .security-issue {
         margin-top: 20px;
         margin-bottom: 20px;
         border: 1px solid #ccc;
         border-radius: 5px;
         overflow: hidden;
-    }
+      }
 
-    /* Style for the accordion header */
-    .accordion-header {
+      .accordion-header {
         padding: 10px;
         cursor: pointer;
         background-color: #f2f2f2;
         border-bottom: 1px solid #ccc;
-    }
+      }
 
-    /* Style for the active accordion header (when open) */
-    .accordion-header.active {
+      .accordion-header.active {
         background-color: #ddd;
-    }
+      }
 
-    /* Style for the accordion content */
-    .accordion-content {
+      .accordion-content {
         padding: 10px;
         display: none;
-    }
+      }
 
-    /* Style for the active accordion content (when open) */
-    .accordion-content.active {
+      .accordion-content.active {
         display: block;
-    }
+      }
 
-    #pagination {
-        display: flex;
-    }
-
-    .language-margin {
-        margin: 10px;
+      #pagination {
         display: flex;
       }
 
-    .language-list {
+      .language-margin {
+        margin: 10px;
+      }
+
+      .language-list {
         display: flex;
-        
-    }
-    .checkbox {
+      }
+
+      .loading-spinner {
+        display: inline-block;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 3px solid #fff;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .resolve-issue-btn {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin-left: 20px;
+        cursor: pointer;
+        min-width: 90px;
+      }
+
+      .checkbox {
         vertical-align: middle;
         position: relative;
         bottom: 1px;
         margin: 5px;
         width: 20px;
         height: 20px;
-        display: flex;
         align-items: center;
         justify-content: center;
-    }
+      }
 </style>
 
 <link

@@ -1,4 +1,4 @@
-import { ITEMS_PER_PAGE } from "../constants";
+import { ITEMS_PER_PAGE, impactMap, severityMap } from "../constants";
 import { SecurityIssuesHashUrl } from "../security-issue-hash";
 
 export function renderDepedencyIssue(
@@ -7,7 +7,6 @@ export function renderDepedencyIssue(
   securityIssuesHashUrl: SecurityIssuesHashUrl
 ) {
   container.innerHTML = "";
-
   const startIndex =
     (securityIssuesHashUrl.getPageNumber() - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
@@ -39,8 +38,7 @@ const getHeader = (issue: Issue): HTMLHeadElement => {
   const fileName = document.createElement("p");
   const filePath = document.createElement("p");
   fileName.innerHTML = "<strong>File Name:</strong> " + issue.fileName;
-  filePath.innerHTML =
-    "<strong>File Path:</strong> " + issue.filePath.replace(".node", "");
+  filePath.innerHTML = "<strong>File Path:</strong> " + issue.filePath;
   header.appendChild(fileName);
   header.appendChild(filePath);
   return header;
@@ -49,7 +47,6 @@ const getHeader = (issue: Issue): HTMLHeadElement => {
 function addPacakges(issueSection: HTMLElement, issue: Issue) {
   if (issue.packages?.length === undefined) return;
   const packages = document.createElement("div");
-
   const div = document.createElement("div");
   const p = document.createElement("p");
 
@@ -107,8 +104,8 @@ const addVulnerabilies = (issueSection: HTMLElement, issue: Issue) => {
     "<strong>Threat vector:</strong> " +
     getCleanedAttackVector(issue.vulnerabilities.cvssv3?.attackVector);
   confidentialImpact.innerHTML =
-    "<strong>Confidential impact:</strong> " +
-    getCleanedImpact(issue.vulnerabilities.cvssv3?.confidentialImpact);
+    "<strong>Confidentiality impact:</strong> " +
+    getCleanedImpact(issue.vulnerabilities.cvssv3?.confidentialityImpact);
   integrityImpact.innerHTML =
     "<strong>Integrity impact:</strong> " +
     getCleanedImpact(issue.vulnerabilities.cvssv3?.integrityImpact);
@@ -116,59 +113,32 @@ const addVulnerabilies = (issueSection: HTMLElement, issue: Issue) => {
     "<strong>Availiblity impact:</strong> " +
     getCleanedImpact(issue.vulnerabilities.cvssv3?.availabilityImpact);
 
-  if (issue.vulnerabilities?.description !== undefined) {
+  if (issue.vulnerabilities?.description) {
     li.appendChild(description);
   }
 
-  if (issue.vulnerabilities.severity !== undefined) {
+  if (issue.vulnerabilities.severity) {
     li.appendChild(severity);
   }
 
-  if (issue.vulnerabilities.cvssv3?.attackVector !== undefined) {
+  if (issue.vulnerabilities.cvssv3?.attackVector) {
     li.appendChild(attackVector);
   }
 
-  if (issue.vulnerabilities.cvssv3?.confidentialImpact !== undefined) {
+  if (issue.vulnerabilities.cvssv3?.confidentialityImpact) {
     li.appendChild(confidentialImpact);
   }
 
-  if (issue.vulnerabilities.cvssv3?.integrityImpact !== undefined) {
+  if (issue.vulnerabilities.cvssv3?.integrityImpact) {
     li.appendChild(integrityImpact);
   }
 
-  if (issue.vulnerabilities.cvssv3?.availabilityImpact !== undefined) {
+  if (issue.vulnerabilities.cvssv3?.availabilityImpact) {
     li.appendChild(availabilityImpact);
   }
 
-  if (issue.vulnerabilities.references.length !== undefined) {
-    const strong = document.createElement("strong");
-    strong.innerHTML = "References:";
-    strong.style.cursor = "pointer";
-
-    const arrowSpan = getArrow();
-    strong.prepend(arrowSpan);
-
-    const div = document.createElement("div");
-    div.classList.add("d-none");
-
-    references.appendChild(strong);
-
-    strong.addEventListener("click", () => {
-      div.classList.toggle("d-none");
-      arrowSpan.classList.toggle("rotate-arrow");
-    });
-
-    issue.vulnerabilities?.references?.forEach((reference) => {
-      const a = document.createElement("a");
-      const referenceLi = document.createElement("li");
-      a.setAttribute("href", reference.url);
-      a.textContent = reference.url;
-      referenceLi.appendChild(a);
-      div.style.paddingLeft = "15px";
-      div.appendChild(referenceLi);
-      references.appendChild(div);
-    });
-    li.appendChild(references);
+  if (issue.vulnerabilities.references.length) {
+    addReferences(references, issue, li);
   }
 
   li.style.border = "1px solid #ddd";
@@ -179,6 +149,42 @@ const addVulnerabilies = (issueSection: HTMLElement, issue: Issue) => {
 
   issueSection.appendChild(vulnerabilities);
 };
+
+function addReferences(
+  references: HTMLDivElement,
+  issue: Issue,
+  li: HTMLLIElement
+) {
+  const referenceLabel = document.createElement("strong");
+  referenceLabel.innerHTML = "References:";
+  referenceLabel.style.cursor = "pointer";
+
+  const arrowSpan = getArrow();
+  referenceLabel.prepend(arrowSpan);
+
+  const div = document.createElement("div");
+  div.classList.add("d-none");
+
+  references.appendChild(referenceLabel);
+
+  referenceLabel.addEventListener("click", () => {
+    div.classList.toggle("d-none");
+    arrowSpan.classList.toggle("rotate-arrow");
+  });
+
+  issue.vulnerabilities?.references?.forEach((reference) => {
+    const a = document.createElement("a");
+    const referenceLi = document.createElement("li");
+    a.setAttribute("href", reference.url);
+    a.setAttribute("target", "_blank");
+    a.textContent = reference.name;
+    referenceLi.appendChild(a);
+    div.style.paddingLeft = "15px";
+    div.appendChild(referenceLi);
+    references.appendChild(div);
+  });
+  li.appendChild(references);
+}
 
 function getArrow() {
   const arrowSpan = document.createElement("span");
@@ -196,7 +202,6 @@ function getContentSkeleton() {
   vulnerabilities.classList.add("vulnerabilities");
   vulnerabilities.appendChild(label);
   const ul = document.createElement("ul");
-  // issue.vulnerabilities.forEach(.vulnerabilities?. => {
   const li = document.createElement("li");
 
   const description = document.createElement("p");
@@ -229,31 +234,11 @@ function getCleanedAttackVector(attackVector: string | undefined) {
   }
   return attackVector;
 }
+
 function getCleanedImpact(impact: string) {
-  if (impact === "N") {
-    return "NONE";
-  } else if (impact === "H") {
-    return "HIGH";
-  } else if (impact === "L") {
-    return "LOW";
-  } else if (impact === "M") {
-    return "MEDIUM";
-  } else {
-    return impact;
-  }
+  return impactMap[impact] || impact;
 }
+
 function getSeverityBadge(severity: string): string {
-  if (severity === "CRITICAL") {
-    return "critical";
-  } else if (severity === "HIGH") {
-    return "high";
-  } else if (severity === "LOW") {
-    return "low";
-  } else if (severity === "MEDIUM") {
-    return "medium";
-  } else if (severity === "MODERATE") {
-    return "moderate";
-  } else {
-    return severity;
-  }
+  return severityMap[severity] || severity;
 }

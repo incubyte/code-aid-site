@@ -16,7 +16,7 @@ type Vulnerability = {
   cvssv3: {
     attackVector: string;
     attackComplexity: string;
-    confidentialImpact: string;
+    confidentialityImpact: string;
     integrityImpact: string;
     availabilityImpact: string;
   };
@@ -28,6 +28,7 @@ type Vulnerability = {
 type Reference = {
   source: string;
   url: string;
+  name: string;
 };
 
 type Package = {

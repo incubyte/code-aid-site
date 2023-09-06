@@ -136,8 +136,9 @@ async function getSolution(
   const buttonText = resolveIssueBtn.querySelector(
     ".button-text"
   ) as HTMLSpanElement;
-  loadingSpinner.style.display = "block";
   buttonText.style.display = "none";
+  loadingSpinner.style.display = "block";
+  loadingSpinner.style.marginLeft = "20px";
   await fetch(url, {
     method: "POST",
     headers: headers,

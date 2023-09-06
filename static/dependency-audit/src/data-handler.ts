@@ -5,7 +5,7 @@ const isIssuesEmpty = (issue: DependencyIssue) => {
 };
 
 export const getDependencyIssues = async (): Promise<Issue[]> => {
-  const res = await fetch("./cats-dependency-check-report.json");
+  const res = await fetch("./dependency-check-report.json");
   const data = await res.json();
   const dependencyIssues = data.dependencies;
   const finalDependecyIssues: Issue[] = [];
@@ -16,9 +16,6 @@ export const getDependencyIssues = async (): Promise<Issue[]> => {
   );
   filteredDependencyIssues.forEach((issue: DependencyIssue) => {
     issue.filePath = issue.filePath.replace("/mnt/d/", "");
-    if (issue.filePath.includes("package-lock.json")) {
-      issue.filePath = issue.filePath + ".node";
-    }
   });
 
   filteredDependencyIssues.forEach((issue: DependencyIssue) => {
