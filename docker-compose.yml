@@ -23,7 +23,7 @@ services:
       - sh
       - -c
       - |
-        semgrep --config=auto --json --output=/output/results.json
+        semgrep --config=auto --json --output=/output/scan_results.json
   code-embeddings:
     image: code-embeddings:latest
     environment:
@@ -79,10 +79,12 @@ services:
       - 1313:1313
     volumes:
       - ${BASE_FOLDER}\${OUTPUT_DIR_NAME}:/code-aid-site/content/en/docs/Code/${OUTPUT_DIR_NAME}
+      - ${BASE_FOLDER}\security-output:/security-issues
     command:
       - sh
       - -c
       - |
         ./wait-for-code-aid-finish.sh /code-aid-site/content/en/docs/Code/${OUTPUT_DIR_NAME}/ready &&
         ./generate-architecture-diagram.sh ${OUTPUT_DIR_NAME} &&
+        ./generate-security-issues.sh ${OUTPUT_DIR_NAME} &&
         hugo server --bind 0.0.0.0
