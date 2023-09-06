@@ -47,10 +47,23 @@ function createAccordionHeader(issue: Issue, index: number): HTMLDivElement {
 
 function createAccordionContent(issue: Issue): HTMLDivElement {
   const content = document.createElement("div");
-  const resolveIssue = document.createElement("button");
-  resolveIssue.innerHTML = "show solution";
-  resolveIssue.onclick = () => {
-    getSolution(content, issue);
+  const resolveIssueBtn = document.createElement("button");
+  const spinner = document.createElement("div");
+  const buttonText = document.createElement("span");
+  buttonText.textContent = "show solution";
+
+  spinner.classList.add("loading-spinner");
+  spinner.style.display = "none";
+
+  buttonText.classList.add("button-text");
+
+  resolveIssueBtn.classList.add("resolve-issue-btn");
+
+  resolveIssueBtn.appendChild(buttonText);
+  resolveIssueBtn.appendChild(spinner);
+
+  resolveIssueBtn.onclick = () => {
+    getSolution(content, issue, resolveIssueBtn);
   };
   content.classList.add("accordion-content");
   content.classList.add("active");
@@ -67,7 +80,7 @@ function createAccordionContent(issue: Issue): HTMLDivElement {
   )}`;
 
   appendChildren(content, [ul]);
-  content.appendChild(resolveIssue);
+  content.appendChild(resolveIssueBtn);
 
   return content;
 }
@@ -104,44 +117,57 @@ function appendChildren(parent: HTMLElement, children: HTMLElement[]): void {
   children.forEach((child) => parent.appendChild(child));
 }
 
-async function getSolution(content: HTMLDivElement, data: Issue) {
+async function getSolution(
+  content: HTMLDivElement,
+  data: Issue,
+  resolveIssueBtn: HTMLButtonElement
+) {
   const url = "http://localhost:3000/embedding/resolveissue";
   const headers = {
-    "Content-Type": "application/json", // Specify the content type as JSON
+    "Content-Type": "application/json",
   };
   const { message, lines } = data.extra;
   const { cwe, owasp } = data.extra.metadata;
 
   const requestBody = JSON.stringify({ cwe, message, owasp, code: lines });
-
+  const loadingSpinner = resolveIssueBtn.querySelector(
+    ".loading-spinner"
+  ) as HTMLDivElement;
+  const buttonText = resolveIssueBtn.querySelector(
+    ".button-text"
+  ) as HTMLSpanElement;
+  loadingSpinner.style.display = "block";
+  buttonText.style.display = "none";
   await fetch(url, {
     method: "POST",
     headers: headers,
     body: requestBody,
   })
     .then((response) => {
-      console.log(response);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       return response.json();
     })
     .then((data) => {
-      console.log("Response:", data);
-
       const aiResult = document.createElement("ul");
+
       const solutionDescription = document.createElement("li");
       solutionDescription.innerHTML =
         "<strong>Description:</strong>" + data.solution_description;
+
       const updatedCode = document.createElement("li");
       const code = hljs.highlightAuto(data.updated_code).value;
       const language = hljs.highlightAuto(code).language;
-      console.log(code);
-
       updatedCode.innerHTML = `<strong>Code:</strong><br/><pre><code class=${language} >${code}</code></pre`;
+
       aiResult.appendChild(solutionDescription);
       aiResult.appendChild(updatedCode);
+
       content.appendChild(aiResult);
+
+      loadingSpinner.style.display = "none";
+      buttonText.style.display = "block";
     })
     .catch((error) => {
       console.error("Error:", error);

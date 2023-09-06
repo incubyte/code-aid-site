@@ -82,6 +82,39 @@
       .language-list {
         display: flex;
       }
+
+      .loading-spinner {
+        display: inline-block;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 3px solid #fff;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .resolve-issue-btn {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin-left: 20px;
+        cursor: pointer;
+        min-width: 90px;
+      }
     </style>
     <link
       rel="stylesheet"

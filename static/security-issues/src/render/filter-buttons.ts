@@ -3,7 +3,20 @@ import { SecurityIssuesHashUrl } from "../security-issue-hash";
 export type Counter = {
   key: string;
   value: number;
-}
+};
+
+const customSort = (data: Counter[]): Counter[] => {
+  const order: string[] = ["CRITICAL", "HIGH", "MODERATE", "MEDIUM", "LOW"];
+  return data.sort((a, b) => {
+    const indexA: number = order.indexOf(a.key);
+    const indexB: number = order.indexOf(b.key);
+    if (indexA === indexB) {
+      return b.value - a.value;
+    }
+
+    return indexA - indexB;
+  });
+};
 
 export class FilterImpactButtons {
   constructor(
@@ -11,11 +24,14 @@ export class FilterImpactButtons {
     allImpactsWithCount: Counter[],
     private readonly securityIssuesHashUrl: SecurityIssuesHashUrl
   ) {
+    allImpactsWithCount = customSort(allImpactsWithCount);
     allImpactsWithCount.forEach((impactWithCount) => {
       const selectedImpacts = securityIssuesHashUrl.getImpacts();
       const filterButton = document.createElement("button");
       filterButton.className = "filter-button";
-      filterButton.classList.add(`${impactWithCount.key.toLocaleLowerCase()}-button`);
+      filterButton.classList.add(
+        `${impactWithCount.key.toLocaleLowerCase()}-button`
+      );
       filterButton.textContent = `${impactWithCount.key} (x${impactWithCount.value})`;
       if (selectedImpacts.includes(impactWithCount.key)) {
         filterButton.classList.add("selected");
@@ -30,7 +46,9 @@ export class FilterImpactButtons {
           ]);
         } else {
           securityIssuesHashUrl.setImpacts(
-            securityIssuesHashUrl.getImpacts().filter((imp) => imp !== impactWithCount.key)
+            securityIssuesHashUrl
+              .getImpacts()
+              .filter((imp) => imp !== impactWithCount.key)
           );
         }
         securityIssuesHashUrl.setPageNumber(1);
