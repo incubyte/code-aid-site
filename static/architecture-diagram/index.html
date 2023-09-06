@@ -1,0 +1,49 @@
++++
+title = "Architecture Diagram"
+linkTitle = "Architecture Diagram"
+weight = -1
++++
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chart Visualization</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script defer src="index.js"></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    
+    <div id="filter-panel">
+      <div class="filter-section">
+        <h4>Name</h4>
+        <input type="text" id="name-filter" placeholder=" Filter by name" />
+      </div>
+      <div class="filter-section">
+        <h4>LOC</h4>
+        <label
+          >Min: <span id="min-selected-value">0</span>
+          <input type="range" id="loc-filter-min" min="0" max="1000" value="0"
+        /></label>
+        <label
+          >Max: <span id="max-selected-value">1000</span> 
+          <input type="range" id="loc-filter-max" min="0" max="1000" value="0"
+        /></label>
+        
+      </div>
+    
+
+     
+      <div id="button-section">
+        <button id="apply-filters">Apply Filters</button>
+        <button id="reset-filters">Reset Filters</button>
+      </div>
+    </div>
+
+    <div id="chart"></div>
+ 
+  </body>
+</html>

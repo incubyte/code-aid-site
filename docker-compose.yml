@@ -39,6 +39,7 @@ services:
       - |
         ./wait-for-arangodb.sh arangodb 8529 root test123 &&
         ./wait-for-qdrant.sh qdrant 6333 &&
+        curl -X DELETE http://host.docker.internal:6333/collections/code &&
         npm install &&
         node main.js
   code-aid:
@@ -83,4 +84,5 @@ services:
       - -c
       - |
         ./wait-for-code-aid-finish.sh /code-aid-site/content/en/docs/Code/${OUTPUT_DIR_NAME}/ready &&
+        ./generate-architecture-diagram.sh ${OUTPUT_DIR_NAME} &&
         hugo server --bind 0.0.0.0
