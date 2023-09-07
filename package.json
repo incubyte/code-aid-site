@@ -8,7 +8,7 @@
     "index": "hugo-lunr -i \"content/**\" -o public/index.json",
     "security:start": "cd static/security-issues &&  npm run start",
     "graph:start": "cd static/database-graph &&  npm run start",
-    "security:build": "cd static/security-issues && npm run build",
+    "security:build": "cd static/security-issues && npm i && npm run build",
     "graph:build": "cd static/database-graph && npm run build &&  cp dist/index.js ../../content/en/docs/Database/HRMS",
     "docker:build": "npm run security:build && docker build -t code-aid-site ."
   },

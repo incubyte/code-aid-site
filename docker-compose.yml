@@ -13,7 +13,7 @@ services:
     ports:
       - 6333:6333
     volumes:
-      - ${BASE_FOLDER}\qdrant:/data
+      - ${BASE_FOLDER}\qdrant:/qdrant/storage
   semgrep:
     image: returntocorp/semgrep:latest
     volumes:
@@ -80,6 +80,7 @@ services:
     volumes:
       - ${BASE_FOLDER}\${OUTPUT_DIR_NAME}:/code-aid-site/content/en/docs/Code/${OUTPUT_DIR_NAME}
       - ${BASE_FOLDER}\security-output:/security-issues
+      - ${BASE_FOLDER}\public:/code-aid-site/public
     command:
       - sh
       - -c
@@ -87,4 +88,10 @@ services:
         ./wait-for-code-aid-finish.sh /code-aid-site/content/en/docs/Code/${OUTPUT_DIR_NAME}/ready &&
         ./generate-architecture-diagram.sh ${OUTPUT_DIR_NAME} &&
         ./generate-security-issues.sh ${OUTPUT_DIR_NAME} &&
+        cd /code-aid-site &&
+        npm install &&
+        echo "Generating site..." &&
+        hugo &&
+        cp -r /code-aid-site/static/webfonts /code-aid-site/public
+        echo "Site generated" &&
         hugo server --bind 0.0.0.0
