@@ -19,7 +19,7 @@ export const getDependencyIssues = async (): Promise<Issue[]> => {
   });
 
   filteredDependencyIssues.forEach((issue: DependencyIssue) => {
-    convertToSaprateEle(issue).forEach((ele) => finalDependecyIssues.push(ele));
+    splitByVulnerablity(issue).forEach((ele) => finalDependecyIssues.push(ele));
   });
 
   finalDependecyIssues.forEach((issue) => {
@@ -44,43 +44,46 @@ export const filteredDependencyIssues = (
 
 export const getIssuesWithLanguageLabel = (results: Issue[]): Issue[] => {
   return results.map((result) => {
+    if (result.filePath.includes("package-lock.json")) {
+      const language = "node";
+      return { ...result, language: language ? language : "" };
+    }
     const language = result.filePath.split("/").pop()?.split(".").pop();
     return { ...result, language: language ? language : "" };
   });
 };
 
+const mapToArray = (map: any) =>
+  Array.from(map, ([key, value]) => ({ key, value }));
+
 export const getSecurityIssuesMetadata = (
   results: Issue[]
 ): { allLanguagesWithCount: Counter[]; allSeverityWithCount: Counter[] } => {
-  const allLanguagesWithCount: Counter[] = [];
-  const allSeveritiesWithCount: Counter[] = [];
+  const allLanguagesWithCount: Map<string, number> = new Map();
+  const allSeveritiesWithCount: Map<string, number> = new Map();
+
   results.forEach((result) => {
-    const language = result.language;
-    const severity = result.vulnerabilities?.severity;
-    const languageIndex = allLanguagesWithCount.findIndex(
-      (lang) => lang.key === language
+    const language = result.language || "Unknown";
+    const severity = result.vulnerabilities?.severity || "Unknown";
+
+    allLanguagesWithCount.set(
+      language,
+      (allLanguagesWithCount.get(language) || 0) + 1
     );
-    const severityIndex = allSeveritiesWithCount.findIndex(
-      (sev) => sev.key === severity
+
+    allSeveritiesWithCount.set(
+      severity,
+      (allSeveritiesWithCount.get(severity) || 0) + 1
     );
-    if (languageIndex === -1) {
-      allLanguagesWithCount.push({ key: language, value: 1 });
-    } else {
-      allLanguagesWithCount[languageIndex].value++;
-    }
-    if (severityIndex === -1) {
-      allSeveritiesWithCount.push({ key: severity ? severity : "", value: 1 });
-    } else {
-      allSeveritiesWithCount[severityIndex].value++;
-    }
   });
+
   return {
-    allLanguagesWithCount,
-    allSeverityWithCount: allSeveritiesWithCount,
+    allLanguagesWithCount: mapToArray(allLanguagesWithCount),
+    allSeverityWithCount: mapToArray(allSeveritiesWithCount),
   };
 };
 
-function convertToSaprateEle(issue: DependencyIssue): Issue[] {
+function splitByVulnerablity(issue: DependencyIssue): Issue[] {
   const convertedIssues: Issue[] = [];
   const { filePath, fileName, language, packages, vulnerabilities } = issue;
   const singleIssue: any = {

@@ -151,7 +151,8 @@ async function getSolution(
       return response.json();
     })
     .then((data) => {
-      const aiResult = document.createElement("ul");
+      const aiResult = document.createElement("div");
+      const ul = document.createElement("ul");
 
       const solutionDescription = document.createElement("li");
       solutionDescription.innerHTML =
@@ -162,13 +163,21 @@ async function getSolution(
       const language = hljs.highlightAuto(code).language;
       updatedCode.innerHTML = `<strong>Code:</strong><br/><pre><code class=${language} >${code}</code></pre`;
 
-      aiResult.appendChild(solutionDescription);
-      aiResult.appendChild(updatedCode);
+      ul.appendChild(solutionDescription);
+      ul.appendChild(updatedCode);
+
+      aiResult.appendChild(ul);
 
       content.appendChild(aiResult);
 
       loadingSpinner.style.display = "none";
       buttonText.style.display = "block";
+
+      resolveIssueBtn.setAttribute("disabled", "true");
+      resolveIssueBtn.style.border = "1px solid #999999";
+      resolveIssueBtn.style.backgroundColor = "#cccccc";
+      resolveIssueBtn.style.color = "#666666";
+      resolveIssueBtn.style.cursor = "default";
     })
     .catch((error) => {
       console.error("Error:", error);
