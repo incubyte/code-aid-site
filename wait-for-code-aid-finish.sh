@@ -3,8 +3,6 @@
 set -e
 
 file_path="$1"
-shift
-cmd="$@"
 
 sleep 5
 
@@ -16,4 +14,4 @@ until [ -f "$file_path" ]; do
 done
 
 >&2 echo "Code Aid output is generated - executing command"
-exec $cmd
+
