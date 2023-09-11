@@ -14,6 +14,7 @@ describe("getSecurityIssues", () => {
     const mockResponse: Issue[] = [
       {
         path: "filepath/goes/here",
+        end: { col: 25, line: 10, offset: 225 },
         extra: {
           lines: "lines of code",
           message: "message related to security issue",
@@ -27,6 +28,7 @@ describe("getSecurityIssues", () => {
       },
       {
         path: "filepath2/goes/here",
+        end: { col: 25, line: 10, offset: 225 },
         extra: {
           lines: "line of code goes here",
           message: "message related to issue",

@@ -7,6 +7,20 @@ export enum Impact {
 export type Issue = {
   path: string;
   extra: {
+    dataflow_trace?: {
+      intermediate_vars?: [
+        {
+          content: string;
+          location: {
+            start: {
+              col: number;
+              line: number;
+              offset: number;
+            };
+          };
+        }
+      ];
+    };
     metadata: {
       impact: Impact;
       cwe: string;
@@ -15,6 +29,12 @@ export type Issue = {
     message: string;
     lines: string;
   };
+  end: {
+    col: number;
+    line: number;
+    offset: number;
+  };
+
   language: string;
 };
 
