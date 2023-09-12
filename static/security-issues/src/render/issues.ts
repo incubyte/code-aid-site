@@ -117,6 +117,23 @@ function appendChildren(parent: HTMLElement, children: HTMLElement[]): void {
   children.forEach((child) => parent.appendChild(child));
 }
 
+async function getFullContext(path: string, start: number, end: number) {
+  const url = `http://localhost:3000/embedding/get-context?path=${path}&start=${start}&end=${end}`;
+  const data = await fetch(url, {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.text();
+    })
+    .then((data) => {
+      return data;
+    });
+  return data;
+}
+
 async function getSolution(
   content: HTMLDivElement,
   data: Issue,
@@ -128,8 +145,26 @@ async function getSolution(
   };
   const { message, lines } = data.extra;
   const { cwe, owasp } = data.extra.metadata;
+  let context = "";
+  let requestBody = "";
+  if (
+    data.extra.dataflow_trace?.intermediate_vars?.[0]?.location?.start?.line
+  ) {
+    const startLineNo =
+      data.extra.dataflow_trace?.intermediate_vars?.[0]?.location?.start?.line;
+    context = await getFullContext(data.path, startLineNo, data.end.line);
+  }
+  if (context) {
+    requestBody = JSON.stringify({
+      cwe,
+      message,
+      owasp,
+      code: context,
+    });
+  } else {
+    requestBody = JSON.stringify({ cwe, message, owasp, code: lines });
+  }
 
-  const requestBody = JSON.stringify({ cwe, message, owasp, code: lines });
   const loadingSpinner = resolveIssueBtn.querySelector(
     ".loading-spinner"
   ) as HTMLDivElement;
