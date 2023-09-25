@@ -15,7 +15,17 @@ describe("getSecurityIssues", () => {
       {
         path: "filepath/goes/here",
         end: { col: 25, line: 10, offset: 225 },
+
         extra: {
+          metavars: {
+            $SQL: {
+              propagated_value: {
+                svalue_start: {
+                  line: 10,
+                },
+              },
+            },
+          },
           lines: "lines of code",
           message: "message related to security issue",
           metadata: {
@@ -30,6 +40,15 @@ describe("getSecurityIssues", () => {
         path: "filepath2/goes/here",
         end: { col: 25, line: 10, offset: 225 },
         extra: {
+          metavars: {
+            $SQL: {
+              propagated_value: {
+                svalue_start: {
+                  line: 10,
+                },
+              },
+            },
+          },
           lines: "line of code goes here",
           message: "message related to issue",
           metadata: {
@@ -47,4 +66,4 @@ describe("getSecurityIssues", () => {
     expect(fetchMock).toHaveBeenCalledWith("./scan_results.json");
     expect(issues).toHaveLength(2);
   });
-}); 
+});

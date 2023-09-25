@@ -153,6 +153,10 @@ async function getSolution(
     const startLineNo =
       data.extra.dataflow_trace?.intermediate_vars?.[0]?.location?.start?.line;
     context = await getFullContext(data.path, startLineNo, data.end.line);
+  } else if (data.extra.metavars.$SQL?.propagated_value?.svalue_start?.line) {
+    const startLineNo =
+      data.extra.metavars.$SQL?.propagated_value?.svalue_start?.line;
+    context = await getFullContext(data.path, startLineNo, data.end.line);
   }
   if (context) {
     requestBody = JSON.stringify({
@@ -183,22 +187,17 @@ async function getSolution(
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      return response.json();
+      return response.text();
     })
     .then((data) => {
       const aiResult = document.createElement("div");
       const ul = document.createElement("ul");
 
-      const solutionDescription = document.createElement("li");
-      solutionDescription.innerHTML =
-        "<strong>Description:</strong>" + data.solution_description;
-
       const updatedCode = document.createElement("li");
-      const code = hljs.highlightAuto(data.updated_code).value;
+      const code = hljs.highlightAuto(data).value;
       const language = hljs.highlightAuto(code).language;
       updatedCode.innerHTML = `<strong>Code:</strong><br/><pre><code class=${language} >${code}</code></pre`;
 
-      ul.appendChild(solutionDescription);
       ul.appendChild(updatedCode);
 
       aiResult.appendChild(ul);

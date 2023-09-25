@@ -21,6 +21,15 @@ export type Issue = {
         }
       ];
     };
+    metavars: {
+      $SQL?: {
+        propagated_value?: {
+          svalue_start?: {
+            line: number;
+          };
+        };
+      };
+    };
     metadata: {
       impact: Impact;
       cwe: string;
