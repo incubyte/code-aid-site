@@ -20,14 +20,10 @@ export const renderIssues = (
     const securityIssueData = document.createElement("div");
     securityIssueData.classList.add("security-issue");
 
-    // Create a header for the accordion
     const header = createAccordionHeader(issue, index);
-
-    // Create a content container for the details
-    const content = createAccordionContent(issue);
-
-    // Add the header and content to the accordion
     securityIssueData.appendChild(header);
+
+    const content = createAccordionContent(issue);
     securityIssueData.appendChild(content);
 
     container.appendChild(securityIssueData);
@@ -145,18 +141,22 @@ async function getSolution(
   };
   const { message, lines } = data.extra;
   const { cwe, owasp } = data.extra.metadata;
+  const filePath = "D:\\poc\\java_project\\" + data.path.replace("/", "\\");
+  console.log(filePath);
+
   let context = "";
   let requestBody = "";
+
   if (
     data.extra.dataflow_trace?.intermediate_vars?.[0]?.location?.start?.line
   ) {
     const startLineNo =
       data.extra.dataflow_trace?.intermediate_vars?.[0]?.location?.start?.line;
-    context = await getFullContext(data.path, startLineNo, data.end.line);
+    context = await getFullContext(filePath, startLineNo, data.end.line);
   } else if (data.extra.metavars.$SQL?.propagated_value?.svalue_start?.line) {
     const startLineNo =
       data.extra.metavars.$SQL?.propagated_value?.svalue_start?.line;
-    context = await getFullContext(data.path, startLineNo, data.end.line);
+    context = await getFullContext(filePath, startLineNo, data.end.line);
   }
   if (context) {
     requestBody = JSON.stringify({
@@ -164,9 +164,16 @@ async function getSolution(
       message,
       owasp,
       code: context,
+      path: filePath,
     });
   } else {
-    requestBody = JSON.stringify({ cwe, message, owasp, code: lines });
+    requestBody = JSON.stringify({
+      cwe,
+      message,
+      owasp,
+      code: lines,
+      path: filePath,
+    });
   }
 
   const loadingSpinner = resolveIssueBtn.querySelector(
