@@ -69,6 +69,7 @@ function createAccordionContent(issue: Issue): HTMLDivElement {
     `Message||| ${issue.extra.message}`,
     `OWASP||| ${issue.extra.metadata.owasp}`,
     `Code||| ${issue.extra.lines}`,
+    `Context||| ${issue.context}`,
   ]);
 
   content.style.borderLeft = `5px solid ${getImpactColor(
@@ -97,7 +98,11 @@ function createUnorderedList(items: string[]): HTMLUListElement {
       if (parts[0] === "Code") {
         const code = hljs.highlightAuto(parts[1]).value;
         li.innerHTML = `<strong>${parts[0]}:</strong><br/><pre><code>${code}</code></pre>`;
-      } else {
+      } else if(parts[0] == "Context"){
+        const context = hljs.highlightAuto(parts[1]).value;
+        li.innerHTML = `<strong>${parts[0]}:</strong><br/><pre><code>${context}</code></pre>`;
+      }
+       else {
         li.innerHTML = `<strong>${parts[0]}:</strong> ${parts[1]}<br/>`;
       }
     } else {
@@ -113,51 +118,24 @@ function appendChildren(parent: HTMLElement, children: HTMLElement[]): void {
   children.forEach((child) => parent.appendChild(child));
 }
 
-async function getFullContext(path: string, start: number, end: number) {
-  const url = `http://localhost:3000/embedding/get-context?path=${path}&start=${start}&end=${end}`;
-  const data = await fetch(url, {
-    method: "GET",
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.text();
-    })
-    .then((data) => {
-      return data;
-    });
-  return data;
-}
-
 async function getSolution(
   content: HTMLDivElement,
   data: Issue,
   resolveIssueBtn: HTMLButtonElement
 ) {
-  const url = "http://localhost:3000/embedding/resolveissue";
+  const url = "http://localhost:3000/security-issues/resolveissue";
   const headers = {
     "Content-Type": "application/json",
   };
   const { message, lines } = data.extra;
   const { cwe, owasp } = data.extra.metadata;
-  const filePath = "D:\\poc\\java_project\\" + data.path.replace("/", "\\");
+  const filePath =
+    "C:\\Development\\CodeAid\\Java-Jdbc\\" + data.path.replace("/", "\\");
   console.log(filePath);
 
-  let context = "";
+  let context = data.context;
   let requestBody = "";
 
-  if (
-    data.extra.dataflow_trace?.intermediate_vars?.[0]?.location?.start?.line
-  ) {
-    const startLineNo =
-      data.extra.dataflow_trace?.intermediate_vars?.[0]?.location?.start?.line;
-    context = await getFullContext(filePath, startLineNo, data.end.line);
-  } else if (data.extra.metavars.$SQL?.propagated_value?.svalue_start?.line) {
-    const startLineNo =
-      data.extra.metavars.$SQL?.propagated_value?.svalue_start?.line;
-    context = await getFullContext(filePath, startLineNo, data.end.line);
-  }
   if (context) {
     requestBody = JSON.stringify({
       cwe,
