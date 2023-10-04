@@ -62,12 +62,13 @@
 
       .accordion-content {
         padding: 10px;
-        display: none;
+        display: block;
       }
 
       .accordion-content.active {
-        display: block;
+        display: none;
       }
+
 
       #pagination {
         display: flex;
@@ -83,9 +84,9 @@
 
       .loading-spinner {
         display: inline-block;
-        border: 3px solid rgba(255, 255, 255, 0.3);
+        border: 3px solid rgba(87, 73, 73, 0.3);
         border-radius: 50%;
-        border-top: 3px solid #fff;
+        border-top: 3px solid #000000;
         width: 20px;
         height: 20px;
         animation: spin 1s linear infinite;

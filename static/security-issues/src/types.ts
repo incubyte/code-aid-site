@@ -7,6 +7,8 @@ export enum Impact {
 export type Issue = {
   path: string;
   context?:string;
+  solution?:string;
+  index?:number;
   extra: {
     dataflow_trace?: {
       intermediate_vars?: [

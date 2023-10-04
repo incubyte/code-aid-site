@@ -47,11 +47,8 @@ async function addContextToFile(intial_results: Issue[]): Promise<Issue[]> {
       const startLineNo =
         data.extra.metavars.$SQL?.propagated_value?.svalue_start?.line;
       context = await getFullContext(filePath, startLineNo, data.end.line);
-    } else {
-      console.log("no metavar and intermediate var...");
     }
 
-    console.log(context, data.end.line);
     data.context = context;
   }
 
@@ -59,14 +56,14 @@ async function addContextToFile(intial_results: Issue[]): Promise<Issue[]> {
 }
 
 const main = async () => {
-  // 1. fetch JSON data
+  
   const intial_results = await getSecurityIssues();
   const results = await addContextToFile(intial_results);
   const resultsWithLanguages = getIssuesWithLanguageLabel(results);
   const { allImpactsWithCount, allLanguagesWithCount } =
     getSecurityIssuesMetadata(resultsWithLanguages);
 
-  // 1. analyse the current browser URL (hash)
+  
   const securityIssuesHashUrl = new SecurityIssuesHashUrl();
   if (securityIssuesHashUrl.isEmpty()) {
     securityIssuesHashUrl.setImpacts(allImpactsWithCount.map((o) => o.key));
@@ -75,14 +72,14 @@ const main = async () => {
 
   const { impacts, languages } = securityIssuesHashUrl.getData();
 
-  // 4. filter JSON data using global configuration
+  
   const filteredResults = filterIssues(
     resultsWithLanguages,
     impacts,
     languages
   );
 
-  // 5. render the buttons and pagination UI
+  
   const filterImpactButtons = new FilterImpactButtons(
     document.getElementById("filter-impact-buttons") as HTMLDivElement,
     allImpactsWithCount,
@@ -94,7 +91,7 @@ const main = async () => {
     securityIssuesHashUrl
   );
 
-  // 6. render the filtered data into HTML
+  
   renderIssues(
     document.getElementById("container") as HTMLDivElement,
     securityIssuesHashUrl,
@@ -106,7 +103,7 @@ const main = async () => {
     securityIssuesHashUrl
   );
 
-  // 7. listen to hash change event
+  
   window.addEventListener("hashchange", () => {
     const filteredResults = filterIssues(
       resultsWithLanguages,
