@@ -32,44 +32,34 @@ export const renderIssues = (
 };
 
 function createAccordionHeader(issue: Issue, index: number): HTMLDivElement {
-  const header = document.createElement("div");
-  header.classList.add("accordion-header");
-  header.innerHTML = `<strong>Path:</strong> ${issue.path} </br><strong>CWE:</strong> ${issue.extra.metadata.cwe[0]}`;
-  header.addEventListener("click", () => toggleAccordionContent(index, issue));
-  header.style.borderLeft = `5px solid ${getImpactColor(
+  const headerContainer = document.createElement("div");
+  const content = document.createElement("div");
+  const path = document.createElement("div");
+  const cwe = document.createElement("div");
+  const accordionArrow = document.createElement("span");
+
+  path.innerHTML = `<strong>Path:</strong> ${issue.path}`;
+  cwe.innerHTML = `<strong>CWE:</strong> ${issue.extra.metadata.cwe[0]}`;
+  accordionArrow.innerHTML = "&#9658;";
+
+  headerContainer.classList.add("accordion-header");
+  headerContainer.style.display = "flex";
+  headerContainer.style.justifyContent = "space-between";
+  content.appendChild(path);
+  content.appendChild(cwe);
+  headerContainer.appendChild(content);
+  headerContainer.appendChild(accordionArrow);
+  headerContainer.addEventListener("click", () =>
+    toggleAccordionContent(index, issue, accordionArrow)
+  );
+  headerContainer.style.borderLeft = `5px solid ${getImpactColor(
     issue.extra.metadata.impact as Impact
   )}`;
-  return header;
+  return headerContainer;
 }
 
- function createAccordionContent(issue: Issue): HTMLDivElement {
+function createAccordionContent(issue: Issue): HTMLDivElement {
   const content = document.createElement("div");
-  const updateCodeBtn = document.createElement("button");
-  const generatePRBtn = document.createElement("button");
-  
-  const buttonText = document.createElement("span");
-  const generatePRText = document.createElement("span");
-  buttonText.textContent = "Try Solution";
-  generatePRText.textContent = "Generate PR";
-
-  buttonText.classList.add("button-text");
-  generatePRText.classList.add("button-text");
-  updateCodeBtn.classList.add("resolve-issue-btn");
-  generatePRBtn.classList.add("resolve-issue-btn");
-
-  
-
-  updateCodeBtn.appendChild(buttonText);
-  generatePRBtn.appendChild(generatePRText);
-
-
-  updateCodeBtn.onclick =  () => {
-      updateCode(issue);
-  };
-  generatePRBtn.onclick = () =>{
-    generatePR("this is commit message");
-  }
-
   content.classList.add("accordion-content");
   content.classList.add("active");
   // content.setAttribute("id",`${issue.index}`);
@@ -78,7 +68,7 @@ function createAccordionHeader(issue: Issue, index: number): HTMLDivElement {
     `Message||| ${issue.extra.message}`,
     `OWASP||| ${issue.extra.metadata.owasp}`,
     `Context||| ${issue.context ? issue.context : issue.extra.lines}`,
-    `Solution|||${issue.index}`
+    `Solution|||${issue.index}`,
   ]);
 
   content.style.borderLeft = `5px solid ${getImpactColor(
@@ -86,62 +76,83 @@ function createAccordionHeader(issue: Issue, index: number): HTMLDivElement {
   )}`;
 
   appendChildren(content, [ul]);
-  content.appendChild(updateCodeBtn);
-  content.appendChild(generatePRBtn);
-
-  
 
   return content;
 }
 
-async function generatePR(message: string){
+async function generatePR(message: string, index: number | undefined) {
+  const generatePRBtn = document.getElementById(
+    `generatebtn${index}`
+  ) as HTMLButtonElement;
   const url = `http://localhost:3000/security-issues/generate-pr?path=${message}`;
   await fetch(url, {
     method: "GET",
-  }).then((response) =>{
-    console.log(response);
-  }).catch((error)=>{
-    console.log(error);
   })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  generatePRBtn.setAttribute("disabled", "true");
+  generatePRBtn.style.backgroundColor = "#cccccc";
+  generatePRBtn.style.color = "#666666";
 }
 
-async function updateCode(issue: Issue){
+async function updateCode(issue: Issue) {
+  const updateCodeBtn = document.getElementById(
+    `updatebtn${issue.index}`
+  ) as HTMLButtonElement;
   const url = "http://localhost:3000/security-issues/update-file";
-  const {path, context, solution} = issue;
-  const filePath =
-    "C:\\Development\\CodeAid\\Java-Jdbc\\" + path.replace("/", "\\");
+  const { path, context, solution } = issue;
+  const filePath = "D:\\poc\\java_project\\" + path.replace("/", "\\");
   let updateResponse = "";
   const headers = {
     "Content-Type": "application/json",
   };
   let requestBody = "";
-  console.log(path);
   requestBody = JSON.stringify({
     path: filePath,
     context,
-    AiCode: solution
+    AiCode: solution,
   });
 
   await fetch(url, {
     method: "POST",
     headers: headers,
     body: requestBody,
-  }).then((response) =>{
-    console.log(response);
-  }).catch((error)=>{
-    console.log(error);
   })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  updateCodeBtn.setAttribute("disabled", "true");
+  updateCodeBtn.style.backgroundColor = "#cccccc";
+  updateCodeBtn.style.color = "#666666";
 }
 
-function toggleAccordionContent(index: number, issue:Issue): void {
+function toggleAccordionContent(
+  index: number,
+  issue: Issue,
+  arrowContainer: HTMLSpanElement
+): void {
+  let isOpen = false;
+  if (!isOpen) {
+    isOpen = !isOpen;
+    arrowContainer.style.transform = isOpen ? "rotate(90deg)" : "rotate(0deg)";
+  }
   const content = document.getElementById(`${index}`) as HTMLDivElement;
-  if(issue.solution == null){
+  if (issue.solution == null) {
     getSolution(issue);
   }
-  const accirdionContent = document.querySelectorAll(".accordion-content")[
+  const accordionContent = document.querySelectorAll(".accordion-content")[
     index
   ] as HTMLDivElement;
-  accirdionContent.classList.toggle("active");
+  accordionContent.classList.toggle("active");
 }
 
 function createUnorderedList(items: string[]): HTMLUListElement {
@@ -150,14 +161,12 @@ function createUnorderedList(items: string[]): HTMLUListElement {
     const li = document.createElement("li");
     const parts = item.split("|||");
     if (parts.length === 2) {
-      if(parts[0] == "Context"){
+      if (parts[0] == "Context") {
         const context = hljs.highlightAuto(parts[1]).value;
         li.innerHTML = `<strong>${parts[0]}:</strong><br/><pre><code>${context}</code></pre>`;
-      }
-      else if(parts[0] == "Solution"){
+      } else if (parts[0] == "Solution") {
         li.innerHTML = `<div id="AiSolution"><strong> ${parts[0]}: </strong> <div id="solutionContainer${parts[1]}"> <span id="spinner${parts[1]}"></span> <div id="loadingMessage${parts[1]}"></div></div><div id="${parts[1]}"></div> </div>`;
-      }
-       else {
+      } else {
         li.innerHTML = `<strong>${parts[0]}:</strong> ${parts[1]}<br/>`;
       }
     } else {
@@ -172,19 +181,14 @@ function appendChildren(parent: HTMLElement, children: HTMLElement[]): void {
   children.forEach((child) => parent.appendChild(child));
 }
 
-async function getSolution(
-  data: Issue
-) {
-  console.log('getting a solution...');
+async function getSolution(data: Issue) {
   const url = "http://localhost:3000/security-issues/resolveissue";
   const headers = {
     "Content-Type": "application/json",
   };
   const { message, lines } = data.extra;
   const { cwe, owasp } = data.extra.metadata;
-  const filePath =
-    "C:\\Development\\CodeAid\\Java-Jdbc\\" + data.path.replace("/", "\\");
-
+  const filePath = "D:\\poc\\java_project\\" + data.path.replace("/", "\\");
   let context = data.context;
   let requestBody = "";
 
@@ -206,9 +210,15 @@ async function getSolution(
     });
   }
 
-  const aiSolutionSpinner = document.getElementById(`spinner${data.index}`) as HTMLSpanElement;
-  const loadingMessage = document.getElementById(`loadingMessage${data.index}`) as HTMLDivElement;
-  const solutionContainer = document.getElementById(`solutionContainer${data.index}`) as HTMLDivElement;
+  const aiSolutionSpinner = document.getElementById(
+    `spinner${data.index}`
+  ) as HTMLSpanElement;
+  const loadingMessage = document.getElementById(
+    `loadingMessage${data.index}`
+  ) as HTMLDivElement;
+  const solutionContainer = document.getElementById(
+    `solutionContainer${data.index}`
+  ) as HTMLDivElement;
   solutionContainer.style.marginLeft = "90px";
   solutionContainer.style.display = "flex";
   loadingMessage.style.marginLeft = "10px";
@@ -219,7 +229,6 @@ async function getSolution(
   spinner.style.marginLeft = "20px";
   aiSolutionSpinner.appendChild(spinner);
   loadingMessage.innerHTML = "Generating code from AI.....";
-
 
   await fetch(url, {
     method: "POST",
@@ -233,27 +242,53 @@ async function getSolution(
       return response.text();
     })
     .then((response) => {
-
       const updatedCode = document.createElement("div");
       const code = hljs.highlightAuto(response).value;
       const language = hljs.highlightAuto(code).language;
       updatedCode.innerHTML = `<pre><code class=${language} >${code}</code></pre>`;
       data.solution = response;
-      
 
-      let solutionContainer = document.getElementById(`${data.index}`) as HTMLDivElement;
+      let solutionContainer = document.getElementById(
+        `${data.index}`
+      ) as HTMLDivElement;
       spinner.style.display = "none";
       loadingMessage.innerHTML = "";
       solutionContainer.appendChild(updatedCode);
-    
-
-      // resolveIssueBtn.setAttribute("disabled", "true");
-      // resolveIssueBtn.style.border = "1px solid #999999";
-      // resolveIssueBtn.style.backgroundColor = "#cccccc";
-      // resolveIssueBtn.style.color = "#666666";
-      // resolveIssueBtn.style.cursor = "default";
+      addActions(solutionContainer, data);
     })
     .catch((error) => {
       console.error("Error:", error);
     });
+}
+
+function addActions(container: HTMLDivElement, issue: Issue) {
+  const updateCodeBtn = document.createElement("button");
+  const generatePRBtn = document.createElement("button");
+
+  const buttonText = document.createElement("span");
+  const generatePRText = document.createElement("span");
+  buttonText.textContent = "Try Solution";
+  generatePRText.textContent = "Generate PR";
+
+  updateCodeBtn.setAttribute("id", `updatebtn${issue.index}`);
+  generatePRBtn.setAttribute("id", `generatebtn${issue.index}`);
+
+  buttonText.classList.add("button-text");
+  generatePRText.classList.add("button-text");
+  updateCodeBtn.classList.add("resolve-issue-btn");
+  generatePRBtn.classList.add("resolve-issue-btn");
+
+  updateCodeBtn.appendChild(buttonText);
+  generatePRBtn.appendChild(generatePRText);
+
+  updateCodeBtn.onclick = () => {
+    updateCode(issue);
+  };
+
+  generatePRBtn.onclick = () => {
+    generatePR("this is commit message", issue.index);
+  };
+
+  container.appendChild(updateCodeBtn);
+  container.appendChild(generatePRBtn);
 }

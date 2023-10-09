@@ -32,8 +32,7 @@ async function getFullContext(path: string, start: number, end: number) {
 
 async function addContextToFile(intial_results: Issue[]): Promise<Issue[]> {
   for (const data of intial_results) {
-    const filePath =
-      "C:\\Development\\CodeAid\\Java-Jdbc\\" + data.path.replace("/", "\\");
+    const filePath = "D:\\poc\\java_project\\" + data.path.replace("/", "\\");
     let context: string = "";
 
     if (
@@ -56,14 +55,12 @@ async function addContextToFile(intial_results: Issue[]): Promise<Issue[]> {
 }
 
 const main = async () => {
-  
   const intial_results = await getSecurityIssues();
   const results = await addContextToFile(intial_results);
   const resultsWithLanguages = getIssuesWithLanguageLabel(results);
   const { allImpactsWithCount, allLanguagesWithCount } =
     getSecurityIssuesMetadata(resultsWithLanguages);
 
-  
   const securityIssuesHashUrl = new SecurityIssuesHashUrl();
   if (securityIssuesHashUrl.isEmpty()) {
     securityIssuesHashUrl.setImpacts(allImpactsWithCount.map((o) => o.key));
@@ -72,14 +69,12 @@ const main = async () => {
 
   const { impacts, languages } = securityIssuesHashUrl.getData();
 
-  
   const filteredResults = filterIssues(
     resultsWithLanguages,
     impacts,
     languages
   );
 
-  
   const filterImpactButtons = new FilterImpactButtons(
     document.getElementById("filter-impact-buttons") as HTMLDivElement,
     allImpactsWithCount,
@@ -91,7 +86,6 @@ const main = async () => {
     securityIssuesHashUrl
   );
 
-  
   renderIssues(
     document.getElementById("container") as HTMLDivElement,
     securityIssuesHashUrl,
@@ -103,7 +97,6 @@ const main = async () => {
     securityIssuesHashUrl
   );
 
-  
   window.addEventListener("hashchange", () => {
     const filteredResults = filterIssues(
       resultsWithLanguages,
